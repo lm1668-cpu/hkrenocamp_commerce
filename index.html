@@ -314,6 +314,12 @@ html, body {
   </div>
 </section>
 
+<section id="product-detail" class="hidden max-w-7xl mx-auto px-3 sm:px-6 py-5">
+  <div class="bg-white border-2 border-stone-200 rounded-3xl p-4 sm:p-7 shadow-xs">
+    <div id="product-detail-body"></div>
+  </div>
+</section>
+
 <section id="section-repair" class="max-w-7xl mx-auto px-3 sm:px-6 py-5 space-y-6">
   <div class="bg-amber-50 border-2 border-amber-300 rounded-3xl p-4 sm:p-7 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-5 shadow-xs">
     <div class="space-y-2 max-w-2xl">
@@ -624,6 +630,7 @@ html, body {
     </div>
 
     <div id="materials-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2 items-stretch"></div>
+    <p class="text-[11px] text-stone-500">撳商品圖片或名稱可看詳細介紹。睇緊介紹時，配對站同五金店會先收起。</p>
   </div>
 </section>
 
@@ -1617,12 +1624,30 @@ const repairTrades = [
 ];
 
 const materialsProducts = [
-  { id: "m-ro", cat: "飲水機", name: "廚下式 RO 濾水機", desc: "三樽濾芯加專用龍頭。只售物料，唔包安裝。", price: 2480, unit: "套", img: "images/materials/catalog/ro.jpg", trade: "水喉漏水 / 換龍頭" },
-  { id: "m-downlight", cat: "燈飾", name: "LED 筒燈（暖白光）", desc: "暖白光 LED 筒燈。只售燈具，唔包更換。", price: 160, unit: "盞", img: "images/materials/catalog/downlight.jpg", trade: "電力跳掣 / 換燈掣" },
-  { id: "m-faucet", cat: "浴室", name: "炭灰色單控廚房龍頭", desc: "炭灰色單控龍頭。只售龍頭，唔包接駁。", price: 860, unit: "套", img: "images/materials/catalog/faucet.jpg", trade: "水喉漏水 / 換龍頭" },
-  { id: "m-elock", cat: "門鎖", name: "大門密碼電子門鎖", desc: "密碼電子門鎖。只售鎖，唔包安裝。", price: 1680, unit: "套", img: "images/materials/catalog/elock.jpg", trade: "大門鎖 / 電子鎖" },
-  { id: "m-latex", cat: "牆漆", name: "室內牆身乳膠漆", desc: "室內牆身乳膠漆。只售油漆，唔包掃油。", price: 480, unit: "桶", img: "images/materials/catalog/latex.jpg", trade: "牆身補灰 / 油漆" },
-  { id: "m-membrane", cat: "防漏", name: "浴室/露台用防漏膜", desc: "浴室或露台用防漏膜。只售材料，唔包塗層。", price: 880, unit: "份", img: "images/materials/catalog/membrane.jpg", trade: "浴室防漏 / 泥水" }
+  { id: "m-ro", cat: "飲水機", name: "廚下式 RO 濾水機", desc: "三樽濾芯加專用龍頭。只售物料，唔包安裝。", price: 2480, unit: "套", img: "images/materials/catalog/ro.jpg", trade: "水喉漏水 / 換龍頭",
+    intro: "放在廚櫃內的三樽式 RO 濾水機，連專用出水位龍頭。適合想在星盆旁直接取過濾水、又不想佔枱面的單位。",
+    includes: ["主機連三樽濾芯", "專用廚房龍頭", "基本說明"],
+    excludes: ["唔包開喉或鑽枱", "唔包駁去現有水喉", "唔包上門安裝或棄置舊機"] },
+  { id: "m-downlight", cat: "燈飾", name: "LED 筒燈（暖白光）", desc: "暖白光 LED 筒燈。只售燈具，唔包更換。", price: 160, unit: "盞", img: "images/materials/catalog/downlight.jpg", trade: "電力跳掣 / 換燈掣",
+    intro: "暖白色 LED 筒燈，適合客廳、走廊、廚房天花。這張單只賣燈具本身，不會連更換人工。",
+    includes: ["暖白光 LED 筒燈 1 盞", "原廠保養"],
+    excludes: ["唔包天花開孔", "唔包駁電或換舊燈", "唔包燈架改位"] },
+  { id: "m-faucet", cat: "浴室", name: "炭灰色單控廚房龍頭", desc: "炭灰色單控龍頭。只售龍頭，唔包接駁。", price: 860, unit: "套", img: "images/materials/catalog/faucet.jpg", trade: "水喉漏水 / 換龍頭",
+    intro: "炭灰色單控廚房龍頭，適合標準單孔星盆。冷熱水同一支手柄控制。只售龍頭，水喉接駁要另外處理。",
+    includes: ["炭灰色單控龍頭 1 套", "基本安裝配件"],
+    excludes: ["唔包波曲或軟喉", "唔包拆舊龍頭", "唔包試水同收貨後的漏水維修"] },
+  { id: "m-elock", cat: "門鎖", name: "大門密碼電子門鎖", desc: "密碼電子門鎖。只售鎖，唔包安裝。", price: 1680, unit: "套", img: "images/materials/catalog/elock.jpg", trade: "大門鎖 / 電子鎖",
+    intro: "大門用密碼電子鎖。落單前要先量度門厚、鎖舌同原來鎖孔，尺寸不合不能硬裝。",
+    includes: ["電子鎖本體 1 套", "密碼說明"],
+    excludes: ["唔包改門或開鎖孔", "唔包鎖匠上門", "唔包與大廈對講系統駁線"] },
+  { id: "m-latex", cat: "牆漆", name: "室內牆身乳膠漆", desc: "室內牆身乳膠漆。只售油漆，唔包掃油。", price: 480, unit: "桶", img: "images/materials/catalog/latex.jpg", trade: "牆身補灰 / 油漆",
+    intro: "室內牆身用乳膠漆，只售油漆一桶。牆身若有裂、鬆或油膩，要先批灰打底，那些工序不在這件貨裡。",
+    includes: ["室內乳膠漆 1 桶"],
+    excludes: ["唔包批灰或剷底", "唔包掃油人工", "唔包保護傢俬同地板"] },
+  { id: "m-membrane", cat: "防漏", name: "浴室/露台用防漏膜", desc: "浴室或露台用防漏膜。只售材料，唔包塗層。", price: 880, unit: "份", img: "images/materials/catalog/membrane.jpg", trade: "浴室防漏 / 泥水",
+    intro: "浴室或露台防水用的防漏膜，只售材料。要先清走鬆散批盪再塗，施工屬泥水工序，這張單不包。",
+    includes: ["防漏膜材料 1 份"],
+    excludes: ["唔包剷磚或批盪", "唔包泥水人工", "唔包閉水測試"] }
 ];
 
 const hardwareTrades = [
@@ -3022,7 +3047,7 @@ function sendRepairTicketWhatsApp() {
 function renderMaterials(filter = 'all') {
   const grid = document.getElementById('materials-grid');
   const list = filter === 'all' ? materialsProducts : materialsProducts.filter(p => p.cat === filter);
-  grid.innerHTML = list.map(p => `<div class="card-equal bg-stone-50 rounded-2xl border border-stone-200 p-4 gap-3">
+  grid.innerHTML = list.map(p => `<div class="card-equal bg-stone-50 rounded-2xl border border-stone-200 p-4 gap-3 cursor-pointer hover:border-amber-400" onclick="openMaterialDetail('${p.id}')">
     <div class="flex gap-3 items-start">
       <img src="${p.img}" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='https://placehold.co/120x120/1e293b/fbbf24?text=建材';" alt="${p.name}" class="w-20 h-20 rounded-xl object-cover shrink-0 bg-stone-200 border border-stone-200" />
       <div class="min-w-0 flex-1 space-y-1">
@@ -3037,8 +3062,8 @@ function renderMaterials(filter = 'all') {
         <span class="text-[11px] text-stone-500"> / ${p.unit}</span>
       </div>
       <div class="flex items-center gap-1.5">
-        <button onclick="bookInstallForMaterial('${p.name}', '${p.trade}')" class="btn-std h-8 px-3 rounded-lg text-xs font-bold text-amber-900 bg-amber-100 hover:bg-amber-200 border border-amber-300">🔧 搵師傅裝</button>
-        <button onclick="addToCart('${p.id}', 'materials-official', '大本營建材直銷', '60000000', '${p.name}', ${p.price}, '${p.unit}')" class="btn-std h-8 px-3 rounded-lg text-xs font-black bg-slate-900 hover:bg-slate-800 text-white">＋入清單</button>
+        <button type="button" onclick="event.stopPropagation(); bookInstallForMaterial('${p.name}', '${p.trade}')" class="btn-std h-8 px-3 rounded-lg text-xs font-bold text-amber-900 bg-amber-100 hover:bg-amber-200 border border-amber-300">🔧 搵師傅裝</button>
+        <button type="button" onclick="event.stopPropagation(); addToCart('${p.id}', 'materials-official', '大本營建材直銷', '60000000', '${p.name}', ${p.price}, '${p.unit}')" class="btn-std h-8 px-3 rounded-lg text-xs font-black bg-slate-900 hover:bg-slate-800 text-white">＋入清單</button>
       </div>
     </div>
   </div>`).join('');
@@ -3056,10 +3081,65 @@ function filterMaterials(cat, btnEl) {
 }
 
 function bookInstallForMaterial(productName, tradeName) {
+  closeProductDetail(false);
   switchSection('repair');
   document.getElementById('repair-trade-input').value = tradeName + ' ｜ 公價參考標準';
   document.getElementById('repair-desc').value = `我喺【大本營建材店】買咗「${productName}」，想根據大本營標準公價預約高分師傅上門安裝。`;
   setTimeout(() => { document.getElementById('repair-form-box').scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 60);
+}
+
+let detailReturnSection = null;
+
+function openMaterialDetail(productId) {
+  const p = materialsProducts.find(item => item.id === productId);
+  if (!p) return;
+  const lines = (items, mark) => items.map(t => `<li class="leading-relaxed">${mark} ${t}</li>`).join('');
+  showProductDetail(`
+    <button type="button" onclick="closeProductDetail()" class="btn-std h-9 px-3 rounded-xl bg-stone-100 text-slate-900 font-bold text-xs">← 返回建材店，並重新打開其他服務</button>
+    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-5">
+      <img src="${p.img}" alt="${p.name}" class="w-full h-64 object-cover rounded-2xl bg-stone-100 border border-stone-200" />
+      <div class="space-y-3 min-w-0">
+        <span class="inline-block text-[11px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-900">${p.cat} · 原廠保養 · 只售物料</span>
+        <h2 class="text-xl sm:text-2xl font-black text-slate-900">${p.name}</h2>
+        <div class="text-2xl font-black text-slate-900">HK$${p.price.toLocaleString()} <span class="text-sm font-bold text-stone-500">/ ${p.unit}</span></div>
+        <p class="text-sm text-stone-700 leading-relaxed">${p.intro}</p>
+        <div class="flex flex-wrap gap-2 pt-1">
+          <button type="button" onclick="bookInstallForMaterial('${p.name}', '${p.trade}')" class="btn-std h-10 px-4 rounded-xl text-xs font-bold text-amber-950 bg-amber-400 hover:bg-amber-300">🔧 搵師傅安裝</button>
+          <button type="button" onclick="addToCart('${p.id}', 'materials-official', '大本營建材直銷', '60000000', '${p.name}', ${p.price}, '${p.unit}')" class="btn-std h-10 px-4 rounded-xl text-xs font-black bg-slate-900 text-white">＋入清單</button>
+        </div>
+      </div>
+    </div>
+    <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+      <div class="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
+        <div class="font-black text-emerald-950 mb-2">這件貨包括</div>
+        <ul class="space-y-1 text-emerald-950">${lines(p.includes, '·')}</ul>
+      </div>
+      <div class="rounded-2xl border border-stone-200 bg-stone-50 p-4">
+        <div class="font-black text-slate-900 mb-2">這件貨不包括</div>
+        <ul class="space-y-1 text-stone-700">${lines(p.excludes, '·')}</ul>
+      </div>
+    </div>
+  `);
+}
+
+function showProductDetail(html) {
+  if (detailReturnSection == null) detailReturnSection = currentSection || 'all';
+  ['repair', 'materials', 'hardware'].forEach(id => {
+    const el = document.getElementById('section-' + id);
+    if (el) el.classList.add('hidden');
+  });
+  const panel = document.getElementById('product-detail');
+  document.getElementById('product-detail-body').innerHTML = html;
+  panel.classList.remove('hidden');
+  panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function closeProductDetail(restore = true) {
+  const panel = document.getElementById('product-detail');
+  if (panel) panel.classList.add('hidden');
+  const back = detailReturnSection;
+  detailReturnSection = null;
+  if (restore) switchSection(back || currentSection || 'all');
 }
 
 function updateGoogleMapWidget() {
@@ -3904,6 +3984,11 @@ function checkoutOrder() {
 }
 
 function switchSection(sec) {
+  const detail = document.getElementById('product-detail');
+  if (detail && !detail.classList.contains('hidden')) {
+    detail.classList.add('hidden');
+    detailReturnSection = null;
+  }
   currentSection = sec;
   applyHeroVisuals(sec);
   const sections = {
