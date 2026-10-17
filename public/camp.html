@@ -609,12 +609,15 @@ html, body {
         </div>
         <h2 class="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900">飲水機、抽油煙機、煮食爐、大門電子鎖直銷</h2>
         <p class="text-stone-600 text-xs sm:text-sm leading-relaxed">
-          標價<strong>只售物料，唔包安裝</strong>。香港代理行貨，原廠保養。買料後如需師傅安裝，可隨時點撃右方<strong>「查看家電標準安裝公價表」</strong>或於商品卡撳「🔧 搵師傅裝」一鍵轉介！
+          標價只售物料。需要上門安裝的貨品先會有「搵師傅裝」。每件貨可先加減數量再入清單。有優惠的貨會顯示劃線原價同折扣價。
         </p>
       </div>
       <div class="flex items-center gap-2 shrink-0">
         <button onclick="openAppliancePricingModal()" class="btn-std bg-slate-900 hover:bg-slate-800 text-amber-400 font-black text-xs px-4 h-10 rounded-xl shadow-xs">
           <span>📋 查看「家電標準安裝公價表」</span>
+        </button>
+        <button onclick="openShopOwnerModal('promo')" class="btn-std bg-white hover:bg-stone-100 text-slate-900 border border-stone-300 font-black text-xs px-4 h-10 rounded-xl">
+          <span>🏷️ 貨品折扣管理</span>
         </button>
       </div>
     </div>
@@ -1316,6 +1319,7 @@ html, body {
           <button type="button" id="owner-tab-catalog" onclick="switchOwnerTab('catalog')" class="btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950">1. 店舖資料 & 改價</button>
           <button type="button" id="owner-tab-pricing" onclick="switchOwnerTab('pricing')" class="btn-std h-8 px-3 rounded-lg text-xs font-bold text-stone-300">2. 📋 家電安裝公價設定</button>
           <button type="button" id="owner-tab-orders" onclick="switchOwnerTab('orders')" class="btn-std h-8 px-3 rounded-lg text-xs font-bold text-stone-300">3. 訂單狀態管理</button>
+          <button type="button" id="owner-tab-promo" onclick="switchOwnerTab('promo')" class="btn-std h-8 px-3 rounded-lg text-xs font-bold text-stone-300">4. 貨品折扣</button>
         </div>
       </div>
 
@@ -1386,6 +1390,15 @@ html, body {
           <p class="text-stone-300 text-[11px]">點擊下方狀態按鈕即可切換：<strong>已下單 ➔ 執貨中 ➔ 打包好 ➔ 運送中</strong>。</p>
         </div>
         <div id="owner-orders-list" class="space-y-3"></div>
+      </div>
+
+      <div id="owner-panel-promo" class="hidden flex-1 overflow-y-auto space-y-3 pr-1 text-xs">
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-2">
+          <h4 class="font-black text-sm text-amber-400">🏷️ 選擇可做優惠的貨品</h4>
+          <p class="text-stone-300 text-[11px]">勾選後填折扣百分比。儲存後，貨品卡會顯示原價劃線同折扣價。未勾選的貨維持原價。</p>
+        </div>
+        <div id="promo-admin-list" class="space-y-2"></div>
+        <button type="button" onclick="saveProductPromos()" class="btn-std h-10 px-4 bg-amber-400 text-slate-950 font-black rounded-xl">儲存折扣設定</button>
       </div>
     </div>
   </div>
@@ -1557,6 +1570,7 @@ const LOCAL_HW_STORES_KEY = 'hk_camp_hw_stores_v9';
 const LOCAL_HW_ORDERS_KEY = 'hk_camp_hw_orders_v9';
 const LOCAL_REVIEWS_KEY = 'hk_camp_mutual_reviews_v9';
 const LOCAL_PRICING_KEY = 'hk_camp_appliance_pricing_v3';
+const LOCAL_PROMO_KEY = 'hk_camp_product_promos_v1';
 
 let appliancePricingData = {
   kitchen: [
@@ -1624,27 +1638,27 @@ const repairTrades = [
 ];
 
 const materialsProducts = [
-  { id: "m-ro", cat: "飲水機", name: "廚下式 RO 濾水機", desc: "三樽濾芯加專用龍頭。只售物料，唔包安裝。", price: 2480, unit: "套", img: "images/materials/catalog/ro.jpg", trade: "水喉漏水 / 換龍頭",
+  { id: "m-ro", install: true, cat: "飲水機", name: "廚下式 RO 濾水機", desc: "三樽濾芯加專用龍頭。只售物料，唔包安裝。", price: 2480, unit: "套", img: "images/materials/catalog/ro.jpg", trade: "水喉漏水 / 換龍頭",
     intro: "放在廚櫃內的三樽式 RO 濾水機，連專用出水位龍頭。適合想在星盆旁直接取過濾水、又不想佔枱面的單位。",
     includes: ["主機連三樽濾芯", "專用廚房龍頭", "基本說明"],
     excludes: ["唔包開喉或鑽枱", "唔包駁去現有水喉", "唔包上門安裝或棄置舊機"] },
-  { id: "m-downlight", cat: "燈飾", name: "LED 筒燈（暖白光）", desc: "暖白光 LED 筒燈。只售燈具，唔包更換。", price: 160, unit: "盞", img: "images/materials/catalog/downlight.jpg", trade: "電力跳掣 / 換燈掣",
+  { id: "m-downlight", install: true, cat: "燈飾", name: "LED 筒燈（暖白光）", desc: "暖白光 LED 筒燈。只售燈具，唔包更換。", price: 160, unit: "盞", img: "images/materials/catalog/downlight.jpg", trade: "電力跳掣 / 換燈掣",
     intro: "暖白色 LED 筒燈，適合客廳、走廊、廚房天花。這張單只賣燈具本身，不會連更換人工。",
     includes: ["暖白光 LED 筒燈 1 盞", "原廠保養"],
     excludes: ["唔包天花開孔", "唔包駁電或換舊燈", "唔包燈架改位"] },
-  { id: "m-faucet", cat: "浴室", name: "炭灰色單控廚房龍頭", desc: "炭灰色單控龍頭。只售龍頭，唔包接駁。", price: 860, unit: "套", img: "images/materials/catalog/faucet.jpg", trade: "水喉漏水 / 換龍頭",
+  { id: "m-faucet", install: true, cat: "浴室", name: "炭灰色單控廚房龍頭", desc: "炭灰色單控龍頭。只售龍頭，唔包接駁。", price: 860, unit: "套", img: "images/materials/catalog/faucet.jpg", trade: "水喉漏水 / 換龍頭",
     intro: "炭灰色單控廚房龍頭，適合標準單孔星盆。冷熱水同一支手柄控制。只售龍頭，水喉接駁要另外處理。",
     includes: ["炭灰色單控龍頭 1 套", "基本安裝配件"],
     excludes: ["唔包波曲或軟喉", "唔包拆舊龍頭", "唔包試水同收貨後的漏水維修"] },
-  { id: "m-elock", cat: "門鎖", name: "大門密碼電子門鎖", desc: "密碼電子門鎖。只售鎖，唔包安裝。", price: 1680, unit: "套", img: "images/materials/catalog/elock.jpg", trade: "大門鎖 / 電子鎖",
+  { id: "m-elock", install: true, cat: "門鎖", name: "大門密碼電子門鎖", desc: "密碼電子門鎖。只售鎖，唔包安裝。", price: 1680, unit: "套", img: "images/materials/catalog/elock.jpg", trade: "大門鎖 / 電子鎖",
     intro: "大門用密碼電子鎖。落單前要先量度門厚、鎖舌同原來鎖孔，尺寸不合不能硬裝。",
     includes: ["電子鎖本體 1 套", "密碼說明"],
     excludes: ["唔包改門或開鎖孔", "唔包鎖匠上門", "唔包與大廈對講系統駁線"] },
-  { id: "m-latex", cat: "牆漆", name: "室內牆身乳膠漆", desc: "室內牆身乳膠漆。只售油漆，唔包掃油。", price: 480, unit: "桶", img: "images/materials/catalog/latex.jpg", trade: "牆身補灰 / 油漆",
+  { id: "m-latex", install: false, cat: "牆漆", name: "室內牆身乳膠漆", desc: "室內牆身乳膠漆。只售油漆，唔包掃油。", price: 480, unit: "桶", img: "images/materials/catalog/latex.jpg", trade: "牆身補灰 / 油漆",
     intro: "室內牆身用乳膠漆，只售油漆一桶。牆身若有裂、鬆或油膩，要先批灰打底，那些工序不在這件貨裡。",
     includes: ["室內乳膠漆 1 桶"],
     excludes: ["唔包批灰或剷底", "唔包掃油人工", "唔包保護傢俬同地板"] },
-  { id: "m-membrane", cat: "防漏", name: "浴室/露台用防漏膜", desc: "浴室或露台用防漏膜。只售材料，唔包塗層。", price: 880, unit: "份", img: "images/materials/catalog/membrane.jpg", trade: "浴室防漏 / 泥水",
+  { id: "m-membrane", install: false, cat: "防漏", name: "浴室/露台用防漏膜", desc: "浴室或露台用防漏膜。只售材料，唔包塗層。", price: 880, unit: "份", img: "images/materials/catalog/membrane.jpg", trade: "浴室防漏 / 泥水",
     intro: "浴室或露台防水用的防漏膜，只售材料。要先清走鬆散批盪再塗，施工屬泥水工序，這張單不包。",
     includes: ["防漏膜材料 1 份"],
     excludes: ["唔包剷磚或批盪", "唔包泥水人工", "唔包閉水測試"] }
@@ -1757,6 +1771,8 @@ let hardwareOrders = [
 let cart = [];
 let activeCartTab = 'hardware';
 let pendingOwnerTab = 'catalog';
+let currentMaterialsFilter = 'all';
+let productPromos = { "m-downlight": { on: true, percent: 20 } };
 
 const FACTORY_STATE = {
   masters: JSON.parse(JSON.stringify(registeredMasters)),
@@ -1764,7 +1780,8 @@ const FACTORY_STATE = {
   stores: JSON.parse(JSON.stringify(hardwareStores)),
   orders: JSON.parse(JSON.stringify(hardwareOrders)),
   reviews: JSON.parse(JSON.stringify(mutualReviews)),
-  pricing: JSON.parse(JSON.stringify(appliancePricingData))
+  pricing: JSON.parse(JSON.stringify(appliancePricingData)),
+  promos: JSON.parse(JSON.stringify(productPromos))
 };
 
 function normalizeLoadedState() {
@@ -1789,6 +1806,8 @@ function loadPersistedData() {
     if (savedR) mutualReviews = JSON.parse(savedR);
     const savedP = localStorage.getItem(LOCAL_PRICING_KEY);
     if (savedP) appliancePricingData = JSON.parse(savedP);
+    const savedPromo = localStorage.getItem(LOCAL_PROMO_KEY);
+    if (savedPromo) productPromos = JSON.parse(savedPromo);
     normalizeLoadedState();
   } catch (e) { console.warn(e); }
 }
@@ -1801,6 +1820,7 @@ function persistDataLocally() {
     localStorage.setItem(LOCAL_HW_ORDERS_KEY, JSON.stringify(hardwareOrders));
     localStorage.setItem(LOCAL_REVIEWS_KEY, JSON.stringify(mutualReviews));
     localStorage.setItem(LOCAL_PRICING_KEY, JSON.stringify(appliancePricingData));
+    localStorage.setItem(LOCAL_PROMO_KEY, JSON.stringify(productPromos));
   } catch (e) { console.warn(e); }
   if (typeof window.syncStateToCloud === 'function') {
     window.syncStateToCloud();
@@ -1821,6 +1841,7 @@ function refreshAllViewsFromCloud() {
   renderTopMastersShowcase();
   renderMutualReviewsWall();
   renderMasterJobs();
+  renderMaterials(currentMaterialsFilter);
   renderHardwareStoresBar();
   renderHardwareProducts(currentHardwareFilter);
   renderHardwareOrdersTracker();
@@ -3044,10 +3065,55 @@ function sendRepairTicketWhatsApp() {
   window.open(`https://wa.me/85260000000?text=${encodeURIComponent(text)}`, '_blank');
 }
 
+function saleOf(listPrice, productId) {
+  const promo = productPromos[productId];
+  const percent = promo && promo.on ? Math.min(90, Math.max(1, Number(promo.percent) || 0)) : 0;
+  if (!percent) return { price: listPrice, list: listPrice, percent: 0 };
+  return { price: Math.max(1, Math.round(listPrice * (100 - percent) / 100)), list: listPrice, percent };
+}
+
+function priceMarkup(listPrice, productId, tone) {
+  const sale = saleOf(listPrice, productId);
+  const main = tone === 'dark' ? 'text-amber-400' : 'text-slate-900';
+  if (!sale.percent) {
+    return `<span class="text-sm sm:text-base font-black ${main}">HK$${sale.price.toLocaleString()}</span>`;
+  }
+  return `<span class="inline-flex items-center gap-1 flex-wrap">
+    <span class="text-[10px] font-black text-white bg-red-600 px-1.5 py-0.5 rounded">-${sale.percent}%</span>
+    <span class="text-[11px] line-through ${tone === 'dark' ? 'text-stone-500' : 'text-stone-400'}">HK$${sale.list.toLocaleString()}</span>
+    <span class="text-sm sm:text-base font-black text-red-600">HK$${sale.price.toLocaleString()}</span>
+  </span>`;
+}
+
+function qtyControl(qtyId) {
+  return `<div class="inline-flex items-center h-8 rounded-lg border border-stone-300 bg-white overflow-hidden" onclick="event.stopPropagation()">
+    <button type="button" onclick="event.stopPropagation(); bumpQty('${qtyId}', -1)" class="w-7 h-8 font-black text-slate-900">－</button>
+    <input id="${qtyId}" value="1" readonly class="w-8 h-8 text-center text-xs font-black text-slate-900 bg-white border-x border-stone-200" />
+    <button type="button" onclick="event.stopPropagation(); bumpQty('${qtyId}', 1)" class="w-7 h-8 font-black text-slate-900">＋</button>
+  </div>`;
+}
+
+function bumpQty(qtyId, delta) {
+  const el = document.getElementById(qtyId);
+  if (!el) return;
+  el.value = String(Math.max(1, (parseInt(el.value, 10) || 1) + delta));
+}
+
+function readQty(qtyId) {
+  const n = parseInt(document.getElementById(qtyId)?.value, 10);
+  return Number.isFinite(n) && n > 0 ? n : 1;
+}
+
 function renderMaterials(filter = 'all') {
+  currentMaterialsFilter = filter;
   const grid = document.getElementById('materials-grid');
   const list = filter === 'all' ? materialsProducts : materialsProducts.filter(p => p.cat === filter);
-  grid.innerHTML = list.map(p => `<div class="card-equal bg-stone-50 rounded-2xl border border-stone-200 p-4 gap-3 cursor-pointer hover:border-amber-400" onclick="openMaterialDetail('${p.id}')">
+  grid.innerHTML = list.map(p => {
+    const sale = saleOf(p.price, p.id);
+    const installBtn = p.install
+      ? `<button type="button" onclick="event.stopPropagation(); bookInstallForMaterial('${p.name}', '${p.trade}')" class="btn-std h-8 px-3 rounded-lg text-xs font-bold text-amber-900 bg-amber-100 hover:bg-amber-200 border border-amber-300">🔧 搵師傅裝</button>`
+      : '';
+    return `<div class="card-equal bg-stone-50 rounded-2xl border border-stone-200 p-4 gap-3 cursor-pointer hover:border-amber-400" onclick="openMaterialDetail('${p.id}')">
     <div class="flex gap-3 items-start">
       <img src="${p.img}" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='https://placehold.co/120x120/1e293b/fbbf24?text=建材';" alt="${p.name}" class="w-20 h-20 rounded-xl object-cover shrink-0 bg-stone-200 border border-stone-200" />
       <div class="min-w-0 flex-1 space-y-1">
@@ -3057,16 +3123,18 @@ function renderMaterials(filter = 'all') {
       </div>
     </div>
     <div class="pt-2.5 border-t border-stone-200 flex items-center justify-between gap-2">
-      <div>
-        <span class="text-sm sm:text-base font-black text-slate-900">HK$${p.price.toLocaleString()}</span>
+      <div class="min-w-0">
+        ${priceMarkup(p.price, p.id, 'light')}
         <span class="text-[11px] text-stone-500"> / ${p.unit}</span>
       </div>
-      <div class="flex items-center gap-1.5">
-        <button type="button" onclick="event.stopPropagation(); bookInstallForMaterial('${p.name}', '${p.trade}')" class="btn-std h-8 px-3 rounded-lg text-xs font-bold text-amber-900 bg-amber-100 hover:bg-amber-200 border border-amber-300">🔧 搵師傅裝</button>
-        <button type="button" onclick="event.stopPropagation(); addToCart('${p.id}', 'materials-official', '大本營建材直銷', '60000000', '${p.name}', ${p.price}, '${p.unit}')" class="btn-std h-8 px-3 rounded-lg text-xs font-black bg-slate-900 hover:bg-slate-800 text-white">＋入清單</button>
+      <div class="flex flex-wrap items-center justify-end gap-1.5">
+        ${qtyControl('qty-' + p.id)}
+        ${installBtn}
+        <button type="button" onclick="event.stopPropagation(); addToCart('${p.id}', 'materials-official', '大本營建材直銷', '60000000', '${p.name}', ${sale.price}, '${p.unit}', readQty('qty-${p.id}'))" class="btn-std h-8 px-3 rounded-lg text-xs font-black bg-slate-900 hover:bg-slate-800 text-white">＋入清單</button>
       </div>
     </div>
-  </div>`).join('');
+  </div>`;
+  }).join('');
 }
 
 function filterMaterials(cat, btnEl) {
@@ -3094,6 +3162,10 @@ function openMaterialDetail(productId) {
   const p = materialsProducts.find(item => item.id === productId);
   if (!p) return;
   const lines = (items, mark) => items.map(t => `<li class="leading-relaxed">${mark} ${t}</li>`).join('');
+  const sale = saleOf(p.price, p.id);
+  const installBtn = p.install
+    ? `<button type="button" onclick="bookInstallForMaterial('${p.name}', '${p.trade}')" class="btn-std h-10 px-4 rounded-xl text-xs font-bold text-amber-950 bg-amber-400 hover:bg-amber-300">🔧 搵師傅安裝</button>`
+    : '';
   showProductDetail(`
     <button type="button" onclick="closeProductDetail()" class="btn-std h-9 px-3 rounded-xl bg-stone-100 text-slate-900 font-bold text-xs">← 返回建材店，並重新打開其他服務</button>
     <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -3101,11 +3173,12 @@ function openMaterialDetail(productId) {
       <div class="space-y-3 min-w-0">
         <span class="inline-block text-[11px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-900">${p.cat} · 原廠保養 · 只售物料</span>
         <h2 class="text-xl sm:text-2xl font-black text-slate-900">${p.name}</h2>
-        <div class="text-2xl font-black text-slate-900">HK$${p.price.toLocaleString()} <span class="text-sm font-bold text-stone-500">/ ${p.unit}</span></div>
+        <div>${priceMarkup(p.price, p.id, 'light')} <span class="text-sm font-bold text-stone-500">/ ${p.unit}</span></div>
         <p class="text-sm text-stone-700 leading-relaxed">${p.intro}</p>
-        <div class="flex flex-wrap gap-2 pt-1">
-          <button type="button" onclick="bookInstallForMaterial('${p.name}', '${p.trade}')" class="btn-std h-10 px-4 rounded-xl text-xs font-bold text-amber-950 bg-amber-400 hover:bg-amber-300">🔧 搵師傅安裝</button>
-          <button type="button" onclick="addToCart('${p.id}', 'materials-official', '大本營建材直銷', '60000000', '${p.name}', ${p.price}, '${p.unit}')" class="btn-std h-10 px-4 rounded-xl text-xs font-black bg-slate-900 text-white">＋入清單</button>
+        <div class="flex flex-wrap items-center gap-2 pt-1">
+          ${qtyControl('qty-detail-' + p.id)}
+          ${installBtn}
+          <button type="button" onclick="addToCart('${p.id}', 'materials-official', '大本營建材直銷', '60000000', '${p.name}', ${sale.price}, '${p.unit}', readQty('qty-detail-${p.id}'))" class="btn-std h-10 px-4 rounded-xl text-xs font-black bg-slate-900 text-white">＋入清單</button>
         </div>
       </div>
     </div>
@@ -3338,12 +3411,15 @@ function renderHardwareProducts(filter = 'all') {
       </div>
       <div class="p-3.5 pt-2 border-t border-stone-700 flex items-center justify-between gap-2">
         <div>
-          <span class="text-sm sm:text-base font-black text-amber-400">HK$${customPrice}</span>
+          ${priceMarkup(customPrice, p.id, 'dark')}
           <span class="text-xs text-stone-400"> / ${p.unit}</span>
         </div>
-        <button onclick="addToCart('${p.id}', '${store.id}', '${store.name}', '${store.phone}', '${p.name}', ${customPrice}, '${p.unit}')" class="btn-std h-8 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs">
-          ＋執貨
-        </button>
+        <div class="flex items-center gap-1.5">
+          ${qtyControl('qty-' + p.id)}
+          <button type="button" onclick="addToCart('${p.id}', '${store.id}', '${store.name}', '${store.phone}', '${p.name}', ${saleOf(customPrice, p.id).price}, '${p.unit}', readQty('qty-${p.id}'))" class="btn-std h-8 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs">
+            ＋執貨
+          </button>
+        </div>
       </div>
     </div>`;
   }).join('');
@@ -3587,14 +3663,16 @@ function switchOwnerTab(tab) {
   const catBtn = document.getElementById('owner-tab-catalog');
   const priBtn = document.getElementById('owner-tab-pricing');
   const ordBtn = document.getElementById('owner-tab-orders');
+  const promoBtn = document.getElementById('owner-tab-promo');
   const catPanel = document.getElementById('owner-panel-catalog');
   const priPanel = document.getElementById('owner-panel-pricing');
   const ordPanel = document.getElementById('owner-panel-orders');
+  const promoPanel = document.getElementById('owner-panel-promo');
 
-  [catBtn, priBtn, ordBtn].forEach(b => {
+  [catBtn, priBtn, ordBtn, promoBtn].forEach(b => {
     if (b) b.className = "btn-std h-8 px-3 rounded-lg text-xs font-bold text-stone-300 hover:text-white";
   });
-  [catPanel, priPanel, ordPanel].forEach(p => {
+  [catPanel, priPanel, ordPanel, promoPanel].forEach(p => {
     if (p) p.classList.add('hidden');
   });
 
@@ -3605,11 +3683,54 @@ function switchOwnerTab(tab) {
     priBtn.className = "btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950";
     priPanel.classList.remove('hidden');
     loadOwnerPricingForm();
+  } else if (tab === 'promo') {
+    promoBtn.className = "btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950";
+    promoPanel.classList.remove('hidden');
+    renderPromoAdmin();
   } else {
     ordBtn.className = "btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950";
     ordPanel.classList.remove('hidden');
     renderOwnerOrdersList();
   }
+}
+
+function renderPromoAdmin() {
+  const box = document.getElementById('promo-admin-list');
+  if (!box) return;
+  const rows = [
+    ...materialsProducts.map(p => ({ id: p.id, name: p.name, group: '建材店', price: p.price })),
+    ...masterHardwareCatalog.map(p => ({ id: p.id, name: p.name, group: '五金', price: p.defaultPrice }))
+  ];
+  box.innerHTML = rows.map(p => {
+    const promo = productPromos[p.id] || { on: false, percent: 10 };
+    return `<label class="flex flex-wrap items-center gap-3 bg-slate-900 border border-slate-700 rounded-xl p-3">
+      <input type="checkbox" data-promo-id="${p.id}" ${promo.on ? 'checked' : ''} class="w-4 h-4" />
+      <div class="flex-1 min-w-40">
+        <div class="font-bold text-white">${p.name}</div>
+        <div class="text-[11px] text-stone-400">${p.group} · 原價 HK$${Number(p.price).toLocaleString()}</div>
+      </div>
+      <div class="flex items-center gap-1 text-amber-300">
+        <span>減</span>
+        <input type="number" min="1" max="90" value="${promo.percent || 10}" data-promo-percent="${p.id}" class="w-16 h-8 bg-slate-950 border border-slate-600 rounded-lg text-center text-white" />
+        <span>%</span>
+      </div>
+    </label>`;
+  }).join('');
+}
+
+function saveProductPromos() {
+  const next = {};
+  document.querySelectorAll('[data-promo-id]').forEach(chk => {
+    const id = chk.getAttribute('data-promo-id');
+    const percentEl = document.querySelector(`[data-promo-percent="${id}"]`);
+    const percent = Math.min(90, Math.max(1, Number(percentEl && percentEl.value) || 10));
+    if (chk.checked) next[id] = { on: true, percent };
+  });
+  productPromos = next;
+  persistDataLocally();
+  renderMaterials(currentMaterialsFilter);
+  renderHardwareProducts(currentHardwareFilter);
+  showModal('折扣已更新', '已勾選的貨品會顯示劃線原價同折扣價。未勾選的維持原價。', '優惠');
 }
 
 function renderOwnerOrdersList() {
@@ -3677,13 +3798,15 @@ function switchCartTab(tab) {
   updateCartUI();
 }
 
-function addToCart(productId, storeId, storeName, storePhone, name, price, unit) {
+function addToCart(productId, storeId, storeName, storePhone, name, price, unit, qty) {
+  const addQty = Math.max(1, parseInt(qty, 10) || 1);
   const cartKey = `${storeId}__${productId}`;
   const existing = cart.find(item => item.cartKey === cartKey);
   if (existing) {
-    existing.qty += 1;
+    existing.qty += addQty;
+    existing.price = price;
   } else {
-    cart.push({ cartKey, productId, storeId, storeName, storePhone, name, price, unit, qty: 1 });
+    cart.push({ cartKey, productId, storeId, storeName, storePhone, name, price, unit, qty: addQty });
   }
   activeCartTab = storeId === 'materials-official' ? 'materials' : 'hardware';
   updateCartUI();
@@ -4015,6 +4138,7 @@ async function resetDemoData() {
   hardwareOrders = JSON.parse(JSON.stringify(FACTORY_STATE.orders));
   mutualReviews = JSON.parse(JSON.stringify(FACTORY_STATE.reviews));
   appliancePricingData = JSON.parse(JSON.stringify(FACTORY_STATE.pricing));
+  productPromos = JSON.parse(JSON.stringify(FACTORY_STATE.promos));
   selectedHardwareStoreId = hardwareStores[0] ? hardwareStores[0].id : 'store-kt';
   cart = [];
   isMasterLoggedIn = false;
@@ -4027,6 +4151,7 @@ async function resetDemoData() {
     localStorage.setItem(LOCAL_HW_ORDERS_KEY, JSON.stringify(hardwareOrders));
     localStorage.setItem(LOCAL_REVIEWS_KEY, JSON.stringify(mutualReviews));
     localStorage.setItem(LOCAL_PRICING_KEY, JSON.stringify(appliancePricingData));
+    localStorage.setItem(LOCAL_PROMO_KEY, JSON.stringify(productPromos));
   } catch (e) {}
   if (typeof window.syncStateToCloud === 'function') {
     try { await window.syncStateToCloud(); } catch (e) {}
@@ -4164,6 +4289,7 @@ window.syncStateToCloud = async function () {
         storesJson: JSON.stringify(hardwareStores),
         ordersJson: JSON.stringify(hardwareOrders),
         pricingJson: JSON.stringify(appliancePricingData),
+        promosJson: JSON.stringify(productPromos),
         updatedAt: Date.now(),
         updatedBy: currentUser.uid
       });
@@ -4206,6 +4332,7 @@ async function initCloudSync() {
             if (data.storesJson) hardwareStores = JSON.parse(data.storesJson);
             if (data.ordersJson) hardwareOrders = JSON.parse(data.ordersJson);
             if (data.pricingJson) appliancePricingData = JSON.parse(data.pricingJson);
+            if (data.promosJson) productPromos = JSON.parse(data.promosJson);
             normalizeLoadedState();
           }
         });
