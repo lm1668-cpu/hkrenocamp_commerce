@@ -145,7 +145,7 @@ html, body {
       <div class="w-10 h-10 sm:w-11 sm:h-11 icon-crop-white border-2 border-amber-400 shadow-xs shrink-0">
         <img 
           id="header-brand-logo"
-          src="https://light-timber-vivid-swift.grok.me/brand/mark.jpg?v=opt" 
+          src="images/materials/brand/mark.jpg" 
           onerror="this.onerror=null; this.src='https://placehold.co/96x96/1e293b/fbbf24?text=大本營';"
           alt="香港裝修師傅大本營"
           decoding="async"
@@ -249,10 +249,10 @@ html, body {
       </div>
 
       <div class="lg:col-span-5 relative h-[220px] sm:h-[280px] lg:h-auto lg:min-h-[340px] bg-slate-950 overflow-hidden shrink-0">
-        <img id="hero-img-all" src="https://light-timber-vivid-swift.grok.me/brand/team.jpg?v=opt" onerror="this.onerror=null; this.src='https://placehold.co/800x600/1e293b/fbbf24?text=香港裝修師傅大本營';" alt="總覽主視覺" class="hero-layer opacity-100" decoding="async" />
-        <img id="hero-img-repair" src="https://marble-breeze-bird-berry.grok.me/camp/hero.jpg" onerror="this.onerror=null; this.src='https://placehold.co/800x600/1e293b/fbbf24?text=配對站';" alt="配對站主視覺" class="hero-layer opacity-0 pointer-events-none" decoding="async" />
-        <img id="hero-img-materials" src="https://light-timber-vivid-swift.grok.me/brand/hero.jpg?v=shop2" onerror="this.onerror=null; this.src='https://placehold.co/800x600/064e3b/34d399?text=建材店';" alt="建材店主視覺" class="hero-layer opacity-0 pointer-events-none" decoding="async" />
-        <img id="hero-img-hardware" src="https://daisy-spruce-silver-yellow.grok.me/camp/warehouse-banner-13.jpg" onerror="this.onerror=null; this.src='https://placehold.co/800x600/0c4a6e/38bdf8?text=五金店';" alt="五金店主視覺" class="hero-layer opacity-0 pointer-events-none" decoding="async" />
+        <img id="hero-img-all" src="images/materials/brand/team.jpg" onerror="this.onerror=null; this.src='https://placehold.co/800x600/1e293b/fbbf24?text=香港裝修師傅大本營';" alt="總覽主視覺" class="hero-layer opacity-100" decoding="async" />
+        <img id="hero-img-repair" src="images/repair/camp/hero.jpg" onerror="this.onerror=null; this.src='https://placehold.co/800x600/1e293b/fbbf24?text=配對站';" alt="配對站主視覺" class="hero-layer opacity-0 pointer-events-none" decoding="async" />
+        <img id="hero-img-materials" src="images/materials/brand/hero.jpg" onerror="this.onerror=null; this.src='https://placehold.co/800x600/064e3b/34d399?text=建材店';" alt="建材店主視覺" class="hero-layer opacity-0 pointer-events-none" decoding="async" />
+        <img id="hero-img-hardware" src="images/hardware/camp/warehouse-banner-13.jpg" onerror="this.onerror=null; this.src='https://placehold.co/800x600/0c4a6e/38bdf8?text=五金店';" alt="五金店主視覺" class="hero-layer opacity-0 pointer-events-none" decoding="async" />
 
         <div class="absolute bottom-3 right-3 left-3 sm:left-auto bg-slate-950/85 backdrop-blur-md border border-white/20 text-white px-3.5 py-2 rounded-xl flex items-center justify-between gap-2 shadow-lg z-10">
           <span id="hero-img-caption" class="text-xs font-bold text-amber-300 truncate">📍 大本營三合一總站 · 獅子山師傅團隊</span>
@@ -1452,7 +1452,7 @@ html, body {
 const heroConfig = {
   all: {
     layerId: "hero-img-all",
-    logo: "https://light-timber-vivid-swift.grok.me/brand/mark.jpg?v=opt",
+    logo: "images/materials/brand/mark.jpg",
     caption: "📍 大本營三合一總站 · 獅子山師傅團隊",
     indicator: "目前顯示：全部總覽",
     badge: "✨ 業主 $0 搵師傅 · 家電標準安裝公價 · 十八區五金直發",
@@ -1461,7 +1461,7 @@ const heroConfig = {
   },
   repair: {
     layerId: "hero-img-repair",
-    logo: "https://marble-breeze-bird-berry.grok.me/camp/logo.jpg",
+    logo: "images/repair/camp/logo.jpg",
     caption: "🏠 配對站 · 18個工種防甩底指派與星級互評",
     indicator: "目前選中：01 配對站",
     badge: "🏠 配對站 · 業主 $0 配對費 · 100分誠信防甩底保障",
@@ -1470,7 +1470,7 @@ const heroConfig = {
   },
   materials: {
     layerId: "hero-img-materials",
-    logo: "https://light-timber-vivid-swift.grok.me/brand/mark.jpg?v=opt",
+    logo: "images/materials/brand/mark.jpg",
     caption: "🚿 建材店 · 潔具燈飾門鎖淨料直銷 & 家電公價",
     indicator: "目前選中：02 建材店",
     badge: "🚿 建材店 · 只售產品明碼實價 · 家電標準安裝公價",
@@ -1479,7 +1479,7 @@ const heroConfig = {
   },
   hardware: {
     layerId: "hero-img-hardware",
-    logo: "https://daisy-spruce-silver-yellow.grok.me/camp/five.jpg",
+    logo: "images/hardware/camp/five.jpg",
     caption: "🔩 五金店 · 十八區聯盟五金 Google Map 導航直發",
     indicator: "目前選中：03 五金店",
     badge: "🔩 五金店 · 手機 Google Maps 定位導航 · 各區五金舖直發",
@@ -1574,32 +1574,32 @@ const repairTrades = [
 ];
 
 const materialsProducts = [
-  { id: "m-ro", cat: "飲水機", name: "廚下式 RO 濾水機", desc: "三樽濾芯加專用龍頭。只售物料，唔包安裝。", price: 2480, unit: "套", img: "https://light-timber-vivid-swift.grok.me/catalog/ro.jpg?v=opt", trade: "水喉漏水 / 換龍頭" },
-  { id: "m-downlight", cat: "燈飾", name: "LED 筒燈（暖白光）", desc: "暖白光 LED 筒燈。只售燈具，唔包更換。", price: 160, unit: "盞", img: "https://light-timber-vivid-swift.grok.me/catalog/downlight.jpg?v=opt", trade: "電力跳掣 / 換燈掣" },
-  { id: "m-faucet", cat: "浴室", name: "炭灰色單控廚房龍頭", desc: "炭灰色單控龍頭。只售龍頭，唔包接駁。", price: 860, unit: "套", img: "https://light-timber-vivid-swift.grok.me/catalog/faucet.jpg?v=opt", trade: "水喉漏水 / 換龍頭" },
-  { id: "m-elock", cat: "門鎖", name: "大門密碼電子門鎖", desc: "密碼電子門鎖。只售鎖，唔包安裝。", price: 1680, unit: "套", img: "https://light-timber-vivid-swift.grok.me/catalog/elock.jpg?v=opt", trade: "大門鎖 / 電子鎖" },
-  { id: "m-latex", cat: "牆漆", name: "室內牆身乳膠漆", desc: "室內牆身乳膠漆。只售油漆，唔包掃油。", price: 480, unit: "桶", img: "https://light-timber-vivid-swift.grok.me/catalog/latex.jpg?v=opt", trade: "牆身補灰 / 油漆" },
-  { id: "m-membrane", cat: "防漏", name: "浴室/露台用防漏膜", desc: "浴室或露台用防漏膜。只售材料，唔包塗層。", price: 880, unit: "份", img: "https://light-timber-vivid-swift.grok.me/catalog/membrane.jpg?v=opt", trade: "浴室防漏 / 泥水" }
+  { id: "m-ro", cat: "飲水機", name: "廚下式 RO 濾水機", desc: "三樽濾芯加專用龍頭。只售物料，唔包安裝。", price: 2480, unit: "套", img: "images/materials/catalog/ro.jpg", trade: "水喉漏水 / 換龍頭" },
+  { id: "m-downlight", cat: "燈飾", name: "LED 筒燈（暖白光）", desc: "暖白光 LED 筒燈。只售燈具，唔包更換。", price: 160, unit: "盞", img: "images/materials/catalog/downlight.jpg", trade: "電力跳掣 / 換燈掣" },
+  { id: "m-faucet", cat: "浴室", name: "炭灰色單控廚房龍頭", desc: "炭灰色單控龍頭。只售龍頭，唔包接駁。", price: 860, unit: "套", img: "images/materials/catalog/faucet.jpg", trade: "水喉漏水 / 換龍頭" },
+  { id: "m-elock", cat: "門鎖", name: "大門密碼電子門鎖", desc: "密碼電子門鎖。只售鎖，唔包安裝。", price: 1680, unit: "套", img: "images/materials/catalog/elock.jpg", trade: "大門鎖 / 電子鎖" },
+  { id: "m-latex", cat: "牆漆", name: "室內牆身乳膠漆", desc: "室內牆身乳膠漆。只售油漆，唔包掃油。", price: 480, unit: "桶", img: "images/materials/catalog/latex.jpg", trade: "牆身補灰 / 油漆" },
+  { id: "m-membrane", cat: "防漏", name: "浴室/露台用防漏膜", desc: "浴室或露台用防漏膜。只售材料，唔包塗層。", price: 880, unit: "份", img: "images/materials/catalog/membrane.jpg", trade: "浴室防漏 / 泥水" }
 ];
 
 const hardwareTrades = [
-  { key: "all", label: "全部五金", sub: "標準圖庫", img: "https://daisy-spruce-silver-yellow.grok.me/camp/five.jpg" },
-  { key: "電工", label: "電工", sub: "蘇位、電線", img: "https://daisy-spruce-silver-yellow.grok.me/camp/elec.jpg" },
-  { key: "水喉", label: "水喉", sub: "波曲、膠喉", img: "https://daisy-spruce-silver-yellow.grok.me/camp/plumb.jpg" },
-  { key: "木工", label: "木工", sub: "螺絲、木釘", img: "https://daisy-spruce-silver-yellow.grok.me/camp/wood.jpg" },
-  { key: "油漆", label: "油漆", sub: "滾筒、油掃", img: "https://daisy-spruce-silver-yellow.grok.me/camp/paint.jpg" },
-  { key: "鋁窗", label: "鋁窗", sub: "滑輪、門鉸", img: "https://daisy-spruce-silver-yellow.grok.me/camp/window.jpg" }
+  { key: "all", label: "全部五金", sub: "標準圖庫", img: "images/hardware/camp/five.jpg" },
+  { key: "電工", label: "電工", sub: "蘇位、電線", img: "images/hardware/camp/elec.jpg" },
+  { key: "水喉", label: "水喉", sub: "波曲、膠喉", img: "images/hardware/camp/plumb.jpg" },
+  { key: "木工", label: "木工", sub: "螺絲、木釘", img: "images/hardware/camp/wood.jpg" },
+  { key: "油漆", label: "油漆", sub: "滾筒、油掃", img: "images/hardware/camp/paint.jpg" },
+  { key: "鋁窗", label: "鋁窗", sub: "滑輪、門鉸", img: "images/hardware/camp/window.jpg" }
 ];
 
 const masterHardwareCatalog = [
-  { id: "h-socket", cat: "電工", sku: "DC-EL-013", name: "英式 13A 單蘇面板", desc: "白色，帶開關，英式三腳標準規格", defaultPrice: 38, unit: "件", img: "https://daisy-spruce-silver-yellow.grok.me/products/electrical.jpg" },
-  { id: "h-socket2", cat: "電工", sku: "DC-EL-026", name: "英式 13A 雙蘇面板 (連開關)", desc: "雙位帶獨立開關，BS 標準安全認證", defaultPrice: 55, unit: "件", img: "https://daisy-spruce-silver-yellow.grok.me/products/electrical.jpg" },
-  { id: "h-wire", cat: "電工", sku: "DC-EL-25W", name: "2.5mm 單支銅芯電線 (紅/黑/綠)", desc: "足米標準銅線，地盤拉線必備", defaultPrice: 375, unit: "圈", img: "https://daisy-spruce-silver-yellow.grok.me/products/electrical.jpg" },
-  { id: "h-valve", cat: "水喉", sku: "DC-PB-012", name: "黃銅球閥 (波曲) 1/2寸", desc: "全通徑防漏設計，耐用蝶柄開關", defaultPrice: 68, unit: "件", img: "https://daisy-spruce-silver-yellow.grok.me/products/plumbing.jpg" },
-  { id: "h-ptfe", cat: "水喉", sku: "DC-PB-TAPE", name: "加厚水喉生料帶 (10卷裝)", desc: "高密度防滲漏四氟帶，駁口必備", defaultPrice: 28, unit: "排", img: "https://daisy-spruce-silver-yellow.grok.me/products/plumbing.jpg" },
-  { id: "h-screw", cat: "木工", sku: "DC-WD-425", name: "不鏽鋼自攻螺絲 4×25", desc: "防銹加硬十字頭，200 粒地盤盒裝", defaultPrice: 32, unit: "盒", img: "https://daisy-spruce-silver-yellow.grok.me/products/fastener.jpg" },
-  { id: "h-hinge", cat: "鋁窗", sku: "DC-WD-H304", name: "304 不鏽鋼緩衝門鉸 (一對)", desc: "液壓靜音緩衝，連全套不鏽鋼螺絲", defaultPrice: 45, unit: "對", img: "https://daisy-spruce-silver-yellow.grok.me/camp/window.jpg" },
-  { id: "h-roller", cat: "油漆", sku: "DC-PT-R9", name: "細緻羊毛滾筒 9 寸", desc: "3 個裝中毛滾筒，上漆均勻唔甩毛", defaultPrice: 42, unit: "組", img: "https://daisy-spruce-silver-yellow.grok.me/products/paint.jpg" }
+  { id: "h-socket", cat: "電工", sku: "DC-EL-013", name: "英式 13A 單蘇面板", desc: "白色，帶開關，英式三腳標準規格", defaultPrice: 38, unit: "件", img: "images/hardware/products/electrical.jpg" },
+  { id: "h-socket2", cat: "電工", sku: "DC-EL-026", name: "英式 13A 雙蘇面板 (連開關)", desc: "雙位帶獨立開關，BS 標準安全認證", defaultPrice: 55, unit: "件", img: "images/hardware/products/electrical.jpg" },
+  { id: "h-wire", cat: "電工", sku: "DC-EL-25W", name: "2.5mm 單支銅芯電線 (紅/黑/綠)", desc: "足米標準銅線，地盤拉線必備", defaultPrice: 375, unit: "圈", img: "images/hardware/products/electrical.jpg" },
+  { id: "h-valve", cat: "水喉", sku: "DC-PB-012", name: "黃銅球閥 (波曲) 1/2寸", desc: "全通徑防漏設計，耐用蝶柄開關", defaultPrice: 68, unit: "件", img: "images/hardware/products/plumbing.jpg" },
+  { id: "h-ptfe", cat: "水喉", sku: "DC-PB-TAPE", name: "加厚水喉生料帶 (10卷裝)", desc: "高密度防滲漏四氟帶，駁口必備", defaultPrice: 28, unit: "排", img: "images/hardware/products/plumbing.jpg" },
+  { id: "h-screw", cat: "木工", sku: "DC-WD-425", name: "不鏽鋼自攻螺絲 4×25", desc: "防銹加硬十字頭，200 粒地盤盒裝", defaultPrice: 32, unit: "盒", img: "images/hardware/products/fastener.jpg" },
+  { id: "h-hinge", cat: "鋁窗", sku: "DC-WD-H304", name: "304 不鏽鋼緩衝門鉸 (一對)", desc: "液壓靜音緩衝，連全套不鏽鋼螺絲", defaultPrice: 45, unit: "對", img: "images/hardware/camp/window.jpg" },
+  { id: "h-roller", cat: "油漆", sku: "DC-PT-R9", name: "細緻羊毛滾筒 9 寸", desc: "3 個裝中毛滾筒，上漆均勻唔甩毛", defaultPrice: 42, unit: "組", img: "images/hardware/products/paint.jpg" }
 ];
 
 let hardwareStores = [
