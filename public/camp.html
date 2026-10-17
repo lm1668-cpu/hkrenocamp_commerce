@@ -756,6 +756,7 @@ html, body {
         <button type="button" id="hw-kind-tool" onclick="setHardwareKind('tool')" class="btn-std h-9 px-4 rounded-xl text-xs font-bold bg-stone-800 text-stone-200 border border-stone-600">工具目錄</button>
       </div>
       <div id="hardware-trades-bar" class="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3 items-stretch"></div>
+      <div id="tool-page-content" class="hidden space-y-3"></div>
 
       <div class="pt-2 space-y-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -1667,6 +1668,25 @@ const materialsProducts = [
     intro: "浴室或露台防水用的防漏膜，只售材料。要先清走鬆散批盪再塗，施工屬泥水工序，這張單不包。",
     includes: ["防漏膜材料 1 份"],
     excludes: ["唔包剷磚或批盪", "唔包泥水人工", "唔包閉水測試"] }
+];
+
+const toolGuides = [
+  { cat: "電動", text: "電鑽負責上螺絲和鑽木。混凝土要用衝擊鑽。角磨機和熱風槍是切割、打磨、剝漆用，磨碟和鋸片要另買。" },
+  { cat: "手工具", text: "水喉用管子鉗、水泵鉗和活動扳手。電工用尖嘴鉗。木作用羊角錘，鋁窗和層板用膠錘，避免打花表面。" },
+  { cat: "量度", text: "開工先度。拉尺量門和喉，水平尺看層板和窗，激光測距用來報價，驗電筆只作換蘇換燈前的初檢。" },
+  { cat: "安全", text: "用角磨機或衝擊鑽要戴眼鏡。搬玻璃和鋁料戴防割手套。打磨批灰用防塵口罩。地盤有墜物先戴安全帽。" }
+];
+
+const toolKits = [
+  { id: "kit-elec", name: "室內電工開工套", note: "換蘇、上螺絲、驗電。", ids: ["t-drill", "t-driver", "t-tester", "t-plier", "t-tape", "t-glass"] },
+  { id: "kit-plumb", name: "水喉開工套", note: "拆波曲、駁軟喉、度尺寸。", ids: ["t-pipewrench", "t-pump", "t-wrench", "t-tape"] },
+  { id: "kit-wood", name: "木作開工套", note: "上螺絲、釘木、度平。", ids: ["t-drill", "t-driver", "t-claw", "t-level", "t-knife"] }
+];
+
+const toolNotes = [
+  { title: "只售工具", text: "價錢不含師傅人工，也不含上門安裝。" },
+  { title: "耗材另計", text: "磨碟、鋸片、刀片、鑽咀不是跟機。用完要另買。" },
+  { title: "先對尺寸", text: "12V 電鑽做家居。鑽混凝土要用 18V 衝擊鑽，兩者不能互相代替。" }
 ];
 
 const hardwareToolTrades = [
@@ -3462,6 +3482,7 @@ function setHardwareKind(kind) {
     : "btn-std h-9 px-4 rounded-xl text-xs font-bold bg-stone-800 text-stone-200 border border-stone-600";
   renderHardwareTrades();
   renderHardwareProducts('all');
+  renderToolPageContent();
 }
 
 function renderHardwareTrades() {
@@ -3490,6 +3511,7 @@ function renderHardwareProducts(filter = 'all') {
   const searchInput = document.getElementById('hardware-search-input');
   const keyword = searchInput ? searchInput.value.trim().toLowerCase() : '';
   const store = hardwareStores.find(s => s.id === selectedHardwareStoreId) || hardwareStores[0];
+  renderToolPageContent(store);
 
   const kindLabel = currentHardwareKind === 'tool' ? '工具' : '零件';
   shelfTitle.textContent = `🔥 ${store.name} · 現貨五金${kindLabel}`;
@@ -3546,7 +3568,78 @@ function renderHardwareProducts(filter = 'all') {
   }).join('');
 }
 
-function filterHardware(cat) { renderHardwareProducts(cat); }
+function renderToolPageContent(store) {
+  const box = document.getElementById('tool-page-content');
+  if (!box) return;
+  if (currentHardwareKind !== 'tool') {
+    box.classList.add('hidden');
+    box.innerHTML = '';
+    return;
+  }
+  const shop = store || hardwareStores.find(s => s.id === selectedHardwareStoreId) || hardwareStores[0];
+  const guides = toolGuides.map(g => `<div class="bg-stone-900 border border-stone-700 rounded-2xl p-3">
+    <div class="text-xs font-black text-amber-300">${g.cat}</div>
+    <p class="text-[11px] text-stone-300 leading-relaxed mt-1">${g.text}</p>
+  </div>`).join('');
+  const kits = toolKits.map(kit => {
+    const items = kit.ids.map(id => masterHardwareCatalog.find(p => p.id === id)).filter(Boolean);
+    const priced = items.map(p => {
+      const row = shop.items && shop.items[p.id];
+      return { p, ok: !!(row && row.active), price: row ? row.price : p.defaultPrice };
+    });
+    const ready = priced.filter(x => x.ok);
+    const total = ready.reduce((sum, x) => sum + saleOf(x.price, x.p.id).price, 0);
+    const names = priced.map(x => `${x.ok ? '' : '缺・'}${x.p.name}`).join('、');
+    return `<div class="bg-stone-900 border border-amber-400/40 rounded-2xl p-3 space-y-2">
+      <div class="flex items-start justify-between gap-2">
+        <div>
+          <div class="text-sm font-black text-white">${kit.name}</div>
+          <p class="text-[11px] text-stone-400 mt-0.5">${kit.note}</p>
+        </div>
+        <div class="text-right shrink-0">
+          <div class="text-sm font-black text-amber-300">HK$${total.toLocaleString()}</div>
+          <div class="text-[10px] text-stone-500">${ready.length}/${items.length} 件有貨</div>
+        </div>
+      </div>
+      <p class="text-[11px] text-stone-300 leading-relaxed">${names}</p>
+      <button type="button" onclick="addToolKit('${kit.id}')" class="btn-std h-8 px-3 rounded-xl bg-amber-400 text-slate-950 font-black text-xs" ${ready.length ? '' : 'disabled'}>一次入清單</button>
+    </div>`;
+  }).join('');
+  const notes = toolNotes.map(n => `<div class="bg-stone-950 border border-stone-700 rounded-xl px-3 py-2">
+    <div class="text-[11px] font-black text-white">${n.title}</div>
+    <p class="text-[11px] text-stone-400 leading-relaxed">${n.text}</p>
+  </div>`).join('');
+  box.classList.remove('hidden');
+  box.innerHTML = `
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">${guides}</div>
+    <div>
+      <h4 class="text-sm font-black text-white mb-2">開工套裝</h4>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-2">${kits}</div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">${notes}</div>
+  `;
+}
+
+function addToolKit(kitId) {
+  const kit = toolKits.find(k => k.id === kitId);
+  const store = hardwareStores.find(s => s.id === selectedHardwareStoreId) || hardwareStores[0];
+  if (!kit || !store) return;
+  let added = 0;
+  kit.ids.forEach(id => {
+    const p = masterHardwareCatalog.find(item => item.id === id);
+    const row = p && store.items && store.items[id];
+    if (!p || !row || !row.active) return;
+    const sale = saleOf(row.price, p.id);
+    addToCart(p.id, store.id, store.name, store.phone, p.name, sale.price, p.unit, 1, true);
+    added += 1;
+  });
+  if (!added) {
+    showModal('這間舖未有這套工具', '請切換其他五金店，或逐件查看現貨。', '套裝');
+    return;
+  }
+  updateCartUI();
+  toggleCart(true);
+}
 
 function openHardwareDetail(productId) {
   const p = masterHardwareCatalog.find(item => item.id === productId);
@@ -3956,7 +4049,7 @@ function switchCartTab(tab) {
   updateCartUI();
 }
 
-function addToCart(productId, storeId, storeName, storePhone, name, price, unit, qty) {
+function addToCart(productId, storeId, storeName, storePhone, name, price, unit, qty, silent) {
   const addQty = Math.max(1, parseInt(qty, 10) || 1);
   const cartKey = `${storeId}__${productId}`;
   const existing = cart.find(item => item.cartKey === cartKey);
@@ -3968,7 +4061,7 @@ function addToCart(productId, storeId, storeName, storePhone, name, price, unit,
   }
   activeCartTab = storeId === 'materials-official' ? 'materials' : 'hardware';
   updateCartUI();
-  toggleCart(true);
+  if (!silent) toggleCart(true);
 }
 
 function changeQty(cartKey, delta) {
