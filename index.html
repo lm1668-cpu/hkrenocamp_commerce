@@ -946,8 +946,8 @@ html, body {
         </div>
       </div>
       <div class="flex items-center gap-1.5">
-        <button type="button" onclick="switchMemberTab('login')" class="btn-std h-8 px-3 bg-slate-700 hover:bg-slate-600 text-amber-300 rounded-xl text-xs font-bold">
-          🔄 切換電話 / 師傅登入
+        <button type="button" onclick="toggleMemberMode()" class="btn-std h-8 px-3 bg-slate-700 hover:bg-slate-600 text-amber-300 rounded-xl text-xs font-bold">
+          🔄 切換業主 / 師傅
         </button>
       </div>
     </div>
@@ -966,8 +966,20 @@ html, body {
 
     <!-- 分頁 1：電話極速登入 ＋ 我的維修單實時追蹤台 -->
     <div id="mem-panel-login" class="flex-1 overflow-y-auto space-y-4 pr-1 text-xs">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-        <!-- 業主極速查單（免填名稱、免密碼） -->
+      <div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
+        <div class="font-black text-amber-300">點樣用</div>
+        <ol class="text-[11px] text-stone-300 space-y-1 list-decimal pl-4 leading-relaxed">
+          <li>業主揀「我是業主」，輸入發單電話，撳「查單」。不用填姓名，亦不用密碼。</li>
+          <li>下面只會顯示這個電話的單。師傅已接單後，撳綠色「一鍵確認完工 & 打星評價」先算驗收。</li>
+          <li>如果師傅甩底，撳紅色「舉報甩底換人」。師傅本人請改揀「我是師傅」，用電話同密碼登入。</li>
+        </ol>
+        <div class="grid grid-cols-2 gap-2 pt-1">
+          <button type="button" id="mem-mode-owner" onclick="setMemberCenterMode('owner')" class="btn-std h-9 rounded-xl text-xs font-black bg-amber-400 text-slate-950">我是業主</button>
+          <button type="button" id="mem-mode-master" onclick="setMemberCenterMode('master')" class="btn-std h-9 rounded-xl text-xs font-bold bg-slate-900 text-stone-300 border border-slate-600">我是師傅</button>
+        </div>
+      </div>
+      <div class="space-y-3.5">
+        <div id="mem-owner-box">
         <div class="bg-slate-800/90 border border-amber-400/40 rounded-2xl p-4 space-y-3 flex flex-col justify-between">
           <div class="space-y-2">
             <div class="flex items-center justify-between">
@@ -982,7 +994,7 @@ html, body {
               <div class="flex gap-2">
                 <input type="tel" id="mem-owner-phone" value="9123 8392" placeholder="輸入電話 (例：9123 8392)" class="flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-emerald-400 font-mono font-bold text-sm focus:outline-none focus:border-amber-400" />
                 <button type="button" onclick="loginAsMember('owner')" class="btn-std px-4 h-10 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs shrink-0">
-                  🔍 查單 / 驗收
+                  🔍 查單
                 </button>
               </div>
             </div>
@@ -992,9 +1004,11 @@ html, body {
             <button type="button" onclick="quickFillMemberOwner('9123 8392')" class="btn-std h-6 px-2 bg-slate-900 hover:bg-slate-700 text-amber-300 border border-slate-600 rounded-lg text-[10px] font-mono">9123 8392 (淘大陳生)</button>
             <button type="button" onclick="quickFillMemberOwner('6888 4120')" class="btn-std h-6 px-2 bg-slate-900 hover:bg-slate-700 text-amber-300 border border-slate-600 rounded-lg text-[10px] font-mono">6888 4120 (第一城李太)</button>
           </div>
+          <p id="mem-lookup-note" class="text-[11px] text-amber-200 leading-relaxed"></p>
+        </div>
         </div>
 
-        <!-- 師傅極速驗證（免填名稱，自動讀取師傅名冊） -->
+        <div id="mem-master-box" class="hidden">
         <div class="bg-slate-800/90 border border-emerald-500/40 rounded-2xl p-4 space-y-3 flex flex-col justify-between">
           <div class="space-y-2">
             <div class="flex items-center justify-between">
@@ -1029,6 +1043,7 @@ html, body {
             <button type="button" onclick="closeMemberModal(); openMasterDashboard();" class="text-[11px] text-amber-300 hover:underline font-bold">🛠️ 進入師傅工作台 ➔</button>
           </div>
         </div>
+        </div>
       </div>
 
       <!-- 實時維修單進度與一鍵驗收中心 -->
@@ -1036,7 +1051,7 @@ html, body {
         <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-700 pb-2.5">
           <div>
             <h4 id="mem-orders-title" class="font-black text-sm text-amber-400">📋 我的維修單進度追蹤 & 一鍵完工驗收</h4>
-            <p class="text-[11px] text-stone-400">撳「✅ 確認完工並打星」即可一鍵自動帶入單號及師傅名字進行評價，免手動輸入！</p>
+            <p id="mem-orders-hint" class="text-[11px] text-stone-400">先撳「查單」。查到未驗收的單後，綠色按鈕先是驗收。</p>
           </div>
           <button type="button" onclick="closeMemberModal(); jumpToRepairForm();" class="btn-std h-8 px-3 bg-amber-400/20 hover:bg-amber-400/30 text-amber-300 border border-amber-400/40 rounded-xl text-xs font-bold">
             ＋ 發起新維修單
@@ -1123,7 +1138,7 @@ html, body {
           </div>
           <div class="p-3 rounded-xl bg-slate-900 border border-slate-700">
             <div class="font-black text-amber-300">2. 遲到 / 放飛機（甩底）嚴厲扣分與後備師傅頂上</div>
-            <p class="mt-1">若師傅確認約期後無故失聯或甩底，業主可喺第 1 頁「我的維修單」一鍵撳<strong>「🚨 舉報甩底換人」</strong>。核實後師傅每次扣 25 分並凍結接單權限 7 日；同時<strong>大本營派單台會在 1 小時內自動指派同區另一位 4.8★ 以上後備師傅免費頂上</strong>！</p>
+            <p class="mt-1">若師傅確認約期後無故失聯或甩底，業主可喺第 1 頁自己張單撳<strong>「🚨 舉報甩底換人」</strong>。核實後師傅每次扣 25 分並凍結接單；其他 4.8★ 或以上師傅先可以頂上。未接單或已驗收的單不會出現這個按鈕。</p>
           </div>
           <div class="p-3 rounded-xl bg-slate-900 border border-slate-700">
             <div class="font-black text-sky-300">3. 淘寶式雙向星級互評與排名掛鈎</div>
@@ -2130,13 +2145,61 @@ function updateMasterCountUI() {
   if (tabJ) tabJ.textContent = liveMasterJobs.length;
 }
 
+function setMemberCenterMode(mode) {
+  memberCenterMode = mode === 'master' ? 'master' : 'owner';
+  const ownerBox = document.getElementById('mem-owner-box');
+  const masterBox = document.getElementById('mem-master-box');
+  const ownerBtn = document.getElementById('mem-mode-owner');
+  const masterBtn = document.getElementById('mem-mode-master');
+  if (ownerBox) ownerBox.classList.toggle('hidden', memberCenterMode !== 'owner');
+  if (masterBox) masterBox.classList.toggle('hidden', memberCenterMode !== 'master');
+  if (ownerBtn) ownerBtn.className = memberCenterMode === 'owner'
+    ? 'btn-std h-9 rounded-xl text-xs font-black bg-amber-400 text-slate-950'
+    : 'btn-std h-9 rounded-xl text-xs font-bold bg-slate-900 text-stone-300 border border-slate-600';
+  if (masterBtn) masterBtn.className = memberCenterMode === 'master'
+    ? 'btn-std h-9 rounded-xl text-xs font-black bg-emerald-400 text-slate-950'
+    : 'btn-std h-9 rounded-xl text-xs font-bold bg-slate-900 text-stone-300 border border-slate-600';
+}
+
+function toggleMemberMode() {
+  setMemberCenterMode(memberCenterMode === 'owner' ? 'master' : 'owner');
+  switchMemberTab('login');
+}
+
+function logoutMasterSession() {
+  isMasterLoggedIn = false;
+  currentMasterProfile = null;
+  const badge = document.getElementById('master-auth-badge');
+  if (badge) {
+    badge.textContent = '未登入';
+    badge.className = 'text-[10px] bg-stone-700 text-stone-300 px-2.5 py-0.5 rounded-full font-bold';
+  }
+  renderMasterJobs();
+}
+
+function jobsForCurrentMember() {
+  if (!currentMemberUser) return [];
+  if (currentMemberUser.role === '師傅' && currentMasterProfile) {
+    return liveMasterJobs.filter(j => jobBelongsToMaster(j, currentMasterProfile));
+  }
+  const phone = (currentMemberUser.phone || '').replace(/\D/g, '');
+  return liveMasterJobs.filter(j => (j.phone || '').replace(/\D/g, '') === phone);
+}
+
+function reviewsForJob(job) {
+  if (!job) return [];
+  return mutualReviews.filter(r => String(r.jobId || '').startsWith(job.id));
+}
+
+let memberCenterMode = 'owner';
+
 function openMemberModal(defaultTab = 'login', preselectJobId = null) {
   document.getElementById('member-modal').classList.remove('hidden');
   if (!currentMemberUser) {
-    // 預設以示範業主電話自動載入，打開即見完整單據，免除手動輸入煩惱
     const defaultPhone = (document.getElementById('mem-owner-phone')?.value || '9123 8392').trim();
     setOwnerSessionByPhone(defaultPhone, false);
   }
+  setMemberCenterMode(currentMemberUser && currentMemberUser.role === '師傅' ? 'master' : 'owner');
   populateReviewJobSelect(preselectJobId);
   renderMemberCenterOrders();
   renderMemberRecentReviewsMini();
@@ -2169,13 +2232,15 @@ function switchMemberTab(tab) {
 
 function setOwnerSessionByPhone(rawPhone, showToast = false) {
   const clean = (rawPhone || '').replace(/\s+/g, '');
-  // 從現有維修單自動尋找業主稱呼，完全無需用家填名
-  const matchedJob = liveMasterJobs.find(j => (j.phone || '').replace(/\s+/g, '') === clean);
+  const digits = clean.replace(/\D/g, '');
+  logoutMasterSession();
+  const matchedJob = liveMasterJobs.find(j => (j.phone || '').replace(/\D/g, '') === digits);
   const autoName = matchedJob && matchedJob.ownerName
     ? matchedJob.ownerName
-    : (matchedJob && matchedJob.estate ? `${matchedJob.estate}業主` : `業主會員 (尾號 ${clean.slice(-4) || '8392'})`);
+    : (matchedJob && matchedJob.estate ? `${matchedJob.estate}業主` : `業主會員 (尾號 ${digits.slice(-4) || '8392'})`);
 
   currentMemberUser = { role: '業主', name: autoName, phone: rawPhone };
+  setMemberCenterMode('owner');
   document.getElementById('header-member-label').textContent = `🏠 ${autoName.split(' ')[0]}`;
 
   const avatarEl = document.getElementById('mem-current-avatar');
@@ -2234,6 +2299,7 @@ function loginAsMember(role) {
     currentMasterProfile = matched;
     currentMemberUser = { role: '師傅', name: matched.name, phone: matched.phone };
     isMasterLoggedIn = true;
+    setMemberCenterMode('master');
     document.getElementById('header-member-label').textContent = `👷‍♂️ ${matched.name.split(' ')[0]}`;
 
     const avatarEl = document.getElementById('mem-current-avatar');
@@ -2268,33 +2334,43 @@ function renderMemberCenterOrders() {
   if (!listEl) return;
 
   const isMaster = currentMemberUser && currentMemberUser.role === '師傅';
-  const cleanPhone = currentMemberUser ? (currentMemberUser.phone || '').replace(/\s+/g, '') : '';
+  const myJobs = jobsForCurrentMember();
+  const hint = document.getElementById('mem-orders-hint');
+  const note = document.getElementById('mem-lookup-note');
 
-  let myJobs = [];
   if (isMaster && currentMasterProfile) {
-    myJobs = liveMasterJobs.filter(j => jobBelongsToMaster(j, currentMasterProfile));
-    if (titleEl) titleEl.textContent = `📋 ${currentMasterProfile.name} · 已接單據 & 完工互評列表`;
-  } else {
-    myJobs = liveMasterJobs.filter(j => (j.phone || '').replace(/\s+/g, '') === cleanPhone);
-    if (titleEl) titleEl.textContent = `📋 電話 (${currentMemberUser?.phone || '全部'}) 關聯維修單進度 & 一鍵驗收`;
+    if (titleEl) titleEl.textContent = `📋 ${currentMasterProfile.name} · 已接單據`;
+  } else if (titleEl) {
+    titleEl.textContent = `📋 電話 (${currentMemberUser?.phone || '未查單'}) 的維修單`;
   }
 
-  // 若該電話暫無專屬單據，貼心顯示大廳最新示範維修單供即時體驗驗收流程
-  let showingFallback = false;
   if (myJobs.length === 0) {
-    myJobs = liveMasterJobs.slice(0, 3);
-    showingFallback = true;
+    if (hint) hint.textContent = isMaster
+      ? '你未有已接的單。請到派單大廳撳「立即接單鎖定」。'
+      : '這個電話未有維修單。請核對發單電話，或撳右上角「發起新維修單」。';
+    if (note && !isMaster) note.textContent = '未搵到單。示範業主可撳 9123 8392 或 6888 4120。';
+    listEl.innerHTML = `<div class="text-center text-stone-400 text-xs py-6 bg-slate-900 rounded-2xl border border-slate-700">未有屬於這個身份的維修單。</div>`;
+    return;
   }
 
-  const fallbackNote = showingFallback
-    ? `<div class="bg-amber-400/10 border border-amber-400/30 text-amber-200 px-3 py-2 rounded-xl text-[11px]">💡 此電話號碼暫未有專屬發單記錄，以下為你展示系統最新維修單，可直接點擊體驗「一鍵完工驗收 & 雙向打星」：</div>`
-    : '';
+  const waiting = myJobs.filter(j => !(j.status || '').includes('已完工') && !(reviewsForJob(j).some(r => r.role === '業主評師傅')));
+  if (hint) {
+    hint.textContent = waiting.length
+      ? (isMaster
+        ? '你負責的單在下面。完工後可撳「一鍵確認完工 & 打星評價」評價業主。評價業主不會代替業主驗收。'
+        : '下一步：未驗收的單，撳綠色「一鍵確認完工 & 打星評價」。師傅已接單但甩底，先撳紅色「舉報甩底換人」。')
+      : '這張單業主已驗收。可撳「追加/查看互評」，或發起新維修單。';
+  }
+  if (note && !isMaster) {
+    note.textContent = `已搵到 ${myJobs.length} 張單。${waiting.length ? '請喺下面綠色按鈕驗收，查單本身不會完成驗收。' : '這些單已經驗收。'}`;
+  }
 
-  listEl.innerHTML = fallbackNote + myJobs.map(j => {
-    const isCompleted = j.status && j.status.includes('已完工');
-    const isLocked = j.status && j.status.includes('已接單');
-    const masterLabel = j.assignedMaster || '系統指派認證師傅 (張志強師傅)';
-    const ownerLabel = j.ownerName || `${j.estate}業主`;
+  listEl.innerHTML = myJobs.map(j => {
+    const ownerAccepted = reviewsForJob(j).some(r => r.role === '業主評師傅') || ((j.status || '').includes('已完工'));
+    const isCompleted = ownerAccepted;
+    const isLocked = (j.status && j.status.includes('已接單')) || isCompleted || !!(j.assignedMaster);
+    const masterLabel = j.assignedMaster || (isLocked ? '系統指派認證師傅' : '未有師傅');
+    const isOwnerJob = !isMaster;
 
     const step1 = true;
     const step2 = isLocked || isCompleted;
@@ -2323,7 +2399,7 @@ function renderMemberCenterOrders() {
         </div>
 
         <div class="flex flex-wrap items-center gap-1.5">
-          ${!isCompleted && !isMaster ? `<button type="button" onclick="reportMasterDefault('${j.id}')" class="btn-std h-8 px-2.5 bg-red-950/80 hover:bg-red-900 text-red-300 border border-red-500/40 rounded-xl text-[11px] font-bold">🚨 師傅甩底？換人</button>` : ''}
+          ${!isCompleted && isOwnerJob && j.assignedMaster ? `<button type="button" onclick="reportMasterDefault('${j.id}')" class="btn-std h-8 px-2.5 bg-red-950/80 hover:bg-red-900 text-red-300 border border-red-500/40 rounded-xl text-[11px] font-bold">🚨 舉報甩底換人</button>` : ''}
           <button type="button" onclick="jumpToReviewJob('${j.id}')" class="btn-std h-8 px-3 ${isCompleted ? 'bg-slate-700 hover:bg-slate-600 text-amber-300' : 'bg-emerald-500 hover:bg-emerald-400 text-slate-950'} font-black rounded-xl text-xs shadow-xs">
             ${isCompleted ? '⭐ 追加/查看互評' : '✅ 一鍵確認完工 & 打星評價'}
           </button>
@@ -2334,6 +2410,8 @@ function renderMemberCenterOrders() {
 }
 
 function jumpToReviewJob(jobId) {
+  const roleEl = document.getElementById('rev-role');
+  if (roleEl && currentMemberUser) roleEl.value = currentMemberUser.role === '師傅' ? '師傅評業主' : '業主評師傅';
   populateReviewJobSelect(jobId);
   switchMemberTab('reviews');
 }
@@ -2341,13 +2419,17 @@ function jumpToReviewJob(jobId) {
 function populateReviewJobSelect(selectedJobId = null) {
   const sel = document.getElementById('rev-job-id');
   if (!sel) return;
-
-  sel.innerHTML = liveMasterJobs.map(j => {
+  const mine = jobsForCurrentMember();
+  if (!mine.length) {
+    sel.innerHTML = `<option value="">未有你的維修單</option>`;
+    handleReviewRoleOrJobChange();
+    return;
+  }
+  sel.innerHTML = mine.map(j => {
     const label = `${j.id} (${j.trade} · ${j.estate})`;
     const isSel = selectedJobId && j.id === selectedJobId ? 'selected' : '';
     return `<option value="${j.id}" ${isSel}>${label}</option>`;
   }).join('');
-
   handleReviewRoleOrJobChange();
 }
 
@@ -2459,7 +2541,23 @@ function submitMutualReview(e) {
   const role = document.getElementById('rev-role').value;
   const pureJobId = document.getElementById('rev-job-id').value.trim();
   const matchedJob = liveMasterJobs.find(j => j.id === pureJobId);
-  const jobIdFull = matchedJob ? `${matchedJob.id} · ${matchedJob.trade}` : pureJobId;
+  if (!matchedJob || !jobsForCurrentMember().some(j => j.id === matchedJob.id)) {
+    showModal('不能評價這張單', '只可以評價自己的維修單。請先用發單電話查單，或用師傅電話登入。', '身份不符');
+    return;
+  }
+  if (role === '業主評師傅' && !(currentMemberUser && currentMemberUser.role === '業主')) {
+    showModal('請先以業主查單', '評價師傅之前，請用發單電話查單。', '身份不符');
+    return;
+  }
+  if (role === '師傅評業主' && !(currentMemberUser && currentMemberUser.role === '師傅')) {
+    showModal('請先登入師傅', '評價業主之前，請用師傅電話同密碼登入。', '身份不符');
+    return;
+  }
+  if (role === '業主評師傅' && !(matchedJob.assignedMaster || (matchedJob.status || '').includes('已接單') || (matchedJob.status || '').includes('已完工'))) {
+    showModal('師傅未接單', '這張單尚未有師傅接單，暫時不能驗收。', '未能驗收');
+    return;
+  }
+  const jobIdFull = `${matchedJob.id} · ${matchedJob.trade}`;
   const target = document.getElementById('rev-target-name').value;
   const rawComment = document.getElementById('rev-comment').value.trim();
   const autoComment = selectedReviewTags.length
@@ -2486,7 +2584,10 @@ function submitMutualReview(e) {
   mutualReviews.unshift(newRev);
 
   if (matchedJob) {
-    matchedJob.status = `✅ 已完工驗收 (雙向 ${currentReviewStars}★ 互評完成)`;
+    const ownerDone = reviewsForJob(matchedJob).some(r => r.role === '業主評師傅');
+    const masterDone = reviewsForJob(matchedJob).some(r => r.role === '師傅評業主');
+    if (ownerDone && masterDone) matchedJob.status = `✅ 已完工驗收 (雙向 ${currentReviewStars}★ 互評完成)`;
+    else if (ownerDone) matchedJob.status = `✅ 業主已驗收 (待師傅互評)`;
   }
 
   persistDataLocally();
