@@ -485,7 +485,8 @@ html, body {
           <button type="button" onclick="sendRepairTicketWhatsApp()" class="btn-std btn-wrap w-full max-w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs">
             💬 一鍵 WhatsApp 發送單號給大本營派單台
           </button>
-          <p class="text-[11px] text-emerald-200/90 leading-relaxed break-words">開啟 WhatsApp 後，可再貼上剛才上傳的相片。</p>
+          <p class="text-[11px] text-emerald-200/90 leading-relaxed break-words">訊息內有查單連結。客戶之後在 WhatsApp 點開，就看到這張單的進度，不用再填電話。</p>
+          <a id="ticket-lookup-link" href="#" target="_blank" class="hidden break-all text-emerald-200 underline leading-relaxed"></a>
           <button type="button" onclick="openMemberModal('reviews')" class="btn-std btn-wrap w-full max-w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">
             ⭐ 完工後點此進行「驗收及雙向星級互評」
           </button>
@@ -1784,6 +1785,12 @@ function refreshAllViewsFromCloud() {
     renderAdminMasterList();
     renderAdminJobsList();
   }
+  const memberModal = document.getElementById('member-modal');
+  if (memberModal && !memberModal.classList.contains('hidden')) {
+    renderMemberCenterOrders();
+    populateReviewJobSelect();
+    renderMemberRecentReviewsMini();
+  }
   const ownerModal = document.getElementById('shop-owner-modal');
   if (ownerModal && !ownerModal.classList.contains('hidden')) {
     populateOwnerStoreSelect();
@@ -1791,6 +1798,7 @@ function refreshAllViewsFromCloud() {
     loadOwnerPricingForm();
     renderOwnerOrdersList();
   }
+  applyOrderLookupFromUrl();
 }
 
 function applyHeroVisuals(secKey) {
@@ -2977,12 +2985,19 @@ function submitRepairTicket(e) {
   document.getElementById('ticket-code').textContent = `單號 #${code}`;
   document.getElementById('ticket-summary').textContent = `${name}你好，你位於「${district} - ${estate}」的【${trade}】維修單已透過「${assignMode}」發布！師傅在大廳可以即時睇到你上傳嘅相片。如師傅無故遲到或甩底，大本營將於 1 小時內自動指派後備高分師傅頂上。`;
   document.getElementById('repair-ticket-result').classList.remove('hidden');
+  const lookup = orderLookupUrl(code);
+  const lookupLink = document.getElementById('ticket-lookup-link');
+  if (lookupLink) {
+    lookupLink.href = lookup;
+    lookupLink.textContent = lookup;
+    lookupLink.classList.remove('hidden');
+  }
 }
 
 function sendRepairTicketWhatsApp() {
   if (!lastRepairTicket) return;
   const t = lastRepairTicket;
-  const text = `你好！我喺大本營登記咗張維修單：\n\n📌 單號：#${t.code}\n🛠️ 工種：${t.trade}\n🛡️ 指派模式：${t.assignMode}\n📍 地區：${t.district} - ${t.estate}\n📝 情況：${t.desc}\n👤 稱呼電話：${t.name} (${t.phone})`;
+  const text = `你好！我喺大本營登記咗張維修單：\n\n📌 單號：#${t.code}\n🛠️ 工種：${t.trade}\n🛡️ 指派模式：${t.assignMode}\n📍 地區：${t.district} - ${t.estate}\n📝 情況：${t.desc}\n👤 稱呼電話：${t.name} (${t.phone})\n\n🔎 之後查進度，打開這條連結即可，不用再填電話：\n${orderLookupUrl(t.code)}`;
   window.open(`https://wa.me/85260000000?text=${encodeURIComponent(text)}`, '_blank');
 }
 
@@ -3920,14 +3935,45 @@ function readCampParams() {
   const own = new URLSearchParams(window.location.search);
   let section = own.get('section');
   let store = own.get('store');
+  let phone = own.get('phone');
+  let job = own.get('job');
   if (window.parent && window.parent !== window) {
     try {
       const parent = new URLSearchParams(window.parent.location.search);
       if (!section) section = parent.get('section');
       if (!store) store = parent.get('store');
+      if (!phone) phone = parent.get('phone');
+      if (!job) job = parent.get('job');
     } catch (e) {}
   }
-  return { section: section, store: store };
+  return { section: section, store: store, phone: phone, job: job };
+}
+
+function orderLookupUrl(jobId) {
+  const url = new URL(window.location.href);
+  url.search = '';
+  url.hash = '';
+  url.searchParams.set('job', jobId);
+  return url.toString();
+}
+
+let orderLookupApplied = false;
+function applyOrderLookupFromUrl() {
+  if (orderLookupApplied) return;
+  const params = readCampParams();
+  if (!params.job && !params.phone) return;
+  let phone = (params.phone || '').trim();
+  if (params.job) {
+    const job = liveMasterJobs.find(j => j.id === params.job);
+    if (!job) return;
+    phone = job.phone || phone;
+  }
+  if (!phone) return;
+  const input = document.getElementById('mem-owner-phone');
+  if (input) input.value = phone;
+  setOwnerSessionByPhone(phone, false);
+  orderLookupApplied = true;
+  openMemberModal('login');
 }
 
 function bootCampApp() {
@@ -3948,6 +3994,7 @@ function bootCampApp() {
   if (params.section && allowed[params.section]) switchSection(params.section);
   else applyHeroVisuals('all');
   if (params.store) selectHardwareStore(params.store);
+  applyOrderLookupFromUrl();
 }
 window.bootCampApp = bootCampApp;
 if (document.readyState === 'complete') bootCampApp();
