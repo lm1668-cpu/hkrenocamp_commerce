@@ -30,9 +30,27 @@ html, body {
   gap: 0.375rem;
   white-space: nowrap;
   text-align: center;
-  line-height: 1.2;
+  line-height: 1;
   transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
   user-select: none;
+}
+.header-cta {
+  height: 2.5rem;
+  line-height: 1;
+  overflow: hidden;
+}
+.cta-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  line-height: 1;
+  flex: 0 0 1.25rem;
+  font-size: 0.95rem;
+}
+.cta-label {
+  line-height: 1;
 }
 .btn-wrap {
   white-space: normal;
@@ -176,17 +194,17 @@ html, body {
     </nav>
 
     <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-      <button onclick="openMemberModal()" class="btn-std bg-stone-100 hover:bg-stone-200 text-slate-900 border border-stone-300 font-bold text-xs px-2.5 sm:px-3 h-9 sm:h-10 rounded-xl">
-        <span>👤</span>
-        <span id="header-member-label">會員登入 / 互評</span>
+      <button onclick="openMemberModal()" class="btn-std header-cta bg-stone-100 hover:bg-stone-200 text-slate-900 border border-stone-300 font-bold text-xs px-2.5 sm:px-3 rounded-xl">
+        <span class="cta-icon">👤</span>
+        <span id="header-member-label" class="cta-label">會員登入 / 互評</span>
       </button>
-      <button onclick="jumpToRepairForm()" class="hidden md:inline-flex btn-std bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs px-3 h-9 sm:h-10 rounded-xl shadow-xs">
-        <span>🙋‍♂️</span>
-        <span>免費搵師傅</span>
+      <button onclick="jumpToRepairForm()" class="hidden md:inline-flex btn-std header-cta bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs px-3 rounded-xl shadow-xs">
+        <span class="cta-icon" aria-hidden="true">🙋</span>
+        <span class="cta-label">免費搵師傅</span>
       </button>
-      <button onclick="toggleCart(true)" class="btn-std bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-2.5 sm:px-3.5 h-9 sm:h-10 rounded-xl shadow-xs">
-        <span>🛒</span>
-        <span class="hidden sm:inline">揀貨清單</span>
+      <button onclick="toggleCart(true)" class="btn-std header-cta bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-2.5 sm:px-3.5 rounded-xl shadow-xs">
+        <span class="cta-icon">🛒</span>
+        <span class="cta-label hidden sm:inline">揀貨清單</span>
         <span id="cart-count" class="bg-amber-400 text-slate-950 px-1.5 py-0.5 rounded-full text-[11px] font-black min-w-[20px] text-center">0</span>
       </button>
     </div>
