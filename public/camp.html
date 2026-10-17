@@ -1666,22 +1666,60 @@ const materialsProducts = [
 
 const hardwareTrades = [
   { key: "all", label: "全部五金", sub: "標準圖庫", img: "images/hardware/camp/five.jpg" },
-  { key: "電工", label: "電工", sub: "蘇位、電線", img: "images/hardware/camp/elec.jpg" },
-  { key: "水喉", label: "水喉", sub: "波曲、膠喉", img: "images/hardware/camp/plumb.jpg" },
-  { key: "木工", label: "木工", sub: "螺絲、木釘", img: "images/hardware/camp/wood.jpg" },
-  { key: "油漆", label: "油漆", sub: "滾筒、油掃", img: "images/hardware/camp/paint.jpg" },
-  { key: "鋁窗", label: "鋁窗", sub: "滑輪、門鉸", img: "images/hardware/camp/window.jpg" }
+  { key: "電工", label: "電工", sub: "蘇、線、掣", img: "images/hardware/camp/elec.jpg" },
+  { key: "水喉", label: "水喉", sub: "波曲、喉件", img: "images/hardware/camp/plumb.jpg" },
+  { key: "木工", label: "木工", sub: "螺絲、牆塞", img: "images/hardware/camp/wood.jpg" },
+  { key: "油漆", label: "油漆", sub: "滾筒、批灰", img: "images/hardware/camp/paint.jpg" },
+  { key: "鋁窗", label: "鋁窗", sub: "滑輪、膠邊", img: "images/hardware/camp/window.jpg" }
 ];
 
 const masterHardwareCatalog = [
-  { id: "h-socket", cat: "電工", sku: "DC-EL-013", name: "英式 13A 單蘇面板", desc: "白色，帶開關，英式三腳標準規格", defaultPrice: 38, unit: "件", img: "images/hardware/products/electrical.jpg" },
-  { id: "h-socket2", cat: "電工", sku: "DC-EL-026", name: "英式 13A 雙蘇面板 (連開關)", desc: "雙位帶獨立開關，BS 標準安全認證", defaultPrice: 55, unit: "件", img: "images/hardware/products/electrical.jpg" },
-  { id: "h-wire", cat: "電工", sku: "DC-EL-25W", name: "2.5mm 單支銅芯電線 (紅/黑/綠)", desc: "足米標準銅線，地盤拉線必備", defaultPrice: 375, unit: "圈", img: "images/hardware/products/electrical.jpg" },
-  { id: "h-valve", cat: "水喉", sku: "DC-PB-012", name: "黃銅球閥 (波曲) 1/2寸", desc: "全通徑防漏設計，耐用蝶柄開關", defaultPrice: 68, unit: "件", img: "images/hardware/products/plumbing.jpg" },
-  { id: "h-ptfe", cat: "水喉", sku: "DC-PB-TAPE", name: "加厚水喉生料帶 (10卷裝)", desc: "高密度防滲漏四氟帶，駁口必備", defaultPrice: 28, unit: "排", img: "images/hardware/products/plumbing.jpg" },
-  { id: "h-screw", cat: "木工", sku: "DC-WD-425", name: "不鏽鋼自攻螺絲 4×25", desc: "防銹加硬十字頭，200 粒地盤盒裝", defaultPrice: 32, unit: "盒", img: "images/hardware/products/fastener.jpg" },
-  { id: "h-hinge", cat: "鋁窗", sku: "DC-WD-H304", name: "304 不鏽鋼緩衝門鉸 (一對)", desc: "液壓靜音緩衝，連全套不鏽鋼螺絲", defaultPrice: 45, unit: "對", img: "images/hardware/camp/window.jpg" },
-  { id: "h-roller", cat: "油漆", sku: "DC-PT-R9", name: "細緻羊毛滾筒 9 寸", desc: "3 個裝中毛滾筒，上漆均勻唔甩毛", defaultPrice: 42, unit: "組", img: "images/hardware/products/paint.jpg" }
+  { id: "h-socket", cat: "電工", sku: "DC-EL-013", name: "英式 13A 單蘇面板", spec: "86 型單蘇，連開關", size: "86×86 mm", material: "阻燃膠面、銅接線柱", pack: "1 件", standard: "BS 1363", use: "一般插座回路，2.5mm 銅線", desc: "白色英式三腳單蘇，帶開關。", defaultPrice: 38, unit: "件", img: "images/hardware/products/electrical.jpg" },
+  { id: "h-socket2", cat: "電工", sku: "DC-EL-026", name: "英式 13A 雙蘇面板", spec: "86 型雙蘇，兩位獨立開關", size: "146×86 mm", material: "阻燃膠面、銅接線柱", pack: "1 件", standard: "BS 1363", use: "廚房、廳櫃多位電器", desc: "雙位帶獨立開關。", defaultPrice: 55, unit: "件", img: "images/hardware/products/electrical.jpg" },
+  { id: "h-switch", cat: "電工", sku: "DC-EL-SW1", name: "單位單控燈掣", spec: "一位單控，10AX", size: "86×86 mm", material: "阻燃膠面", pack: "1 件", standard: "BS EN 60669", use: "一個燈位由一處開關", desc: "替換舊燈掣最常用。", defaultPrice: 28, unit: "件", img: "images/hardware/products/electrical.jpg" },
+  { id: "h-switch2", cat: "電工", sku: "DC-EL-SW2", name: "單位雙控燈掣", spec: "一位雙控，10AX", size: "86×86 mm", material: "阻燃膠面", pack: "1 件", standard: "BS EN 60669", use: "樓梯、長走廊兩頭開關同一盞燈", desc: "要兩隻成對安裝。", defaultPrice: 36, unit: "件", img: "images/hardware/camp/elec.jpg" },
+  { id: "h-wire15", cat: "電工", sku: "DC-EL-15W", name: "1.5mm 單支銅芯電線", spec: "單支銅芯，PVC 絕緣，紅/藍/黃綠", size: "1.5 mm² × 100 m", material: "電解銅", pack: "1 圈", standard: "BS 6004", use: "照明回路", desc: "足米燈具用線。", defaultPrice: 240, unit: "圈", img: "images/hardware/products/electrical.jpg" },
+  { id: "h-wire", cat: "電工", sku: "DC-EL-25W", name: "2.5mm 單支銅芯電線", spec: "單支銅芯，PVC 絕緣，紅/黑/黃綠", size: "2.5 mm² × 100 m", material: "電解銅", pack: "1 圈", standard: "BS 6004", use: "13A 插座回路", desc: "地盤拉線最常用的一圈。", defaultPrice: 375, unit: "圈", img: "images/hardware/products/electrical.jpg" },
+  { id: "h-wire40", cat: "電工", sku: "DC-EL-40W", name: "4mm 單支銅芯電線", spec: "單支銅芯，PVC 絕緣", size: "4 mm² × 100 m", material: "電解銅", pack: "1 圈", standard: "BS 6004", use: "冷氣、大負載專線", desc: "冷氣專線不要用 2.5mm 代替。", defaultPrice: 560, unit: "圈", img: "images/hardware/products/electrical.jpg" },
+  { id: "h-mcb20", cat: "電工", sku: "DC-EL-M20", name: "MCB 微型斷路器 20A", spec: "單極 C 曲線，6kA", size: "1 單位 DIN", material: "阻燃外殼", pack: "1 件", standard: "IEC 60898", use: "照明或細回路總掣", desc: "入箱替換 20A 單極 MCB。", defaultPrice: 68, unit: "件", img: "images/hardware/camp/elec.jpg" },
+  { id: "h-mcb32", cat: "電工", sku: "DC-EL-M32", name: "MCB 微型斷路器 32A", spec: "單極 C 曲線，6kA", size: "1 單位 DIN", material: "阻燃外殼", pack: "1 件", standard: "IEC 60898", use: "插座回路", desc: "入箱替換 32A 單極 MCB。", defaultPrice: 78, unit: "件", img: "images/hardware/camp/elec.jpg" },
+  { id: "h-conduit", cat: "電工", sku: "DC-EL-C20", name: "PVC 電線膠管 20mm", spec: "中型電線管，連直通另計", size: "20 mm × 2.9 m", material: "PVC", pack: "1 支", standard: "BS 4607", use: "明線或批盪內走線", desc: "燈位、蘇位拉線用。", defaultPrice: 18, unit: "支", img: "images/hardware/camp/elec.jpg" },
+  { id: "h-box", cat: "電工", sku: "DC-EL-IP55", name: "防水接線盒", spec: "IP55，4 個出線位", size: "100×100×70 mm", material: "ABS", pack: "1 個", standard: "IP55", use: "露台、廚房外牆駁線", desc: "室外駁線要防水盒，不要用普通底盒。", defaultPrice: 42, unit: "個", img: "images/hardware/products/electrical.jpg" },
+  { id: "h-plug", cat: "電工", sku: "DC-EL-P13", name: "13A 英式插頭連保險絲", spec: "可重接插頭，內置 13A 保險絲", size: "英式三腳", material: "阻燃膠", pack: "1 件", standard: "BS 1363", use: "電器換插頭", desc: "保險絲是 13A，細電器不要硬用。", defaultPrice: 12, unit: "件", img: "images/hardware/products/electrical.jpg" },
+
+  { id: "h-valve", cat: "水喉", sku: "DC-PB-012", name: "黃銅球閥 1/2寸", spec: "全通徑，蝶柄", size: "1/2 寸（15 mm）", material: "黃銅", pack: "1 件", standard: "全通徑", use: "星盆、洗衣機、熱水器總掣", desc: "半寸波曲，全通徑防漏。", defaultPrice: 68, unit: "件", img: "images/hardware/products/plumbing.jpg" },
+  { id: "h-valve34", cat: "水喉", sku: "DC-PB-034", name: "黃銅球閥 3/4寸", spec: "全通徑，蝶柄", size: "3/4 寸（20 mm）", material: "黃銅", pack: "1 件", standard: "全通徑", use: "單位總掣、儲水桶", desc: "六分波曲，總掣常用。", defaultPrice: 88, unit: "件", img: "images/hardware/products/plumbing.jpg" },
+  { id: "h-angle", cat: "水喉", sku: "DC-PB-AV12", name: "黃銅角閥 1/2寸", spec: "四分轉半分", size: "1/2 寸 × 1/2 寸", material: "黃銅", pack: "1 件", standard: "常用角掣", use: "馬桶、洗手盆獨立開關", desc: "維修時可單獨關水，不用關全屋。", defaultPrice: 38, unit: "件", img: "images/hardware/camp/plumb.jpg" },
+  { id: "h-flex", cat: "水喉", sku: "DC-PB-F400", name: "不鏽鋼軟喉 400mm", spec: "1/2 寸母牙兩頭", size: "400 mm", material: "304 編織軟喉", pack: "1 條", standard: "常用駁喉", use: "星盆、馬桶駁角閥", desc: "長度不夠不要拉緊，要換長一號。", defaultPrice: 45, unit: "條", img: "images/hardware/products/plumbing.jpg" },
+  { id: "h-elbow", cat: "水喉", sku: "DC-PB-E12", name: "鍍鋅彎頭 1/2寸", spec: "90 度內牙", size: "1/2 寸", material: "鍍鋅鐵", pack: "1 件", standard: "英制喉件", use: "明喉轉角", desc: "駁鐵喉轉角。膠喉不要混用這隻。", defaultPrice: 9, unit: "件", img: "images/hardware/camp/plumb.jpg" },
+  { id: "h-nipple", cat: "水喉", sku: "DC-PB-N12", name: "鍍鋅直咀 1/2寸", spec: "外牙對外牙", size: "1/2 寸 × 50 mm", material: "鍍鋅鐵", pack: "1 件", standard: "英制喉件", use: "駁波曲、延長鐵喉", desc: "外牙直咀，配 1/2 寸內牙件。", defaultPrice: 6, unit: "件", img: "images/hardware/camp/plumb.jpg" },
+  { id: "h-pvc20", cat: "水喉", sku: "DC-PB-PVC20", name: "PVC 膠喉 20mm", spec: "排水用，冷水排水", size: "20 mm × 4 m", material: "PVC", pack: "1 支", standard: "排水管", use: "洗手盆、洗衣機去水", desc: "只作排水，不可當食水鐵喉。", defaultPrice: 22, unit: "支", img: "images/hardware/products/plumbing.jpg" },
+  { id: "h-trap", cat: "水喉", sku: "DC-PB-TRAP", name: "星盆去水隔氣", spec: "樽型隔氣，連去水掣", size: "1¼ 寸出口", material: "膠及不鏽鋼面", pack: "1 套", standard: "隔氣", use: "廚房、廁所星盆", desc: "有隔氣，減少渠味倒灌。", defaultPrice: 78, unit: "套", img: "images/hardware/products/plumbing.jpg" },
+  { id: "h-drain", cat: "水喉", sku: "DC-PB-DR4", name: "不鏽鋼地漏 4寸", spec: "方型面板，活動隔渣", size: "4 寸", material: "不鏽鋼", pack: "1 件", standard: "地漏", use: "浴室、露台去水", desc: "換地漏要連密封，不要只換面板。", defaultPrice: 65, unit: "件", img: "images/hardware/camp/plumb.jpg" },
+  { id: "h-ptfe", cat: "水喉", sku: "DC-PB-TAPE", name: "加厚水喉生料帶", spec: "高密度四氟帶", size: "10 卷裝", material: "PTFE", pack: "1 排", standard: "駁口密封", use: "所有牙喉駁口", desc: "順牙方向繞，牙口先繞再上緊。", defaultPrice: 28, unit: "排", img: "images/hardware/products/plumbing.jpg" },
+
+  { id: "h-screw", cat: "木工", sku: "DC-WD-425", name: "不鏽鋼自攻螺絲 4×25", spec: "十字頭，全牙", size: "4 × 25 mm", material: "不鏽鋼", pack: "200 粒盒", standard: "地盤盒裝", use: "層板、細木方", desc: "防銹，室內外木作都常用。", defaultPrice: 32, unit: "盒", img: "images/hardware/products/fastener.jpg" },
+  { id: "h-screw40", cat: "木工", sku: "DC-WD-440", name: "不鏽鋼自攻螺絲 4×40", spec: "十字頭，全牙", size: "4 × 40 mm", material: "不鏽鋼", pack: "200 粒盒", standard: "地盤盒裝", use: "木方接駁、門套", desc: "比 25mm 長，入木要預鑽。", defaultPrice: 36, unit: "盒", img: "images/hardware/products/fastener.jpg" },
+  { id: "h-plug6", cat: "木工", sku: "DC-WD-P6", name: "膠牆塞 6mm", spec: "配 6mm 鑽咀", size: "6 mm", material: "尼龍", pack: "100 粒盒", standard: "膨脹牆塞", use: "紅磚、混凝土掛鏡、層板托", desc: "鑽孔要同牆塞一樣深，不要太大。", defaultPrice: 18, unit: "盒", img: "images/hardware/camp/wood.jpg" },
+  { id: "h-plug8", cat: "木工", sku: "DC-WD-P8", name: "膠牆塞 8mm", spec: "配 8mm 鑽咀", size: "8 mm", material: "尼龍", pack: "100 粒盒", standard: "膨脹牆塞", use: "較重的層板、電視架", desc: "重物要用 8mm，不要只用 6mm。", defaultPrice: 20, unit: "盒", img: "images/hardware/camp/wood.jpg" },
+  { id: "h-brad", cat: "木工", sku: "DC-WD-B30", name: "木釘 30mm", spec: "圓木榫", size: "8 × 30 mm", material: "實木", pack: "100 支盒", standard: "木榫", use: "櫃門、層板對接", desc: "要配同直徑木釘鑽咀。", defaultPrice: 16, unit: "盒", img: "images/hardware/camp/wood.jpg" },
+  { id: "h-glue", cat: "木工", sku: "DC-WD-GL5", name: "白膠漿 500ml", spec: "木工白膠", size: "500 ml", material: "PVA", pack: "1 支", standard: "室內木作", use: "木榫、封邊、細木接合", desc: "只適合室內。廚房廁所近水位置不要單靠白膠。", defaultPrice: 28, unit: "支", img: "images/hardware/camp/wood.jpg" },
+  { id: "h-bracket", cat: "木工", sku: "DC-WD-BR", name: "白色層板托", spec: "一對，連螺絲", size: "150 mm", material: "鋼，白色塗層", pack: "1 對", standard: "層板碼", use: "牆身固定層板", desc: "要配牆塞，石膏板牆不能當混凝土來裝。", defaultPrice: 14, unit: "對", img: "images/hardware/products/fastener.jpg" },
+  { id: "h-nail", cat: "木工", sku: "DC-WD-F30", name: "槍釘 F30", spec: "直釘，無頭", size: "30 mm", material: "電鍍鋼", pack: "5000 粒盒", standard: "F 釘", use: "線板、門套收口", desc: "配 F 釘槍。釘長不要超過木厚。", defaultPrice: 42, unit: "盒", img: "images/hardware/products/fastener.jpg" },
+
+  { id: "h-roller", cat: "油漆", sku: "DC-PT-R9", name: "細緻羊毛滾筒 9寸", spec: "中毛，3 個替換頭", size: "9 寸", material: "羊毛混紡", pack: "1 組", standard: "室內牆身", use: "乳膠漆大面積", desc: "上漆較勻，用完可換頭。", defaultPrice: 42, unit: "組", img: "images/hardware/products/paint.jpg" },
+  { id: "h-brush", cat: "油漆", sku: "DC-PT-B2", name: "油掃 2寸", spec: "平頭豬鬃", size: "2 寸", material: "木柄、豬鬃", pack: "1 支", standard: "修邊", use: "門邊、天花線、細位", desc: "大面積用滾筒，邊位先用這支掃。", defaultPrice: 16, unit: "支", img: "images/hardware/camp/paint.jpg" },
+  { id: "h-sand", cat: "油漆", sku: "DC-PT-S120", name: "砂紙 120號", spec: "乾磨", size: "230×280 mm", material: "氧化鋁", pack: "10 張", standard: "P120", use: "批灰後打磨", desc: "批灰乾透先磨。幼面再換更幼的砂紙。", defaultPrice: 22, unit: "包", img: "images/hardware/products/paint.jpg" },
+  { id: "h-filler", cat: "油漆", sku: "DC-PT-FL1", name: "內牆批灰 1kg", spec: "現成補裂灰", size: "1 kg", material: "樹脂灰", pack: "1 包", standard: "室內", use: "釘孔、幼裂", desc: "大裂和空鼓要先剷，不能只補面。", defaultPrice: 24, unit: "包", img: "images/hardware/camp/paint.jpg" },
+  { id: "h-tape", cat: "油漆", sku: "DC-PT-T24", name: "美紋紙 24mm", spec: "可撕，低殘膠", size: "24 mm × 20 m", material: "和紙", pack: "1 卷", standard: "遮蔽", use: "門邊、玻璃、插座保護", desc: "油漆乾前撕走，留太久會黏殘膠。", defaultPrice: 8, unit: "卷", img: "images/hardware/products/paint.jpg" },
+  { id: "h-tray", cat: "油漆", sku: "DC-PT-TR9", name: "油漆盤 9寸", spec: "配 9 寸滾筒", size: "9 寸", material: "塑膠", pack: "1 個", standard: "漆盤", use: "滾筒上漆", desc: "可墊垃圾袋，減少洗盤。", defaultPrice: 18, unit: "個", img: "images/hardware/camp/paint.jpg" },
+
+  { id: "h-hinge", cat: "鋁窗", sku: "DC-WD-H304", name: "304 緩衝門鉸", spec: "液壓靜音，一對連螺絲", size: "4 寸", material: "304 不鏽鋼", pack: "1 對", standard: "緩衝鉸", use: "房門、廁所門", desc: "靜音緩衝。門厚和鉸杯尺寸要先量。", defaultPrice: 45, unit: "對", img: "images/hardware/camp/window.jpg" },
+  { id: "h-winroller", cat: "鋁窗", sku: "DC-AW-RL", name: "鋁窗滑輪", spec: "不鏽鋼輪，可調高低", size: "常用趟窗輪", material: "不鏽鋼輪、尼龍", pack: "1 對", standard: "趟窗", use: "趟窗推不動、偏墮", desc: "換輪前先看槽闊，不是一隻通吃。", defaultPrice: 22, unit: "對", img: "images/hardware/camp/window.jpg" },
+  { id: "h-wlock", cat: "鋁窗", sku: "DC-AW-LK", name: "鋁窗月鎖", spec: "單點月鎖", size: "常用窗扇", material: "鋅合金", pack: "1 件", standard: "窗鎖", use: "窗扇扣不緊", desc: "鎖座和鎖鉤要一起對位。", defaultPrice: 26, unit: "件", img: "images/hardware/camp/window.jpg" },
+  { id: "h-gasket", cat: "鋁窗", sku: "DC-AW-GS", name: "窗膠邊", spec: "灰色密封膠條", size: "每條約 5 m", material: "EPDM 膠", pack: "1 條", standard: "窗縫", use: "窗邊入風、滲水", desc: "舊膠硬裂先清走，再壓入新膠邊。", defaultPrice: 15, unit: "條", img: "images/hardware/camp/window.jpg" },
+  { id: "h-stay", cat: "鋁窗", sku: "DC-AW-ST12", name: "窗風撐 12寸", spec: "不鏽鋼風撐", size: "12 寸", material: "不鏽鋼", pack: "1 支", standard: "上懸窗", use: "窗扇打開後固定角度", desc: "左右邊各一。長度不對會頂住窗框。", defaultPrice: 35, unit: "支", img: "images/hardware/camp/window.jpg" },
+  { id: "h-winscrew", cat: "鋁窗", sku: "DC-AW-SC", name: "不鏽鋼窗螺絲", spec: "盤頭自攻", size: "8 × 1/2 寸", material: "不鏽鋼", pack: "100 粒盒", standard: "鋁窗", use: "窗鎖、滑輪、風撐", desc: "不要用普通黑螺絲，會生鏽留痕。", defaultPrice: 18, unit: "盒", img: "images/hardware/products/fastener.jpg" }
 ];
 
 let hardwareStores = [
@@ -1748,6 +1786,21 @@ let hardwareStores = [
   }
 ];
 
+function stockStore(store, activeIds, tweaks) {
+  const allow = activeIds ? new Set(activeIds) : null;
+  const items = {};
+  masterHardwareCatalog.forEach(p => {
+    items[p.id] = {
+      active: allow ? allow.has(p.id) : true,
+      price: tweaks && tweaks[p.id] != null ? tweaks[p.id] : p.defaultPrice
+    };
+  });
+  store.items = items;
+}
+stockStore(hardwareStores[0], null, { "h-socket": 38, "h-socket2": 54, "h-wire": 375, "h-valve": 68, "h-ptfe": 28, "h-screw": 32, "h-hinge": 45, "h-roller": 42 });
+stockStore(hardwareStores[1], ["h-socket", "h-socket2", "h-switch", "h-wire", "h-wire15", "h-plug", "h-valve", "h-angle", "h-ptfe", "h-screw", "h-screw40", "h-plug6", "h-hinge", "h-winroller"], { "h-socket": 39, "h-wire": 370, "h-valve": 66, "h-hinge": 43, "h-screw": 32 });
+stockStore(hardwareStores[2], ["h-socket", "h-socket2", "h-wire", "h-valve", "h-valve34", "h-angle", "h-flex", "h-pvc20", "h-trap", "h-drain", "h-ptfe", "h-screw", "h-roller", "h-brush", "h-sand", "h-filler"], { "h-socket": 36, "h-socket2": 55, "h-valve": 65, "h-ptfe": 26, "h-screw": 30, "h-roller": 40 });
+
 let selectedHardwareStoreId = "store-kt";
 const ORDER_STEPS = ["已下單", "執貨中", "打包好", "運送中", "師傅已收貨"];
 
@@ -1789,6 +1842,14 @@ function normalizeLoadedState() {
     if (!m.pin) m.pin = '8888';
     if (m.creditScore == null) m.creditScore = 100;
     if (!m.phone) m.phone = '';
+  });
+  hardwareStores.forEach(store => {
+    store.items = store.items || {};
+    masterHardwareCatalog.forEach(p => {
+      if (!store.items[p.id]) {
+        store.items[p.id] = { active: store.id === 'store-kt', price: p.defaultPrice };
+      }
+    });
   });
 }
 
@@ -3373,21 +3434,19 @@ function renderHardwareProducts(filter = 'all') {
   const store = hardwareStores.find(s => s.id === selectedHardwareStoreId) || hardwareStores[0];
 
   shelfTitle.textContent = `🔥 ${store.name} · 現貨五金貨架`;
-  statusEl.textContent = filter === 'all'
-    ? `目前顯示：${store.name} 已上架之全部五金零件`
-    : `目前顯示：${store.name}【${filter}】專用零件`;
 
   const availableList = masterHardwareCatalog.filter(item => {
     const storeItem = store.items && store.items[item.id];
     const isActive = storeItem && storeItem.active;
     const matchCat = filter === 'all' || item.cat === filter;
-    const matchKw = !keyword || 
-      item.name.toLowerCase().includes(keyword) || 
-      item.desc.toLowerCase().includes(keyword) || 
-      item.sku.toLowerCase().includes(keyword) ||
-      item.cat.toLowerCase().includes(keyword);
+    const blob = [item.name, item.desc, item.sku, item.cat, item.spec, item.size, item.material, item.use, item.standard].join(' ').toLowerCase();
+    const matchKw = !keyword || blob.includes(keyword);
     return isActive && matchCat && matchKw;
   });
+
+  statusEl.textContent = filter === 'all'
+    ? `目前顯示：${store.name} 已上架 ${availableList.length} 款零件。撳卡片可看規格。`
+    : `目前顯示：${store.name}【${filter}】${availableList.length} 款。撳卡片可看規格。`;
 
   if (availableList.length === 0) {
     grid.innerHTML = `<div class="col-span-4 text-center py-10 bg-stone-800/50 rounded-2xl text-stone-400 text-xs">找不到符合條件嘅五金零件，請清除搜尋字眼或切換其他五金店！</div>`;
@@ -3396,7 +3455,7 @@ function renderHardwareProducts(filter = 'all') {
 
   grid.innerHTML = availableList.map(p => {
     const customPrice = store.items[p.id].price || p.defaultPrice;
-    return `<div class="card-equal bg-stone-800 border border-stone-700 rounded-2xl overflow-hidden">
+    return `<div class="card-equal bg-stone-800 border border-stone-700 rounded-2xl overflow-hidden cursor-pointer hover:border-amber-400" onclick="openHardwareDetail('${p.id}')">
       <div class="aspect-16/10 w-full bg-stone-950 overflow-hidden relative">
         <img src="${p.img}" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='https://placehold.co/400x250/1e293b/fbbf24?text=五金零件';" alt="${p.name}" class="w-full h-full object-cover" />
         <span class="absolute top-2 left-2 bg-slate-950/85 text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded border border-white/15">${store.name}</span>
@@ -3407,16 +3466,17 @@ function renderHardwareProducts(filter = 'all') {
           <span class="text-stone-400 font-mono text-[10px]">${p.sku}</span>
         </div>
         <h4 class="font-black text-xs sm:text-sm text-white line-clamp-1">${p.name}</h4>
-        <p class="text-xs text-stone-400 line-clamp-2 leading-relaxed">${p.desc}</p>
+        <p class="text-[11px] text-amber-200/90 line-clamp-1">${p.spec} · ${p.size}</p>
+        <p class="text-xs text-stone-400 line-clamp-2 leading-relaxed">${p.use}</p>
       </div>
       <div class="p-3.5 pt-2 border-t border-stone-700 flex items-center justify-between gap-2">
         <div>
           ${priceMarkup(customPrice, p.id, 'dark')}
           <span class="text-xs text-stone-400"> / ${p.unit}</span>
         </div>
-        <div class="flex items-center gap-1.5">
+        <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
           ${qtyControl('qty-' + p.id)}
-          <button type="button" onclick="addToCart('${p.id}', '${store.id}', '${store.name}', '${store.phone}', '${p.name}', ${saleOf(customPrice, p.id).price}, '${p.unit}', readQty('qty-${p.id}'))" class="btn-std h-8 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs">
+          <button type="button" onclick="event.stopPropagation(); addToCart('${p.id}', '${store.id}', '${store.name}', '${store.phone}', '${p.name}', ${saleOf(customPrice, p.id).price}, '${p.unit}', readQty('qty-${p.id}'))" class="btn-std h-8 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs">
             ＋執貨
           </button>
         </div>
@@ -3426,6 +3486,43 @@ function renderHardwareProducts(filter = 'all') {
 }
 
 function filterHardware(cat) { renderHardwareProducts(cat); }
+
+function openHardwareDetail(productId) {
+  const p = masterHardwareCatalog.find(item => item.id === productId);
+  const store = hardwareStores.find(s => s.id === selectedHardwareStoreId) || hardwareStores[0];
+  if (!p || !store) return;
+  const customPrice = (store.items[p.id] && store.items[p.id].price) || p.defaultPrice;
+  const sale = saleOf(customPrice, p.id);
+  const row = (label, value) => `<div class="flex justify-between gap-3 border-b border-stone-100 py-2"><span class="text-stone-500">${label}</span><span class="font-bold text-slate-900 text-right">${value}</span></div>`;
+  showProductDetail(`
+    <button type="button" onclick="closeProductDetail()" class="btn-std h-9 px-3 rounded-xl bg-stone-100 text-slate-900 font-bold text-xs">← 返回五金貨架</button>
+    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-5">
+      <img src="${p.img}" alt="${p.name}" class="w-full h-64 object-cover rounded-2xl bg-stone-100 border border-stone-200" />
+      <div class="space-y-3 min-w-0">
+        <div class="flex items-center gap-2">
+          <span class="text-[11px] font-bold px-2 py-0.5 rounded bg-sky-100 text-sky-900">${p.cat}</span>
+          <span class="text-[11px] font-mono text-stone-500">${p.sku}</span>
+        </div>
+        <h2 class="text-xl sm:text-2xl font-black text-slate-900">${p.name}</h2>
+        <div>${priceMarkup(customPrice, p.id, 'light')} <span class="text-sm font-bold text-stone-500">/ ${p.unit}</span></div>
+        <p class="text-sm text-stone-700 leading-relaxed">${p.desc} ${p.use}</p>
+        <p class="text-xs text-stone-500">現貨店：${store.name}</p>
+        <div class="flex flex-wrap items-center gap-2">
+          ${qtyControl('qty-detail-' + p.id)}
+          <button type="button" onclick="addToCart('${p.id}', '${store.id}', '${store.name}', '${store.phone}', '${p.name}', ${sale.price}, '${p.unit}', readQty('qty-detail-${p.id}'))" class="btn-std h-10 px-4 rounded-xl bg-amber-400 text-slate-950 font-black text-xs">＋執貨</button>
+        </div>
+      </div>
+    </div>
+    <div class="mt-5 rounded-2xl border border-stone-200 px-4 text-sm">
+      ${row('規格', p.spec)}
+      ${row('尺寸', p.size)}
+      ${row('物料', p.material)}
+      ${row('包裝', p.pack)}
+      ${row('標準', p.standard)}
+      ${row('用途', p.use)}
+    </div>
+  `);
+}
 
 function renderHardwareOrdersTracker() {
   const container = document.getElementById('hardware-orders-tracker');
@@ -3533,7 +3630,7 @@ function loadOwnerStoreForm() {
         <img src="${item.img}" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/60x60/1e293b/fbbf24?text=五金';" class="w-10 h-10 rounded-lg object-cover shrink-0 border border-slate-700" />
         <div class="min-w-0">
           <div class="font-bold text-white text-xs truncate">${item.name}</div>
-          <div class="text-[10px] text-stone-400">${item.cat} · 預設價 HK$${item.defaultPrice}/${item.unit}</div>
+          <div class="text-[10px] text-stone-400">${item.cat} · ${item.spec} · 預設 HK$${item.defaultPrice}/${item.unit}</div>
         </div>
       </label>
       <div class="flex items-center gap-1 shrink-0">
