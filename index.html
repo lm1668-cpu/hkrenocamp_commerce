@@ -1670,11 +1670,11 @@ const materialsProducts = [
 ];
 
 const hardwareToolTrades = [
-  { key: "all", label: "全部工具", sub: "電動至安全", img: "images/hardware/camp/five.jpg" },
-  { key: "電動", label: "電動", sub: "電鑽、角磨", img: "images/hardware/camp/elec.jpg" },
-  { key: "手工具", label: "手工具", sub: "鉗、錘、批", img: "images/hardware/products/fastener.jpg" },
-  { key: "量度", label: "量度", sub: "拉尺、水平", img: "images/hardware/camp/wood.jpg" },
-  { key: "安全", label: "安全", sub: "眼鏡、手套", img: "images/hardware/camp/paint.jpg" }
+  { key: "all", label: "全部工具", sub: "電動至安全", img: "images/hardware/tools/t-drill.jpg" },
+  { key: "電動", label: "電動", sub: "電鑽、角磨", img: "images/hardware/tools/t-drill.jpg" },
+  { key: "手工具", label: "手工具", sub: "鉗、錘、批", img: "images/hardware/tools/t-wrench.jpg" },
+  { key: "量度", label: "量度", sub: "拉尺、水平", img: "images/hardware/tools/t-tape.jpg" },
+  { key: "安全", label: "安全", sub: "眼鏡、手套", img: "images/hardware/tools/t-helmet.jpg" }
 ];
 
 const hardwareTrades = [
@@ -1734,31 +1734,31 @@ const masterHardwareCatalog = [
   { id: "h-stay", cat: "鋁窗", sku: "DC-AW-ST12", name: "窗風撐 12寸", spec: "不鏽鋼風撐", size: "12 寸", material: "不鏽鋼", pack: "1 支", standard: "上懸窗", use: "窗扇打開後固定角度", desc: "左右邊各一。長度不對會頂住窗框。", defaultPrice: 35, unit: "支", img: "images/hardware/camp/window.jpg" },
   { id: "h-winscrew", cat: "鋁窗", sku: "DC-AW-SC", name: "不鏽鋼窗螺絲", spec: "盤頭自攻", size: "8 × 1/2 寸", material: "不鏽鋼", pack: "100 粒盒", standard: "鋁窗", use: "窗鎖、滑輪、風撐", desc: "不要用普通黑螺絲，會生鏽留痕。", defaultPrice: 18, unit: "盒", img: "images/hardware/products/fastener.jpg" },
 
-  { id: "t-drill", kind: "tool", cat: "電動", sku: "DC-TL-DR12", name: "12V 充電電鑽套裝", spec: "雙速，連充電器、電池、批咀", size: "夾頭 10 mm", material: "鋰電", pack: "1 套", standard: "12V", use: "上螺絲、鑽木、鑽薄金屬", desc: "家居維修最常用的一把電鑽。", defaultPrice: 680, unit: "套", img: "images/hardware/camp/elec.jpg" },
-  { id: "t-hammer", kind: "tool", cat: "電動", sku: "DC-TL-HM", name: "充電衝擊鑽", spec: "可切錘鑽，鑽混凝土", size: "夾頭 13 mm", material: "鋰電", pack: "1 套", standard: "18V", use: "紅磚、混凝土開牆塞孔", desc: "普通電鑽鑽不動混凝土，要用衝擊鑽。", defaultPrice: 1280, unit: "套", img: "images/hardware/camp/elec.jpg" },
-  { id: "t-grinder", kind: "tool", cat: "電動", sku: "DC-TL-AG4", name: "4寸角磨機", spec: "切金屬、打磨", size: "100 mm 碟", material: "電動", pack: "1 把", standard: "4 寸", use: "切斷螺絲、磨焊口", desc: "碟要另配。用時必須戴眼鏡。", defaultPrice: 420, unit: "把", img: "images/hardware/camp/five.jpg" },
-  { id: "t-heat", kind: "tool", cat: "電動", sku: "DC-TL-HG", name: "熱風槍", spec: "兩段溫度", size: "嘴頭可換", material: "電動", pack: "1 把", standard: "熱風", use: "軟膠喉、剝漆、熱縮管", desc: "不要對住玻璃或電線長期吹。", defaultPrice: 260, unit: "把", img: "images/hardware/camp/elec.jpg" },
-  { id: "t-driver", kind: "tool", cat: "電動", sku: "DC-TL-SD", name: "電動批", spec: "直柄，離合器可調", size: "1/4 寸批頭", material: "鋰電", pack: "1 把", standard: "電動批", use: "櫃門鉸、層板大量上螺絲", desc: "比電鑽輕，適合室內木作。", defaultPrice: 220, unit: "把", img: "images/hardware/camp/wood.jpg" },
-  { id: "t-jigsaw", kind: "tool", cat: "電動", sku: "DC-TL-JS", name: "曲線鋸", spec: "鋸木、鋸鋁", size: "T 柄鋸片", material: "電動", pack: "1 把", standard: "曲線鋸", use: "開孔、弧形切割", desc: "鋸片要按物料換，木片不能鋸金屬。", defaultPrice: 480, unit: "把", img: "images/hardware/camp/wood.jpg" },
+  { id: "t-drill", kind: "tool", cat: "電動", sku: "DC-TL-DR12", name: "12V 充電電鑽套裝", spec: "雙速，連充電器、電池、批咀", size: "夾頭 10 mm", material: "鋰電", pack: "1 套", standard: "12V", use: "上螺絲、鑽木、鑽薄金屬", desc: "家居維修最常用的一把電鑽。", defaultPrice: 680, unit: "套", img: "images/hardware/tools/t-drill.jpg" },
+  { id: "t-hammer", kind: "tool", cat: "電動", sku: "DC-TL-HM", name: "充電衝擊鑽", spec: "可切錘鑽，鑽混凝土", size: "夾頭 13 mm", material: "鋰電", pack: "1 套", standard: "18V", use: "紅磚、混凝土開牆塞孔", desc: "普通電鑽鑽不動混凝土，要用衝擊鑽。", defaultPrice: 1280, unit: "套", img: "images/hardware/tools/t-hammer.jpg" },
+  { id: "t-grinder", kind: "tool", cat: "電動", sku: "DC-TL-AG4", name: "4寸角磨機", spec: "切金屬、打磨", size: "100 mm 碟", material: "電動", pack: "1 把", standard: "4 寸", use: "切斷螺絲、磨焊口", desc: "碟要另配。用時必須戴眼鏡。", defaultPrice: 420, unit: "把", img: "images/hardware/tools/t-grinder.jpg" },
+  { id: "t-heat", kind: "tool", cat: "電動", sku: "DC-TL-HG", name: "熱風槍", spec: "兩段溫度", size: "嘴頭可換", material: "電動", pack: "1 把", standard: "熱風", use: "軟膠喉、剝漆、熱縮管", desc: "不要對住玻璃或電線長期吹。", defaultPrice: 260, unit: "把", img: "images/hardware/tools/t-heat.jpg" },
+  { id: "t-driver", kind: "tool", cat: "電動", sku: "DC-TL-SD", name: "電動批", spec: "直柄，離合器可調", size: "1/4 寸批頭", material: "鋰電", pack: "1 把", standard: "電動批", use: "櫃門鉸、層板大量上螺絲", desc: "比電鑽輕，適合室內木作。", defaultPrice: 220, unit: "把", img: "images/hardware/tools/t-driver.jpg" },
+  { id: "t-jigsaw", kind: "tool", cat: "電動", sku: "DC-TL-JS", name: "曲線鋸", spec: "鋸木、鋸鋁", size: "T 柄鋸片", material: "電動", pack: "1 把", standard: "曲線鋸", use: "開孔、弧形切割", desc: "鋸片要按物料換，木片不能鋸金屬。", defaultPrice: 480, unit: "把", img: "images/hardware/tools/t-jigsaw.jpg" },
 
-  { id: "t-screwset", kind: "tool", cat: "手工具", sku: "DC-TL-BS32", name: "批咀套裝 32 件", spec: "十字、一字、六角", size: "1/4 寸", material: "鉻釩鋼", pack: "1 套", standard: "32 件", use: "電器、傢俬、窗鎖", desc: "地盤臨時少一支批也可以應付。", defaultPrice: 88, unit: "套", img: "images/hardware/products/fastener.jpg" },
-  { id: "t-wrench", kind: "tool", cat: "手工具", sku: "DC-TL-AW10", name: "活動扳手 10寸", spec: "開口可調", size: "10 寸", material: "鉻釩鋼", pack: "1 把", standard: "活動扳手", use: "波曲、角閥、螺母", desc: "牙口要夾實，不要用錯方向。", defaultPrice: 48, unit: "把", img: "images/hardware/products/fastener.jpg" },
-  { id: "t-pump", kind: "tool", cat: "手工具", sku: "DC-TL-PP10", name: "水泵鉗 10寸", spec: "活動牙，可夾圓管", size: "10 寸", material: "鋼", pack: "1 把", standard: "水泵鉗", use: "軟喉螺母、去水", desc: "水喉駁口比活動扳手更穩。", defaultPrice: 55, unit: "把", img: "images/hardware/products/plumbing.jpg" },
-  { id: "t-pipewrench", kind: "tool", cat: "手工具", sku: "DC-TL-PW14", name: "管子鉗 14寸", spec: "夾鐵喉、波曲", size: "14 寸", material: "鑄鐵", pack: "1 把", standard: "管子鉗", use: "鍍鋅鐵喉、舊波曲拆不開", desc: "會留牙印，光面配件不要用。", defaultPrice: 95, unit: "把", img: "images/hardware/camp/plumb.jpg" },
-  { id: "t-plier", kind: "tool", cat: "手工具", sku: "DC-TL-LN6", name: "尖嘴鉗 6寸", spec: "帶剪線口", size: "6 寸", material: "鋼", pack: "1 把", standard: "尖嘴鉗", use: "剪線、拗線、細位", desc: "電工駁線常用。", defaultPrice: 38, unit: "把", img: "images/hardware/camp/elec.jpg" },
-  { id: "t-claw", kind: "tool", cat: "手工具", sku: "DC-TL-HM16", name: "羊角錘 16oz", spec: "起釘兼敲擊", size: "16 oz", material: "碳鋼、纖維柄", pack: "1 把", standard: "羊角錘", use: "釘木、起釘", desc: "柄要完整，裂柄不要繼續用。", defaultPrice: 62, unit: "把", img: "images/hardware/camp/wood.jpg" },
-  { id: "t-mallet", kind: "tool", cat: "手工具", sku: "DC-TL-RB", name: "膠錘", spec: "白膠頭，不留印", size: "中號", material: "橡膠頭", pack: "1 把", standard: "膠錘", use: "裝層板、鋁窗、地磚定位", desc: "金屬錘會打花鋁材，這些位置用膠錘。", defaultPrice: 42, unit: "把", img: "images/hardware/camp/window.jpg" },
-  { id: "t-knife", kind: "tool", cat: "手工具", sku: "DC-TL-KN", name: "美工刀連刀片", spec: "18mm，連 10 片", size: "18 mm", material: "鋼刀片", pack: "1 套", standard: "美工刀", use: "開箱、切膠紙、切石膏板", desc: "刀片鈍了就掰走一截，不要硬割。", defaultPrice: 18, unit: "套", img: "images/hardware/products/fastener.jpg" },
+  { id: "t-screwset", kind: "tool", cat: "手工具", sku: "DC-TL-BS32", name: "批咀套裝 32 件", spec: "十字、一字、六角", size: "1/4 寸", material: "鉻釩鋼", pack: "1 套", standard: "32 件", use: "電器、傢俬、窗鎖", desc: "地盤臨時少一支批也可以應付。", defaultPrice: 88, unit: "套", img: "images/hardware/tools/t-screwset.jpg" },
+  { id: "t-wrench", kind: "tool", cat: "手工具", sku: "DC-TL-AW10", name: "活動扳手 10寸", spec: "開口可調", size: "10 寸", material: "鉻釩鋼", pack: "1 把", standard: "活動扳手", use: "波曲、角閥、螺母", desc: "牙口要夾實，不要用錯方向。", defaultPrice: 48, unit: "把", img: "images/hardware/tools/t-wrench.jpg" },
+  { id: "t-pump", kind: "tool", cat: "手工具", sku: "DC-TL-PP10", name: "水泵鉗 10寸", spec: "活動牙，可夾圓管", size: "10 寸", material: "鋼", pack: "1 把", standard: "水泵鉗", use: "軟喉螺母、去水", desc: "水喉駁口比活動扳手更穩。", defaultPrice: 55, unit: "把", img: "images/hardware/tools/t-pump.jpg" },
+  { id: "t-pipewrench", kind: "tool", cat: "手工具", sku: "DC-TL-PW14", name: "管子鉗 14寸", spec: "夾鐵喉、波曲", size: "14 寸", material: "鑄鐵", pack: "1 把", standard: "管子鉗", use: "鍍鋅鐵喉、舊波曲拆不開", desc: "會留牙印，光面配件不要用。", defaultPrice: 95, unit: "把", img: "images/hardware/tools/t-pipewrench.jpg" },
+  { id: "t-plier", kind: "tool", cat: "手工具", sku: "DC-TL-LN6", name: "尖嘴鉗 6寸", spec: "帶剪線口", size: "6 寸", material: "鋼", pack: "1 把", standard: "尖嘴鉗", use: "剪線、拗線、細位", desc: "電工駁線常用。", defaultPrice: 38, unit: "把", img: "images/hardware/tools/t-plier.jpg" },
+  { id: "t-claw", kind: "tool", cat: "手工具", sku: "DC-TL-HM16", name: "羊角錘 16oz", spec: "起釘兼敲擊", size: "16 oz", material: "碳鋼、纖維柄", pack: "1 把", standard: "羊角錘", use: "釘木、起釘", desc: "柄要完整，裂柄不要繼續用。", defaultPrice: 62, unit: "把", img: "images/hardware/tools/t-claw.jpg" },
+  { id: "t-mallet", kind: "tool", cat: "手工具", sku: "DC-TL-RB", name: "膠錘", spec: "白膠頭，不留印", size: "中號", material: "橡膠頭", pack: "1 把", standard: "膠錘", use: "裝層板、鋁窗、地磚定位", desc: "金屬錘會打花鋁材，這些位置用膠錘。", defaultPrice: 42, unit: "把", img: "images/hardware/tools/t-mallet.jpg" },
+  { id: "t-knife", kind: "tool", cat: "手工具", sku: "DC-TL-KN", name: "美工刀連刀片", spec: "18mm，連 10 片", size: "18 mm", material: "鋼刀片", pack: "1 套", standard: "美工刀", use: "開箱、切膠紙、切石膏板", desc: "刀片鈍了就掰走一截，不要硬割。", defaultPrice: 18, unit: "套", img: "images/hardware/tools/t-knife.jpg" },
 
-  { id: "t-tape", kind: "tool", cat: "量度", sku: "DC-TL-TP5", name: "鋼拉尺 5米", spec: "自動回收，帶鎖", size: "5 m × 19 mm", material: "鋼帶", pack: "1 把", standard: "拉尺", use: "度門、度傢俬、度喉", desc: "尾鉤有鬆動是正常的，要扣實先度。", defaultPrice: 28, unit: "把", img: "images/hardware/camp/five.jpg" },
-  { id: "t-level", kind: "tool", cat: "量度", sku: "DC-TL-LV60", name: "水平尺 600mm", spec: "橫、直、45 度", size: "600 mm", material: "鋁", pack: "1 支", standard: "水平尺", use: "層板、窗、盆是否平", desc: "氣泡在兩條線中間才算平。", defaultPrice: 45, unit: "支", img: "images/hardware/camp/five.jpg" },
-  { id: "t-laser", kind: "tool", cat: "量度", sku: "DC-TL-LS40", name: "激光測距儀", spec: "室內測距", size: "量程 40 m", material: "電子", pack: "1 部", standard: "激光測距", use: "廳房長度、報價度尺", desc: "對住淺色牆較準，玻璃會反射失準。", defaultPrice: 320, unit: "部", img: "images/hardware/camp/five.jpg" },
-  { id: "t-tester", kind: "tool", cat: "量度", sku: "DC-TL-VT", name: "驗電筆", spec: "非接觸驗電", size: "筆型", material: "電子", pack: "1 支", standard: "驗電", use: "換蘇、換燈前確認沒電", desc: "驗電筆只作初檢，不代替正式測試。", defaultPrice: 22, unit: "支", img: "images/hardware/camp/elec.jpg" },
+  { id: "t-tape", kind: "tool", cat: "量度", sku: "DC-TL-TP5", name: "鋼拉尺 5米", spec: "自動回收，帶鎖", size: "5 m × 19 mm", material: "鋼帶", pack: "1 把", standard: "拉尺", use: "度門、度傢俬、度喉", desc: "尾鉤有鬆動是正常的，要扣實先度。", defaultPrice: 28, unit: "把", img: "images/hardware/tools/t-tape.jpg" },
+  { id: "t-level", kind: "tool", cat: "量度", sku: "DC-TL-LV60", name: "水平尺 600mm", spec: "橫、直、45 度", size: "600 mm", material: "鋁", pack: "1 支", standard: "水平尺", use: "層板、窗、盆是否平", desc: "氣泡在兩條線中間才算平。", defaultPrice: 45, unit: "支", img: "images/hardware/tools/t-level.jpg" },
+  { id: "t-laser", kind: "tool", cat: "量度", sku: "DC-TL-LS40", name: "激光測距儀", spec: "室內測距", size: "量程 40 m", material: "電子", pack: "1 部", standard: "激光測距", use: "廳房長度、報價度尺", desc: "對住淺色牆較準，玻璃會反射失準。", defaultPrice: 320, unit: "部", img: "images/hardware/tools/t-laser.jpg" },
+  { id: "t-tester", kind: "tool", cat: "量度", sku: "DC-TL-VT", name: "驗電筆", spec: "非接觸驗電", size: "筆型", material: "電子", pack: "1 支", standard: "驗電", use: "換蘇、換燈前確認沒電", desc: "驗電筆只作初檢，不代替正式測試。", defaultPrice: 22, unit: "支", img: "images/hardware/tools/t-tester.jpg" },
 
-  { id: "t-glass", kind: "tool", cat: "安全", sku: "DC-TL-EG", name: "安全眼鏡", spec: "防衝擊、透明", size: "均碼", material: "聚碳酸酯", pack: "1 副", standard: "防護眼罩", use: "打磨、鑽牆、切斷", desc: "用角磨機和衝擊鑽時要戴。", defaultPrice: 18, unit: "副", img: "images/hardware/camp/five.jpg" },
-  { id: "t-glove", kind: "tool", cat: "安全", sku: "DC-TL-GV", name: "防割手套", spec: "掌心防滑", size: "均碼", material: "纖維", pack: "1 對", standard: "防割", use: "搬玻璃、鋁料、鐵片", desc: "濕水時抓力會下降。", defaultPrice: 25, unit: "對", img: "images/hardware/camp/five.jpg" },
-  { id: "t-mask", kind: "tool", cat: "安全", sku: "DC-TL-MSK", name: "防塵口罩", spec: "杯型，帶排氣閥", size: "10 個裝", material: "不織布", pack: "1 盒", standard: "防塵", use: "打磨、批灰、鑽牆", desc: "噴漆要用防有機蒸氣的口罩，這盒只防塵。", defaultPrice: 32, unit: "盒", img: "images/hardware/camp/paint.jpg" },
-  { id: "t-helmet", kind: "tool", cat: "安全", sku: "DC-TL-HL", name: "安全帽", spec: "通風孔，可調頭圍", size: "均碼", material: "ABS", pack: "1 頂", standard: "地盤安全帽", use: "樓宇地盤、高空有墜物", desc: "帽帶要扣上，只是托在頭上沒有保護。", defaultPrice: 68, unit: "頂", img: "images/hardware/camp/five.jpg" }
+  { id: "t-glass", kind: "tool", cat: "安全", sku: "DC-TL-EG", name: "安全眼鏡", spec: "防衝擊、透明", size: "均碼", material: "聚碳酸酯", pack: "1 副", standard: "防護眼罩", use: "打磨、鑽牆、切斷", desc: "用角磨機和衝擊鑽時要戴。", defaultPrice: 18, unit: "副", img: "images/hardware/tools/t-glass.jpg" },
+  { id: "t-glove", kind: "tool", cat: "安全", sku: "DC-TL-GV", name: "防割手套", spec: "掌心防滑", size: "均碼", material: "纖維", pack: "1 對", standard: "防割", use: "搬玻璃、鋁料、鐵片", desc: "濕水時抓力會下降。", defaultPrice: 25, unit: "對", img: "images/hardware/tools/t-glove.jpg" },
+  { id: "t-mask", kind: "tool", cat: "安全", sku: "DC-TL-MSK", name: "防塵口罩", spec: "杯型，帶排氣閥", size: "10 個裝", material: "不織布", pack: "1 盒", standard: "防塵", use: "打磨、批灰、鑽牆", desc: "噴漆要用防有機蒸氣的口罩，這盒只防塵。", defaultPrice: 32, unit: "盒", img: "images/hardware/tools/t-mask.jpg" },
+  { id: "t-helmet", kind: "tool", cat: "安全", sku: "DC-TL-HL", name: "安全帽", spec: "通風孔，可調頭圍", size: "均碼", material: "ABS", pack: "1 頂", standard: "地盤安全帽", use: "樓宇地盤、高空有墜物", desc: "帽帶要扣上，只是托在頭上沒有保護。", defaultPrice: 68, unit: "頂", img: "images/hardware/tools/t-helmet.jpg" }
 ];
 
 let hardwareStores = [
