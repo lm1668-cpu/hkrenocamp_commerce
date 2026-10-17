@@ -34,6 +34,14 @@ html, body {
   transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
   user-select: none;
 }
+.btn-wrap {
+  white-space: normal;
+  height: auto;
+  min-height: 2.5rem;
+  line-height: 1.45;
+  padding-top: 0.55rem;
+  padding-bottom: 0.55rem;
+}
 .tab-active {
   background-color: #1E242B !important;
   color: #FBBF24 !important;
@@ -387,7 +395,7 @@ html, body {
       </div>
     </div>
 
-    <div id="repair-form-box" class="lg:col-span-5 bg-slate-900 text-white p-4 sm:p-6 rounded-3xl shadow-xl border border-slate-700 flex flex-col justify-between space-y-4">
+    <div id="repair-form-box" class="lg:col-span-5 min-w-0 bg-slate-900 text-white p-4 sm:p-6 rounded-3xl shadow-xl border border-slate-700 flex flex-col justify-between space-y-4">
       <div class="space-y-3.5">
         <div class="flex items-center justify-between border-b border-slate-700 pb-3 gap-2">
           <div>
@@ -467,17 +475,18 @@ html, body {
         </form>
       </div>
 
-      <div id="repair-ticket-result" class="hidden bg-emerald-950/90 border border-emerald-500 rounded-2xl p-4 space-y-2 text-xs">
-        <div class="flex items-center justify-between gap-2">
-          <span class="font-black text-emerald-300">✅ 已派單並開啟防甩底履約保護！</span>
+      <div id="repair-ticket-result" class="hidden bg-emerald-950/90 border border-emerald-500 rounded-2xl p-4 space-y-2 text-xs min-w-0 max-w-full">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <span class="font-black text-emerald-300 min-w-0">✅ 已派單並開啟防甩底履約保護！</span>
           <span id="ticket-code" class="bg-emerald-400 text-slate-950 font-black px-2 py-0.5 rounded-md shrink-0"></span>
         </div>
-        <p id="ticket-summary" class="text-emerald-100 leading-relaxed"></p>
-        <div class="pt-2 border-t border-emerald-800 flex flex-col gap-2">
-          <button type="button" onclick="sendRepairTicketWhatsApp()" class="btn-std w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-2.5 rounded-xl text-xs">
-            💬 一鍵 WhatsApp 發送單號及相片給大本營派單台 *(開啟 WhatsApp 後可隨手貼上剛才上傳嘅相)*
+        <p id="ticket-summary" class="text-emerald-100 leading-relaxed break-words"></p>
+        <div class="pt-2 border-t border-emerald-800 flex flex-col gap-2 min-w-0">
+          <button type="button" onclick="sendRepairTicketWhatsApp()" class="btn-std btn-wrap w-full max-w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs">
+            💬 一鍵 WhatsApp 發送單號給大本營派單台
           </button>
-          <button type="button" onclick="openMemberModal('reviews')" class="btn-std w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black py-2 rounded-xl text-xs">
+          <p class="text-[11px] text-emerald-200/90 leading-relaxed break-words">開啟 WhatsApp 後，可再貼上剛才上傳的相片。</p>
+          <button type="button" onclick="openMemberModal('reviews')" class="btn-std btn-wrap w-full max-w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">
             ⭐ 完工後點此進行「驗收及雙向星級互評」
           </button>
         </div>
