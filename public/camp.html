@@ -1283,7 +1283,7 @@ html, body {
       <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-800 p-3 rounded-2xl border border-slate-700 shrink-0">
         <div class="flex flex-wrap items-center gap-2">
           <span class="text-xs font-bold text-amber-300">切換管理店舖：</span>
-          <select id="owner-store-select" onchange="loadOwnerStoreForm()" class="h-9 bg-slate-900 border border-slate-600 rounded-xl px-3 text-xs font-bold text-white"></select>
+          <select id="owner-store-select" onchange="loadOwnerStoreForm(); renderOwnerOrdersList()" class="h-9 bg-slate-900 border border-slate-600 rounded-xl px-3 text-xs font-bold text-white"></select>
           <button type="button" onclick="addNewHardwareStore()" class="btn-std h-8 px-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold">＋ 新增五金店</button>
         </div>
         <div class="flex flex-wrap gap-1 bg-slate-900 p-1 rounded-xl border border-slate-700">
@@ -2031,10 +2031,10 @@ function renderMasterJobs() {
   grid.innerHTML = list.map(j => {
     const cleanPhone = (j.phone || '').replace(' (驗證後解鎖)', '');
     const maskedPhone = '🔒 師傅驗證或登入後解鎖';
-    const isLocked = j.status && j.status.includes('已接單');
-    const isCompleted = j.status && j.status.includes('已完工');
+    const isCompleted = jobOwnerAccepted(j);
+    const isLocked = !isCompleted && !!(j.assignedMaster || j.assignedMasterId) && !(j.status || '').includes('甩底');
     const isMine = isMasterLoggedIn && jobBelongsToMaster(j, currentMasterProfile);
-    const lockedByOther = !isCompleted && !isMine && !!(j.assignedMaster && isLocked);
+    const lockedByOther = isLocked && !isMine;
 
     let photosHtml = '';
     if (j.photos && j.photos.length > 0) {
@@ -2200,6 +2200,12 @@ function reviewsForJob(job) {
   return mutualReviews.filter(r => String(r.jobId || '').startsWith(job.id));
 }
 
+function jobOwnerAccepted(job) {
+  if (!job) return false;
+  const status = job.status || '';
+  return status.includes('已完工') || status.includes('已驗收') || reviewsForJob(job).some(r => r.role === '業主評師傅');
+}
+
 let memberCenterMode = 'owner';
 
 function openMemberModal(defaultTab = 'login', preselectJobId = null) {
@@ -2362,7 +2368,7 @@ function renderMemberCenterOrders() {
     return;
   }
 
-  const waiting = myJobs.filter(j => !(j.status || '').includes('已完工') && !(reviewsForJob(j).some(r => r.role === '業主評師傅')));
+  const waiting = myJobs.filter(j => !jobOwnerAccepted(j));
   if (hint) {
     hint.textContent = waiting.length
       ? (isMaster
@@ -2375,8 +2381,7 @@ function renderMemberCenterOrders() {
   }
 
   listEl.innerHTML = myJobs.map(j => {
-    const ownerAccepted = reviewsForJob(j).some(r => r.role === '業主評師傅') || ((j.status || '').includes('已完工'));
-    const isCompleted = ownerAccepted;
+    const isCompleted = jobOwnerAccepted(j);
     const isLocked = (j.status && j.status.includes('已接單')) || isCompleted || !!(j.assignedMaster);
     const masterLabel = j.assignedMaster || (isLocked ? '系統指派認證師傅' : '未有師傅');
     const isOwnerJob = !isMaster;
@@ -2607,7 +2612,12 @@ function submitMutualReview(e) {
   document.getElementById('rev-comment').value = '';
   closeMemberModal();
   switchSection('repair');
-  showModal('🌟 完工驗收及星級互評已發布！', `多謝你嘅評價！你對「${target}」嘅 ${currentReviewStars} 粒星評價已經即時刊登喺【最新完工真實互評牆】，對應維修單 #${pureJobId} 亦已自動標記為【✅ 已完工驗收】！`, '互評成功');
+  const doneText = jobOwnerAccepted(matchedJob)
+    ? (reviewsForJob(matchedJob).some(r => r.role === '師傅評業主')
+      ? '雙向互評已完成，維修單已標記為完工驗收。'
+      : '業主已驗收。等負責師傅再評業主之後，先算雙向互評完成。')
+    : '已記錄師傅對業主的評價。這張單仍要等業主自己驗收，先算完工。';
+  showModal('🌟 星級評價已發布！', `多謝你的評價。你對「${target}」的 ${currentReviewStars} 粒星已刊登在互評牆。${doneText}`, '互評成功');
 }
 
 function renderMasterDashboardMyJobs() {
@@ -2879,18 +2889,17 @@ function acceptJob(jobId) {
     return;
   }
   rebindCurrentMaster();
-  if (currentMasterProfile.frozen) {
-    showModal('接單權限已凍結', `「${currentMasterProfile.name}」因甩底被扣誠信分（現時 ${currentMasterProfile.creditScore} 分），接單權限暫時凍結。可按頁尾「重置示範數據」恢復。`, '無法接單');
-    return;
-  }
   const job = liveMasterJobs.find(j => j.id === jobId);
   if (!job) return;
-  if (job.status && job.status.includes('已完工')) {
-    showModal('此單已完工', '呢張維修單已經完成驗收，唔需要再接單！', '提示');
+  const alreadyMine = jobBelongsToMaster(job, currentMasterProfile);
+  if (currentMasterProfile.frozen && !alreadyMine) {
+    showModal('接單權限已凍結', `「${currentMasterProfile.name}」因甩底被扣誠信分（現時 ${currentMasterProfile.creditScore} 分），不能再接新單。已接的單仍可聯絡業主。可按頁尾「重置示範數據」恢復。`, '無法接單');
     return;
   }
-
-  const alreadyMine = jobBelongsToMaster(job, currentMasterProfile);
+  if (jobOwnerAccepted(job)) {
+    showModal('此單已完工', '呢張維修單業主已經驗收，唔需要再接單！', '提示');
+    return;
+  }
   const backupOpen = (job.status || '').includes('甩底');
   const named = specifiedMasterOnJob(job);
   if (!alreadyMine && named && !backupOpen && !jobBelongsToMaster({ assignedMaster: named }, currentMasterProfile)) {
@@ -3271,7 +3280,15 @@ function renderHardwareOrdersTracker() {
 function masterConfirmReceived(orderId) {
   const ord = hardwareOrders.find(o => o.orderId === orderId);
   if (!ord) return;
-  ord.status = "師傅已收貨";
+  if (ord.status === '師傅已收貨') {
+    showModal('已經確認過收貨', `單號 #${orderId} 已經是「師傅已收貨」。`, '收貨完成');
+    return;
+  }
+  if (ord.status !== '運送中') {
+    showModal('貨未送出', `單號 #${orderId} 目前是「${ord.status}」。要等五金店老闆改到「運送中」，先可以確認收貨。`, '未到收貨步驟');
+    return;
+  }
+  ord.status = '師傅已收貨';
   persistDataLocally();
   renderHardwareOrdersTracker();
   renderOwnerOrdersList();
@@ -3485,10 +3502,20 @@ function switchOwnerTab(tab) {
 function renderOwnerOrdersList() {
   const listEl = document.getElementById('owner-orders-list');
   if (!listEl) return;
-  listEl.innerHTML = hardwareOrders.map(o => {
+  const storeId = document.getElementById('owner-store-select')?.value || selectedHardwareStoreId;
+  const mine = hardwareOrders.filter(o => !storeId || o.storeId === storeId);
+  if (!mine.length) {
+    listEl.innerHTML = `<div class="text-stone-400 text-xs py-6 text-center bg-slate-900 rounded-2xl">這間舖暫時未有五金單。請切換店舖，或等師傅落單。</div>`;
+    return;
+  }
+  listEl.innerHTML = mine.map(o => {
+    const current = orderStepIndex(o.status);
+    const locked = o.status === '師傅已收貨';
     const btns = ["已下單", "執貨中", "打包好", "運送中"].map(st => {
+      const idx = orderStepIndex(st);
       const active = o.status === st;
-      return `<button type="button" onclick="ownerUpdateOrderStatus('${o.orderId}', '${st}')" class="btn-std h-8 px-2.5 rounded-lg text-xs font-bold ${active ? 'bg-amber-400 text-slate-950 font-black' : 'bg-slate-800 text-stone-300 hover:bg-slate-700'}">${st}</button>`;
+      const disabled = locked || idx < current;
+      return `<button type="button" ${disabled && !active ? 'disabled' : ''} onclick="ownerUpdateOrderStatus('${o.orderId}', '${st}')" class="btn-std h-8 px-2.5 rounded-lg text-xs font-bold ${active ? 'bg-amber-400 text-slate-950 font-black' : disabled ? 'bg-slate-800 text-stone-600 cursor-not-allowed' : 'bg-slate-800 text-stone-300 hover:bg-slate-700'}">${st}</button>`;
     }).join('');
     return `<div class="bg-slate-900 border border-slate-700 rounded-2xl p-4 space-y-2.5">
       <div class="flex flex-wrap items-center justify-between gap-2">
@@ -3508,9 +3535,24 @@ function renderOwnerOrdersList() {
   }).join('');
 }
 
+function orderStepIndex(status) {
+  const idx = ORDER_STEPS.indexOf(status);
+  return idx < 0 ? 0 : idx;
+}
+
 function ownerUpdateOrderStatus(orderId, newStatus) {
   const ord = hardwareOrders.find(o => o.orderId === orderId);
   if (!ord) return;
+  if (ord.status === '師傅已收貨') {
+    showModal('這張單已收貨', '師傅已確認收貨，店主不能再改回前面的狀態。', '訂單已完成');
+    return;
+  }
+  const from = orderStepIndex(ord.status);
+  const to = orderStepIndex(newStatus);
+  if (to < from) {
+    showModal('不能倒退狀態', `目前是「${ord.status}」。五金單只可以向前：已下單 → 執貨中 → 打包好 → 運送中 → 師傅已收貨。`, '狀態順序');
+    return;
+  }
   ord.status = newStatus;
   persistDataLocally();
   renderOwnerOrdersList();
