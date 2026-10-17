@@ -1,0 +1,21 @@
+@import "tailwindcss";
+@source "../public/camp.html";
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  html,
+  body {
+    margin: 0;
+    background: #faf7f2;
+    color: #1e242b;
+    font-family: "Noto Sans HK", sans-serif;
+  }
+}
+
+.camp-root {
+  min-height: 100%;
+}

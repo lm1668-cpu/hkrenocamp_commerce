@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "香港裝修師傅大本營",
+      "hasCanvas": false,
+      "bodyTextLen": 2806,
+      "bodyTextHash": "bf23674195653623db8fac9f06e37650eb5f1d3cc439bc6bd2fa1bd6cda0350c",
+      "bodyTextPrefix": "🛠️ 香港裝修師傅大本營旗艦總站 ｜ 家電標準安裝公價 · 淘寶式雙向互評 · 十八區五金直發 ☁️ 雲端實時同步中 雲端 I",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "香港裝修師傅大本營",
+      "hasCanvas": false,
+      "bodyTextLen": 5358,
+      "bodyTextHash": "bdcec14c26bf187856c5a027cf03aa1c6e46561e98bbb397c0d548532d63b03d",
+      "bodyTextPrefix": "🛠️ 香港裝修師傅大本營旗艦總站 ｜ 家電標準安裝公價 · 淘寶式雙向互評 · 十八區五金直發 ☁️ 雲端實時同步中 雲端 I",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}

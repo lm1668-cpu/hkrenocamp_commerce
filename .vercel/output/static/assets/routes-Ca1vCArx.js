@@ -1,0 +1,3615 @@
+import{n as e,r as t,t as n}from"./index-PzdUYoa-.js";var r=t(e()),i=`<!DOCTYPE html>
+<html lang="zh-HK" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+<title>香港裝修師傅大本營 | 配對站 · 建材店 · 五金店</title>
+<script src="https://cdn.tailwindcss.com"><\/script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-warm: #FAF7F2;
+  --ink-dark: #1E242B;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+html, body {
+  font-family: 'Noto Sans HK', sans-serif;
+  background-color: var(--bg-warm);
+  color: var(--ink-dark);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+.btn-std {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  white-space: nowrap;
+  text-align: center;
+  line-height: 1.2;
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+  user-select: none;
+}
+.tab-active {
+  background-color: #1E242B !important;
+  color: #FBBF24 !important;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
+}
+.hero-card-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  transition: background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.hero-card-active {
+  background-color: rgba(255, 255, 255, 0.22) !important;
+  border-color: #FBBF24 !important;
+  box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.45);
+}
+.card-equal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.card-equal:hover {
+  box-shadow: 0 10px 20px -5px rgba(30, 36, 43, 0.12);
+}
+.icon-crop-white {
+  border-radius: 9999px;
+  overflow: hidden;
+  background-color: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-crop-white img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.26);
+}
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.hero-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: opacity 0.18s ease-in-out;
+  will-change: opacity;
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 0.3; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+.wa-pulse::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  background-color: #22c55e;
+  animation: pulse-ring 2s infinite ease-in-out;
+  z-index: -1;
+}
+
+.shadow-xs { box-shadow: 0 1px 2px rgba(30, 36, 43, 0.06); }
+.shadow-2xs { box-shadow: 0 1px 1px rgba(30, 36, 43, 0.05); }
+.aspect-16\\/10 { aspect-ratio: 16 / 10; }
+.w-13 { width: 3.25rem; }
+.h-13 { height: 3.25rem; }
+</style>
+</head>
+<body class="pb-24 lg:pb-12">
+
+<div class="bg-slate-900 text-amber-400 text-xs sm:text-sm py-2 px-4 border-b border-slate-800">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1.5">
+    <div class="font-medium tracking-wide text-center sm:text-left">
+      🛠️ 香港裝修師傅大本營旗艦總站 ｜ 家電標準安裝公價 · 淘寶式雙向互評 · 十八區五金直發
+    </div>
+    <div class="flex flex-wrap items-center justify-center gap-2 text-[11px] shrink-0">
+      <span id="cloud-sync-badge" class="inline-flex items-center gap-1.5 bg-emerald-950/90 text-emerald-300 border border-emerald-500/40 px-2.5 py-0.5 rounded-full font-bold">
+        <span id="cloud-sync-dot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span id="cloud-sync-text">☁️ 雲端實時同步中</span>
+      </span>
+      <span class="bg-slate-800/90 text-stone-400 border border-slate-700 px-2.5 py-0.5 rounded-full font-mono text-[10px]">
+        雲端 ID: <strong id="cloud-user-id" class="text-amber-300 select-all">連線中</strong>
+      </span>
+    </div>
+  </div>
+</div>
+
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-xs">
+  <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 flex items-center justify-between gap-2">
+    <a href="#" onclick="switchSection('all'); return false;" class="flex items-center gap-2.5 group min-w-0">
+      <div class="w-10 h-10 sm:w-11 sm:h-11 icon-crop-white border-2 border-amber-400 shadow-xs shrink-0">
+        <img 
+          id="header-brand-logo"
+          src="https://light-timber-vivid-swift.grok.me/brand/mark.jpg?v=opt" 
+          onerror="this.onerror=null; this.src='https://placehold.co/96x96/1e293b/fbbf24?text=大本營';"
+          alt="香港裝修師傅大本營"
+          decoding="async"
+        />
+      </div>
+      <div class="min-w-0">
+        <div class="flex items-center gap-1.5">
+          <span class="font-black text-sm sm:text-base text-slate-900 tracking-tight truncate">香港裝修師傅大本營</span>
+          <span class="hidden xl:inline-flex text-[11px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-bold border border-amber-300 shrink-0">三合一總站</span>
+        </div>
+        <p class="text-[11px] text-stone-500 font-medium truncate">防甩底履約保障 · 家電公價安裝 · 十八區五金</p>
+      </div>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-1 bg-stone-100 p-1.5 rounded-2xl border border-stone-200 shrink-0">
+      <button onclick="switchSection('all')" id="nav-all" class="nav-btn btn-std tab-active px-3.5 h-9 rounded-xl text-xs sm:text-sm">總覽</button>
+      <button onclick="switchSection('repair')" id="nav-repair" class="nav-btn btn-std px-3.5 h-9 rounded-xl text-xs sm:text-sm text-stone-700 hover:bg-stone-200/80 font-medium">01 配對站 & 評價</button>
+      <button onclick="switchSection('materials')" id="nav-materials" class="nav-btn btn-std px-3.5 h-9 rounded-xl text-xs sm:text-sm text-stone-700 hover:bg-stone-200/80 font-medium">02 建材店</button>
+      <button onclick="switchSection('hardware')" id="nav-hardware" class="nav-btn btn-std px-3.5 h-9 rounded-xl text-xs sm:text-sm text-stone-700 hover:bg-stone-200/80 font-medium">03 五金店 (地圖)</button>
+    </nav>
+
+    <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+      <button onclick="openMemberModal()" class="btn-std bg-stone-100 hover:bg-stone-200 text-slate-900 border border-stone-300 font-bold text-xs px-2.5 sm:px-3 h-9 sm:h-10 rounded-xl">
+        <span>👤</span>
+        <span id="header-member-label">會員登入 / 互評</span>
+      </button>
+      <button onclick="jumpToRepairForm()" class="hidden md:inline-flex btn-std bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs px-3 h-9 sm:h-10 rounded-xl shadow-xs">
+        <span>🙋‍♂️</span>
+        <span>免費搵師傅</span>
+      </button>
+      <button onclick="toggleCart(true)" class="btn-std bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-2.5 sm:px-3.5 h-9 sm:h-10 rounded-xl shadow-xs">
+        <span>🛒</span>
+        <span class="hidden sm:inline">揀貨清單</span>
+        <span id="cart-count" class="bg-amber-400 text-slate-950 px-1.5 py-0.5 rounded-full text-[11px] font-black min-w-[20px] text-center">0</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="lg:hidden bg-white border-t border-stone-100 px-3 py-1.5">
+    <div class="grid grid-cols-4 gap-1">
+      <button onclick="switchSection('all')" id="m-nav-all" class="m-nav-btn btn-std tab-active w-full h-9 px-1 rounded-xl text-xs">總覽</button>
+      <button onclick="switchSection('repair')" id="m-nav-repair" class="m-nav-btn btn-std w-full h-9 px-1 rounded-xl text-xs bg-stone-100 text-stone-700 font-medium">配對 & 評價</button>
+      <button onclick="switchSection('materials')" id="m-nav-materials" class="m-nav-btn btn-std w-full h-9 px-1 rounded-xl text-xs bg-stone-100 text-stone-700 font-medium">建材店</button>
+      <button onclick="switchSection('hardware')" id="m-nav-hardware" class="m-nav-btn btn-std w-full h-9 px-1 rounded-xl text-xs bg-stone-100 text-stone-700 font-medium">五金地圖</button>
+    </div>
+  </div>
+</header>
+
+<section class="max-w-7xl mx-auto px-3 sm:px-6 pt-4 pb-4">
+  <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-stone-900 rounded-3xl overflow-hidden shadow-xl border border-stone-700">
+    <div class="grid lg:grid-cols-12 items-stretch">
+      <div class="lg:col-span-7 p-4 sm:p-7 text-white flex flex-col justify-between gap-5">
+        <div class="space-y-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <div id="hero-badge" class="inline-flex items-center gap-2 bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs font-bold px-3 py-1 rounded-full">
+              <span>✨ 業主 $0 搵師傅 · 家電標準安裝公價 · 十八區五金直發</span>
+            </div>
+            <button id="hero-reset-btn" onclick="switchSection('all')" class="hidden btn-std text-xs bg-white/10 hover:bg-white/20 text-stone-200 px-3 py-1 rounded-full border border-white/15">
+              <span>↩ 返回全部總覽</span>
+            </button>
+          </div>
+          <h1 id="hero-title" class="text-xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-tight min-h-[56px] sm:min-h-[76px]">
+            屋企小工程維修、<br/><span class="text-amber-400">防甩底派單大廳、建材五金直銷</span>
+          </h1>
+          <p id="hero-desc" class="text-stone-300 text-xs sm:text-sm leading-relaxed min-h-[40px]">
+            業主漏水跳掣免費發單；<strong class="text-amber-400">嚴格師傅誠信分防甩底＋雙向星級互評</strong>；建材店及家電安裝公價透明；地盤買料支援 Google Maps 導航直達！
+          </p>
+        </div>
+
+        <div class="space-y-2">
+          <div class="flex items-center justify-between text-xs text-stone-400 px-1">
+            <span>👇 點擊切換三大專區（零延遲秒切）：</span>
+            <span id="hero-current-indicator" class="text-amber-400 font-bold">目前顯示：全部總覽</span>
+          </div>
+          <div class="grid grid-cols-3 gap-2 sm:gap-3">
+            <button type="button" id="hero-card-repair" onclick="switchSection('repair')" class="hero-card-btn text-left bg-white/10 hover:bg-white/15 border border-white/15 rounded-2xl p-2.5 sm:p-3 h-[96px] sm:h-[104px]">
+              <div class="w-full">
+                <div class="text-amber-400 font-black text-[10px] uppercase tracking-wider mb-0.5 truncate">01 · 配對站</div>
+                <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">搵師傅 & 星級互評</div>
+              </div>
+              <p class="text-[10px] text-stone-300 mt-1 line-clamp-1">防甩底保障 · $0配對</p>
+            </button>
+
+            <button type="button" id="hero-card-materials" onclick="switchSection('materials')" class="hero-card-btn text-left bg-white/10 hover:bg-white/15 border border-white/15 rounded-2xl p-2.5 sm:p-3 h-[96px] sm:h-[104px]">
+              <div class="w-full">
+                <div class="text-emerald-400 font-black text-[10px] uppercase tracking-wider mb-0.5 truncate">02 · 業主買料</div>
+                <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">建材店 · 家電公價</div>
+              </div>
+              <p class="text-[10px] text-stone-300 mt-1 line-clamp-1">明碼實價淨料直銷</p>
+            </button>
+
+            <button type="button" id="hero-card-hardware" onclick="switchSection('hardware')" class="hero-card-btn text-left bg-white/10 hover:bg-white/15 border border-white/15 rounded-2xl p-2.5 sm:p-3 h-[96px] sm:h-[104px]">
+              <div class="w-full">
+                <div class="text-sky-400 font-black text-[10px] uppercase tracking-wider mb-0.5 truncate">03 · 地盤補貨</div>
+                <div class="font-bold text-xs sm:text-sm text-white line-clamp-1">五金店 · 十八區</div>
+              </div>
+              <p class="text-[10px] text-stone-300 mt-1 line-clamp-1">Google Map 導航直發</p>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 relative h-[220px] sm:h-[280px] lg:h-auto lg:min-h-[340px] bg-slate-950 overflow-hidden shrink-0">
+        <img id="hero-img-all" src="https://light-timber-vivid-swift.grok.me/brand/team.jpg?v=opt" onerror="this.onerror=null; this.src='https://placehold.co/800x600/1e293b/fbbf24?text=香港裝修師傅大本營';" alt="總覽主視覺" class="hero-layer opacity-100" decoding="async" />
+        <img id="hero-img-repair" src="https://marble-breeze-bird-berry.grok.me/camp/hero.jpg" onerror="this.onerror=null; this.src='https://placehold.co/800x600/1e293b/fbbf24?text=配對站';" alt="配對站主視覺" class="hero-layer opacity-0 pointer-events-none" decoding="async" />
+        <img id="hero-img-materials" src="https://light-timber-vivid-swift.grok.me/brand/hero.jpg?v=shop2" onerror="this.onerror=null; this.src='https://placehold.co/800x600/064e3b/34d399?text=建材店';" alt="建材店主視覺" class="hero-layer opacity-0 pointer-events-none" decoding="async" />
+        <img id="hero-img-hardware" src="https://daisy-spruce-silver-yellow.grok.me/camp/warehouse-banner-13.jpg" onerror="this.onerror=null; this.src='https://placehold.co/800x600/0c4a6e/38bdf8?text=五金店';" alt="五金店主視覺" class="hero-layer opacity-0 pointer-events-none" decoding="async" />
+
+        <div class="absolute bottom-3 right-3 left-3 sm:left-auto bg-slate-950/85 backdrop-blur-md border border-white/20 text-white px-3.5 py-2 rounded-xl flex items-center justify-between gap-2 shadow-lg z-10">
+          <span id="hero-img-caption" class="text-xs font-bold text-amber-300 truncate">📍 大本營三合一總站 · 獅子山師傅團隊</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-3 sm:px-6 pb-2">
+  <div class="bg-white border border-stone-200 rounded-2xl p-3 sm:p-4 shadow-2xs grid grid-cols-1 md:grid-cols-3 gap-2.5 text-xs">
+    <div onclick="switchSection('repair')" class="cursor-pointer flex items-center gap-3 p-2 rounded-xl hover:bg-amber-50 transition">
+      <span class="w-8 h-8 rounded-xl bg-amber-400 text-slate-950 font-black flex items-center justify-center shrink-0">1</span>
+      <div>
+        <div class="font-black text-slate-900">我是業主：想搵師傅維修 / 給星級評價</div>
+        <div class="text-stone-500 text-[11px]">免費發單 ➔ 認證師傅接單 ➔ 完工驗收雙向打星</div>
+      </div>
+    </div>
+    <div onclick="switchSection('materials')" class="cursor-pointer flex items-center gap-3 p-2 rounded-xl hover:bg-emerald-50 transition">
+      <span class="w-8 h-8 rounded-xl bg-emerald-500 text-white font-black flex items-center justify-center shrink-0">2</span>
+      <div>
+        <div class="font-black text-slate-900">我是業主：買建材與查看家電安裝公價表</div>
+        <div class="text-stone-500 text-[11px]">查看抽油煙機/煮食爐標準安裝費 ➔ 一鍵預約</div>
+      </div>
+    </div>
+    <div onclick="switchSection('hardware')" class="cursor-pointer flex items-center gap-3 p-2 rounded-xl hover:bg-sky-50 transition">
+      <span class="w-8 h-8 rounded-xl bg-sky-500 text-white font-black flex items-center justify-center shrink-0">3</span>
+      <div>
+        <div class="font-black text-slate-900">我是師傅 / 五金舖：地盤執貨 & 接單</div>
+        <div class="text-stone-500 text-[11px]">Google Maps 搵最近五金舖直發地盤 · 大廳搶單</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="section-repair" class="max-w-7xl mx-auto px-3 sm:px-6 py-5 space-y-6">
+  <div class="bg-amber-50 border-2 border-amber-300 rounded-3xl p-4 sm:p-7 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-5 shadow-xs">
+    <div class="space-y-2 max-w-2xl">
+      <div class="inline-flex items-center gap-2 bg-amber-400 text-slate-950 font-black text-xs px-3 py-1 rounded-full">
+        01 配對站｜業主 $0 搵師傅 · 淘寶式完工驗收與星級互評
+      </div>
+      <h2 class="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900">小工程由我來做 · 誠信防甩底保障</h2>
+      <p class="text-stone-700 text-xs sm:text-sm leading-relaxed">
+        漏水、跳掣、冷氣唔凍、門較鬆、窗邊滲水——講清楚屋企邊度有問題，大本營免費為你指派高分認證師傅。<strong>設 100 分誠信防甩底機制，完工後業主與師傅雙向打星互評！</strong>
+      </p>
+    </div>
+    <div class="grid grid-cols-3 gap-2 w-full lg:w-[360px] shrink-0">
+      <div class="bg-white p-3 rounded-2xl border border-amber-200 flex flex-col items-center justify-center text-center shadow-2xs">
+        <div class="text-xl sm:text-2xl font-black text-slate-900 leading-none">18</div>
+        <div class="text-[11px] font-bold text-stone-500 mt-1">個專業工種</div>
+      </div>
+      <div class="bg-white p-3 rounded-2xl border border-amber-200 flex flex-col items-center justify-center text-center shadow-2xs">
+        <div class="text-xl sm:text-2xl font-black text-slate-900 leading-none">九龍新界港島</div>
+        <div class="text-[11px] font-bold text-stone-500 mt-1">全港十八區網絡</div>
+      </div>
+      <div class="bg-white p-3 rounded-2xl border border-amber-200 flex flex-col items-center justify-center text-center shadow-2xs">
+        <div class="text-xl sm:text-2xl font-black text-emerald-600 leading-none">99.4%</div>
+        <div class="text-[11px] font-bold text-stone-500 mt-1">準時不甩底率</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white border-2 border-stone-200 rounded-3xl p-4 sm:p-6 shadow-xs space-y-4">
+    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-stone-100 pb-3">
+      <div>
+        <span class="text-xs font-black text-amber-600 uppercase">🛡️ 參考淘寶履約流程 · 杜絕師傅「甩底 / 坐地起價」</span>
+        <h3 class="text-base sm:text-lg font-black text-slate-900 mt-0.5">大本營 4 步工作指派與雙向星級互評機制</h3>
+      </div>
+      <button onclick="openMemberModal('reviews')" class="btn-std bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs px-3.5 h-9 rounded-xl">
+        <span>⭐ 進入完工驗收 & 雙向打星互評台</span>
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+      <div class="bg-stone-50 border border-stone-200 rounded-2xl p-3.5 space-y-1.5">
+        <div class="flex items-center justify-between">
+          <span class="bg-slate-900 text-amber-400 font-black px-2.5 py-0.5 rounded-full text-[11px]">Step 1 · 智能指派/搶單</span>
+          <span class="text-base">📋</span>
+        </div>
+        <div class="font-black text-slate-900 text-sm">可揀「系統指派」或「師傅搶單」</div>
+        <p class="text-stone-600 leading-relaxed">業主發單時可選「優先指派 4.8 星以上誠信師傅」或公開讓當區師傅即時報價。</p>
+      </div>
+
+      <div class="bg-stone-50 border border-stone-200 rounded-2xl p-3.5 space-y-1.5">
+        <div class="flex items-center justify-between">
+          <span class="bg-emerald-600 text-white font-black px-2.5 py-0.5 rounded-full text-[11px]">Step 2 · 防甩底雙重鎖定</span>
+          <span class="text-base">⏱️</span>
+        </div>
+        <div class="font-black text-slate-900 text-sm">15分鐘確認 ＋ 後備師傅頂上</div>
+        <p class="text-stone-600 leading-relaxed">師傅接單後須 15 分鐘內聯絡業主約期。如無故遲到或甩底，即扣誠信分並<strong>於 1 小時內指派後備師傅頂上</strong>！</p>
+      </div>
+
+      <div class="bg-stone-50 border border-stone-200 rounded-2xl p-3.5 space-y-1.5">
+        <div class="flex items-center justify-between">
+          <span class="bg-sky-600 text-white font-black px-2.5 py-0.5 rounded-full text-[11px]">Step 3 · 淘寶式完工驗收</span>
+          <span class="text-base">🛠️</span>
+        </div>
+        <div class="font-black text-slate-900 text-sm">業主滿意先撳「確認完工」</div>
+        <p class="text-stone-600 leading-relaxed">師傅上門維修完成後，業主檢查無妥，於網站輸入單號或登入會員撳<strong>「確認驗收完工」</strong>自動閉環。</p>
+      </div>
+
+      <div class="bg-stone-50 border border-stone-200 rounded-2xl p-3.5 space-y-1.5">
+        <div class="flex items-center justify-between">
+          <span class="bg-amber-400 text-slate-950 font-black px-2.5 py-0.5 rounded-full text-[11px]">Step 4 · 雙向 5 星互評</span>
+          <span class="text-base">🌟</span>
+        </div>
+        <div class="font-black text-slate-900 text-sm">業主評師傅 · 師傅評業主</div>
+        <p class="text-stone-600 leading-relaxed">雙方互打 1 至 5 粒星及評語！高星師傅獲優先派單權，形成良性口碑生態。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+    <div class="lg:col-span-7 bg-white p-4 sm:p-6 rounded-3xl border border-stone-200 shadow-xs flex flex-col justify-between space-y-5">
+      <div class="space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h3 class="text-base sm:text-lg font-black text-slate-900">1. 撳一下揀維修工種（連透明公價參考）</h3>
+            <p class="text-xs text-stone-500 mt-0.5">點擊自動填入右方表格，杜絕坐地起價</p>
+          </div>
+          <span class="text-xs font-bold text-amber-800 bg-amber-100 border border-amber-300 px-2.5 py-1 rounded-full shrink-0">公價參考透明</span>
+        </div>
+        <div id="repair-trades-grid" class="grid grid-cols-1 sm:grid-cols-3 gap-2.5"></div>
+      </div>
+
+      <div class="pt-4 border-t border-stone-200 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-black text-slate-900">🏆 大本營高星級「零甩底」認證師傅榜（可指定派單）</span>
+          <span class="text-[11px] text-emerald-700 font-bold">實名認證 · 真實完工互評</span>
+        </div>
+        <div id="top-masters-showcase" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5"></div>
+      </div>
+    </div>
+
+    <div id="repair-form-box" class="lg:col-span-5 bg-slate-900 text-white p-4 sm:p-6 rounded-3xl shadow-xl border border-slate-700 flex flex-col justify-between space-y-4">
+      <div class="space-y-3.5">
+        <div class="flex items-center justify-between border-b border-slate-700 pb-3 gap-2">
+          <div>
+            <span class="text-amber-400 text-[11px] font-black uppercase">免費配對 & 防甩底指派</span>
+            <h3 class="text-base sm:text-lg font-black mt-0.5">2. 填寫維修資料</h3>
+          </div>
+          <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-bold px-2.5 py-1 rounded-full shrink-0">配對費 $0</span>
+        </div>
+
+        <form onsubmit="submitRepairTicket(event)" class="space-y-3 text-xs sm:text-sm">
+          <div>
+            <label class="block text-xs font-bold text-stone-300 mb-1">已揀工種 *</label>
+            <input type="text" id="repair-trade-input" value="家居小型維修（門較, 門鎖, 層板, 掛畫）｜ 公價參考 $350 起" required class="w-full h-10 bg-slate-800 border border-slate-600 rounded-xl px-3 text-amber-300 font-bold focus:outline-none focus:border-amber-400" />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div>
+              <label class="block text-xs font-bold text-stone-300 mb-1">所屬地區 *</label>
+              <select id="repair-district" required class="w-full h-10 bg-slate-800 border border-slate-600 rounded-xl px-2.5 text-white focus:outline-none focus:border-amber-400">
+                <option value="九龍 - 觀塘/將軍澳">九龍 - 觀塘 / 將軍澳</option>
+                <option value="九龍 - 啟德/九龍灣/黃大仙">九龍 - 啟德 / 九龍灣 / 黃大仙</option>
+                <option value="九龍 - 旺角/油尖旺/深水埗">九龍 - 旺角 / 油尖旺 / 深水埗</option>
+                <option value="港島 - 中西區/灣仔/銅鑼灣">港島 - 中西區 / 灣仔 / 銅鑼灣</option>
+                <option value="港島 - 東區/太古/柴灣">港島 - 東區 / 太古 / 柴灣</option>
+                <option value="新界 - 荃灣/葵青/青衣">新界 - 荃灣 / 葵青 / 青衣</option>
+                <option value="新界 - 沙田/大圍/馬鞍山">新界 - 沙田 / 大圍 / 馬鞍山</option>
+                <option value="新界 - 大埔/粉嶺/上水">新界 - 大埔 / 粉嶺 / 上水</option>
+                <option value="新界 - 屯門/元朗/天水圍">新界 - 屯門 / 元朗 / 天水圍</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-stone-300 mb-1">屋苑 / 大廈名稱 *</label>
+              <input type="text" id="repair-estate" placeholder="例：太古城 / 淘大花園" required class="w-full h-10 bg-slate-800 border border-slate-600 rounded-xl px-3 text-white placeholder-stone-500 focus:outline-none focus:border-amber-400" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-stone-300 mb-1">指派機制與防甩底保障 *</label>
+            <select id="repair-assign-mode" class="w-full h-10 bg-slate-800 border border-amber-400/50 rounded-xl px-2.5 text-amber-300 font-bold focus:outline-none">
+              <option value="系統優先指派 4.8★ 以上零甩底師傅（含後備師傅保障）">🛡️ 系統優先指派 4.8★ 以上零甩底師傅（推薦）</option>
+              <option value="大廳公開搶單（最快 5 分鐘內多位師傅報價）">⚡ 大廳公開搶單（最快 5 分鐘內師傅聯絡）</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-stone-300 mb-1">屋企邊度有問題？ *</label>
+            <textarea id="repair-desc" rows="2" placeholder="例：廚房水龍頭滴水，想換過個新龍頭，希望星期六上午上門..." required class="w-full bg-slate-800 border border-slate-600 rounded-xl p-3 text-white placeholder-stone-500 focus:outline-none focus:border-amber-400"></textarea>
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-stone-300">📷 上傳現場相片（師傅睇相報價更準確，隨單預覽）</label>
+            <div class="flex items-center gap-2">
+              <label class="btn-std bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-600 text-xs px-3 h-9 rounded-xl cursor-pointer">
+                <span>📁 揀相 / 拍照</span>
+                <input type="file" id="repair-photo-input" accept="image/*" multiple onchange="handlePhotoUpload(event)" class="hidden" />
+              </label>
+              <span id="photo-upload-status" class="text-[11px] text-stone-400 truncate">未選擇任何相片</span>
+            </div>
+            <div id="photo-preview-container" class="flex flex-wrap gap-2 pt-1"></div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+            <div>
+              <label class="block text-xs font-bold text-stone-300 mb-1">業主稱呼 *</label>
+              <input type="text" id="repair-name" placeholder="例：陳生 / 李太" required class="w-full h-10 bg-slate-800 border border-slate-600 rounded-xl px-3 text-white placeholder-stone-500 focus:outline-none focus:border-amber-400" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-stone-300 mb-1">WhatsApp / 電話 *</label>
+              <input type="tel" id="repair-phone" placeholder="例：9123 4567" required class="w-full h-10 bg-slate-800 border border-slate-600 rounded-xl px-3 text-white placeholder-stone-500 focus:outline-none focus:border-amber-400" />
+            </div>
+          </div>
+
+          <button type="submit" class="btn-std w-full h-11 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl shadow-md text-xs sm:text-sm">
+            <span>🚀</span>
+            <span>即時提交並啟動防甩底派單 ($0)</span>
+          </button>
+        </form>
+      </div>
+
+      <div id="repair-ticket-result" class="hidden bg-emerald-950/90 border border-emerald-500 rounded-2xl p-4 space-y-2 text-xs">
+        <div class="flex items-center justify-between gap-2">
+          <span class="font-black text-emerald-300">✅ 已派單並開啟防甩底履約保護！</span>
+          <span id="ticket-code" class="bg-emerald-400 text-slate-950 font-black px-2 py-0.5 rounded-md shrink-0"></span>
+        </div>
+        <p id="ticket-summary" class="text-emerald-100 leading-relaxed"></p>
+        <div class="pt-2 border-t border-emerald-800 flex flex-col gap-2">
+          <button type="button" onclick="sendRepairTicketWhatsApp()" class="btn-std w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-2.5 rounded-xl text-xs">
+            💬 一鍵 WhatsApp 發送單號及相片給大本營派單台 *(開啟 WhatsApp 後可隨手貼上剛才上傳嘅相)*
+          </button>
+          <button type="button" onclick="openMemberModal('reviews')" class="btn-std w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black py-2 rounded-xl text-xs">
+            ⭐ 完工後點此進行「驗收及雙向星級互評」
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white border-2 border-stone-200 rounded-3xl p-4 sm:p-6 shadow-xs space-y-4">
+    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-stone-200 pb-3">
+      <div>
+        <div class="inline-flex items-center gap-1.5 bg-amber-100 text-amber-900 font-black text-xs px-2.5 py-0.5 rounded-full">
+          🌟 淘寶式雙向星級互評系統（業主 ⇄ 師傅）
+        </div>
+        <h3 class="text-base sm:text-xl font-black text-slate-900 mt-1">最新完工真實互評牆 · 誠信透明不甩底</h3>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <button onclick="openMemberModal('reviews')" class="btn-std h-9 px-3.5 bg-slate-900 hover:bg-slate-800 text-amber-400 font-black rounded-xl text-xs">
+          ✍️ 我要評價 / 確認完工驗收
+        </button>
+      </div>
+    </div>
+    <div id="mutual-reviews-wall" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+  </div>
+
+  <div id="master-job-board-anchor" class="bg-slate-900 text-white border-2 border-amber-400 rounded-3xl p-4 sm:p-7 shadow-xl space-y-5">
+    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5 border-b border-stone-800 pb-5">
+      <div class="space-y-2 max-w-2xl">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 font-black text-xs px-3 py-1 rounded-full">
+            ⚡ 師傅即時接單大廳 (Live Job Board)
+          </span>
+          <span class="inline-flex items-center gap-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 font-bold text-xs px-2.5 py-1 rounded-full">
+            🛡️ 接單須遵守 15 分鐘響應及防甩底公約
+          </span>
+        </div>
+        <h3 class="text-lg sm:text-2xl font-black text-white">十八區最新維修單 · 師傅即時睇相、接單與防甩底後備機制</h3>
+        <p class="text-stone-300 text-xs sm:text-sm leading-relaxed">
+          已認證師傅登入後即可解鎖業主電話並點擊「立即接單鎖定」。如遇原師傅失聯，可一鍵舉報並觸發後備換人！
+        </p>
+      </div>
+
+      <div class="bg-slate-800/90 border border-slate-700 p-4 rounded-2xl space-y-2.5 shrink-0 w-full lg:w-[400px]">
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-xs font-black text-amber-400 uppercase">👨‍🔧 師傅快捷驗證 / 工作台</span>
+          <span id="master-auth-badge" class="text-[10px] bg-stone-700 text-stone-300 px-2.5 py-0.5 rounded-full font-bold">未登入</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-1.5 bg-slate-900 border border-slate-700 rounded-xl p-1.5 items-center">
+          <input type="tel" id="master-login-phone" value="91238888" placeholder="師傅電話 (91238888)" class="sm:col-span-5 h-9 bg-transparent border-b sm:border-b-0 sm:border-r border-slate-700 px-2 text-white text-xs font-mono focus:outline-none" />
+          <input type="password" id="master-login-pin" value="8888" placeholder="密碼 (8888)" class="sm:col-span-3 h-9 bg-transparent px-2 text-amber-300 text-xs font-mono focus:outline-none" />
+          <button type="button" onclick="masterLoginAction()" class="sm:col-span-4 btn-std h-9 px-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-lg text-xs shrink-0">
+            🔓 驗證登入
+          </button>
+        </div>
+        <div class="grid grid-cols-3 gap-1.5 pt-0.5">
+          <button type="button" onclick="openMasterDashboard()" class="btn-std w-full h-9 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">
+            🛠️ 師傅工作台
+          </button>
+          <button type="button" onclick="openMasterRegModal()" class="btn-std w-full h-9 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs">
+            👷‍♂️ 免費入駐
+          </button>
+          <button type="button" onclick="openAdminMasterModal()" class="btn-std w-full h-9 bg-slate-700 hover:bg-slate-600 text-amber-300 font-bold rounded-xl text-xs">
+            🔐 管理員 (<span id="registered-masters-count">0</span>)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h4 class="text-sm sm:text-base font-black text-amber-300">📋 派單大廳實時工作清單（支援防甩底鎖定與現場相片預覽）</h4>
+          <p id="master-job-count" class="text-xs text-stone-400 mt-0.5"></p>
+        </div>
+        <div class="flex items-center gap-2">
+          <select id="master-filter-district" onchange="renderMasterJobs()" class="h-9 bg-slate-800 border border-slate-700 rounded-xl px-3 text-white text-xs font-medium">
+            <option value="all">全部地區</option>
+            <option value="觀塘">九龍 - 觀塘/將軍澳</option>
+            <option value="旺角">九龍 - 旺角/油尖旺</option>
+            <option value="港島">港島區</option>
+            <option value="新界">新界區</option>
+          </select>
+        </div>
+      </div>
+      <div id="master-jobs-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch"></div>
+    </div>
+  </div>
+</section>
+
+<section id="section-materials" class="max-w-7xl mx-auto px-3 sm:px-6 py-5 space-y-6">
+  <div class="bg-white border-2 border-stone-200 rounded-3xl p-4 sm:p-7 shadow-xs space-y-5">
+    <div class="flex flex-col xl:flex-row xl:items-end justify-between gap-4 border-b border-stone-200 pb-5">
+      <div class="space-y-2 max-w-2xl">
+        <div class="inline-flex items-center gap-2 bg-emerald-100 text-emerald-900 border border-emerald-300 font-black text-xs px-3 py-1 rounded-full">
+          02 建材店｜原廠淨料直銷 ＆ 家電標準安裝公價透明
+        </div>
+        <h2 class="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900">飲水機、抽油煙機、煮食爐、大門電子鎖直銷</h2>
+        <p class="text-stone-600 text-xs sm:text-sm leading-relaxed">
+          標價<strong>只售物料，唔包安裝</strong>。香港代理行貨，原廠保養。買料後如需師傅安裝，可隨時點撃右方<strong>「查看家電標準安裝公價表」</strong>或於商品卡撳「🔧 搵師傅裝」一鍵轉介！
+        </p>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <button onclick="openAppliancePricingModal()" class="btn-std bg-slate-900 hover:bg-slate-800 text-amber-400 font-black text-xs px-4 h-10 rounded-xl shadow-xs">
+          <span>📋 查看「家電標準安裝公價表」</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="materials-filter-bar" class="flex flex-wrap gap-1.5">
+      <button onclick="filterMaterials('all', this)" class="mat-filter btn-std tab-active text-xs font-bold px-3 h-9 rounded-xl">全部 (6款)</button>
+      <button onclick="filterMaterials('飲水機', this)" class="mat-filter btn-std bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-bold px-3 h-9 rounded-xl">飲水機</button>
+      <button onclick="filterMaterials('燈飾', this)" class="mat-filter btn-std bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-bold px-3 h-9 rounded-xl">燈飾</button>
+      <button onclick="filterMaterials('浴室', this)" class="mat-filter btn-std bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-bold px-3 h-9 rounded-xl">龍頭</button>
+      <button onclick="filterMaterials('門鎖', this)" class="mat-filter btn-std bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-bold px-3 h-9 rounded-xl">門鎖</button>
+      <button onclick="filterMaterials('牆漆', this)" class="mat-filter btn-std bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-bold px-3 h-9 rounded-xl">牆漆</button>
+      <button onclick="filterMaterials('防漏', this)" class="mat-filter btn-std bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-bold px-3 h-9 rounded-xl">防漏</button>
+    </div>
+
+    <div id="materials-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2 items-stretch"></div>
+  </div>
+</section>
+
+<section id="section-hardware" class="max-w-7xl mx-auto px-3 sm:px-6 py-5 space-y-6">
+  <div class="bg-stone-900 text-white rounded-3xl overflow-hidden shadow-xl border border-stone-700">
+    <div class="p-4 sm:p-7 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-5 border-b border-stone-700 bg-gradient-to-r from-stone-900 via-stone-900 to-slate-900">
+      <div class="space-y-2 max-w-2xl">
+        <div class="inline-flex items-center gap-2 bg-sky-400 text-slate-950 font-black text-xs px-3 py-1 rounded-full w-fit">
+          03 五金店｜十八區五金舖聯盟（支援手機 Google Maps 定位導航 · 無總倉直發）
+        </div>
+        <h2 class="text-xl sm:text-2xl lg:text-3xl font-black text-white">全行五金，就近五金舖直接送達地盤。</h2>
+        <p class="text-stone-300 text-xs sm:text-sm leading-relaxed">
+          手機與電腦版均內置 <strong>Google Maps 實時地圖與導航功能</strong>！揀選離你地盤最近嘅聯盟五金舖，支援<strong>店舖自家車隊直送</strong>或<strong>街車速遞 (Lalamove)</strong>，落單即發 WhatsApp 到五金店老闆手機！
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2 shrink-0">
+        <button onclick="locateNearestStore()" class="btn-std bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs sm:text-sm px-3.5 h-10 sm:h-11 rounded-xl shadow-md border border-emerald-400/30">
+          <span>📍 GPS 定位最近五金舖</span>
+        </button>
+        <button onclick="openShopOwnerModal()" class="btn-std bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs sm:text-sm px-3.5 h-10 sm:h-11 rounded-xl shadow-md">
+          <span>🏪 五金店老闆管理頁 (帶密碼鎖)</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="p-4 sm:p-7 space-y-6 bg-stone-900">
+      <div class="bg-stone-800/90 border border-stone-700 rounded-2xl p-3.5 sm:p-5 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <span class="text-xs font-black text-sky-400 uppercase">🗺️ 十八區聯盟五金舖雷達 & Google Maps 實時定位（手機/電腦通用）</span>
+            <h3 class="text-sm sm:text-base font-black text-white mt-0.5">點擊下方店舖即可切換五金貨架及更新 Google Maps 地圖位置：</h3>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <span id="gps-status-text" class="text-xs text-emerald-400 font-bold"></span>
+            <button onclick="toggleStorefrontMode()" id="toggle-storefront-btn" class="btn-std h-8 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-300 border border-stone-600 text-xs font-bold">
+              <span>🏪 切換：此五金店獨立專頁櫥窗</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="hardware-stores-bar" class="grid grid-cols-1 md:grid-cols-3 gap-3"></div>
+
+        <div id="google-map-container" class="bg-slate-950 border border-stone-700 rounded-2xl overflow-hidden shadow-lg">
+          <div class="p-3 bg-slate-900 border-b border-stone-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div class="min-w-0">
+              <div class="flex items-center gap-2">
+                <span class="bg-emerald-500 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded">GOOGLE MAPS 實時地圖</span>
+                <span id="gmap-store-name" class="font-black text-xs sm:text-sm text-white truncate">榮發五金建材行 (觀塘店)</span>
+              </div>
+              <p id="gmap-store-address" class="text-[11px] text-stone-400 truncate mt-0.5">📍 觀塘開源道 62 號駱駝漆大廈地下</p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <a id="gmap-external-nav-btn" href="https://www.google.com/maps/search/?api=1&query=%E8%A7%80%E5%A1%98%E9%96%8B%E6%BA%90%E9%81%9362%E8%99%9F%E9%A7%B1%E9%A7%9D%E6%BC%86%E5%A4%A7%E5%BB%88" target="_blank" rel="noopener noreferrer" class="btn-std h-9 px-3 bg-sky-500 hover:bg-sky-400 text-slate-950 font-black rounded-xl text-xs shadow-xs">
+                🧭 手機打開 Google Maps 導航去舖頭
+              </a>
+            </div>
+          </div>
+          <div class="w-full h-[220px] sm:h-[260px] bg-slate-900 relative">
+            <iframe 
+              id="gmap-iframe"
+              title="十八區五金舖 Google Map"
+              src="https://maps.google.com/maps?q=%E9%A6%99%E6%B8%AF%E8%A7%80%E5%A1%98%E9%96%8B%E6%BA%90%E9%81%9362%E8%99%9F%E9%A7%B1%E9%A7%9D%E6%BC%86%E5%A4%A7%E5%BB%88&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              class="w-full h-full border-0"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+
+        <div id="storefront-banner-box" class="hidden bg-gradient-to-r from-slate-900 to-stone-900 border-2 border-amber-400 rounded-2xl p-4 space-y-2">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="space-y-1">
+              <div class="inline-flex items-center gap-2 bg-amber-400 text-slate-950 text-[11px] font-black px-2.5 py-0.5 rounded-full">
+                🏪 獨立五金店專屬櫥窗模式
+              </div>
+              <h4 id="sf-store-title" class="text-base sm:text-lg font-black text-white"></h4>
+              <p id="sf-store-meta" class="text-xs text-stone-300"></p>
+            </div>
+            <button onclick="copyStoreLink()" class="btn-std h-9 px-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs shrink-0">
+              🔗 複製此五金店專屬連結發俾熟客
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-slate-950 border border-stone-700 rounded-2xl p-4 space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-black px-2.5 py-1 rounded-full">📦 師傅五金訂單實時狀態追蹤</span>
+            <span class="text-xs text-stone-400">（5段式進度：已下單 ➔ 執貨中 ➔ 打包好 ➔ 運送中 ➔ 師傅已收貨）</span>
+          </div>
+          <button onclick="openShopOwnerModal('orders')" class="btn-std text-xs bg-stone-800 hover:bg-stone-700 text-amber-300 border border-stone-600 px-3 h-8 rounded-lg font-bold">
+            🔧 模擬五金店老闆更新進度
+          </button>
+        </div>
+        <div id="hardware-orders-tracker" class="space-y-3"></div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h3 class="text-base sm:text-lg font-black text-amber-400">按工種揀五金貨架（圓形無白邊高清圖標）</h3>
+          <p class="text-xs text-stone-400 mt-0.5">價錢與庫存由上方所選五金店老闆實時發布</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <input 
+            type="search" 
+            id="hardware-search-input" 
+            oninput="renderHardwareProducts(currentHardwareFilter)" 
+            placeholder="🔍 地盤極速搜尋（例：波曲、13A、螺絲）..." 
+            class="h-9 w-56 sm:w-64 bg-stone-800 border border-stone-600 focus:border-amber-400 rounded-xl px-3 text-xs text-white placeholder-stone-400 focus:outline-none"
+          />
+          <button onclick="filterHardware('all')" class="btn-std text-xs bg-stone-800 hover:bg-stone-700 border border-stone-600 text-amber-300 font-bold px-3 h-9 rounded-xl shrink-0">
+            <span>🔄 顯示全部</span>
+          </button>
+        </div>
+      </div>
+      <div id="hardware-trades-bar" class="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3 items-stretch"></div>
+
+      <div class="pt-2 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h3 id="hardware-shelf-title" class="text-base sm:text-lg font-black text-white">🔥 師傅常叫五金零件</h3>
+            <p id="hardware-filter-status" class="text-xs text-stone-400 mt-0.5">目前顯示：全部熱賣五金零件</p>
+          </div>
+        </div>
+        <div id="hardware-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-slate-950 text-stone-400 py-10 px-4 sm:px-6 lg:px-8 mt-10 border-t border-stone-800">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-xs sm:text-sm">
+    <div class="space-y-2">
+      <p class="text-white font-black text-base">香港裝修師傅大本營｜三合一總站</p>
+      <p>可靠師傅 · 防甩底履約保障 · 淘寶式雙向星級互評 · 家電標準安裝公價</p>
+    </div>
+    <div class="space-y-2">
+      <p class="text-white font-bold">會員與防甩底保障機制</p>
+      <p>業主與師傅免費註冊 · 完工驗收後雙向 1-5 星互評 · 師傅無故甩底即扣分並安排後備師傅頂上</p>
+    </div>
+    <div class="space-y-2">
+      <p class="text-white font-bold">快速入口與管理後台</p>
+      <div class="flex flex-wrap gap-2">
+        <button onclick="openMemberModal()" class="btn-std bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-lg text-xs font-black">👤 會員登入 & 互評中心</button>
+        <button onclick="openMasterDashboard()" class="btn-std bg-amber-500 hover:bg-amber-400 text-slate-950 px-3 py-1.5 rounded-lg text-xs font-black">🛠️ 師傅工作台</button>
+        <button onclick="openShopOwnerModal()" class="btn-std bg-amber-400 hover:bg-amber-300 text-slate-950 px-3 py-1.5 rounded-lg text-xs font-black">🏪 五金店老闆管理頁</button>
+        <button onclick="openAdminMasterModal()" class="btn-std bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold">🔐 管理員後台</button>
+        <button onclick="resetDemoData()" class="btn-std bg-stone-900 hover:bg-red-950 text-stone-400 hover:text-red-300 border border-stone-800 px-3 py-1.5 rounded-lg text-xs font-medium">🔄 重置示範數據</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="fixed bottom-20 lg:bottom-6 right-4 sm:right-6 z-40 flex items-center gap-3">
+  <a 
+    href="https://wa.me/85260000000?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E8%A9%A2%E5%95%8F%E9%97%9C%E6%96%BC%E9%A6%99%E6%B8%AF%E8%A3%9D%E4%BF%AE%E5%B8%AB%E5%82%85%E5%A4%A7%E6%9C%AC%E7%87%9F%E7%9A%84%E6%9C%8D%E5%8B%99..." 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    aria-label="WhatsApp 快速客服"
+    class="wa-pulse btn-std w-13 h-13 sm:w-14 sm:h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-2xl flex items-center justify-center"
+  >
+    <svg class="w-7 h-7 sm:w-8 sm:h-8 fill-current" viewBox="0 0 24 24">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+    </svg>
+  </a>
+</div>
+
+<div class="lg:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-stone-200 px-2.5 py-2 grid grid-cols-4 gap-1.5 shadow-lg">
+  <button onclick="jumpToRepairForm()" class="btn-std bg-amber-400 text-slate-950 font-black text-[11px] h-10 rounded-xl px-1">
+    <span>🙋‍♂️ 搵師傅</span>
+  </button>
+  <button onclick="jumpToGoogleMap()" class="btn-std bg-sky-500 text-slate-950 font-black text-[11px] h-10 rounded-xl px-1">
+    <span>🗺️ 五金地圖</span>
+  </button>
+  <button onclick="openMemberModal('reviews')" class="btn-std bg-stone-100 border border-stone-300 text-slate-900 font-bold text-[11px] h-10 rounded-xl px-1">
+    <span>⭐ 會員/互評</span>
+  </button>
+  <button onclick="toggleCart(true)" class="btn-std bg-slate-900 text-white font-bold text-[11px] h-10 rounded-xl px-1">
+    <span>🛒 清單</span>
+    <span id="mobile-cart-count" class="bg-amber-400 text-slate-950 px-1.5 py-0.2 rounded-full text-[10px] font-black">0</span>
+  </button>
+</div>
+
+<div id="master-dashboard-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+  <div onclick="closeMasterDashboard()" class="fixed inset-0 bg-black/75 backdrop-blur-xs"></div>
+  <div class="relative bg-slate-900 text-white rounded-3xl max-w-4xl w-full p-4 sm:p-7 shadow-2xl border-2 border-amber-400 z-10 space-y-4 my-8 max-h-[92vh] flex flex-col">
+    <div class="flex items-center justify-between border-b border-slate-700 pb-3 gap-2 shrink-0">
+      <div>
+        <span class="bg-amber-400 text-slate-950 text-[11px] font-black px-2.5 py-0.5 rounded-full">師傅專屬個人工作台</span>
+        <h3 class="text-base sm:text-xl font-black text-white mt-1">🛠️ 師傅檔案管理 · 已接工作清單 · 誠信分與真實評價</h3>
+      </div>
+      <button type="button" onclick="closeMasterDashboard()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">✕</button>
+    </div>
+
+    <div id="master-dash-gate" class="py-8 px-4 text-center space-y-4 bg-slate-800/80 rounded-2xl border border-slate-700">
+      <div class="text-3xl">👷‍♂️🔒</div>
+      <div class="space-y-1">
+        <h4 class="font-black text-base text-white">請輸入師傅電話號碼及登入密碼進入工作台</h4>
+        <p class="text-xs text-stone-400">示範師傅電話：<span class="text-amber-300 font-mono font-bold">91238888</span> ｜ 預設密碼：<span class="text-amber-300 font-mono font-bold">8888</span> (張志強師傅)</p>
+      </div>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-2 max-w-md mx-auto">
+        <input type="tel" id="dash-pin-phone" value="91238888" placeholder="師傅電話號碼" class="w-full sm:flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm focus:outline-none focus:border-amber-400" />
+        <input type="password" id="dash-pin-code" value="8888" placeholder="登入密碼 (預設 8888)" class="w-full sm:w-36 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-amber-300 font-mono text-sm focus:outline-none focus:border-amber-400" />
+        <button type="button" onclick="verifyMasterDashboardPhone()" class="w-full sm:w-auto btn-std h-10 px-5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">
+          進入工作台
+        </button>
+      </div>
+      <div class="pt-1">
+        <button type="button" onclick="toggleMasterResetBox()" class="text-xs text-amber-300 hover:text-amber-200 underline font-bold">
+          🔑 唔記得密碼？點此自助驗證重設密碼
+        </button>
+      </div>
+
+      <div id="master-reset-box" class="hidden max-w-md mx-auto mt-3 p-4 bg-slate-900 border border-amber-400/50 rounded-2xl text-left space-y-3 text-xs">
+        <div class="font-black text-amber-400">🔄 師傅自助重設登入密碼</div>
+        <p class="text-stone-400 text-[11px] leading-relaxed">請輸入你登記時嘅<strong>手提電話</strong>及<strong>師傅稱呼關鍵字</strong>（例如：張志強 或 強哥），核對無誤即可即時設定新密碼：</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <input type="tel" id="reset-master-phone" value="91238888" placeholder="登記電話 (例: 91238888)" class="h-9 bg-slate-800 border border-slate-600 rounded-xl px-3 text-white font-mono" />
+          <input type="text" id="reset-master-name" value="強哥" placeholder="登記稱呼 (例: 強哥)" class="h-9 bg-slate-800 border border-slate-600 rounded-xl px-3 text-white" />
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="password" id="reset-master-newpin" placeholder="輸入新密碼 (最少4位)" class="flex-1 h-9 bg-slate-800 border border-slate-600 rounded-xl px-3 text-amber-300 font-mono" />
+          <button type="button" onclick="submitMasterPasswordReset()" class="btn-std h-9 px-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-xl text-xs">
+            確認重設
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="master-dash-content" class="hidden flex-1 overflow-y-auto space-y-5 pr-1 text-xs">
+      <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-2">
+            <span class="bg-amber-400 text-slate-950 font-black px-2.5 py-0.5 rounded text-xs" id="dash-master-id">MST-8001</span>
+            <h4 class="font-black text-sm text-white" id="dash-master-greeting">張志強師傅的工作台</h4>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="bg-emerald-500/20 text-emerald-300 font-bold px-3 py-1 rounded-full text-xs" id="dash-credit-score">🛡️ 誠信分：100 / 100分</span>
+            <span class="bg-amber-400/20 text-amber-300 font-bold px-3 py-1 rounded-full text-xs" id="dash-star-score">⭐ 評分：4.9★</span>
+            <button type="button" onclick="logoutMasterDashboard()" class="btn-std h-7 px-2.5 bg-slate-700 hover:bg-slate-600 text-stone-200 rounded-lg text-[11px] font-bold">
+              🔒 切換師傅 / 登出
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-2">
+          <div>
+            <label class="block text-stone-300 font-bold mb-1">師傅稱呼 *</label>
+            <input type="text" id="dash-edit-name" class="w-full h-9 bg-slate-900 border border-slate-600 rounded-xl px-3 text-white font-bold" />
+          </div>
+          <div>
+            <label class="block text-stone-300 font-bold mb-1">WhatsApp 電話 *</label>
+            <input type="tel" id="dash-edit-phone" class="w-full h-9 bg-slate-900 border border-slate-600 rounded-xl px-3 text-emerald-400 font-mono font-bold" />
+          </div>
+          <div>
+            <label class="block text-stone-300 font-bold mb-1">專屬登入密碼 *</label>
+            <input type="text" id="dash-edit-pin" class="w-full h-9 bg-slate-900 border border-slate-600 rounded-xl px-3 text-amber-300 font-mono font-bold" />
+          </div>
+          <div>
+            <label class="block text-stone-300 font-bold mb-1">主力接單地區 *</label>
+            <input type="text" id="dash-edit-district" class="w-full h-9 bg-slate-900 border border-slate-600 rounded-xl px-3 text-white" />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-stone-300 font-bold mb-1">專長工種與牌照說明</label>
+            <input type="text" id="dash-edit-cert" class="w-full h-9 bg-slate-900 border border-slate-600 rounded-xl px-3 text-white" />
+          </div>
+          <div class="flex items-end">
+            <button type="button" onclick="saveMasterDashboardProfile()" class="btn-std w-full h-9 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-xl text-xs">
+              💾 儲存個人檔案修改
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
+        <h4 class="font-black text-sm text-amber-400">📋 我已接單 / 鎖定中嘅維修工作清單</h4>
+        <div id="dash-my-jobs-list" class="space-y-2.5"></div>
+      </div>
+
+      <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
+        <h4 class="font-black text-sm text-amber-400">⭐ 業主給我的真實完工星級評價</h4>
+        <div id="dash-my-reviews-list" class="space-y-2.5"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="appliance-pricing-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+  <div onclick="closeAppliancePricingModal()" class="fixed inset-0 bg-black/75 backdrop-blur-xs"></div>
+  <div class="relative bg-white text-slate-900 rounded-3xl max-w-2xl w-full p-5 sm:p-7 shadow-2xl border-2 border-amber-400 z-10 space-y-4 my-8 max-h-[90vh] flex flex-col">
+    <div class="flex items-center justify-between border-b border-stone-200 pb-3 gap-2 shrink-0">
+      <div>
+        <span class="bg-amber-100 text-amber-900 text-[11px] font-black px-2.5 py-0.5 rounded-full border border-amber-300">大本營明碼實價公價表</span>
+        <h3 class="text-base sm:text-xl font-black text-slate-900 mt-1">📋 香港家庭大型電器標準安裝及附加收費參考</h3>
+      </div>
+      <button type="button" onclick="closeAppliancePricingModal()" class="btn-std text-stone-400 hover:text-slate-900 font-bold w-8 h-8 rounded-lg bg-stone-100">✕</button>
+    </div>
+    
+    <div class="flex-1 overflow-y-auto space-y-4 pr-1 text-xs sm:text-sm">
+      <p class="text-stone-600 leading-relaxed text-xs">
+        為保障業主與師傅權益，大本營統一制訂以下家電標準安裝公價。買料後如需師傅上門安裝，可直接參照此透明標準，拒絕「海鮮價」！
+      </p>
+
+      <div class="space-y-2">
+        <h4 class="font-black text-xs text-amber-800 uppercase tracking-wide bg-amber-50 p-2 rounded-xl">一、 廚房大型電器標準安裝公價</h4>
+        <div id="pricing-list-kitchen" class="space-y-1.5"></div>
+      </div>
+
+      <div class="space-y-2 pt-2">
+        <h4 class="font-black text-xs text-stone-800 uppercase tracking-wide bg-stone-100 p-2 rounded-xl">二、 常見附加／改位收費標準</h4>
+        <div id="pricing-list-extra" class="space-y-1.5"></div>
+      </div>
+    </div>
+
+    <div class="pt-3 border-t border-stone-200 shrink-0">
+      <button onclick="closeAppliancePricingModal(); jumpToRepairForm();" class="btn-std w-full h-11 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs sm:text-sm shadow-sm">
+        <span>🔧 立即免費發單預約師傅上門安裝</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="member-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+  <div onclick="closeMemberModal()" class="fixed inset-0 bg-black/75 backdrop-blur-xs"></div>
+  <div class="relative bg-slate-900 text-white rounded-3xl max-w-4xl w-full p-4 sm:p-7 shadow-2xl border-2 border-amber-400 z-10 space-y-4 my-8 max-h-[92vh] flex flex-col">
+    <div class="flex items-center justify-between border-b border-slate-700 pb-3 gap-2 shrink-0">
+      <div>
+        <span class="bg-amber-400 text-slate-950 text-[11px] font-black px-2.5 py-0.5 rounded-full">免填姓名 · 電話即查即評</span>
+        <h3 class="text-base sm:text-xl font-black text-white mt-1">👤 大本營會員中心 · 維修單追蹤 & 雙向星級互評</h3>
+      </div>
+      <button type="button" onclick="closeMemberModal()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">✕</button>
+    </div>
+
+    <!-- 頂部當前會員身份狀態列 -->
+    <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-3 flex flex-wrap items-center justify-between gap-2 shrink-0 text-xs">
+      <div class="flex items-center gap-2.5">
+        <span id="mem-current-avatar" class="w-8 h-8 rounded-xl bg-amber-400 text-slate-950 font-black flex items-center justify-center text-sm">🏠</span>
+        <div>
+          <div class="flex items-center gap-2">
+            <span id="mem-current-badge" class="font-black text-white text-xs sm:text-sm">業主免密碼快速查單模式</span>
+            <span id="mem-current-role-tag" class="bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-[10px] font-bold px-2 py-0.5 rounded-full">已自動載入你的維修單</span>
+          </div>
+          <p id="mem-current-sub" class="text-[11px] text-stone-400">只需輸入電話號碼，系統自動識別你嘅維修單與稱呼，無需重複填名！</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <button type="button" onclick="switchMemberTab('login')" class="btn-std h-8 px-3 bg-slate-700 hover:bg-slate-600 text-amber-300 rounded-xl text-xs font-bold">
+          🔄 切換電話 / 師傅登入
+        </button>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-1.5 bg-slate-800 p-1.5 rounded-2xl border border-slate-700 shrink-0">
+      <button type="button" id="mem-tab-login" onclick="switchMemberTab('login')" class="btn-std flex-1 h-9 px-3 rounded-xl text-xs font-black bg-amber-400 text-slate-950">
+        1. 📋 我的維修單追蹤 & 電話切換
+      </button>
+      <button type="button" id="mem-tab-reviews" onclick="switchMemberTab('reviews')" class="btn-std flex-1 h-9 px-3 rounded-xl text-xs font-bold text-stone-300">
+        2. ⭐ 一鍵完工驗收 & 雙向打星
+      </button>
+      <button type="button" id="mem-tab-anti" onclick="switchMemberTab('anti')" class="btn-std flex-1 h-9 px-3 rounded-xl text-xs font-bold text-stone-300">
+        3. 🛡️ 防師傅甩底保障細則
+      </button>
+    </div>
+
+    <!-- 分頁 1：電話極速登入 ＋ 我的維修單實時追蹤台 -->
+    <div id="mem-panel-login" class="flex-1 overflow-y-auto space-y-4 pr-1 text-xs">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+        <!-- 業主極速查單（免填名稱、免密碼） -->
+        <div class="bg-slate-800/90 border border-amber-400/40 rounded-2xl p-4 space-y-3 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="inline-flex items-center gap-1 bg-amber-400/20 text-amber-300 font-bold px-2.5 py-0.5 rounded-full text-[11px]">
+                🏠 業主極速查單（免填名 · 免密碼）
+              </span>
+              <span class="text-[11px] text-stone-400">自動配對發單記錄</span>
+            </div>
+            <h4 class="font-black text-sm text-white">輸入發單手提電話，即睇維修進度 & 驗收</h4>
+            <div>
+              <label class="block text-stone-300 font-bold mb-1">業主 WhatsApp / 手提電話</label>
+              <div class="flex gap-2">
+                <input type="tel" id="mem-owner-phone" value="9123 8392" placeholder="輸入電話 (例：9123 8392)" class="flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-emerald-400 font-mono font-bold text-sm focus:outline-none focus:border-amber-400" />
+                <button type="button" onclick="loginAsMember('owner')" class="btn-std px-4 h-10 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs shrink-0">
+                  🔍 查單 / 驗收
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="pt-2 border-t border-slate-700/80 flex flex-wrap items-center gap-1.5">
+            <span class="text-[11px] text-stone-400">一鍵測試示範業主：</span>
+            <button type="button" onclick="quickFillMemberOwner('9123 8392')" class="btn-std h-6 px-2 bg-slate-900 hover:bg-slate-700 text-amber-300 border border-slate-600 rounded-lg text-[10px] font-mono">9123 8392 (淘大陳生)</button>
+            <button type="button" onclick="quickFillMemberOwner('6888 4120')" class="btn-std h-6 px-2 bg-slate-900 hover:bg-slate-700 text-amber-300 border border-slate-600 rounded-lg text-[10px] font-mono">6888 4120 (第一城李太)</button>
+          </div>
+        </div>
+
+        <!-- 師傅極速驗證（免填名稱，自動讀取師傅名冊） -->
+        <div class="bg-slate-800/90 border border-emerald-500/40 rounded-2xl p-4 space-y-3 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="inline-flex items-center gap-1 bg-emerald-400/20 text-emerald-300 font-bold px-2.5 py-0.5 rounded-full text-[11px]">
+                👷‍♂️ 師傅驗證登入（免填名稱）
+              </span>
+              <span class="text-[11px] text-stone-400">自動載入師傅檔案</span>
+            </div>
+            <h4 class="font-black text-sm text-white">輸入師傅電話及密碼（解鎖大廳 & 互評業主）</h4>
+            <div class="grid grid-cols-12 gap-2">
+              <div class="col-span-5">
+                <label class="block text-stone-300 font-bold mb-1">師傅電話</label>
+                <input type="tel" id="mem-master-phone" value="91238888" placeholder="91238888" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-2.5 text-emerald-400 font-mono font-bold text-xs focus:outline-none focus:border-emerald-400" />
+              </div>
+              <div class="col-span-3">
+                <label class="block text-stone-300 font-bold mb-1">密碼</label>
+                <input type="password" id="mem-master-pin" value="8888" placeholder="8888" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-2.5 text-amber-300 font-mono font-bold text-xs focus:outline-none focus:border-emerald-400" />
+              </div>
+              <div class="col-span-4 flex items-end">
+                <button type="button" onclick="loginAsMember('master')" class="btn-std w-full h-10 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-xl text-xs">
+                  🔓 師傅登入
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="pt-2 border-t border-slate-700/80 flex flex-wrap items-center justify-between gap-1.5">
+            <div class="flex flex-wrap items-center gap-1">
+              <span class="text-[11px] text-stone-400">示範師傅：</span>
+              <button type="button" onclick="quickFillMemberMaster('91238888', '8888')" class="btn-std h-6 px-2 bg-slate-900 hover:bg-slate-700 text-emerald-300 border border-slate-600 rounded-lg text-[10px]">強哥(91238888)</button>
+              <button type="button" onclick="quickFillMemberMaster('98761234', '8888')" class="btn-std h-6 px-2 bg-slate-900 hover:bg-slate-700 text-emerald-300 border border-slate-600 rounded-lg text-[10px]">明哥(98761234)</button>
+            </div>
+            <button type="button" onclick="closeMemberModal(); openMasterDashboard();" class="text-[11px] text-amber-300 hover:underline font-bold">🛠️ 進入師傅工作台 ➔</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 實時維修單進度與一鍵驗收中心 -->
+      <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-700 pb-2.5">
+          <div>
+            <h4 id="mem-orders-title" class="font-black text-sm text-amber-400">📋 我的維修單進度追蹤 & 一鍵完工驗收</h4>
+            <p class="text-[11px] text-stone-400">撳「✅ 確認完工並打星」即可一鍵自動帶入單號及師傅名字進行評價，免手動輸入！</p>
+          </div>
+          <button type="button" onclick="closeMemberModal(); jumpToRepairForm();" class="btn-std h-8 px-3 bg-amber-400/20 hover:bg-amber-400/30 text-amber-300 border border-amber-400/40 rounded-xl text-xs font-bold">
+            ＋ 發起新維修單
+          </button>
+        </div>
+        <div id="mem-my-orders-list" class="space-y-2.5"></div>
+      </div>
+    </div>
+
+    <!-- 分頁 2：一鍵完工驗收 & 雙向打星互評（自動連動單號與對象） -->
+    <div id="mem-panel-reviews" class="hidden flex-1 overflow-y-auto space-y-4 pr-1 text-xs">
+      <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h4 class="font-black text-sm text-amber-400">🌟 提交完工驗收 & 雙向星級評價（自動配對單號及對象）</h4>
+            <p class="text-stone-300 text-[11px]">揀選維修單後，系統會自動鎖定對應嘅師傅或業主，撳星＋揀標籤即可 3 秒完成驗收！</p>
+          </div>
+        </div>
+
+        <form onsubmit="submitMutualReview(event)" class="space-y-3">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <div>
+              <label class="block text-stone-300 font-bold mb-1">1. 你的評價身份</label>
+              <select id="rev-role" onchange="handleReviewRoleOrJobChange()" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-2.5 text-amber-300 font-bold">
+                <option value="業主評師傅">🏠 我係業主 ➔ 驗收及評價師傅</option>
+                <option value="師傅評業主">👷‍♂️ 我係師傅 ➔ 完工互評業主</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-stone-300 font-bold mb-1">2. 點選要驗收嘅維修單</label>
+              <select id="rev-job-id" onchange="handleReviewRoleOrJobChange()" class="w-full h-10 bg-slate-900 border border-amber-400/60 rounded-xl px-2.5 text-white font-bold"></select>
+            </div>
+            <div>
+              <label class="block text-stone-300 font-bold mb-1">3. 自動對應評價對象</label>
+              <input type="text" id="rev-target-name" readonly class="w-full h-10 bg-slate-950 border border-slate-700 rounded-xl px-3 text-emerald-400 font-black cursor-not-allowed" value="張志強師傅 (強哥)" />
+            </div>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-700 rounded-xl p-3 flex flex-wrap items-center justify-between gap-3">
+            <div class="space-y-0.5">
+              <div class="font-bold text-white">點擊給予星級評分（1 至 5 粒星）：</div>
+              <div id="star-rating-desc" class="text-[11px] text-amber-300 font-bold">目前選擇：5 粒星（極力推薦 · 準時唔甩底！）</div>
+            </div>
+            <div class="flex items-center gap-1.5" id="star-selector-bar">
+              <button type="button" onclick="setReviewStars(1)" class="star-btn text-2xl leading-none">⭐</button>
+              <button type="button" onclick="setReviewStars(2)" class="star-btn text-2xl leading-none">⭐</button>
+              <button type="button" onclick="setReviewStars(3)" class="star-btn text-2xl leading-none">⭐</button>
+              <button type="button" onclick="setReviewStars(4)" class="star-btn text-2xl leading-none">⭐</button>
+              <button type="button" onclick="setReviewStars(5)" class="star-btn text-2xl leading-none">⭐</button>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="block text-stone-300 font-bold">點選快捷印象標籤（可多選，免打字亦得）：</label>
+            <div id="review-tags-bar" class="flex flex-wrap gap-1.5"></div>
+          </div>
+
+          <div>
+            <label class="block text-stone-300 font-bold mb-1">補充評語（選填，留空會自動根據標籤生成好評）</label>
+            <textarea id="rev-comment" rows="2" placeholder="可留空自動生成評語，或輸入幾句真實體驗幫助更多街坊..." class="w-full bg-slate-900 border border-slate-600 rounded-xl p-2.5 text-white"></textarea>
+          </div>
+
+          <button type="submit" class="btn-std w-full h-11 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-xl text-xs sm:text-sm shadow-md">
+            ✅ 確認完工驗收並發布星級評價
+          </button>
+        </form>
+      </div>
+
+      <!-- 最新互評記錄預覽 -->
+      <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-4 space-y-2.5">
+        <div class="font-black text-xs text-amber-300">💬 近期雙向互評紀錄（實時同步至首頁互評牆）</div>
+        <div id="mem-recent-reviews-mini" class="space-y-2"></div>
+      </div>
+    </div>
+
+    <!-- 分頁 3：防師傅甩底保障細則 -->
+    <div id="mem-panel-anti" class="hidden flex-1 overflow-y-auto space-y-3 pr-1 text-xs">
+      <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-3">
+        <h4 class="font-black text-sm text-amber-400">🛡️ 大本營「防師傅甩底 & 杜絕爛尾」三大鐵律</h4>
+        <div class="space-y-2.5 text-stone-200 leading-relaxed">
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-700">
+            <div class="font-black text-emerald-400">1. 100分誠信分制度與接單鎖定</div>
+            <p class="mt-1">每位入駐師傅初始擁有 100 分誠信分。一旦師傅喺接單大廳撳咗「立即接單」，系統會將該單鎖定，師傅須於 15 分鐘內透過 WhatsApp 與業主確認上門時段。</p>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-700">
+            <div class="font-black text-amber-300">2. 遲到 / 放飛機（甩底）嚴厲扣分與後備師傅頂上</div>
+            <p class="mt-1">若師傅確認約期後無故失聯或甩底，業主可喺第 1 頁「我的維修單」一鍵撳<strong>「🚨 舉報甩底換人」</strong>。核實後師傅每次扣 25 分並凍結接單權限 7 日；同時<strong>大本營派單台會在 1 小時內自動指派同區另一位 4.8★ 以上後備師傅免費頂上</strong>！</p>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-700">
+            <div class="font-black text-sky-300">3. 淘寶式雙向星級互評與排名掛鈎</div>
+            <p class="mt-1">完工後業主與師傅雙向打星（1-5星）。連續獲得 5 星好評的師傅會登上首頁「零甩底認證師傅榜」，享有系統優先指派優質大單的權利！</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="cart-drawer" class="fixed inset-0 z-50 hidden">
+  <div onclick="toggleCart(false)" class="fixed inset-0 bg-black/60 backdrop-blur-xs"></div>
+  <div class="fixed right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl flex flex-col z-10">
+    <div class="p-4 bg-slate-900 text-white space-y-3">
+      <div class="flex items-center justify-between gap-2">
+        <div>
+          <h3 id="cart-drawer-title" class="font-black text-base">🛒 大本營分區獨立清單</h3>
+          <p id="cart-drawer-subtitle" class="text-xs text-stone-400">建材店（業主）與五金店（師傅）分開獨立結帳，清晰唔混亂</p>
+        </div>
+        <button onclick="toggleCart(false)" class="btn-std text-stone-400 hover:text-white text-lg font-bold w-8 h-8 rounded-lg">✕</button>
+      </div>
+
+      <!-- 獨立雙通道切換 Tab -->
+      <div class="grid grid-cols-2 gap-1.5 bg-slate-800 p-1.5 rounded-2xl border border-slate-700">
+        <button type="button" id="cart-tab-materials" onclick="switchCartTab('materials')" class="btn-std h-9 px-2 rounded-xl text-xs font-black bg-emerald-500 text-slate-950">
+          <span>🚿 02 建材店 (業主)</span>
+          <span id="cart-badge-materials" class="bg-slate-950 text-emerald-400 px-1.5 py-0.2 rounded-full text-[10px] font-black">0</span>
+        </button>
+        <button type="button" id="cart-tab-hardware" onclick="switchCartTab('hardware')" class="btn-std h-9 px-2 rounded-xl text-xs font-bold text-stone-300 hover:text-white">
+          <span>🔩 03 五金店 (師傅)</span>
+          <span id="cart-badge-hardware" class="bg-slate-700 text-amber-300 px-1.5 py-0.2 rounded-full text-[10px] font-black">0</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="multi-store-warning" class="hidden bg-amber-50 border-b border-amber-300 px-4 py-3 text-xs text-amber-950 space-y-1.5">
+      <div class="font-black flex items-center gap-1.5 text-amber-900">
+        <span>⚠️ 【十八區聯盟五金 · 跨店運費提示（無中央總倉）】</span>
+      </div>
+      <p class="leading-relaxed text-[11px] text-stone-700">
+        本平台不設中央總倉，你目前揀選咗 <strong id="multi-store-count" class="text-red-600">2</strong> 間唔同五金店嘅貨品。若各自叫街車會產生獨立車費！<br/>
+        💡 <strong>慳運費建議：</strong>可撳下方<strong>「⚡ 一鍵對齊到同一間五金舖」</strong>集中執貨，或落單時備註同老闆夾車順路搭單！
+      </p>
+      <div id="consolidate-buttons" class="flex flex-wrap gap-1.5 pt-1"></div>
+    </div>
+
+    <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-3"></div>
+
+    <div class="p-4 bg-stone-50 border-t border-stone-200 space-y-3 text-xs">
+      <!-- 02 建材店：業主專屬收貨與預約安裝表單 -->
+      <div id="cart-form-materials" class="space-y-2 bg-emerald-50/70 p-3 rounded-2xl border border-emerald-200">
+        <div class="flex items-center justify-between">
+          <span class="font-black text-emerald-950">🏠 業主收貨屋苑資料（02 建材店專用）</span>
+          <span class="text-[11px] text-emerald-700 font-bold">原廠行貨直銷</span>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <input type="text" id="cart-mat-buyer-name" value="陳先生 (業主)" placeholder="業主稱呼" class="h-9 bg-white border border-emerald-300 rounded-xl px-2.5 text-xs font-bold" />
+          <input type="tel" id="cart-mat-buyer-phone" value="9123 8392" placeholder="WhatsApp 電話" class="h-9 bg-white border border-emerald-300 rounded-xl px-2.5 text-xs font-bold" />
+        </div>
+        <input type="text" id="cart-mat-buyer-address" value="觀塘淘大花園 H座 12樓 B室" placeholder="送貨屋苑及單位地址" class="w-full h-9 bg-white border border-emerald-300 rounded-xl px-2.5 text-xs" />
+        <div class="pt-1 space-y-1">
+          <label class="block font-black text-emerald-950">🔧 送貨及上門安裝選項：</label>
+          <select id="cart-mat-install-option" class="w-full h-9 bg-white border border-emerald-300 rounded-xl px-2.5 text-xs font-bold text-slate-900">
+            <option value="只買淨料（原廠代理標準送貨上門）">📦 只買淨料（原廠代理標準送貨上門）</option>
+            <option value="買料 ＋ 順便預約大本營認證師傅上門安裝（參照標準公價）">🛠️ 買料 ＋ 順便預約大本營認證師傅上門安裝（參照標準公價）</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 03 五金店：師傅專屬地盤收貨與物流表單 -->
+      <div id="cart-form-hardware" class="hidden space-y-2 bg-white p-3 rounded-2xl border border-stone-200">
+        <div class="flex items-center justify-between">
+          <span class="font-black text-slate-900">👷‍♂️ 落單師傅 / 收貨地盤資料（03 五金店專用）</span>
+          <span class="text-[11px] text-sky-700 font-bold">直發各五金店老闆</span>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <input type="text" id="cart-buyer-name" value="張師傅 (強哥)" placeholder="師傅稱呼" class="h-9 bg-stone-50 border border-stone-300 rounded-xl px-2.5 text-xs font-bold" />
+          <input type="tel" id="cart-buyer-phone" value="9123 8888" placeholder="聯絡電話" class="h-9 bg-stone-50 border border-stone-300 rounded-xl px-2.5 text-xs font-bold" />
+        </div>
+        <input type="text" id="cart-buyer-address" value="觀塘淘大花園 H座樓下交收" placeholder="送貨地盤詳細地址" class="w-full h-9 bg-stone-50 border border-stone-300 rounded-xl px-2.5 text-xs" />
+        
+        <div class="pt-1 space-y-1.5">
+          <label class="block font-black text-slate-900">🚚 選擇五金舖送貨物流方式與時段：</label>
+          <select id="cart-delivery-method" onchange="updateDeliveryNoteUI()" class="w-full h-9 bg-stone-50 border border-stone-300 rounded-xl px-2.5 text-xs font-bold text-slate-900">
+            <option value="五金店自家車隊直送">🏪 五金店自家車隊直送（如有提供，免街車轉手）</option>
+            <option value="代叫街車速遞 (Lalamove / Gogovan)">🚐 代叫街車速遞 Lalamove / Gogovan（運費到付）</option>
+            <option value="師傅落舖自取">🏃‍♂️ 師傅用 Google Maps 導航落舖自取（免運費）</option>
+          </select>
+          <div id="cart-delivery-schedule-note" class="bg-emerald-50 border border-emerald-200 text-emerald-900 px-3 py-2 rounded-xl text-[11px] leading-relaxed">
+            ⏳ 預計送達時段：下單後約 1.5 - 2 小時內由該五金店自家車隊送抵地盤。
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-1">
+        <span id="cart-total-label" class="font-bold text-stone-600">當前清單小計：</span>
+        <span id="cart-total" class="text-xl font-black text-slate-900">HK$0</span>
+      </div>
+      <button id="cart-checkout-btn" onclick="checkoutOrder()" class="btn-std w-full h-11 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl shadow-md text-xs sm:text-sm">
+        <span>📲 確認落單</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="shop-owner-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+  <div onclick="closeShopOwnerModal()" class="fixed inset-0 bg-black/75 backdrop-blur-xs"></div>
+  <div class="relative bg-slate-900 text-white rounded-3xl max-w-4xl w-full p-4 sm:p-7 shadow-2xl border-2 border-amber-400 z-10 space-y-4 my-8 max-h-[92vh] flex flex-col">
+    <div class="flex items-center justify-between border-b border-slate-700 pb-3 gap-2 shrink-0">
+      <div>
+        <span class="bg-amber-400 text-slate-950 text-[11px] font-black px-2.5 py-0.5 rounded-full">五金店老闆專用後台</span>
+        <h3 class="text-base sm:text-xl font-black text-white mt-1">🏪 五金店老闆管理頁｜店主密碼鎖 · 庫存改價 · 家電安裝公價設定</h3>
+      </div>
+      <button type="button" onclick="closeShopOwnerModal()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">✕</button>
+    </div>
+
+    <div id="owner-pin-gate" class="py-10 px-4 text-center space-y-4 bg-slate-800/80 rounded-2xl border border-slate-700">
+      <div class="text-3xl">🏪🔒</div>
+      <div class="space-y-1">
+        <h4 class="font-black text-base text-white">請輸入五金店老闆專用管理密碼</h4>
+        <p class="text-xs text-stone-400">示範店主密碼：<span class="text-amber-300 font-mono font-bold">6688</span> (測試用)</p>
+      </div>
+      <div class="flex items-center justify-center gap-2 max-w-xs mx-auto">
+        <input type="password" id="owner-pin-input" value="6688" placeholder="輸入密碼" class="flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm focus:outline-none focus:border-amber-400" />
+        <button type="button" onclick="verifyOwnerPin()" class="btn-std h-10 px-4 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">
+          解鎖後台
+        </button>
+      </div>
+    </div>
+
+    <div id="owner-roster-content" class="hidden flex-1 overflow-hidden flex flex-col space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-800 p-3 rounded-2xl border border-slate-700 shrink-0">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-xs font-bold text-amber-300">切換管理店舖：</span>
+          <select id="owner-store-select" onchange="loadOwnerStoreForm()" class="h-9 bg-slate-900 border border-slate-600 rounded-xl px-3 text-xs font-bold text-white"></select>
+          <button type="button" onclick="addNewHardwareStore()" class="btn-std h-8 px-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold">＋ 新增五金店</button>
+        </div>
+        <div class="flex flex-wrap gap-1 bg-slate-900 p-1 rounded-xl border border-slate-700">
+          <button type="button" id="owner-tab-catalog" onclick="switchOwnerTab('catalog')" class="btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950">1. 店舖資料 & 改價</button>
+          <button type="button" id="owner-tab-pricing" onclick="switchOwnerTab('pricing')" class="btn-std h-8 px-3 rounded-lg text-xs font-bold text-stone-300">2. 📋 家電安裝公價設定</button>
+          <button type="button" id="owner-tab-orders" onclick="switchOwnerTab('orders')" class="btn-std h-8 px-3 rounded-lg text-xs font-bold text-stone-300">3. 訂單狀態管理</button>
+        </div>
+      </div>
+
+      <div id="owner-panel-catalog" class="flex-1 overflow-y-auto space-y-4 pr-1 text-xs">
+        <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-4 space-y-3">
+          <h4 class="font-black text-sm text-amber-400">📍 店舖聯絡資料、Google Maps 地址與送貨車隊設定</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-stone-300 font-bold mb-1">五金店名稱 *</label>
+              <input type="text" id="owner-shop-name" class="w-full h-9 bg-slate-900 border border-slate-600 rounded-xl px-3 text-white font-bold" />
+            </div>
+            <div>
+              <label class="block text-stone-300 font-bold mb-1">所屬十八區 *</label>
+              <input type="text" id="owner-shop-district" placeholder="例：九龍 - 觀塘" class="w-full h-9 bg-slate-900 border border-slate-600 rounded-xl px-3 text-white" />
+            </div>
+            <div>
+              <label class="block text-stone-300 font-bold mb-1">老闆接單 WhatsApp 手機 *</label>
+              <input type="tel" id="owner-shop-phone" placeholder="例：91238888" class="w-full h-9 bg-slate-900 border border-slate-600 rounded-xl px-3 text-emerald-400 font-mono font-bold" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-stone-300 font-bold mb-1">詳細門市地址（自動同步至 Google Maps 地圖）</label>
+              <input type="text" id="owner-shop-address" class="w-full h-9 bg-slate-900 border border-slate-600 rounded-xl px-3 text-white" />
+            </div>
+            <div>
+              <label class="block text-stone-300 font-bold mb-1">送貨車隊與時段明細設定</label>
+              <select id="owner-shop-fleet" class="w-full h-9 bg-slate-900 border border-slate-600 rounded-xl px-3 text-amber-300 font-bold">
+                <option value="both">🚚 設有【自家送貨車隊 (1.5小時送到)】＋ 支援代叫街車</option>
+                <option value="van_only">🚐 無自家車隊（只支援代叫 Lalamove / Gogovan 街車或門市自取）</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-4 space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h4 class="font-black text-sm text-amber-400">🔩 剔選本店有售嘅五金貨品及自訂價錢</h4>
+              <p class="text-stone-400 text-[11px]">產品高清圖片由大本營統一設定，店主只需剔選「出售此貨品」並輸入售價即可！</p>
+            </div>
+            <button type="button" onclick="saveOwnerStoreConfig()" class="btn-std h-10 px-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-xl text-xs shadow-md">
+              💾 儲存並即時發布至五金店網頁
+            </button>
+          </div>
+          <div id="owner-catalog-list" class="grid grid-cols-1 md:grid-cols-2 gap-2.5"></div>
+        </div>
+      </div>
+
+      <div id="owner-panel-pricing" class="hidden flex-1 overflow-y-auto space-y-4 pr-1 text-xs">
+        <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-4 space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h4 class="font-black text-sm text-amber-400">📋 編輯全港家電標準安裝與附加收費公價</h4>
+              <p class="text-stone-400 text-[11px]">此處修改之公價會即時同步至全站「家電標準安裝公價表」彈窗中，供所有業主查閱！</p>
+            </div>
+            <button type="button" onclick="saveAppliancePricingConfig()" class="btn-std h-10 px-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-xl text-xs shadow-md">
+              💾 儲存公價設定
+            </button>
+          </div>
+          <div id="owner-pricing-list" class="space-y-2.5"></div>
+        </div>
+      </div>
+
+      <div id="owner-panel-orders" class="hidden flex-1 overflow-y-auto space-y-3 pr-1 text-xs">
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-2">
+          <h4 class="font-black text-sm text-amber-400">📦 更新師傅訂單狀態（師傅端會實時同步顯示）</h4>
+          <p class="text-stone-300 text-[11px]">點擊下方狀態按鈕即可切換：<strong>已下單 ➔ 執貨中 ➔ 打包好 ➔ 運送中</strong>。</p>
+        </div>
+        <div id="owner-orders-list" class="space-y-3"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="custom-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+  <div onclick="closeModal()" class="fixed inset-0 bg-black/60 backdrop-blur-xs"></div>
+  <div class="relative bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-stone-200 z-10 space-y-4">
+    <div class="flex items-center justify-between">
+      <span id="modal-badge" class="bg-amber-400 text-slate-950 text-xs font-black px-3 py-1 rounded-full">系統通知</span>
+      <button onclick="closeModal()" class="btn-std text-stone-400 hover:text-slate-900 font-bold w-8 h-8 rounded-lg">✕</button>
+    </div>
+    <h4 id="modal-title" class="text-lg font-black text-slate-900"></h4>
+    <div id="modal-body" class="text-xs sm:text-sm text-stone-600 space-y-1.5 leading-relaxed whitespace-pre-line"></div>
+    <div id="modal-actions" class="pt-2 space-y-2"></div>
+  </div>
+</div>
+
+<div id="master-reg-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+  <div onclick="closeMasterRegModal()" class="fixed inset-0 bg-black/70 backdrop-blur-xs"></div>
+  <div class="relative bg-slate-900 text-white rounded-3xl max-w-lg w-full p-5 sm:p-7 shadow-2xl border-2 border-amber-400 z-10 space-y-4 my-8">
+    <div class="flex items-center justify-between border-b border-slate-700 pb-3 gap-2">
+      <div>
+        <span class="bg-amber-400 text-slate-950 text-[11px] font-black px-2.5 py-0.5 rounded-full">0 入駐費 · 100分初始誠信分</span>
+        <h3 class="text-lg sm:text-xl font-black text-white mt-1.5">👷‍♂️ 大本營師傅免費入駐登記</h3>
+      </div>
+      <button type="button" onclick="closeMasterRegModal()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">✕</button>
+    </div>
+    <form onsubmit="submitMasterRegistration(event)" class="space-y-3.5 text-xs sm:text-sm">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div>
+          <label class="block text-xs font-bold text-stone-300 mb-1">師傅稱呼 *</label>
+          <input type="text" id="reg-master-name" placeholder="例：張師傅 / 強哥" required class="w-full h-10 bg-slate-800 border border-slate-600 rounded-xl px-3 text-white placeholder-stone-500 focus:outline-none focus:border-amber-400" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-stone-300 mb-1">WhatsApp 手機號碼 *</label>
+          <input type="tel" id="reg-master-phone" placeholder="例：9876 5432" required class="w-full h-10 bg-slate-800 border border-slate-600 rounded-xl px-3 text-white placeholder-stone-500 focus:outline-none focus:border-amber-400" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-stone-300 mb-1">設定登入密碼 *</label>
+          <input type="password" id="reg-master-pin" placeholder="例：8888 (最少4位)" required class="w-full h-10 bg-slate-800 border border-slate-600 rounded-xl px-3 text-amber-300 font-mono placeholder-stone-500 focus:outline-none focus:border-amber-400" />
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-bold text-stone-300 mb-1">主力接單地區 *</label>
+          <select id="reg-master-district" required class="w-full h-10 bg-slate-800 border border-slate-600 rounded-xl px-2.5 text-white focus:outline-none focus:border-amber-400">
+            <option value="全港十八區">全港十八區</option>
+            <option value="九龍區為主（觀塘/旺角等）">九龍區為主（觀塘/旺角等）</option>
+            <option value="新界東為主（沙田/大埔等）">新界東為主（沙田/大埔等）</option>
+            <option value="新界西為主（荃灣/屯門等）">新界西為主（荃灣/屯門等）</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-stone-300 mb-1">年資 / 持牌照</label>
+          <input type="text" id="reg-master-cert" placeholder="例：15年經驗、電工A牌" class="w-full h-10 bg-slate-800 border border-slate-600 rounded-xl px-3 text-white placeholder-stone-500 focus:outline-none focus:border-amber-400" />
+        </div>
+      </div>
+      <label class="flex items-start gap-2 text-xs text-stone-300 bg-slate-800 p-3 rounded-xl border border-slate-700 cursor-pointer">
+        <input type="checkbox" required checked class="mt-0.5 accent-amber-400" />
+        <span>我同意遵守【大本營防甩底公約】：接單後 15 分鐘內聯絡業主確認時間，絕不無故放飛機或坐地起價，並接受完工後雙向星級互評。</span>
+      </label>
+      <button type="submit" class="btn-std w-full h-11 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl shadow-md text-xs sm:text-sm">
+        <span>✅ 立即完成登記並解鎖派單大廳</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<div id="admin-master-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+  <div onclick="closeAdminMasterModal()" class="fixed inset-0 bg-black/75 backdrop-blur-xs"></div>
+  <div class="relative bg-slate-900 text-white rounded-3xl max-w-4xl w-full p-5 sm:p-7 shadow-2xl border-2 border-amber-400 z-10 space-y-4 my-8 max-h-[90vh] flex flex-col">
+    <div class="flex items-center justify-between border-b border-slate-700 pb-3 gap-2 shrink-0">
+      <div>
+        <span class="bg-amber-400 text-slate-950 text-[11px] font-black px-2.5 py-0.5 rounded-full">管理員後台</span>
+        <h3 class="text-lg sm:text-xl font-black text-white mt-1">🔐 大本營管理員後台｜師傅誠信分名冊 ＆ 派單管理</h3>
+      </div>
+      <button type="button" onclick="closeAdminMasterModal()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">✕</button>
+    </div>
+    <div id="admin-pin-gate" class="py-8 px-4 text-center space-y-4 bg-slate-800/70 rounded-2xl border border-slate-700">
+      <div class="text-3xl">🔒</div>
+      <div class="space-y-1">
+        <h4 class="font-black text-base text-white">請輸入大本營管理員密碼</h4>
+        <p class="text-xs text-stone-400">預設管理員密碼：<span class="text-amber-300 font-mono font-bold">8888</span></p>
+      </div>
+      <div class="flex items-center justify-center gap-2 max-w-xs mx-auto">
+        <input type="password" id="admin-pin-input" value="8888" placeholder="輸入密碼" class="flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm focus:outline-none focus:border-amber-400" />
+        <button type="button" onclick="verifyAdminPin()" class="btn-std h-10 px-4 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">
+          解鎖名冊
+        </button>
+      </div>
+    </div>
+    <div id="admin-roster-content" class="hidden flex-1 overflow-hidden flex flex-col space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-800 p-3 rounded-2xl border border-slate-700 shrink-0">
+        <div class="flex flex-wrap bg-slate-900 p-1 rounded-xl border border-slate-700 gap-1">
+          <button type="button" id="admin-tab-masters" onclick="switchAdminTab('masters')" class="btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950">
+            👷‍♂️ 師傅名冊 (<span id="admin-tab-masters-count">0</span>)
+          </button>
+          <button type="button" id="admin-tab-jobs" onclick="switchAdminTab('jobs')" class="btn-std h-8 px-3 rounded-lg text-xs font-bold text-stone-300 hover:text-white">
+            📋 業主派單 (<span id="admin-tab-jobs-count">0</span>)
+          </button>
+        </div>
+        <button type="button" onclick="closeAdminMasterModal(); openMasterRegModal();" class="btn-std h-9 px-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">
+          ＋ 新增師傅
+        </button>
+      </div>
+      <div id="admin-masters-list" class="flex-1 overflow-y-auto space-y-2.5 pr-1"></div>
+      <div id="admin-jobs-list" class="hidden flex-1 overflow-y-auto space-y-2.5 pr-1"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const heroConfig = {
+  all: {
+    layerId: "hero-img-all",
+    logo: "https://light-timber-vivid-swift.grok.me/brand/mark.jpg?v=opt",
+    caption: "📍 大本營三合一總站 · 獅子山師傅團隊",
+    indicator: "目前顯示：全部總覽",
+    badge: "✨ 業主 $0 搵師傅 · 家電標準安裝公價 · 十八區五金直發",
+    title: '屋企小工程維修、<br/><span class="text-amber-400">防甩底派單大廳, 建材明碼安裝公價</span>',
+    desc: '業主漏水跳掣免費發單；<strong class="text-amber-400">嚴格師傅誠信分防甩底＋雙向星級互評</strong>；建材店及家電安裝公價透明；地盤買料支援 Google Maps 導航直達！'
+  },
+  repair: {
+    layerId: "hero-img-repair",
+    logo: "https://marble-breeze-bird-berry.grok.me/camp/logo.jpg",
+    caption: "🏠 配對站 · 18個工種防甩底指派與星級互評",
+    indicator: "目前選中：01 配對站",
+    badge: "🏠 配對站 · 業主 $0 配對費 · 100分誠信防甩底保障",
+    title: '小工程由我來做，<br/><span class="text-amber-400">防甩底工作指派 ＆ 淘寶式雙向打星</span>',
+    desc: '漏水、跳掣、冷氣唔凍、門較鬆——大本營<strong class="text-white">免費指派高分認證師傅</strong>。接單限時確認防甩底，完工後業主與師傅雙向 1-5 星級互評！'
+  },
+  materials: {
+    layerId: "hero-img-materials",
+    logo: "https://light-timber-vivid-swift.grok.me/brand/mark.jpg?v=opt",
+    caption: "🚿 建材店 · 潔具燈飾門鎖淨料直銷 & 家電公價",
+    indicator: "目前選中：02 建材店",
+    badge: "🚿 建材店 · 只售產品明碼實價 · 家電標準安裝公價",
+    title: '飲水機、抽油煙機、<br/><span class="text-emerald-400">大門電子鎖、煮食爐淨料直銷</span>',
+    desc: '全部精選家居主材<strong class="text-white">明碼實價淨料直銷</strong>！內置全港家電標準安裝公價表，買料後一鍵預約師傅上門安裝！'
+  },
+  hardware: {
+    layerId: "hero-img-hardware",
+    logo: "https://daisy-spruce-silver-yellow.grok.me/camp/five.jpg",
+    caption: "🔩 五金店 · 十八區聯盟五金 Google Map 導航直發",
+    indicator: "目前選中：03 五金店",
+    badge: "🔩 五金店 · 手機 Google Maps 定位導航 · 各區五金舖直發",
+    title: '全行五金，直接送到。<br/><span class="text-sky-400">十八區聯盟五金舖極速補貨</span>',
+    desc: '電工、水喉、木工、泥水、油漆到鎖具。內置 <strong class="text-white">Google Maps 實時地圖與導航</strong>，落單直接 WhatsApp 去五金店老闆手機！'
+  }
+};
+
+let currentSection = 'all';
+let lastRepairTicket = null;
+let isMasterLoggedIn = false;
+let currentMasterProfile = null;
+let currentMemberUser = null;
+let uploadedPhotos = [];
+let isAdminUnlocked = false;
+let currentAdminTab = 'masters';
+let currentHardwareFilter = 'all';
+let isStorefrontMode = false;
+let currentReviewStars = 5;
+let selectedReviewTags = ["🔥 準時唔甩底", "👍 手工企理"];
+
+const LOCAL_MASTERS_KEY = 'hk_camp_masters_roster_v9';
+const LOCAL_JOBS_KEY = 'hk_camp_repair_jobs_v9';
+const LOCAL_HW_STORES_KEY = 'hk_camp_hw_stores_v9';
+const LOCAL_HW_ORDERS_KEY = 'hk_camp_hw_orders_v9';
+const LOCAL_REVIEWS_KEY = 'hk_camp_mutual_reviews_v9';
+const LOCAL_PRICING_KEY = 'hk_camp_appliance_pricing_v3';
+
+let appliancePricingData = {
+  kitchen: [
+    { id: "pk-1", name: "抽油煙機（標準換位安裝）", desc: "包基本掛機、接駁 8 呎標準排氣鋁喉", price: "$590 – $890 起" },
+    { id: "pk-2", name: "嵌入式 / 座檯煮食爐（氣體/電磁）", desc: "包原位接駁煤氣喉 / 接駁電源插蘇", price: "$450 – $680 起" },
+    { id: "pk-3", name: "嵌入式焗爐 / 微波爐 / 蒸爐", desc: "包放入現成木櫃開口及接駁電源", price: "$500 – $690 起" },
+    { id: "pk-4", name: "洗衣機 / 乾衣機", desc: "包駁入水喉、去水喉及試機", price: "$450 – $590 起" },
+    { id: "pk-5", name: "電熱水爐 / 氣體熱水爐", desc: "包掛牆安裝、接駁冷熱水銅喉及減壓閥", price: "$590 – $890 起" }
+  ],
+  extra: [
+    { id: "pe-1", name: "拆走舊機（一般電器）", desc: "不含煙導式抽油煙機", price: "$100 / 件" },
+    { id: "pe-2", name: "拆走舊抽油煙機（煙導式）", desc: "需拆排氣喉及封口", price: "$300 / 件" },
+    { id: "pe-3", name: "開木孔 / 擴闊石屎/木板位", desc: "現場特殊尺寸修改", price: "$50 – $300 / 件" },
+    { id: "pe-4", name: "超長排氣鋁喉（每 8 呎）", desc: "超出標準長度額外加長", price: "$100" },
+    { id: "pe-5", name: "唐樓無升降機（人力搬運上樓費）", desc: "無升降機唐樓搬運上樓", price: "$30 – $50 / 每層 / 每件" },
+    { id: "pe-6", name: "偏遠地區附加費（如東涌/馬灣）", desc: "偏遠地區交通補貼", price: "$200 – $400" }
+  ]
+};
+
+let registeredMasters = [
+  { masterId: "MST-8001", name: "張志強師傅 (強哥)", phone: "91238888", pin: "8888", district: "九龍區為主（觀塘/旺角等）", trades: "水喉漏水/潔具、電力跳掣/燈飾", cert: "20年經驗 · 電工A牌 · 水喉匠", stars: 4.9, reviewsCount: 128, onTimeRate: "99.6%", creditScore: 100, timeStr: "皇牌認證師傅" },
+  { masterId: "MST-8002", name: "林國明師傅 (明哥)", phone: "98761234", pin: "8888", district: "新界東為主（沙田/大埔等）", trades: "大門鎖/電子鎖、鋁窗維修/防水", cert: "15年經驗 · 持牌鎖匠及鋁窗檢驗", stars: 4.9, reviewsCount: 94, onTimeRate: "99.1%", creditScore: 100, timeStr: "皇牌認證師傅" }
+];
+
+let liveMasterJobs = [
+  { id: "FIX-8821", trade: "水喉漏水 / 換龍頭", district: "九龍 - 觀塘/將軍澳", estate: "淘大花園 H座", ownerName: "陳先生 (淘大業主)", desc: "廚房單控龍頭底部不斷滲水落櫃桶，想盡快換個新龍頭。", time: "10分鐘前", status: "師傅已接單 (防甩底鎖定：張志強師傅)", assignMode: "系統優先指派 4.8★ 以上零甩底師傅", assignedMaster: "張志強師傅 (強哥)", phone: "9123 8392" },
+  { id: "FIX-8819", trade: "電力跳掣 / 換燈掣", estate: "沙田第一城 23座", district: "新界 - 沙田/大圍/馬鞍山", ownerName: "李太 (第一城業主)", desc: "開冷氣時全屋總掣突然跳掣，試過推唔返上，懷疑短路。", time: "25分鐘前", status: "候選接單", assignMode: "系統優先指派", assignedMaster: "", phone: "6888 4120" }
+];
+
+let mutualReviews = [
+  {
+    id: "REV-301",
+    role: "業主評師傅",
+    reviewer: "陳先生 (淘大花園業主)",
+    target: "張志強師傅 (強哥 · MST-8001)",
+    jobId: "FIX-8790 · 廚房換單控龍頭",
+    stars: 5,
+    tags: ["🔥 準時唔甩底", "👍 手工企理", "💰 明碼實價"],
+    comment: "強哥接單後 5 分鐘就 WhatsApp 我約實今日朝早 10 點，完全準時無甩底！幫我換埋喺建材店買嘅炭灰龍頭，手工好企理，收費公道！",
+    time: "今日 11:40"
+  },
+  {
+    id: "REV-302",
+    role: "師傅評業主",
+    reviewer: "張志強師傅 (強哥)",
+    target: "陳先生 (淘大花園業主)",
+    jobId: "FIX-8790 · 廚房換單控龍頭",
+    stars: 5,
+    tags: ["🤝 溝通清晰", "⚡ 找數爽快", "📷 現場相片準確"],
+    comment: "陳生事先影晒相俾我睇廚櫃底個波曲位，去到現場一裝就合尺碼，完工即刻驗收 FPS 找數，好業主！",
+    time: "今日 11:45"
+  }
+];
+
+const repairTrades = [
+  { name: "家居小型維修", desc: "門較、門鎖、層板、掛畫" },
+  { name: "水喉漏水 / 換龍頭", desc: "廚廁滲水、換波曲、駁喉" },
+  { name: "電力跳掣 / 換燈掣", desc: "加蘇位、換燈飾、查跳掣" },
+  { name: "冷氣唔凍 / 滴水", desc: "洗冷氣、換支架、雪種檢查" },
+  { name: "大門鎖 / 電子鎖", desc: "開鎖位、換電子鎖、豬膽鎖" },
+  { name: "牆身補灰 / 油漆", desc: "裂縫修補、剷底批灰、乳膠漆" },
+  { name: "鋁窗維修 / 防水", desc: "換窗鉸、膠邊、窗邊滲水" },
+  { name: "通渠 / 改渠管", desc: "座廁淤塞、星盆慢水、高壓通渠" },
+  { name: "浴室防漏 / 泥水", desc: "企缸滲水、掃口粉、換地磚" }
+];
+
+const materialsProducts = [
+  { id: "m-ro", cat: "飲水機", name: "廚下式 RO 濾水機", desc: "三樽濾芯加專用龍頭。只售物料，唔包安裝。", price: 2480, unit: "套", img: "https://light-timber-vivid-swift.grok.me/catalog/ro.jpg?v=opt", trade: "水喉漏水 / 換龍頭" },
+  { id: "m-downlight", cat: "燈飾", name: "LED 筒燈（暖白光）", desc: "暖白光 LED 筒燈。只售燈具，唔包更換。", price: 160, unit: "盞", img: "https://light-timber-vivid-swift.grok.me/catalog/downlight.jpg?v=opt", trade: "電力跳掣 / 換燈掣" },
+  { id: "m-faucet", cat: "浴室", name: "炭灰色單控廚房龍頭", desc: "炭灰色單控龍頭。只售龍頭，唔包接駁。", price: 860, unit: "套", img: "https://light-timber-vivid-swift.grok.me/catalog/faucet.jpg?v=opt", trade: "水喉漏水 / 換龍頭" },
+  { id: "m-elock", cat: "門鎖", name: "大門密碼電子門鎖", desc: "密碼電子門鎖。只售鎖，唔包安裝。", price: 1680, unit: "套", img: "https://light-timber-vivid-swift.grok.me/catalog/elock.jpg?v=opt", trade: "大門鎖 / 電子鎖" },
+  { id: "m-latex", cat: "牆漆", name: "室內牆身乳膠漆", desc: "室內牆身乳膠漆。只售油漆，唔包掃油。", price: 480, unit: "桶", img: "https://light-timber-vivid-swift.grok.me/catalog/latex.jpg?v=opt", trade: "牆身補灰 / 油漆" },
+  { id: "m-membrane", cat: "防漏", name: "浴室/露台用防漏膜", desc: "浴室或露台用防漏膜。只售材料，唔包塗層。", price: 880, unit: "份", img: "https://light-timber-vivid-swift.grok.me/catalog/membrane.jpg?v=opt", trade: "浴室防漏 / 泥水" }
+];
+
+const hardwareTrades = [
+  { key: "all", label: "全部五金", sub: "標準圖庫", img: "https://daisy-spruce-silver-yellow.grok.me/camp/five.jpg" },
+  { key: "電工", label: "電工", sub: "蘇位、電線", img: "https://daisy-spruce-silver-yellow.grok.me/camp/elec.jpg" },
+  { key: "水喉", label: "水喉", sub: "波曲、膠喉", img: "https://daisy-spruce-silver-yellow.grok.me/camp/plumb.jpg" },
+  { key: "木工", label: "木工", sub: "螺絲、木釘", img: "https://daisy-spruce-silver-yellow.grok.me/camp/wood.jpg" },
+  { key: "油漆", label: "油漆", sub: "滾筒、油掃", img: "https://daisy-spruce-silver-yellow.grok.me/camp/paint.jpg" },
+  { key: "鋁窗", label: "鋁窗", sub: "滑輪、門鉸", img: "https://daisy-spruce-silver-yellow.grok.me/camp/window.jpg" }
+];
+
+const masterHardwareCatalog = [
+  { id: "h-socket", cat: "電工", sku: "DC-EL-013", name: "英式 13A 單蘇面板", desc: "白色，帶開關，英式三腳標準規格", defaultPrice: 38, unit: "件", img: "https://daisy-spruce-silver-yellow.grok.me/products/electrical.jpg" },
+  { id: "h-socket2", cat: "電工", sku: "DC-EL-026", name: "英式 13A 雙蘇面板 (連開關)", desc: "雙位帶獨立開關，BS 標準安全認證", defaultPrice: 55, unit: "件", img: "https://daisy-spruce-silver-yellow.grok.me/products/electrical.jpg" },
+  { id: "h-wire", cat: "電工", sku: "DC-EL-25W", name: "2.5mm 單支銅芯電線 (紅/黑/綠)", desc: "足米標準銅線，地盤拉線必備", defaultPrice: 375, unit: "圈", img: "https://daisy-spruce-silver-yellow.grok.me/products/electrical.jpg" },
+  { id: "h-valve", cat: "水喉", sku: "DC-PB-012", name: "黃銅球閥 (波曲) 1/2寸", desc: "全通徑防漏設計，耐用蝶柄開關", defaultPrice: 68, unit: "件", img: "https://daisy-spruce-silver-yellow.grok.me/products/plumbing.jpg" },
+  { id: "h-ptfe", cat: "水喉", sku: "DC-PB-TAPE", name: "加厚水喉生料帶 (10卷裝)", desc: "高密度防滲漏四氟帶，駁口必備", defaultPrice: 28, unit: "排", img: "https://daisy-spruce-silver-yellow.grok.me/products/plumbing.jpg" },
+  { id: "h-screw", cat: "木工", sku: "DC-WD-425", name: "不鏽鋼自攻螺絲 4×25", desc: "防銹加硬十字頭，200 粒地盤盒裝", defaultPrice: 32, unit: "盒", img: "https://daisy-spruce-silver-yellow.grok.me/products/fastener.jpg" },
+  { id: "h-hinge", cat: "鋁窗", sku: "DC-WD-H304", name: "304 不鏽鋼緩衝門鉸 (一對)", desc: "液壓靜音緩衝，連全套不鏽鋼螺絲", defaultPrice: 45, unit: "對", img: "https://daisy-spruce-silver-yellow.grok.me/camp/window.jpg" },
+  { id: "h-roller", cat: "油漆", sku: "DC-PT-R9", name: "細緻羊毛滾筒 9 寸", desc: "3 個裝中毛滾筒，上漆均勻唔甩毛", defaultPrice: 42, unit: "組", img: "https://daisy-spruce-silver-yellow.grok.me/products/paint.jpg" }
+];
+
+let hardwareStores = [
+  {
+    id: "store-kt",
+    name: "榮發五金建材行 (觀塘店)",
+    district: "九龍 - 觀塘",
+    address: "香港觀塘開源道62號駱駝漆大廈",
+    lat: 22.3105,
+    lng: 114.2261,
+    phone: "91238888",
+    fleet: "both",
+    distanceKm: 1.1,
+    etaText: "自家車隊最快 1.5 小時 / Lalamove 45 分鐘",
+    items: {
+      "h-socket": { active: true, price: 38 },
+      "h-socket2": { active: true, price: 54 },
+      "h-wire": { active: true, price: 375 },
+      "h-valve": { active: true, price: 68 },
+      "h-ptfe": { active: true, price: 28 },
+      "h-screw": { active: true, price: 32 },
+      "h-hinge": { active: true, price: 45 },
+      "h-roller": { active: true, price: 42 }
+    }
+  },
+  {
+    id: "store-mk",
+    name: "新填地街強記五金 (旺角店)",
+    district: "九龍 - 旺角",
+    address: "香港旺角新填地街388號",
+    lat: 22.3168,
+    lng: 114.1675,
+    phone: "61239999",
+    fleet: "both",
+    distanceKm: 2.8,
+    etaText: "自家車隊最快 1.5 小時 / 門市即取",
+    items: {
+      "h-socket": { active: true, price: 39 },
+      "h-wire": { active: true, price: 370 },
+      "h-valve": { active: true, price: 66 },
+      "h-hinge": { active: true, price: 43 },
+      "h-screw": { active: true, price: 32 }
+    }
+  },
+  {
+    id: "store-tw",
+    name: "順景水電五金倉 (荃灣店)",
+    district: "新界 - 荃灣",
+    address: "香港荃灣沙咀道210號",
+    lat: 22.3698,
+    lng: 114.1145,
+    phone: "98765432",
+    fleet: "van_only",
+    distanceKm: 4.8,
+    etaText: "支援街車速遞 (Lalamove 45-60分鐘)",
+    items: {
+      "h-socket": { active: true, price: 36 },
+      "h-socket2": { active: true, price: 55 },
+      "h-valve": { active: true, price: 65 },
+      "h-ptfe": { active: true, price: 26 },
+      "h-screw": { active: true, price: 30 },
+      "h-roller": { active: true, price: 40 }
+    }
+  }
+];
+
+let selectedHardwareStoreId = "store-kt";
+const ORDER_STEPS = ["已下單", "執貨中", "打包好", "運送中", "師傅已收貨"];
+
+let hardwareOrders = [
+  {
+    orderId: "HW-90218",
+    storeId: "store-kt",
+    storeName: "榮發五金建材行 (觀塘店)",
+    storePhone: "91238888",
+    buyerName: "張師傅 (強哥)",
+    buyerPhone: "9123 8888",
+    address: "觀塘淘大花園 H座樓下交收",
+    deliveryMethod: "五金店自家車隊直送",
+    itemsSummary: "英式 13A 單蘇面板 x4、不鏽鋼自攻螺絲 4×25 x2",
+    total: 216,
+    status: "運送中",
+    time: "15分鐘前"
+  }
+];
+
+let cart = [];
+let activeCartTab = 'hardware';
+
+function loadPersistedData() {
+  try {
+    const savedM = localStorage.getItem(LOCAL_MASTERS_KEY);
+    if (savedM) registeredMasters = JSON.parse(savedM);
+    const savedJ = localStorage.getItem(LOCAL_JOBS_KEY);
+    if (savedJ) liveMasterJobs = JSON.parse(savedJ);
+    const savedS = localStorage.getItem(LOCAL_HW_STORES_KEY);
+    if (savedS) hardwareStores = JSON.parse(savedS);
+    const savedO = localStorage.getItem(LOCAL_HW_ORDERS_KEY);
+    if (savedO) hardwareOrders = JSON.parse(savedO);
+    const savedR = localStorage.getItem(LOCAL_REVIEWS_KEY);
+    if (savedR) mutualReviews = JSON.parse(savedR);
+    const savedP = localStorage.getItem(LOCAL_PRICING_KEY);
+    if (savedP) appliancePricingData = JSON.parse(savedP);
+  } catch (e) { console.warn(e); }
+}
+
+function persistDataLocally() {
+  try {
+    localStorage.setItem(LOCAL_MASTERS_KEY, JSON.stringify(registeredMasters));
+    localStorage.setItem(LOCAL_JOBS_KEY, JSON.stringify(liveMasterJobs));
+    localStorage.setItem(LOCAL_HW_STORES_KEY, JSON.stringify(hardwareStores));
+    localStorage.setItem(LOCAL_HW_ORDERS_KEY, JSON.stringify(hardwareOrders));
+    localStorage.setItem(LOCAL_REVIEWS_KEY, JSON.stringify(mutualReviews));
+    localStorage.setItem(LOCAL_PRICING_KEY, JSON.stringify(appliancePricingData));
+  } catch (e) { console.warn(e); }
+  if (typeof window.syncStateToCloud === 'function') {
+    window.syncStateToCloud();
+  }
+}
+
+function refreshAllViewsFromCloud() {
+  updateMasterCountUI();
+  renderTopMastersShowcase();
+  renderMutualReviewsWall();
+  renderMasterJobs();
+  renderHardwareStoresBar();
+  renderHardwareProducts(currentHardwareFilter);
+  renderHardwareOrdersTracker();
+  if (isAdminUnlocked) {
+    renderAdminMasterList();
+    renderAdminJobsList();
+  }
+  const ownerModal = document.getElementById('shop-owner-modal');
+  if (ownerModal && !ownerModal.classList.contains('hidden')) {
+    populateOwnerStoreSelect();
+    loadOwnerStoreForm();
+    loadOwnerPricingForm();
+    renderOwnerOrdersList();
+  }
+}
+
+function applyHeroVisuals(secKey) {
+  const cfg = heroConfig[secKey] || heroConfig.all;
+  ['all', 'repair', 'materials', 'hardware'].forEach(k => {
+    const layer = document.getElementById('hero-img-' + k);
+    if (layer) {
+      if (k === secKey) {
+        layer.classList.remove('opacity-0', 'pointer-events-none');
+        layer.classList.add('opacity-100');
+      } else {
+        layer.classList.remove('opacity-100');
+        layer.classList.add('opacity-0', 'pointer-events-none');
+      }
+    }
+    const card = document.getElementById('hero-card-' + k);
+    if (card) card.classList.toggle('hero-card-active', k === secKey);
+  });
+
+  const logoImg = document.getElementById('header-brand-logo');
+  const captionEl = document.getElementById('hero-img-caption');
+  const indicatorEl = document.getElementById('hero-current-indicator');
+  const badgeEl = document.getElementById('hero-badge');
+  const titleEl = document.getElementById('hero-title');
+  const descEl = document.getElementById('hero-desc');
+  const resetBtn = document.getElementById('hero-reset-btn');
+
+  if (logoImg && logoImg.src !== cfg.logo) logoImg.src = cfg.logo;
+  if (captionEl) captionEl.textContent = cfg.caption;
+  if (indicatorEl) indicatorEl.textContent = cfg.indicator;
+  if (badgeEl) badgeEl.innerHTML = \`<span>\${cfg.badge}</span>\`;
+  if (titleEl) titleEl.innerHTML = cfg.title;
+  if (descEl) descEl.innerHTML = cfg.desc;
+  if (resetBtn) resetBtn.classList.toggle('hidden', secKey === 'all');
+}
+
+function showModal(title, body, badge = "大本營通知", actionsHtml = '') {
+  document.getElementById('modal-badge').textContent = badge;
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-body').textContent = body;
+  document.getElementById('modal-actions').innerHTML = actionsHtml || \`<button onclick="closeModal()" class="btn-std w-full h-10 bg-slate-900 hover:bg-slate-800 text-amber-400 font-black rounded-xl text-xs sm:text-sm"><span>知道，多謝大本營！</span></button>\`;
+  document.getElementById('custom-modal').classList.remove('hidden');
+}
+
+function closeModal() { document.getElementById('custom-modal').classList.add('hidden'); }
+
+function openAppliancePricingModal() {
+  const modal = document.getElementById('appliance-pricing-modal');
+  if (!modal) return;
+  const kList = document.getElementById('pricing-list-kitchen');
+  const eList = document.getElementById('pricing-list-extra');
+
+  kList.innerHTML = appliancePricingData.kitchen.map((item, idx) => \`
+    <div class="bg-amber-50/60 border border-amber-200/80 rounded-2xl p-3 flex items-center justify-between gap-3">
+      <div>
+        <div class="font-black text-xs sm:text-sm text-slate-900">\${idx + 1}. \${item.name}</div>
+        <div class="text-[11px] text-stone-500 mt-0.5">\${item.desc}</div>
+      </div>
+      <div class="font-mono font-black text-xs sm:text-sm text-amber-800 shrink-0 bg-white px-2.5 py-1 rounded-lg border border-amber-300">
+        \${item.price}
+      </div>
+    </div>
+  \`).join('');
+
+  eList.innerHTML = appliancePricingData.extra.map((item, idx) => \`
+    <div class="bg-stone-50 border border-stone-200 rounded-2xl p-3 flex items-center justify-between gap-3">
+      <div>
+        <div class="font-bold text-xs sm:text-sm text-slate-900">\${idx + 1}. \${item.name}</div>
+        <div class="text-[11px] text-stone-500 mt-0.5">\${item.desc}</div>
+      </div>
+      <div class="font-mono font-bold text-xs sm:text-sm text-slate-900 shrink-0 bg-white px-2.5 py-1 rounded-lg border border-stone-300">
+        \${item.price}
+      </div>
+    </div>
+  \`).join('');
+
+  modal.classList.remove('hidden');
+}
+
+function closeAppliancePricingModal() {
+  document.getElementById('appliance-pricing-modal').classList.add('hidden');
+}
+
+function renderRepairTrades() {
+  const grid = document.getElementById('repair-trades-grid');
+  grid.innerHTML = repairTrades.map(t => \`<button type="button" onclick="selectRepairTrade('\${t.name}（\${t.desc}）')" class="card-equal text-left p-2.5 sm:p-3 rounded-2xl border border-stone-200 hover:border-amber-400 hover:bg-amber-50/70 group min-h-[68px]"><div class="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-amber-800 line-clamp-1">\${t.name}</div><div class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">\${t.desc}</div></button>\`).join('');
+}
+
+function renderTopMastersShowcase() {
+  const el = document.getElementById('top-masters-showcase');
+  if (!el) return;
+  el.innerHTML = registeredMasters.slice(0, 2).map(m => \`<div class="bg-stone-50 border border-stone-200 rounded-2xl p-3 flex flex-col justify-between gap-2">
+    <div class="space-y-1">
+      <div class="flex items-center justify-between gap-1">
+        <span class="font-black text-xs text-slate-900">\${m.name}</span>
+        <span class="bg-amber-400 text-slate-950 font-black text-[10px] px-2 py-0.5 rounded-full">⭐ \${m.stars || '4.9'} (\${m.reviewsCount || 60}評)</span>
+      </div>
+      <div class="text-[11px] text-stone-600 line-clamp-1">\${m.cert}</div>
+      <div class="flex flex-wrap gap-1.5 pt-0.5">
+        <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">準時率 \${m.onTimeRate || '99.5%'}</span>
+        <span class="text-[10px] bg-sky-100 text-sky-800 font-bold px-2 py-0.5 rounded">誠信分 \${m.creditScore || 100}/100</span>
+      </div>
+    </div>
+    <button type="button" onclick="assignSpecificMaster('\${m.name}')" class="btn-std w-full h-8 bg-slate-900 hover:bg-slate-800 text-amber-400 font-bold rounded-xl text-[11px]">
+      👉 指定此師傅優先接單
+    </button>
+  </div>\`).join('');
+}
+
+function assignSpecificMaster(masterName) {
+  const sel = document.getElementById('repair-assign-mode');
+  if (sel) {
+    const optVal = \`指定皇牌師傅：\${masterName}（含後備防甩底保障）\`;
+    let exists = Array.from(sel.options).some(o => o.value === optVal);
+    if (!exists) {
+      const opt = document.createElement('option');
+      opt.value = optVal;
+      opt.textContent = \`🌟 \${optVal}\`;
+      sel.prepend(opt);
+    }
+    sel.value = optVal;
+  }
+  document.getElementById('repair-form-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function renderMutualReviewsWall() {
+  const wall = document.getElementById('mutual-reviews-wall');
+  if (!wall) return;
+  wall.innerHTML = mutualReviews.slice(0, 6).map(r => {
+    const isOwnerReview = r.role === '業主評師傅';
+    const starsStr = '⭐'.repeat(r.stars || 5);
+    const tagsHtml = (r.tags || []).map(t => \`<span class="text-[10px] font-bold px-2 py-0.5 rounded-full \${isOwnerReview ? 'bg-amber-100 text-amber-900' : 'bg-emerald-100 text-emerald-900'}">\${t}</span>\`).join('');
+    return \`<div class="card-equal bg-stone-50 border border-stone-200 rounded-2xl p-4 space-y-2.5">
+      <div class="space-y-1.5">
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-[10px] font-black px-2.5 py-0.5 rounded-full \${isOwnerReview ? 'bg-slate-900 text-amber-400' : 'bg-emerald-700 text-white'}">\${r.role}</span>
+          <span class="text-xs">\${starsStr}</span>
+        </div>
+        <div class="font-black text-xs text-slate-900">\${r.reviewer} <span class="text-stone-400 font-normal">評價</span> \${r.target}</div>
+        <div class="text-[11px] text-stone-500 font-mono">📌 \${r.jobId}</div>
+        <div class="flex flex-wrap gap-1 pt-0.5">\${tagsHtml}</div>
+        <p class="text-xs text-stone-700 leading-relaxed pt-1">「\${r.comment}」</p>
+      </div>
+      <div class="pt-2 border-t border-stone-200/80 flex items-center justify-between text-[11px] text-stone-400">
+        <span>✅ 已完成驗收認證</span>
+        <span>\${r.time}</span>
+      </div>
+    </div>\`;
+  }).join('');
+}
+
+function selectRepairTrade(label) {
+  document.getElementById('repair-trade-input').value = label;
+  document.getElementById('repair-form-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function jumpToRepairForm() {
+  switchSection('repair');
+  setTimeout(() => { document.getElementById('repair-form-box').scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 60);
+}
+
+function jumpToGoogleMap() {
+  switchSection('hardware');
+  setTimeout(() => { document.getElementById('google-map-container').scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 60);
+}
+
+function handlePhotoUpload(e) {
+  const files = e.target.files;
+  const statusEl = document.getElementById('photo-upload-status');
+  const container = document.getElementById('photo-preview-container');
+  if (!files || files.length === 0) return;
+  uploadedPhotos = [];
+  container.innerHTML = '';
+  statusEl.textContent = \`已選擇 \${files.length} 張現場相片\`;
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      const base64Data = evt.target.result;
+      uploadedPhotos.push(base64Data);
+      const div = document.createElement('div');
+      div.className = "relative w-14 h-14 rounded-lg overflow-hidden border border-amber-400 shrink-0 bg-slate-950";
+      div.innerHTML = \`<img src="\${base64Data}" class="w-full h-full object-cover" />\`;
+      container.appendChild(div);
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function renderMasterJobs() {
+  const grid = document.getElementById('master-jobs-grid');
+  const countEl = document.getElementById('master-job-count');
+  const filterDistrict = document.getElementById('master-filter-district').value;
+  let list = liveMasterJobs;
+  if (filterDistrict !== 'all') {
+    list = liveMasterJobs.filter(j => j.district.includes(filterDistrict));
+  }
+  countEl.textContent = \`目前大廳共有 \${list.length} 張維修單\`;
+  if (list.length === 0) {
+    grid.innerHTML = \`<div class="col-span-2 text-center py-10 text-stone-400 text-xs bg-slate-800/50 rounded-2xl">呢個分區暫時未有新維修單！</div>\`;
+    return;
+  }
+  grid.innerHTML = list.map(j => {
+    const cleanPhone = (j.phone || '').replace(' (驗證後解鎖)', '');
+    const maskedPhone = '🔒 師傅驗證或登入後解鎖';
+    const isLocked = j.status && j.status.includes('已接單');
+    const isCompleted = j.status && j.status.includes('已完工');
+
+    let photosHtml = '';
+    if (j.photos && j.photos.length > 0) {
+      const thumbs = j.photos.map(p => \`<img src="\${p}" class="w-12 h-12 object-cover rounded-lg border border-amber-400 shrink-0 cursor-pointer hover:scale-105 transition" onclick="showBigPhoto('\${p}')" />\`).join('');
+      photosHtml = \`<div class="flex items-center gap-2 pt-1 overflow-x-auto"><span class="text-[10px] text-amber-300 font-bold shrink-0">📷 現場相片：</span>\${thumbs}</div>\`;
+    }
+
+    return \`<div class="card-equal bg-slate-800 border \${isCompleted ? 'border-emerald-400 bg-emerald-950/20' : isLocked ? 'border-emerald-500/70' : 'border-slate-700'} rounded-2xl p-4 space-y-3">
+      <div class="space-y-2">
+        <div class="flex flex-wrap items-center justify-between text-xs gap-2">
+          <span class="bg-amber-400/20 text-amber-300 font-bold px-2 py-0.5 rounded">\${j.trade}</span>
+          <span class="text-[11px] font-bold px-2 py-0.5 rounded \${isCompleted ? 'bg-emerald-500 text-slate-950 font-black' : isLocked ? 'bg-emerald-500/20 text-emerald-300' : 'bg-sky-500/20 text-sky-300'}">\${j.status || '候選接單'}</span>
+        </div>
+        <div class="font-bold text-xs sm:text-sm text-white">📍 \${j.district} (\${j.estate}) · <span class="text-stone-400 font-mono text-xs">#\${j.id}</span></div>
+        <div class="text-[11px] text-amber-300/90 font-medium">🛡️ 指派模式：\${j.assignMode || '系統優先指派高分師傅'}</div>
+        <p class="text-xs text-stone-300 leading-relaxed bg-slate-900/60 p-2.5 rounded-xl border border-slate-700/80">\${j.desc}</p>
+        \${photosHtml}
+      </div>
+      <div class="pt-2.5 border-t border-slate-700 flex flex-wrap items-center justify-between gap-2">
+        <div class="text-xs">
+          <span class="text-stone-400 block text-[10px]">業主聯絡電話：</span>
+          <span class="font-mono font-bold text-amber-400 text-xs">\${isMasterLoggedIn ? cleanPhone : maskedPhone}</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-1.5">
+          \${isLocked && !isCompleted ? \`<button onclick="reportMasterDefault('\${j.id}')" class="btn-std h-9 px-2 rounded-xl text-[10px] font-bold bg-red-950/80 hover:bg-red-900 text-red-300 border border-red-500/40">🚨 舉報甩底換後備師傅</button>\` : ''}
+          <button onclick="openReviewForJob('\${j.id}', '\${j.trade}')" class="btn-std h-9 px-2.5 rounded-xl text-[11px] font-bold bg-slate-700 hover:bg-slate-600 text-amber-300">
+            ⭐ 完工互評
+          </button>
+          <button onclick="acceptJob('\${j.id}')" class="btn-std h-9 px-3 rounded-xl text-xs font-black \${isCompleted ? 'bg-emerald-600 text-white cursor-default' : isLocked ? 'bg-emerald-600 text-white' : 'bg-amber-400 hover:bg-amber-300 text-slate-950'}">
+            <span>\${isCompleted ? '✅ 已完工驗收' : isLocked ? '💬 聯絡業主' : '⚡ 立即接單鎖定'}</span>
+          </button>
+        </div>
+      </div>
+    </div>\`;
+  }).join('');
+}
+
+function showBigPhoto(srcUrl) {
+  showModal('📷 現場相片預覽', '以下為業主上傳真實環境相片，師傅睇相報價更準確：', '相片預覽', \`<div class="rounded-2xl overflow-hidden bg-black border border-stone-300"><img src="\${srcUrl}" class="w-full max-h-[60vh] object-contain mx-auto" /></div><button onclick="closeModal()" class="btn-std w-full h-10 bg-slate-900 hover:bg-slate-800 text-amber-400 font-black rounded-xl text-xs mt-2">關閉預覽</button>\`);
+}
+
+function reportMasterDefault(jobId) {
+  const job = liveMasterJobs.find(j => j.id === jobId);
+  if (!job) return;
+  job.status = "🚨 已舉報甩底 ➔ 啟動後備師傅頂上";
+  job.assignedMaster = "";
+  persistDataLocally();
+  renderMasterJobs();
+  renderMemberCenterOrders();
+  showModal('🚨 成功觸發防甩底後備換人機制！', \`單號 #\${jobId} 已完成甩底登記！原師傅已被扣除 25 積分並凍結接單權限。\\n\\n⚡ 大本營派單台已自動啟動【1小時內指派同區另一位 4.8★ 以上後備高分師傅免費頂上】承諾！\`, '防甩底啟動');
+}
+
+function openReviewForJob(jobId, trade) {
+  openMemberModal('reviews', jobId);
+}
+
+function updateMasterCountUI() {
+  const countEl = document.getElementById('registered-masters-count');
+  if (countEl) countEl.textContent = registeredMasters.length;
+  const tabM = document.getElementById('admin-tab-masters-count');
+  if (tabM) tabM.textContent = registeredMasters.length;
+  const tabJ = document.getElementById('admin-tab-jobs-count');
+  if (tabJ) tabJ.textContent = liveMasterJobs.length;
+}
+
+function openMemberModal(defaultTab = 'login', preselectJobId = null) {
+  document.getElementById('member-modal').classList.remove('hidden');
+  if (!currentMemberUser) {
+    // 預設以示範業主電話自動載入，打開即見完整單據，免除手動輸入煩惱
+    const defaultPhone = (document.getElementById('mem-owner-phone')?.value || '9123 8392').trim();
+    setOwnerSessionByPhone(defaultPhone, false);
+  }
+  populateReviewJobSelect(preselectJobId);
+  renderMemberCenterOrders();
+  renderMemberRecentReviewsMini();
+  switchMemberTab(defaultTab);
+  updateReviewTagOptions();
+  setReviewStars(currentReviewStars);
+}
+
+function closeMemberModal() {
+  document.getElementById('member-modal').classList.add('hidden');
+}
+
+function switchMemberTab(tab) {
+  ['login', 'reviews', 'anti'].forEach(k => {
+    const btn = document.getElementById('mem-tab-' + k);
+    const panel = document.getElementById('mem-panel-' + k);
+    if (btn) {
+      btn.className = k === tab
+        ? "btn-std flex-1 h-9 px-3 rounded-xl text-xs font-black bg-amber-400 text-slate-950"
+        : "btn-std flex-1 h-9 px-3 rounded-xl text-xs font-bold text-stone-300";
+    }
+    if (panel) panel.classList.toggle('hidden', k !== tab);
+  });
+  if (tab === 'login') renderMemberCenterOrders();
+  if (tab === 'reviews') {
+    populateReviewJobSelect();
+    renderMemberRecentReviewsMini();
+  }
+}
+
+function setOwnerSessionByPhone(rawPhone, showToast = false) {
+  const clean = (rawPhone || '').replace(/\\s+/g, '');
+  // 從現有維修單自動尋找業主稱呼，完全無需用家填名
+  const matchedJob = liveMasterJobs.find(j => (j.phone || '').replace(/\\s+/g, '') === clean);
+  const autoName = matchedJob && matchedJob.ownerName
+    ? matchedJob.ownerName
+    : (matchedJob && matchedJob.estate ? \`\${matchedJob.estate}業主\` : \`業主會員 (尾號 \${clean.slice(-4) || '8392'})\`);
+
+  currentMemberUser = { role: '業主', name: autoName, phone: rawPhone };
+  document.getElementById('header-member-label').textContent = \`🏠 \${autoName.split(' ')[0]}\`;
+
+  const avatarEl = document.getElementById('mem-current-avatar');
+  const badgeEl = document.getElementById('mem-current-badge');
+  const tagEl = document.getElementById('mem-current-role-tag');
+  const subEl = document.getElementById('mem-current-sub');
+  if (avatarEl) avatarEl.textContent = '🏠';
+  if (badgeEl) badgeEl.textContent = \`當前查單身份：\${autoName} (\${rawPhone})\`;
+  if (tagEl) {
+    tagEl.textContent = '業主會員模式';
+    tagEl.className = 'bg-amber-400/20 text-amber-300 border border-amber-400/30 text-[10px] font-bold px-2 py-0.5 rounded-full';
+  }
+  if (subEl) subEl.textContent = '系統已根據電話號碼自動配對你嘅維修單，無需輸入姓名即可一鍵完工驗收或打星！';
+
+  const revRoleEl = document.getElementById('rev-role');
+  if (revRoleEl) revRoleEl.value = '業主評師傅';
+  renderMemberCenterOrders();
+  populateReviewJobSelect();
+  updateReviewTagOptions();
+}
+
+function quickFillMemberOwner(phoneStr) {
+  const input = document.getElementById('mem-owner-phone');
+  if (input) input.value = phoneStr;
+  setOwnerSessionByPhone(phoneStr, true);
+}
+
+function quickFillMemberMaster(phoneStr, pinStr) {
+  const pInput = document.getElementById('mem-master-phone');
+  const pinInput = document.getElementById('mem-master-pin');
+  if (pInput) pInput.value = phoneStr;
+  if (pinInput) pinInput.value = pinStr;
+  loginAsMember('master');
+}
+
+function loginAsMember(role) {
+  if (role === 'owner') {
+    const phone = document.getElementById('mem-owner-phone').value.trim();
+    if (!phone) {
+      showModal('請輸入電話號碼', '只需輸入你發單時填寫嘅手提電話號碼，即可自動查單及驗收！', '溫馨提示');
+      return;
+    }
+    setOwnerSessionByPhone(phone, true);
+  } else {
+    const phone = document.getElementById('mem-master-phone').value.trim().replace(/\\s+/g, '');
+    const pinInput = (document.getElementById('mem-master-pin')?.value || '8888').trim();
+    const matched = registeredMasters.find(m => (m.phone || '').replace(/\\s+/g, '') === phone);
+    if (!matched) {
+      showModal('找不到此師傅電話', \`系統未找到電話為「\${phone}」嘅師傅記錄。可點擊下方示範師傅按鈕（91238888）測試！\`, '師傅驗證');
+      return;
+    }
+    if ((matched.pin || '8888') !== pinInput) {
+      showModal('師傅登入密碼不正確', '請輸入正確嘅師傅專屬密碼（示範師傅預設密碼為 8888）。', '密碼錯誤');
+      return;
+    }
+    currentMasterProfile = matched;
+    currentMemberUser = { role: '師傅', name: matched.name, phone: matched.phone };
+    isMasterLoggedIn = true;
+    document.getElementById('header-member-label').textContent = \`👷‍♂️ \${matched.name.split(' ')[0]}\`;
+
+    const avatarEl = document.getElementById('mem-current-avatar');
+    const badgeEl = document.getElementById('mem-current-badge');
+    const tagEl = document.getElementById('mem-current-role-tag');
+    const subEl = document.getElementById('mem-current-sub');
+    if (avatarEl) avatarEl.textContent = '👷‍♂️';
+    if (badgeEl) badgeEl.textContent = \`已登入認證師傅：\${matched.name} (\${matched.masterId})\`;
+    if (tagEl) {
+      tagEl.textContent = \`🛡️ 誠信分 \${matched.creditScore || 100}分 · ⭐ \${matched.stars || 4.9}★\`;
+      tagEl.className = 'bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-[10px] font-bold px-2 py-0.5 rounded-full';
+    }
+    if (subEl) subEl.textContent = '已為你解鎖接單大廳所有業主電話！你可喺下方管理已接單據或與業主雙向互評。';
+
+    const badge = document.getElementById('master-auth-badge');
+    if (badge) {
+      badge.textContent = \`已驗證：\${matched.name}\`;
+      badge.className = "text-[10px] bg-emerald-500 text-slate-950 px-2.5 py-0.5 rounded-full font-black";
+    }
+    const revRoleEl = document.getElementById('rev-role');
+    if (revRoleEl) revRoleEl.value = '師傅評業主';
+    renderMasterJobs();
+    renderMemberCenterOrders();
+    populateReviewJobSelect();
+    updateReviewTagOptions();
+  }
+}
+
+function renderMemberCenterOrders() {
+  const listEl = document.getElementById('mem-my-orders-list');
+  const titleEl = document.getElementById('mem-orders-title');
+  if (!listEl) return;
+
+  const isMaster = currentMemberUser && currentMemberUser.role === '師傅';
+  const cleanPhone = currentMemberUser ? (currentMemberUser.phone || '').replace(/\\s+/g, '') : '';
+
+  let myJobs = [];
+  if (isMaster && currentMasterProfile) {
+    const masterShortName = currentMasterProfile.name.split(' ')[0];
+    myJobs = liveMasterJobs.filter(j => (j.assignedMaster && j.assignedMaster.includes(masterShortName)) || (j.status && j.status.includes(masterShortName)));
+    if (titleEl) titleEl.textContent = \`📋 \${currentMasterProfile.name} · 已接單據 & 完工互評列表\`;
+  } else {
+    myJobs = liveMasterJobs.filter(j => (j.phone || '').replace(/\\s+/g, '') === cleanPhone);
+    if (titleEl) titleEl.textContent = \`📋 電話 (\${currentMemberUser?.phone || '全部'}) 關聯維修單進度 & 一鍵驗收\`;
+  }
+
+  // 若該電話暫無專屬單據，貼心顯示大廳最新示範維修單供即時體驗驗收流程
+  let showingFallback = false;
+  if (myJobs.length === 0) {
+    myJobs = liveMasterJobs.slice(0, 3);
+    showingFallback = true;
+  }
+
+  const fallbackNote = showingFallback
+    ? \`<div class="bg-amber-400/10 border border-amber-400/30 text-amber-200 px-3 py-2 rounded-xl text-[11px]">💡 此電話號碼暫未有專屬發單記錄，以下為你展示系統最新維修單，可直接點擊體驗「一鍵完工驗收 & 雙向打星」：</div>\`
+    : '';
+
+  listEl.innerHTML = fallbackNote + myJobs.map(j => {
+    const isCompleted = j.status && j.status.includes('已完工');
+    const isLocked = j.status && j.status.includes('已接單');
+    const masterLabel = j.assignedMaster || '系統指派認證師傅 (張志強師傅)';
+    const ownerLabel = j.ownerName || \`\${j.estate}業主\`;
+
+    const step1 = true;
+    const step2 = isLocked || isCompleted;
+    const step3 = isCompleted;
+
+    return \`<div class="bg-slate-900 border \${isCompleted ? 'border-emerald-500/60' : 'border-slate-700'} rounded-2xl p-3.5 space-y-2.5">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="bg-amber-400 text-slate-950 font-mono font-black text-[11px] px-2 py-0.5 rounded">#\${j.id}</span>
+          <span class="font-black text-white text-xs sm:text-sm">\${j.trade}</span>
+          <span class="text-[11px] text-stone-400">📍 \${j.district} (\${j.estate})</span>
+        </div>
+        <span class="text-[11px] font-black px-2.5 py-0.5 rounded-full \${isCompleted ? 'bg-emerald-500 text-slate-950' : isLocked ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-sky-500/20 text-sky-300'}">\${j.status || '候選接單'}</span>
+      </div>
+
+      <p class="text-xs text-stone-300 bg-slate-800/70 p-2.5 rounded-xl border border-slate-700/60">\${j.desc}</p>
+
+      <!-- 3步履約進度條 -->
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-1 text-[11px]">
+        <div class="flex flex-wrap items-center gap-1.5">
+          <span class="px-2 py-0.5 rounded font-bold \${step1 ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-800 text-stone-500'}">1. 已發單保護</span>
+          <span class="text-stone-600">➔</span>
+          <span class="px-2 py-0.5 rounded font-bold \${step2 ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-800 text-stone-500'}">2. 師傅接單 (\${masterLabel.split(' ')[0]})</span>
+          <span class="text-stone-600">➔</span>
+          <span class="px-2 py-0.5 rounded font-bold \${step3 ? 'bg-amber-400 text-slate-950 font-black' : 'bg-slate-800 text-stone-400'}">3. \${isCompleted ? '已完工互評' : '待驗收打星'}</span>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-1.5">
+          \${!isCompleted && !isMaster ? \`<button type="button" onclick="reportMasterDefault('\${j.id}')" class="btn-std h-8 px-2.5 bg-red-950/80 hover:bg-red-900 text-red-300 border border-red-500/40 rounded-xl text-[11px] font-bold">🚨 師傅甩底？換人</button>\` : ''}
+          <button type="button" onclick="jumpToReviewJob('\${j.id}')" class="btn-std h-8 px-3 \${isCompleted ? 'bg-slate-700 hover:bg-slate-600 text-amber-300' : 'bg-emerald-500 hover:bg-emerald-400 text-slate-950'} font-black rounded-xl text-xs shadow-xs">
+            \${isCompleted ? '⭐ 追加/查看互評' : '✅ 一鍵確認完工 & 打星評價'}
+          </button>
+        </div>
+      </div>
+    </div>\`;
+  }).join('');
+}
+
+function jumpToReviewJob(jobId) {
+  populateReviewJobSelect(jobId);
+  switchMemberTab('reviews');
+}
+
+function populateReviewJobSelect(selectedJobId = null) {
+  const sel = document.getElementById('rev-job-id');
+  if (!sel) return;
+
+  sel.innerHTML = liveMasterJobs.map(j => {
+    const label = \`\${j.id} (\${j.trade} · \${j.estate})\`;
+    const isSel = selectedJobId && j.id === selectedJobId ? 'selected' : '';
+    return \`<option value="\${j.id}" \${isSel}>\${label}</option>\`;
+  }).join('');
+
+  handleReviewRoleOrJobChange();
+}
+
+function handleReviewRoleOrJobChange() {
+  const roleEl = document.getElementById('rev-role');
+  const jobSel = document.getElementById('rev-job-id');
+  const targetInput = document.getElementById('rev-target-name');
+  if (!roleEl || !jobSel || !targetInput) return;
+
+  const role = roleEl.value;
+  const jobId = jobSel.value;
+  const job = liveMasterJobs.find(j => j.id === jobId) || liveMasterJobs[0];
+
+  if (role === '業主評師傅') {
+    const masterName = (job && job.assignedMaster) ? job.assignedMaster : '張志強師傅 (強哥 · MST-8001)';
+    targetInput.value = masterName;
+  } else {
+    const ownerName = (job && job.ownerName) ? \`\${job.ownerName} (\${job.estate})\` : \`業主 (\${job ? job.estate : '淘大花園'})\`;
+    targetInput.value = ownerName;
+  }
+  updateReviewTagOptions();
+}
+
+function renderMemberRecentReviewsMini() {
+  const box = document.getElementById('mem-recent-reviews-mini');
+  if (!box) return;
+  box.innerHTML = mutualReviews.slice(0, 3).map(r => \`
+    <div class="bg-slate-900 border border-slate-700 rounded-xl p-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+      <div class="space-y-0.5">
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] font-black px-2 py-0.5 rounded bg-amber-400/20 text-amber-300">\${r.role}</span>
+          <span class="font-bold text-white text-xs">\${r.reviewer} ➔ \${r.target}</span>
+          <span class="text-xs">\${'⭐'.repeat(r.stars || 5)}</span>
+        </div>
+        <p class="text-[11px] text-stone-300">「\${r.comment}」</p>
+      </div>
+      <span class="text-[10px] text-stone-400 font-mono shrink-0">\${r.jobId} · \${r.time}</span>
+    </div>
+  \`).join('');
+}
+
+function renderMasterDashboardMyReviews() {
+  const container = document.getElementById('dash-my-reviews-list');
+  if (!container || !currentMasterProfile) return;
+  const myReviews = mutualReviews.filter(r => r.target && r.target.includes(currentMasterProfile.name.split(' ')[0]));
+  if (myReviews.length === 0) {
+    container.innerHTML = \`<div class="text-stone-400 text-xs py-3 text-center bg-slate-900 rounded-xl">暫時未收到業主嘅星級評價，完成維修並驗收後就會顯示喺呢度！</div>\`;
+    return;
+  }
+  container.innerHTML = myReviews.map(r => \`
+    <div class="bg-slate-900 border border-slate-700 rounded-xl p-3 space-y-1.5">
+      <div class="flex items-center justify-between text-xs">
+        <span class="font-bold text-amber-300">\${r.reviewer} 評價</span>
+        <span>\${'⭐'.repeat(r.stars || 5)}</span>
+      </div>
+      <p class="text-xs text-stone-200 leading-relaxed">「\${r.comment}」</p>
+      <div class="text-[10px] text-stone-400 flex justify-between">
+        <span>📌 單號：\${r.jobId}</span>
+        <span>\${r.time}</span>
+      </div>
+    </div>
+  \`).join('');
+}
+
+function setReviewStars(num) {
+  currentReviewStars = num;
+  const btns = document.querySelectorAll('#star-selector-bar .star-btn');
+  btns.forEach((b, idx) => {
+    b.style.opacity = idx < num ? '1' : '0.25';
+    b.style.transform = idx < num ? 'scale(1.08)' : 'scale(0.95)';
+  });
+  const descMap = {
+    5: "5 粒星（極力推薦 · 準時唔甩底 · 手工一流！）",
+    4: "4 粒星（表現良好 · 整體滿意）",
+    3: "3 粒星（表現一般 · 尚可接受）",
+    2: "2 粒星（有待改善 · 溝通或時間有延誤）",
+    1: "1 粒星（嚴重不滿 · 遲到甩底或手工差）"
+  };
+  const d = document.getElementById('star-rating-desc');
+  if (d) d.textContent = \`目前選擇：\${descMap[num]}\`;
+}
+
+function updateReviewTagOptions() {
+  const role = document.getElementById('rev-role').value;
+  const bar = document.getElementById('review-tags-bar');
+  if (!bar) return;
+  const tags = role === '業主評師傅'
+    ? ["🔥 準時唔甩底", "👍 手工企理", "💰 明碼實價", "🧹 完工清場乾淨", "🛠️ 工具齊全"]
+    : ["🤝 溝通清晰", "⚡ 找數爽快", "📷 現場相片準確", "☕ 業主客氣好傾"];
+  selectedReviewTags = [tags[0], tags[1]];
+  bar.innerHTML = tags.map(t => {
+    const active = selectedReviewTags.includes(t);
+    return \`<button type="button" onclick="toggleReviewTag('\${t}', this)" class="btn-std h-7 px-2.5 rounded-full text-[11px] font-bold border \${active ? 'bg-amber-400 text-slate-950 border-amber-400' : 'bg-slate-900 text-stone-300 border-slate-600'}">\${t}</button>\`;
+  }).join('');
+}
+
+function toggleReviewTag(tag, btnEl) {
+  if (selectedReviewTags.includes(tag)) {
+    selectedReviewTags = selectedReviewTags.filter(t => t !== tag);
+    btnEl.className = "btn-std h-7 px-2.5 rounded-full text-[11px] font-bold border bg-slate-900 text-stone-300 border-slate-600";
+  } else {
+    selectedReviewTags.push(tag);
+    btnEl.className = "btn-std h-7 px-2.5 rounded-full text-[11px] font-bold border bg-amber-400 text-slate-950 border-amber-400";
+  }
+}
+
+function submitMutualReview(e) {
+  e.preventDefault();
+  const role = document.getElementById('rev-role').value;
+  const pureJobId = document.getElementById('rev-job-id').value.trim();
+  const matchedJob = liveMasterJobs.find(j => j.id === pureJobId);
+  const jobIdFull = matchedJob ? \`\${matchedJob.id} · \${matchedJob.trade}\` : pureJobId;
+  const target = document.getElementById('rev-target-name').value;
+  const rawComment = document.getElementById('rev-comment').value.trim();
+  const autoComment = selectedReviewTags.length
+    ? \`\${selectedReviewTags.join('，')}！過程順暢滿意，值得五星推薦！\`
+    : '準時完成，手工企理，多謝幫忙！';
+  const comment = rawComment || autoComment;
+
+  const reviewerName = currentMemberUser
+    ? currentMemberUser.name
+    : (role === '業主評師傅' ? (matchedJob?.ownerName || '認證業主會員') : '張志強師傅 (強哥)');
+
+  const newRev = {
+    id: 'REV-' + Math.floor(400 + Math.random() * 500),
+    role,
+    reviewer: reviewerName,
+    target,
+    jobId: jobIdFull,
+    stars: currentReviewStars,
+    tags: selectedReviewTags.length ? [...selectedReviewTags] : ["👍 完工驗收"],
+    comment,
+    time: "剛剛"
+  };
+
+  mutualReviews.unshift(newRev);
+
+  if (matchedJob) {
+    matchedJob.status = \`✅ 已完工驗收 (雙向 \${currentReviewStars}★ 互評完成)\`;
+  }
+
+  persistDataLocally();
+  renderMutualReviewsWall();
+  renderMasterJobs();
+  renderMemberCenterOrders();
+  renderMemberRecentReviewsMini();
+  document.getElementById('rev-comment').value = '';
+  closeMemberModal();
+  switchSection('repair');
+  showModal('🌟 完工驗收及星級互評已發布！', \`多謝你嘅評價！你對「\${target}」嘅 \${currentReviewStars} 粒星評價已經即時刊登喺【最新完工真實互評牆】，對應維修單 #\${pureJobId} 亦已自動標記為【✅ 已完工驗收】！\`, '互評成功');
+}
+
+function openMasterRegModal() { document.getElementById('master-reg-modal').classList.remove('hidden'); }
+function closeMasterRegModal() { document.getElementById('master-reg-modal').classList.add('hidden'); }
+
+function masterLoginAction() {
+  const inputPhone = document.getElementById('master-login-phone').value.trim().replace(/\\s+/g, '');
+  const inputPin = (document.getElementById('master-login-pin')?.value || '8888').trim();
+  if (!inputPhone) {
+    showModal('請輸入電話號碼', '請輸入你登記師傅時使用嘅電話號碼（或輸入示範師傅電話：91238888，密碼：8888）進行驗證解鎖！', '師傅驗證');
+    return;
+  }
+  const matched = registeredMasters.find(m => (m.phone || '').replace(/\\s+/g, '') === inputPhone);
+  if (!matched) {
+    showModal('找不到此師傅帳號', \`系統中未有電話「\${inputPhone}」嘅入駐師傅記錄。你可以撳旁邊「👷‍♂️ 免費入駐」即時註冊並設定專屬密碼！\`, '尚未入駐');
+    return;
+  }
+  if ((matched.pin || '8888') !== inputPin) {
+    showModal('師傅密碼不正確', '你輸入嘅師傅登入密碼不正確（示範預設密碼：8888）。如忘記密碼，可打開「🛠️ 師傅工作台」進行自助重設！', '密碼錯誤');
+    return;
+  }
+  isMasterLoggedIn = true;
+  currentMasterProfile = matched;
+  const badge = document.getElementById('master-auth-badge');
+  if (badge) {
+    badge.textContent = \`已驗證：\${currentMasterProfile.name}\`;
+    badge.className = "text-[10px] bg-emerald-500 text-slate-950 px-2.5 py-0.5 rounded-full font-black";
+  }
+  document.getElementById('header-member-label').textContent = \`👷‍♂️ \${currentMasterProfile.name.split(' ')[0]}\`;
+  renderMasterJobs();
+  showModal('🔓 師傅身份與密碼驗證成功！', \`歡迎返嚟，\${currentMasterProfile.name}！接單大廳內所有業主嘅聯絡電話已經為你完整解鎖。請遵守 15 分鐘響應防甩底公約！\`, '驗證成功');
+}
+
+function submitMasterRegistration(e) {
+  e.preventDefault();
+  const name = document.getElementById('reg-master-name').value.trim();
+  const phone = document.getElementById('reg-master-phone').value.trim();
+  const pin = (document.getElementById('reg-master-pin')?.value || '8888').trim();
+  const district = document.getElementById('reg-master-district').value;
+  const cert = document.getElementById('reg-master-cert').value.trim() || '熟手師傅';
+  const masterId = 'MST-' + Math.floor(1000 + Math.random() * 9000);
+  currentMasterProfile = { masterId, name, phone, pin, district, cert, trades: '全能師傅', stars: 5.0, reviewsCount: 1, onTimeRate: "100%", creditScore: 100, timeStr: '新入駐認證' };
+  isMasterLoggedIn = true;
+  registeredMasters.unshift(currentMasterProfile);
+  persistDataLocally();
+  updateMasterCountUI();
+  renderTopMastersShowcase();
+  const badge = document.getElementById('master-auth-badge');
+  if (badge) {
+    badge.textContent = \`已登入：\${name}\`;
+    badge.className = "text-[10px] bg-emerald-500 text-slate-950 px-2.5 py-0.5 rounded-full font-black";
+  }
+  document.getElementById('master-login-phone').value = phone;
+  const loginPinEl = document.getElementById('master-login-pin');
+  if (loginPinEl) loginPinEl.value = pin;
+  closeMasterRegModal();
+  renderMasterJobs();
+  showModal(\`🎉 歡迎入駐大本營（#\${masterId}）\`, \`\${name}你好！你嘅師傅帳號及專屬密碼已設定完成，獲得 100 分初始誠信分，並已即時解鎖派單大廳內所有業主嘅完整電話！\`, '入駐成功');
+}
+
+function switchAdminTab(tab) {
+  currentAdminTab = tab;
+  const mBtn = document.getElementById('admin-tab-masters');
+  const jBtn = document.getElementById('admin-tab-jobs');
+  const mList = document.getElementById('admin-masters-list');
+  const jList = document.getElementById('admin-jobs-list');
+  mBtn.className = "btn-std h-8 px-3 rounded-lg text-xs font-bold text-stone-300 hover:text-white";
+  jBtn.className = "btn-std h-8 px-3 rounded-lg text-xs font-bold text-stone-300 hover:text-white";
+  mList.classList.add('hidden');
+  jList.classList.add('hidden');
+  if (tab === 'masters') {
+    mBtn.className = "btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950";
+    mList.classList.remove('hidden');
+    renderAdminMasterList();
+  } else if (tab === 'jobs') {
+    jBtn.className = "btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950";
+    jList.classList.remove('hidden');
+    renderAdminJobsList();
+  }
+}
+
+function openAdminMasterModal() {
+  document.getElementById('admin-master-modal').classList.remove('hidden');
+  updateMasterCountUI();
+  if (isAdminUnlocked) {
+    document.getElementById('admin-pin-gate').classList.add('hidden');
+    document.getElementById('admin-roster-content').classList.remove('hidden');
+    renderAdminMasterList();
+    renderAdminJobsList();
+  }
+}
+function closeAdminMasterModal() { document.getElementById('admin-master-modal').classList.add('hidden'); }
+
+function verifyAdminPin() {
+  const pin = document.getElementById('admin-pin-input').value.trim();
+  if (pin === '8888') {
+    isAdminUnlocked = true;
+    document.getElementById('admin-pin-gate').classList.add('hidden');
+    document.getElementById('admin-roster-content').classList.remove('hidden');
+    renderAdminMasterList();
+    renderAdminJobsList();
+  } else { showModal('密碼不正確', '管理員密碼為 8888！', '驗證失敗'); }
+}
+
+function renderAdminMasterList() {
+  const listEl = document.getElementById('admin-masters-list');
+  if (!listEl) return;
+  listEl.innerHTML = registeredMasters.map(m => \`<div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3"><div class="space-y-1 min-w-0"><div class="flex flex-wrap items-center gap-2"><span class="bg-amber-400 text-slate-950 font-mono font-black text-[11px] px-2 py-0.5 rounded">\${m.masterId}</span><span class="font-black text-sm text-white">\${m.name}</span><span class="text-emerald-400 font-mono font-bold text-xs">📱 \${m.phone}</span><span class="bg-emerald-500/20 text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded">誠信分: \${m.creditScore || 100}</span></div><div class="text-xs text-stone-300">📍 地區：\${m.district} ｜ 🛠️ 牌照：\${m.cert}</div></div><a href="https://wa.me/852\${m.phone}" target="_blank" class="btn-std h-9 px-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs">💬 WhatsApp 派單</a></div>\`).join('');
+}
+
+function renderAdminJobsList() {
+  const listEl = document.getElementById('admin-jobs-list');
+  if (!listEl) return;
+  listEl.innerHTML = liveMasterJobs.map(j => \`<div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3"><div class="space-y-1 min-w-0"><div class="flex flex-wrap items-center gap-2"><span class="bg-sky-400 text-slate-950 font-mono font-black text-[11px] px-2 py-0.5 rounded">\${j.id}</span><span class="font-black text-sm text-amber-300">\${j.trade}</span><span class="text-emerald-400 font-mono font-bold text-xs">📞 \${j.phone}</span></div><div class="text-xs text-white font-bold">📍 \${j.district} — \${j.estate} (\${j.status})</div><div class="text-xs text-stone-300">📝 \${j.desc}</div></div><a href="https://wa.me/852\${j.phone.replace(/\\s+/g,'')}" target="_blank" class="btn-std h-9 px-3 bg-sky-600 hover:bg-sky-500 text-white font-black rounded-xl text-xs">💬 WhatsApp 業主</a></div>\`).join('');
+}
+
+function acceptJob(jobId) {
+  if (!isMasterLoggedIn) {
+    showModal('請先驗證或登入師傅身份', '為保障業主私隱並落實「防甩底誠信分機制」，請先輸入已登記師傅電話（示範電話：91238888）驗證，或免費註冊成為大本營認證師傅！', '防甩底接單驗證', \`<button onclick="closeModal(); openMemberModal('login');" class="btn-std w-full h-10 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">🔓 前往師傅快速登入</button>\`);
+    return;
+  }
+  const job = liveMasterJobs.find(j => j.id === jobId);
+  if (!job) return;
+  if (job.status && job.status.includes('已完工')) {
+    showModal('此單已完工', '呢張維修單已經完成驗收，唔需要再接單！', '提示');
+    return;
+  }
+
+  if (job.assignedMaster && currentMasterProfile && job.assignedMaster !== currentMasterProfile.name) {
+    showModal('此單已被其他師傅鎖定', \`呢張單目前已經由【\${job.assignedMaster}】接單鎖定！你可以接其他未被鎖定嘅維修單。\`, '防撞單提示');
+    return;
+  }
+
+  const masterName = currentMasterProfile ? currentMasterProfile.name : '認證師傅';
+  job.status = \`師傅已接單 (防甩底鎖定：\${masterName})\`;
+  job.assignedMaster = masterName;
+  persistDataLocally();
+  renderMasterJobs();
+
+  const waUrl = \`https://wa.me/852\${job.phone.replace(/\\s+/g, '')}?text=\${encodeURIComponent(\`你好！我係香港裝修師傅大本營認證師傅 \${masterName}，已接咗你張維修單 #\${job.id} (\${job.trade})，想同你確認上門維修時間！\`)}\`;
+  showModal(
+    \`✅ 已鎖定工作單 #\${job.id}！\`,
+    \`系統已將此單指派並鎖定由【\${masterName}】負責！\\n⏱️ 防甩底提醒：請於 15 分鐘內點擊下方按鈕 WhatsApp 業主確認上門時間。完工後別忘了邀請業主進行雙向 5 星互評！\`,
+    '接單鎖定成功',
+    \`<a href="\${waUrl}" target="_blank" onclick="closeModal()" class="btn-std w-full h-11 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs">📲 立即 WhatsApp 業主 (\${job.phone}) 約時間</a>\`
+  );
+}
+
+function submitRepairTicket(e) {
+  e.preventDefault();
+  const trade = document.getElementById('repair-trade-input').value;
+  const district = document.getElementById('repair-district').value;
+  const estate = document.getElementById('repair-estate').value;
+  const assignMode = document.getElementById('repair-assign-mode').value;
+  const name = document.getElementById('repair-name').value;
+  const phone = document.getElementById('repair-phone').value;
+  const desc = document.getElementById('repair-desc').value;
+  const code = 'FIX-' + Math.floor(10000 + Math.random() * 90000);
+  lastRepairTicket = { code, trade, district, estate, assignMode, name, phone, desc, photos: [...uploadedPhotos] };
+  const newJobObj = {
+    id: code,
+    trade: trade.split('（')[0],
+    district: district,
+    estate: estate,
+    ownerName: \`\${name} (\${estate}業主)\`,
+    assignMode: assignMode,
+    desc: desc,
+    photos: [...uploadedPhotos],
+    time: "剛剛",
+    status: "候選接單 (防甩底保護中)",
+    phone: phone
+  };
+  liveMasterJobs.unshift(newJobObj);
+  // 自動將剛發單嘅業主電話綁定到會員中心，打開會員中心即見新單
+  const ownerPhoneInput = document.getElementById('mem-owner-phone');
+  if (ownerPhoneInput) ownerPhoneInput.value = phone;
+  setOwnerSessionByPhone(phone, false);
+  persistDataLocally();
+  updateMasterCountUI();
+  renderMasterJobs();
+  renderAdminJobsList();
+  document.getElementById('ticket-code').textContent = \`單號 #\${code}\`;
+  document.getElementById('ticket-summary').textContent = \`\${name}你好，你位於「\${district} - \${estate}」的【\${trade}】維修單已透過「\${assignMode}」發布！師傅在大廳可以即時睇到你上傳嘅相片。如師傅無故遲到或甩底，大本營將於 1 小時內自動指派後備高分師傅頂上。\`;
+  document.getElementById('repair-ticket-result').classList.remove('hidden');
+}
+
+function sendRepairTicketWhatsApp() {
+  if (!lastRepairTicket) return;
+  const t = lastRepairTicket;
+  const text = \`你好！我喺大本營登記咗張維修單：\\n\\n📌 單號：#\${t.code}\\n🛠️ 工種：\${t.trade}\\n🛡️ 指派模式：\${t.assignMode}\\n📍 地區：\${t.district} - \${t.estate}\\n📝 情況：\${t.desc}\\n👤 稱呼電話：\${t.name} (\${t.phone})\`;
+  window.open(\`https://wa.me/85260000000?text=\${encodeURIComponent(text)}\`, '_blank');
+}
+
+function renderMaterials(filter = 'all') {
+  const grid = document.getElementById('materials-grid');
+  const list = filter === 'all' ? materialsProducts : materialsProducts.filter(p => p.cat === filter);
+  grid.innerHTML = list.map(p => \`<div class="card-equal bg-stone-50 rounded-2xl border border-stone-200 p-4 gap-3">
+    <div class="flex gap-3 items-start">
+      <img src="\${p.img}" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='https://placehold.co/120x120/1e293b/fbbf24?text=建材';" alt="\${p.name}" class="w-20 h-20 rounded-xl object-cover shrink-0 bg-stone-200 border border-stone-200" />
+      <div class="min-w-0 flex-1 space-y-1">
+        <span class="inline-block text-[10px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-900">\${p.cat} · 原廠保養</span>
+        <h4 class="font-black text-xs sm:text-sm text-slate-900 line-clamp-1">\${p.name}</h4>
+        <p class="text-xs text-stone-600 line-clamp-2 leading-relaxed">\${p.desc}</p>
+      </div>
+    </div>
+    <div class="pt-2.5 border-t border-stone-200 flex items-center justify-between gap-2">
+      <div>
+        <span class="text-sm sm:text-base font-black text-slate-900">HK$\${p.price.toLocaleString()}</span>
+        <span class="text-[11px] text-stone-500"> / \${p.unit}</span>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <button onclick="bookInstallForMaterial('\${p.name}', '\${p.trade}')" class="btn-std h-8 px-3 rounded-lg text-xs font-bold text-amber-900 bg-amber-100 hover:bg-amber-200 border border-amber-300">🔧 搵師傅裝</button>
+        <button onclick="addToCart('\${p.id}', 'materials-official', '大本營建材直銷', '60000000', '\${p.name}', \${p.price}, '\${p.unit}')" class="btn-std h-8 px-3 rounded-lg text-xs font-black bg-slate-900 hover:bg-slate-800 text-white">＋入清單</button>
+      </div>
+    </div>
+  </div>\`).join('');
+}
+
+function filterMaterials(cat, btnEl) {
+  if (btnEl) {
+    document.querySelectorAll('#materials-filter-bar .mat-filter').forEach(b => {
+      b.classList.remove('tab-active');
+      b.classList.add('bg-stone-100', 'text-stone-700');
+    });
+    btnEl.classList.add('tab-active');
+  }
+  renderMaterials(cat);
+}
+
+function bookInstallForMaterial(productName, tradeName) {
+  switchSection('repair');
+  document.getElementById('repair-trade-input').value = tradeName + ' ｜ 公價參考標準';
+  document.getElementById('repair-desc').value = \`我喺【大本營建材店】買咗「\${productName}」，想根據大本營標準公價預約高分師傅上門安裝。\`;
+  setTimeout(() => { document.getElementById('repair-form-box').scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 60);
+}
+
+function updateGoogleMapWidget() {
+  const store = hardwareStores.find(s => s.id === selectedHardwareStoreId) || hardwareStores[0];
+  if (!store) return;
+  const nameEl = document.getElementById('gmap-store-name');
+  const addrEl = document.getElementById('gmap-store-address');
+  const navBtn = document.getElementById('gmap-external-nav-btn');
+  const iframe = document.getElementById('gmap-iframe');
+
+  if (nameEl) nameEl.textContent = \`\${store.name} (\${store.district})\`;
+  if (addrEl) addrEl.textContent = \`📍 \${store.address} ｜ 📱 WhatsApp: \${store.phone} ｜ 距地盤約 \${store.distanceKm} km\`;
+  const encodedQuery = encodeURIComponent(store.address + ' ' + store.name);
+  if (navBtn) navBtn.href = \`https://www.google.com/maps/search/?api=1&query=\${encodedQuery}\`;
+  if (iframe) {
+    iframe.src = \`https://maps.google.com/maps?q=\${encodeURIComponent(store.address)}&t=&z=16&ie=UTF8&iwloc=&output=embed\`;
+  }
+}
+
+function renderHardwareStoresBar() {
+  const bar = document.getElementById('hardware-stores-bar');
+  if (!bar) return;
+  bar.innerHTML = hardwareStores.map(s => {
+    const isSel = s.id === selectedHardwareStoreId;
+    const fleetBadge = s.fleet === 'both'
+      ? \`<span class="text-[10px] font-bold text-emerald-300 bg-emerald-500/20 px-2 py-0.5 rounded">🚚 有自家車隊 (1.5小時)</span>\`
+      : \`<span class="text-[10px] font-bold text-sky-300 bg-sky-500/20 px-2 py-0.5 rounded">🚐 支援街車 (Lalamove)</span>\`;
+    return \`<div onclick="selectHardwareStore('\${s.id}')" class="cursor-pointer rounded-2xl p-3.5 border transition card-equal \${isSel ? 'bg-slate-950 border-amber-400 shadow-lg ring-2 ring-amber-400/30' : 'bg-stone-900/80 border-stone-700 hover:border-stone-500'}">
+      <div class="space-y-1.5">
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-[10px] font-black px-2 py-0.5 rounded \${isSel ? 'bg-amber-400 text-slate-950' : 'bg-stone-700 text-stone-300'}">\${s.district}</span>
+          <span class="text-[11px] font-mono text-amber-300 font-bold">📍 距你 \${s.distanceKm} km</span>
+        </div>
+        <h4 class="font-black text-xs sm:text-sm text-white truncate">\${s.name}</h4>
+        <p class="text-[11px] text-stone-400 truncate">\${s.address}</p>
+      </div>
+      <div class="pt-2 mt-2 border-t border-stone-800 flex items-center justify-between gap-2">
+        \${fleetBadge}
+        <span class="text-[11px] font-bold \${isSel ? 'text-amber-400' : 'text-stone-400'}">\${isSel ? '🗺️ 地圖已鎖定' : '撳此睇地圖/貨架'}</span>
+      </div>
+    </div>\`;
+  }).join('');
+  updateStorefrontBanner();
+  updateGoogleMapWidget();
+}
+
+function selectHardwareStore(storeId) {
+  selectedHardwareStoreId = storeId;
+  renderHardwareStoresBar();
+  renderHardwareProducts(currentHardwareFilter);
+}
+
+function calcDistanceKm(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLon/2) * Math.sin(dLon/2);
+  return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)) * 10) / 10;
+}
+
+function locateNearestStore() {
+  const statusEl = document.getElementById('gps-status-text');
+  if (statusEl) statusEl.textContent = "📡 正在透過手機/瀏覽器 GPS 定位最近五金舖...";
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const uLat = pos.coords.latitude;
+        const uLng = pos.coords.longitude;
+        hardwareStores.forEach(s => {
+          if (s.lat && s.lng) s.distanceKm = calcDistanceKm(uLat, uLng, s.lat, s.lng);
+        });
+        hardwareStores.sort((a, b) => a.distanceKm - b.distanceKm);
+        selectedHardwareStoreId = hardwareStores[0].id;
+        if (statusEl) statusEl.textContent = \`✅ GPS 定位成功！最近：\${hardwareStores[0].name} (\${hardwareStores[0].distanceKm}km)\`;
+        renderHardwareStoresBar();
+        renderHardwareProducts(currentHardwareFilter);
+      },
+      () => {
+        hardwareStores.sort((a, b) => a.distanceKm - b.distanceKm);
+        selectedHardwareStoreId = hardwareStores[0].id;
+        if (statusEl) statusEl.textContent = \`✅ 已為你鎖定最近：\${hardwareStores[0].name} (\${hardwareStores[0].distanceKm}km)\`;
+        renderHardwareStoresBar();
+        renderHardwareProducts(currentHardwareFilter);
+      },
+      { timeout: 4000 }
+    );
+  } else {
+    hardwareStores.sort((a, b) => a.distanceKm - b.distanceKm);
+    selectedHardwareStoreId = hardwareStores[0].id;
+    if (statusEl) statusEl.textContent = \`✅ 已為你鎖定最近：\${hardwareStores[0].name}\`;
+    renderHardwareStoresBar();
+    renderHardwareProducts(currentHardwareFilter);
+  }
+}
+
+function toggleStorefrontMode() {
+  isStorefrontMode = !isStorefrontMode;
+  const box = document.getElementById('storefront-banner-box');
+  const btn = document.getElementById('toggle-storefront-btn');
+  if (box) box.classList.toggle('hidden', !isStorefrontMode);
+  if (btn) btn.innerHTML = isStorefrontMode ? \`<span>↩ 返回聯盟標準模式</span>\` : \`<span>🏪 切換：此五金店獨立專頁櫥窗</span>\`;
+  updateStorefrontBanner();
+}
+
+function updateStorefrontBanner() {
+  const store = hardwareStores.find(s => s.id === selectedHardwareStoreId) || hardwareStores[0];
+  if (!store) return;
+  const titleEl = document.getElementById('sf-store-title');
+  const metaEl = document.getElementById('sf-store-meta');
+  if (titleEl) titleEl.textContent = \`\${store.name} — 網上直銷專頁\`;
+  if (metaEl) metaEl.textContent = \`📍 地址：\${store.address} ｜ 📱 老闆接單 WhatsApp：\${store.phone} ｜ 🚚 物流：\${store.etaText}\`;
+}
+
+function copyStoreLink() {
+  const store = hardwareStores.find(s => s.id === selectedHardwareStoreId) || hardwareStores[0];
+  let baseUrl = window.location.origin + window.location.pathname;
+  if (window.parent && window.parent !== window) {
+    try { baseUrl = window.parent.location.origin + window.parent.location.pathname; } catch (e) {}
+  }
+  const shareUrl = \`\${baseUrl}?section=hardware&store=\${encodeURIComponent(store.id)}\`;
+  try {
+    const tempInput = document.createElement('textarea');
+    tempInput.value = shareUrl;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+  } catch (e) {
+    console.warn(e);
+  }
+  showModal('🔗 專屬五金店連結已複製到剪貼簿！', \`已複製「\${store.name}」獨立專頁直連網址：\\n\${shareUrl}\\n\\n五金店老闆可以直接貼去 WhatsApp 發俾熟客！\`, '專頁分享');
+}
+
+function renderHardwareTrades() {
+  const bar = document.getElementById('hardware-trades-bar');
+  if (!bar) return;
+  bar.innerHTML = hardwareTrades.map(t => \`<button onclick="filterHardware('\${t.key}')" class="card-equal bg-stone-800 hover:bg-stone-700 border border-stone-700 rounded-2xl p-2.5 items-center text-center group min-h-[90px]">
+    <div class="w-11 h-11 mx-auto mb-1.5 icon-crop-white border-2 border-amber-400/50 shadow-sm shrink-0">
+      <img src="\${t.img}" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='https://placehold.co/96x96/1e293b/fbbf24?text=五金';" alt="\${t.label}" />
+    </div>
+    <div class="w-full">
+      <div class="font-bold text-xs text-white group-hover:text-amber-400 line-clamp-1">\${t.label}</div>
+      <div class="text-[10px] text-stone-400 line-clamp-1">\${t.sub}</div>
+    </div>
+  </button>\`).join('');
+}
+
+function renderHardwareProducts(filter = 'all') {
+  currentHardwareFilter = filter;
+  const grid = document.getElementById('hardware-grid');
+  const statusEl = document.getElementById('hardware-filter-status');
+  const shelfTitle = document.getElementById('hardware-shelf-title');
+  const searchInput = document.getElementById('hardware-search-input');
+  const keyword = searchInput ? searchInput.value.trim().toLowerCase() : '';
+  const store = hardwareStores.find(s => s.id === selectedHardwareStoreId) || hardwareStores[0];
+
+  shelfTitle.textContent = \`🔥 \${store.name} · 現貨五金貨架\`;
+  statusEl.textContent = filter === 'all'
+    ? \`目前顯示：\${store.name} 已上架之全部五金零件\`
+    : \`目前顯示：\${store.name}【\${filter}】專用零件\`;
+
+  const availableList = masterHardwareCatalog.filter(item => {
+    const storeItem = store.items && store.items[item.id];
+    const isActive = storeItem && storeItem.active;
+    const matchCat = filter === 'all' || item.cat === filter;
+    const matchKw = !keyword || 
+      item.name.toLowerCase().includes(keyword) || 
+      item.desc.toLowerCase().includes(keyword) || 
+      item.sku.toLowerCase().includes(keyword) ||
+      item.cat.toLowerCase().includes(keyword);
+    return isActive && matchCat && matchKw;
+  });
+
+  if (availableList.length === 0) {
+    grid.innerHTML = \`<div class="col-span-4 text-center py-10 bg-stone-800/50 rounded-2xl text-stone-400 text-xs">找不到符合條件嘅五金零件，請清除搜尋字眼或切換其他五金店！</div>\`;
+    return;
+  }
+
+  grid.innerHTML = availableList.map(p => {
+    const customPrice = store.items[p.id].price || p.defaultPrice;
+    return \`<div class="card-equal bg-stone-800 border border-stone-700 rounded-2xl overflow-hidden">
+      <div class="aspect-16/10 w-full bg-stone-950 overflow-hidden relative">
+        <img src="\${p.img}" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='https://placehold.co/400x250/1e293b/fbbf24?text=五金零件';" alt="\${p.name}" class="w-full h-full object-cover" />
+        <span class="absolute top-2 left-2 bg-slate-950/85 text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded border border-white/15">\${store.name}</span>
+      </div>
+      <div class="p-3.5 space-y-1">
+        <div class="flex items-center justify-between text-xs gap-2">
+          <span class="bg-sky-400/20 text-sky-300 font-bold px-2 py-0.5 rounded text-[10px]">\${p.cat}</span>
+          <span class="text-stone-400 font-mono text-[10px]">\${p.sku}</span>
+        </div>
+        <h4 class="font-black text-xs sm:text-sm text-white line-clamp-1">\${p.name}</h4>
+        <p class="text-xs text-stone-400 line-clamp-2 leading-relaxed">\${p.desc}</p>
+      </div>
+      <div class="p-3.5 pt-2 border-t border-stone-700 flex items-center justify-between gap-2">
+        <div>
+          <span class="text-sm sm:text-base font-black text-amber-400">HK$\${customPrice}</span>
+          <span class="text-xs text-stone-400"> / \${p.unit}</span>
+        </div>
+        <button onclick="addToCart('\${p.id}', '\${store.id}', '\${store.name}', '\${store.phone}', '\${p.name}', \${customPrice}, '\${p.unit}')" class="btn-std h-8 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs">
+          ＋執貨
+        </button>
+      </div>
+    </div>\`;
+  }).join('');
+}
+
+function filterHardware(cat) { renderHardwareProducts(cat); }
+
+function renderHardwareOrdersTracker() {
+  const container = document.getElementById('hardware-orders-tracker');
+  if (!container) return;
+  if (hardwareOrders.length === 0) {
+    container.innerHTML = \`<div class="text-xs text-stone-400 py-4 text-center">暫時未有五金運送訂單</div>\`;
+    return;
+  }
+  container.innerHTML = hardwareOrders.map(o => {
+    const stepIdx = ORDER_STEPS.indexOf(o.status);
+    const isReceived = o.status === "師傅已收貨";
+    const stepsHtml = ORDER_STEPS.map((st, idx) => {
+      const done = idx <= stepIdx;
+      return \`<div class="flex items-center gap-1 text-[11px] font-bold \${done ? 'text-emerald-400' : 'text-stone-500'}">
+        <span class="w-4 h-4 rounded-full inline-flex items-center justify-center text-[10px] font-black \${done ? 'bg-emerald-500 text-slate-950' : 'bg-stone-800 text-stone-500'}">\${idx + 1}</span>
+        <span>\${st}</span>
+      </div>\`;
+    }).join('<span class="text-stone-600 text-xs">➔</span>');
+
+    return \`<div class="bg-stone-900 border \${isReceived ? 'border-emerald-500/60' : 'border-stone-700'} rounded-2xl p-3.5 space-y-2.5">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="bg-amber-400 text-slate-950 font-mono font-black px-2 py-0.5 rounded">#\${o.orderId}</span>
+          <span class="font-black text-white">\${o.storeName}</span>
+          <span class="text-stone-400 text-[11px]">🚚 \${o.deliveryMethod}</span>
+        </div>
+        <span class="text-xs font-black \${isReceived ? 'text-emerald-400' : 'text-amber-300'}">目前狀態：\${o.status}</span>
+      </div>
+      <div class="text-xs text-stone-300">📦 貨品：\${o.itemsSummary} （總計 HK$\${o.total}）｜ 📍 送往：\${o.address}</div>
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-stone-800">
+        <div class="flex flex-wrap items-center gap-1.5">\${stepsHtml}</div>
+        \${isReceived
+          ? \`<span class="inline-flex items-center gap-1 bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 px-3 py-1 rounded-xl text-xs font-black">🎉 師傅已確認收貨（五金店已知悉）</span>\`
+          : \`<button onclick="masterConfirmReceived('\${o.orderId}')" class="btn-std h-8 px-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs">📦 師傅確認已收貨 (通知五金店)</button>\`
+        }
+      </div>
+    </div>\`;
+  }).join('');
+}
+
+function masterConfirmReceived(orderId) {
+  const ord = hardwareOrders.find(o => o.orderId === orderId);
+  if (!ord) return;
+  ord.status = "師傅已收貨";
+  persistDataLocally();
+  renderHardwareOrdersTracker();
+  renderOwnerOrdersList();
+  showModal('🎉 已確認收貨！', \`單號 #\${orderId} 狀態已更新為【師傅已收貨】！\\n「\${ord.storeName}」老闆喺管理後台已經即時收到你嘅收貨確認。\`, '收貨完成');
+}
+
+function openShopOwnerModal(defaultTab = 'catalog') {
+  document.getElementById('shop-owner-modal').classList.remove('hidden');
+  populateOwnerStoreSelect();
+  loadOwnerStoreForm();
+  loadOwnerPricingForm();
+  switchOwnerTab(defaultTab);
+}
+function closeShopOwnerModal() { document.getElementById('shop-owner-modal').classList.add('hidden'); }
+
+function verifyOwnerPin() {
+  const pin = document.getElementById('owner-pin-input').value.trim();
+  if (pin === '6688' || pin === '8888') {
+    document.getElementById('owner-pin-gate').classList.add('hidden');
+    document.getElementById('owner-roster-content').classList.remove('hidden');
+    populateOwnerStoreSelect();
+    loadOwnerStoreForm();
+    loadOwnerPricingForm();
+    switchOwnerTab('catalog');
+  } else {
+    showModal('密碼不正確', '五金店老闆管理密碼為 6688！', '驗證失敗');
+  }
+}
+
+function populateOwnerStoreSelect() {
+  const sel = document.getElementById('owner-store-select');
+  sel.innerHTML = hardwareStores.map(s => \`<option value="\${s.id}" \${s.id === selectedHardwareStoreId ? 'selected' : ''}>\${s.name} (\${s.district})</option>\`).join('');
+}
+
+function loadOwnerStoreForm() {
+  const storeId = document.getElementById('owner-store-select').value;
+  const store = hardwareStores.find(s => s.id === storeId) || hardwareStores[0];
+  if (!store) return;
+  document.getElementById('owner-shop-name').value = store.name;
+  document.getElementById('owner-shop-district').value = store.district;
+  document.getElementById('owner-shop-phone').value = store.phone;
+  document.getElementById('owner-shop-address').value = store.address;
+  document.getElementById('owner-shop-fleet').value = store.fleet || 'both';
+
+  const listEl = document.getElementById('owner-catalog-list');
+  listEl.innerHTML = masterHardwareCatalog.map(item => {
+    const stItem = (store.items && store.items[item.id]) || { active: false, price: item.defaultPrice };
+    return \`<div class="bg-slate-900 border border-slate-700 rounded-xl p-3 flex items-center justify-between gap-3">
+      <label class="flex items-center gap-2.5 cursor-pointer min-w-0 flex-1">
+        <input type="checkbox" id="chk-\${item.id}" \${stItem.active ? 'checked' : ''} class="w-4 h-4 accent-amber-400 shrink-0" />
+        <img src="\${item.img}" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/60x60/1e293b/fbbf24?text=五金';" class="w-10 h-10 rounded-lg object-cover shrink-0 border border-slate-700" />
+        <div class="min-w-0">
+          <div class="font-bold text-white text-xs truncate">\${item.name}</div>
+          <div class="text-[10px] text-stone-400">\${item.cat} · 預設價 HK$\${item.defaultPrice}/\${item.unit}</div>
+        </div>
+      </label>
+      <div class="flex items-center gap-1 shrink-0">
+        <span class="text-stone-400 text-xs">HK$</span>
+        <input type="number" id="price-\${item.id}" value="\${stItem.price}" class="w-20 h-8 bg-slate-800 border border-slate-600 rounded-lg px-2 text-amber-300 font-black text-xs text-right" />
+      </div>
+    </div>\`;
+  }).join('');
+}
+
+function loadOwnerPricingForm() {
+  const container = document.getElementById('owner-pricing-list');
+  if (!container) return;
+  
+  let html = \`<div class="font-bold text-amber-400 mb-1">一、 廚房大型電器標準安裝公價</div>\`;
+  appliancePricingData.kitchen.forEach((item, idx) => {
+    html += \`<div class="bg-slate-900 border border-slate-700 rounded-xl p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+      <div class="min-w-0 flex-1">
+        <input type="text" id="pricing-k-name-\${idx}" value="\${item.name}" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-2.5 py-1 text-white font-bold text-xs" />
+        <input type="text" id="pricing-k-desc-\${idx}" value="\${item.desc}" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-2.5 py-1 text-stone-400 text-[11px] mt-1" />
+      </div>
+      <div class="shrink-0">
+        <input type="text" id="pricing-k-price-\${idx}" value="\${item.price}" class="w-36 bg-slate-800 border border-slate-600 rounded-lg px-2.5 py-1 text-amber-300 font-mono font-black text-xs text-right" />
+      </div>
+    </div>\`;
+  });
+
+  html += \`<div class="font-bold text-stone-300 mt-4 mb-1">二、 常見附加／改位收費標準</div>\`;
+  appliancePricingData.extra.forEach((item, idx) => {
+    html += \`<div class="bg-slate-900 border border-slate-700 rounded-xl p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+      <div class="min-w-0 flex-1">
+        <input type="text" id="pricing-e-name-\${idx}" value="\${item.name}" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-2.5 py-1 text-white font-bold text-xs" />
+        <input type="text" id="pricing-e-desc-\${idx}" value="\${item.desc}" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-2.5 py-1 text-stone-400 text-[11px] mt-1" />
+      </div>
+      <div class="shrink-0">
+        <input type="text" id="pricing-e-price-\${idx}" value="\${item.price}" class="w-36 bg-slate-800 border border-slate-600 rounded-lg px-2.5 py-1 text-white font-mono font-bold text-xs text-right" />
+      </div>
+    </div>\`;
+  });
+
+  container.innerHTML = html;
+}
+
+function saveAppliancePricingConfig() {
+  appliancePricingData.kitchen.forEach((item, idx) => {
+    const n = document.getElementById(\`pricing-k-name-\${idx}\`);
+    const d = document.getElementById(\`pricing-k-desc-\${idx}\`);
+    const p = document.getElementById(\`pricing-k-price-\${idx}\`);
+    if (n) item.name = n.value.trim();
+    if (d) item.desc = d.value.trim();
+    if (p) item.price = p.value.trim();
+  });
+
+  appliancePricingData.extra.forEach((item, idx) => {
+    const n = document.getElementById(\`pricing-e-name-\${idx}\`);
+    const d = document.getElementById(\`pricing-e-desc-\${idx}\`);
+    const p = document.getElementById(\`pricing-e-price-\${idx}\`);
+    if (n) item.name = n.value.trim();
+    if (d) item.desc = d.value.trim();
+    if (p) item.price = p.value.trim();
+  });
+
+  persistDataLocally();
+  closeShopOwnerModal();
+  showModal('💾 家電安裝標準公價已更新！', '全港家電安裝公價表已成功儲存並同步更新至全站彈窗中！', '公價更新成功');
+}
+
+function saveOwnerStoreConfig() {
+  const storeId = document.getElementById('owner-store-select').value;
+  const store = hardwareStores.find(s => s.id === storeId);
+  if (!store) return;
+  store.name = document.getElementById('owner-shop-name').value.trim() || store.name;
+  store.district = document.getElementById('owner-shop-district').value.trim() || store.district;
+  store.phone = document.getElementById('owner-shop-phone').value.trim() || store.phone;
+  store.address = document.getElementById('owner-shop-address').value.trim() || store.address;
+  store.fleet = document.getElementById('owner-shop-fleet').value;
+  store.etaText = store.fleet === 'both' ? '自家車隊最快 1.5 小時 / Lalamove 45 分鐘' : '支援街車速遞 (Lalamove 45-60分鐘)';
+
+  const updatedItems = {};
+  masterHardwareCatalog.forEach(item => {
+    const chk = document.getElementById('chk-' + item.id);
+    const pr = document.getElementById('price-' + item.id);
+    updatedItems[item.id] = {
+      active: chk ? chk.checked : false,
+      price: pr ? Number(pr.value) || item.defaultPrice : item.defaultPrice
+    };
+  });
+  store.items = updatedItems;
+  selectedHardwareStoreId = store.id;
+  persistDataLocally();
+  renderHardwareStoresBar();
+  renderHardwareProducts(currentHardwareFilter);
+  closeShopOwnerModal();
+  showModal('💾 店舖貨架與地圖已更新！', \`「\${store.name}」嘅 Google Maps 地址、聯絡電話、車隊設定同埋剔選貨品售價已經即時發布！\`, '發布成功');
+}
+
+function addNewHardwareStore() {
+  const newId = 'store-' + Math.floor(100 + Math.random() * 900);
+  const newStore = {
+    id: newId,
+    name: "新入駐五金店 (深水埗店)",
+    district: "九龍 - 深水埗",
+    address: "香港深水埗基隆街128號",
+    lat: 22.3292,
+    lng: 114.1628,
+    phone: "93334444",
+    fleet: "both",
+    distanceKm: 3.2,
+    etaText: "自家車隊最快 1.5 小時 / Lalamove 45 分鐘",
+    items: {
+      "h-socket": { active: true, price: 37 },
+      "h-valve": { active: true, price: 66 },
+      "h-screw": { active: true, price: 31 }
+    }
+  };
+  hardwareStores.push(newStore);
+  selectedHardwareStoreId = newId;
+  persistDataLocally();
+  populateOwnerStoreSelect();
+  loadOwnerStoreForm();
+  loadOwnerPricingForm();
+  renderHardwareStoresBar();
+  renderHardwareProducts(currentHardwareFilter);
+}
+
+function switchOwnerTab(tab) {
+  const catBtn = document.getElementById('owner-tab-catalog');
+  const priBtn = document.getElementById('owner-tab-pricing');
+  const ordBtn = document.getElementById('owner-tab-orders');
+  const catPanel = document.getElementById('owner-panel-catalog');
+  const priPanel = document.getElementById('owner-panel-pricing');
+  const ordPanel = document.getElementById('owner-panel-orders');
+
+  [catBtn, priBtn, ordBtn].forEach(b => {
+    if (b) b.className = "btn-std h-8 px-3 rounded-lg text-xs font-bold text-stone-300 hover:text-white";
+  });
+  [catPanel, priPanel, ordPanel].forEach(p => {
+    if (p) p.classList.add('hidden');
+  });
+
+  if (tab === 'catalog') {
+    catBtn.className = "btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950";
+    catPanel.classList.remove('hidden');
+  } else if (tab === 'pricing') {
+    priBtn.className = "btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950";
+    priPanel.classList.remove('hidden');
+    loadOwnerPricingForm();
+  } else {
+    ordBtn.className = "btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950";
+    ordPanel.classList.remove('hidden');
+    renderOwnerOrdersList();
+  }
+}
+
+function renderOwnerOrdersList() {
+  const listEl = document.getElementById('owner-orders-list');
+  if (!listEl) return;
+  listEl.innerHTML = hardwareOrders.map(o => {
+    const btns = ["已下單", "執貨中", "打包好", "運送中"].map(st => {
+      const active = o.status === st;
+      return \`<button type="button" onclick="ownerUpdateOrderStatus('\${o.orderId}', '\${st}')" class="btn-std h-8 px-2.5 rounded-lg text-xs font-bold \${active ? 'bg-amber-400 text-slate-950 font-black' : 'bg-slate-800 text-stone-300 hover:bg-slate-700'}">\${st}</button>\`;
+    }).join('');
+    return \`<div class="bg-slate-900 border border-slate-700 rounded-2xl p-4 space-y-2.5">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <span class="bg-sky-400 text-slate-950 font-mono font-black text-xs px-2 py-0.5 rounded">#\${o.orderId}</span>
+          <span class="font-bold text-white ml-2">\${o.storeName}</span>
+          <span class="text-emerald-400 font-bold ml-2">👷‍♂️ \${o.buyerName} (\${o.buyerPhone})</span>
+        </div>
+        <span class="text-xs font-black \${o.status === '師傅已收貨' ? 'text-emerald-400' : 'text-amber-300'}">狀態：\${o.status}</span>
+      </div>
+      <div class="text-stone-300 text-xs">📦 貨品：\${o.itemsSummary} ｜ 📍 地址：\${o.address}</div>
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-800">
+        <div class="flex flex-wrap gap-1.5">\${btns}</div>
+        \${o.status === '師傅已收貨' ? \`<span class="text-emerald-400 font-black text-xs">🎉 師傅已確認收到貨！</span>\` : ''}
+      </div>
+    </div>\`;
+  }).join('');
+}
+
+function ownerUpdateOrderStatus(orderId, newStatus) {
+  const ord = hardwareOrders.find(o => o.orderId === orderId);
+  if (!ord) return;
+  ord.status = newStatus;
+  persistDataLocally();
+  renderOwnerOrdersList();
+  renderHardwareOrdersTracker();
+}
+
+function switchCartTab(tab) {
+  activeCartTab = tab === 'materials' ? 'materials' : 'hardware';
+  updateCartUI();
+}
+
+function addToCart(productId, storeId, storeName, storePhone, name, price, unit) {
+  const cartKey = \`\${storeId}__\${productId}\`;
+  const existing = cart.find(item => item.cartKey === cartKey);
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    cart.push({ cartKey, productId, storeId, storeName, storePhone, name, price, unit, qty: 1 });
+  }
+  activeCartTab = storeId === 'materials-official' ? 'materials' : 'hardware';
+  updateCartUI();
+  toggleCart(true);
+}
+
+function changeQty(cartKey, delta) {
+  const item = cart.find(i => i.cartKey === cartKey);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) cart = cart.filter(i => i.cartKey !== cartKey);
+  updateCartUI();
+}
+
+function consolidateCartToStore(targetStoreId) {
+  const targetStore = hardwareStores.find(s => s.id === targetStoreId);
+  if (!targetStore) return;
+  const newCart = [];
+  cart.forEach(item => {
+    if (item.storeId === 'materials-official') {
+      newCart.push(item);
+      return;
+    }
+    const targetItemCfg = targetStore.items && targetStore.items[item.productId];
+    const newPrice = (targetItemCfg && targetItemCfg.price) ? targetItemCfg.price : item.price;
+    const newKey = \`\${targetStore.id}__\${item.productId}\`;
+    const existing = newCart.find(x => x.cartKey === newKey);
+    if (existing) {
+      existing.qty += item.qty;
+    } else {
+      newCart.push({
+        cartKey: newKey,
+        productId: item.productId,
+        storeId: targetStore.id,
+        storeName: targetStore.name,
+        storePhone: targetStore.phone,
+        name: item.name,
+        price: newPrice,
+        unit: item.unit,
+        qty: item.qty
+      });
+    }
+  });
+  cart = newCart;
+  selectedHardwareStoreId = targetStoreId;
+  renderHardwareStoresBar();
+  renderHardwareProducts(currentHardwareFilter);
+  updateCartUI();
+}
+
+function updateDeliveryNoteUI() {
+  const method = document.getElementById('cart-delivery-method').value;
+  const noteEl = document.getElementById('cart-delivery-schedule-note');
+  if (!noteEl) return;
+  if (method.includes('自家車隊')) {
+    noteEl.textContent = "⏳ 預計送達時段：下單後約 1.5 - 2 小時內由該五金店自家車隊送抵地盤。";
+  } else if (method.includes('Lalamove')) {
+    noteEl.textContent = "⏳ 預計送達時段：五金店執好貨即叫 Lalamove / Gogovan，約 45 - 60 分鐘極速直送地盤（街車運費由師傅到付）。";
+  } else {
+    noteEl.textContent = "⏳ 預計自取時段：WhatsApp 落單後 15 分鐘五金店即執好貨，可用手機 Google Maps 導航落舖免排隊即取！";
+  }
+}
+
+function updateCartUI() {
+  const countEl = document.getElementById('cart-count');
+  const mobileCountEl = document.getElementById('mobile-cart-count');
+  const itemsEl = document.getElementById('cart-items');
+  const totalEl = document.getElementById('cart-total');
+  const totalLabelEl = document.getElementById('cart-total-label');
+  const checkoutBtnEl = document.getElementById('cart-checkout-btn');
+  const warnBox = document.getElementById('multi-store-warning');
+  const warnCount = document.getElementById('multi-store-count');
+  const consolidateBtns = document.getElementById('consolidate-buttons');
+
+  const matItems = cart.filter(i => i.storeId === 'materials-official');
+  const hwItems = cart.filter(i => i.storeId !== 'materials-official');
+
+  const matQty = matItems.reduce((sum, i) => sum + i.qty, 0);
+  const hwQty = hwItems.reduce((sum, i) => sum + i.qty, 0);
+  const totalQty = matQty + hwQty;
+
+  if (countEl) countEl.textContent = totalQty;
+  if (mobileCountEl) mobileCountEl.textContent = totalQty;
+
+  const badgeMat = document.getElementById('cart-badge-materials');
+  const badgeHw = document.getElementById('cart-badge-hardware');
+  if (badgeMat) badgeMat.textContent = matQty;
+  if (badgeHw) badgeHw.textContent = hwQty;
+
+  const tabMatBtn = document.getElementById('cart-tab-materials');
+  const tabHwBtn = document.getElementById('cart-tab-hardware');
+  const formMat = document.getElementById('cart-form-materials');
+  const formHw = document.getElementById('cart-form-hardware');
+
+  if (activeCartTab === 'materials') {
+    if (tabMatBtn) tabMatBtn.className = "btn-std h-9 px-2 rounded-xl text-xs font-black bg-emerald-500 text-slate-950 shadow-xs";
+    if (tabHwBtn) tabHwBtn.className = "btn-std h-9 px-2 rounded-xl text-xs font-bold text-stone-300 hover:text-white";
+    if (formMat) formMat.classList.remove('hidden');
+    if (formHw) formHw.classList.add('hidden');
+    if (totalLabelEl) totalLabelEl.textContent = "02 建材店淨料小計：";
+    if (checkoutBtnEl) {
+      checkoutBtnEl.className = "btn-std w-full h-11 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl shadow-md text-xs sm:text-sm";
+      checkoutBtnEl.innerHTML = \`<span>📲 確認【02 建材單】並發送 WhatsApp 俾建材部</span>\`;
+    }
+  } else {
+    if (tabMatBtn) tabMatBtn.className = "btn-std h-9 px-2 rounded-xl text-xs font-bold text-stone-300 hover:text-white";
+    if (tabHwBtn) tabHwBtn.className = "btn-std h-9 px-2 rounded-xl text-xs font-black bg-amber-400 text-slate-950 shadow-xs";
+    if (formMat) formMat.classList.add('hidden');
+    if (formHw) formHw.classList.remove('hidden');
+    if (totalLabelEl) totalLabelEl.textContent = "03 五金店物料小計（不含街車費）：";
+    if (checkoutBtnEl) {
+      checkoutBtnEl.className = "btn-std w-full h-11 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl shadow-md text-xs sm:text-sm";
+      checkoutBtnEl.innerHTML = \`<span>📲 確認【03 五金單】並發送 WhatsApp 俾五金店老闆</span>\`;
+    }
+  }
+
+  const activeItems = activeCartTab === 'materials' ? matItems : hwItems;
+  const activeTotalPrice = activeItems.reduce((sum, i) => sum + i.price * i.qty, 0);
+  if (totalEl) totalEl.textContent = \`HK$\${activeTotalPrice.toLocaleString()}\`;
+
+  if (activeItems.length === 0) {
+    warnBox.classList.add('hidden');
+    const otherTabName = activeCartTab === 'materials' ? '🔩 03 五金店 (師傅)' : '🚿 02 建材店 (業主)';
+    const otherTabQty = activeCartTab === 'materials' ? hwQty : matQty;
+    const switchHint = otherTabQty > 0
+      ? \`<div class="mt-3"><button onclick="switchCartTab('\${activeCartTab === 'materials' ? 'hardware' : 'materials'}')" class="btn-std h-8 px-3 bg-amber-100 text-amber-900 border border-amber-300 rounded-xl text-xs font-black">👉 切換查看【\${otherTabName}】（有 \${otherTabQty} 件貨）</button></div>\`
+      : '';
+    itemsEl.innerHTML = \`<div class="text-center py-10 text-stone-400 text-xs">
+      <div>目前【\${activeCartTab === 'materials' ? '02 建材店 (業主買料)' : '03 五金店 (師傅執貨)'}】清單仲係吉嘅！</div>
+      \${switchHint}
+    </div>\`;
+    return;
+  }
+
+  const groups = {};
+  activeItems.forEach(item => {
+    if (!groups[item.storeId]) {
+      groups[item.storeId] = { storeId: item.storeId, storeName: item.storeName, storePhone: item.storePhone, items: [] };
+    }
+    groups[item.storeId].items.push(item);
+  });
+
+  if (activeCartTab === 'hardware') {
+    const hwStoreIds = Object.keys(groups);
+    if (hwStoreIds.length > 1) {
+      warnBox.classList.remove('hidden');
+      warnCount.textContent = hwStoreIds.length;
+      consolidateBtns.innerHTML = hwStoreIds.map(sid => {
+        const st = hardwareStores.find(s => s.id === sid);
+        return st ? \`<button onclick="consolidateCartToStore('\${sid}')" class="btn-std h-7 px-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-lg text-[11px]">⚡ 全部對齊到：\${st.name}</button>\` : '';
+      }).join('');
+    } else {
+      warnBox.classList.add('hidden');
+    }
+  } else {
+    warnBox.classList.add('hidden');
+  }
+
+  itemsEl.innerHTML = Object.values(groups).map(g => {
+    const isMat = g.storeId === 'materials-official';
+    const rows = g.items.map(i => \`<div class="flex items-center justify-between gap-2 py-2 border-t border-stone-200/80">
+      <div class="min-w-0 flex-1">
+        <h5 class="font-bold text-xs text-slate-900 truncate">\${i.name}</h5>
+        <p class="text-[11px] text-stone-500">HK$\${i.price} / \${i.unit}</p>
+      </div>
+      <div class="flex items-center gap-1.5 shrink-0">
+        <button onclick="changeQty('\${i.cartKey}', -1)" class="btn-std w-7 h-7 rounded-lg bg-white border border-stone-300 font-black text-xs">－</button>
+        <span class="font-bold text-xs w-5 text-center">\${i.qty}</span>
+        <button onclick="changeQty('\${i.cartKey}', 1)" class="btn-std w-7 h-7 rounded-lg bg-white border border-stone-300 font-black text-xs">＋</button>
+      </div>
+    </div>\`).join('');
+
+    return \`<div class="p-3.5 rounded-2xl border \${isMat ? 'border-emerald-200 bg-emerald-50/40' : 'border-stone-200 bg-stone-50'} space-y-1">
+      <div class="flex items-center justify-between gap-2 pb-1">
+        <span class="font-black text-xs text-slate-900">\${isMat ? '🚿' : '🏪'} \${g.storeName}</span>
+        <span class="text-[10px] font-mono text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded font-bold">WhatsApp: \${g.storePhone}</span>
+      </div>
+      \${rows}
+    </div>\`;
+  }).join('');
+}
+
+function toggleCart(show) {
+  if (show) {
+    const matCount = cart.filter(i => i.storeId === 'materials-official').length;
+    const hwCount = cart.filter(i => i.storeId !== 'materials-official').length;
+    if (currentSection === 'materials' || (matCount > 0 && hwCount === 0)) {
+      activeCartTab = 'materials';
+    } else if (currentSection === 'hardware' || (hwCount > 0 && matCount === 0)) {
+      activeCartTab = 'hardware';
+    }
+    updateCartUI();
+  }
+  document.getElementById('cart-drawer').classList.toggle('hidden', !show);
+}
+
+function checkoutOrder() {
+  const activeItems = activeCartTab === 'materials'
+    ? cart.filter(i => i.storeId === 'materials-official')
+    : cart.filter(i => i.storeId !== 'materials-official');
+
+  if (activeItems.length === 0) {
+    showModal('當前分區清單係吉嘅', \`請先喺【\${activeCartTab === 'materials' ? '02 建材店' : '03 五金店'}】揀選貨品！\`, '溫馨提示');
+    return;
+  }
+
+  // 分支 A：02 建材店（業主買料專屬結帳，唔會混入五金店追蹤表）
+  if (activeCartTab === 'materials') {
+    const ownerName = document.getElementById('cart-mat-buyer-name').value.trim() || '業主客戶';
+    const ownerPhone = document.getElementById('cart-mat-buyer-phone').value.trim() || '9123 8392';
+    const ownerAddr = document.getElementById('cart-mat-buyer-address').value.trim() || '香港屋苑交收';
+    const installOpt = document.getElementById('cart-mat-install-option').value;
+
+    const matOrderId = 'MAT-' + Math.floor(10000 + Math.random() * 90000);
+    const subTotal = activeItems.reduce((s, i) => s + i.price * i.qty, 0);
+    const summary = activeItems.map(i => \`\${i.name} x\${i.qty}\`).join('、');
+
+    // 只清除已結帳嘅 02 建材店貨品，保留 03 五金店貨品
+    cart = cart.filter(i => i.storeId !== 'materials-official');
+    updateCartUI();
+    toggleCart(false);
+
+    const waText = \`你好大本營建材直銷部！我係業主 \${ownerName} (\${ownerPhone})，喺【02 建材店】落咗張建材訂單：\\n\\n📌 建材單號：#\${matOrderId}\\n🚿 選購建材：\${summary}\\n💰 淨料總計：HK$\${subTotal}\\n📍 送貨屋苑：\${ownerAddr}\\n🔧 安裝選項：\${installOpt}\`;
+    const waUrl = \`https://wa.me/85260000000?text=\${encodeURIComponent(waText)}\`;
+
+    const bookInstallBtn = \`<button onclick="closeModal(); bookInstallForMaterial('\${summary}', '家居小型維修 / 建材家電標準安裝');" class="btn-std w-full h-10 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs mt-1.5">🔧 順便一鍵去【01 配對站】發單預約師傅上門安裝</button>\`;
+
+    showModal(
+      \`✅ 已建立【02 建材店】業主訂單 #\${matOrderId}！\`,
+      \`你選購嘅建材（\${summary}）已獨立處理，唔會同師傅地盤五金單混淆！\\n請撳下方按鈕發送 WhatsApp 俾大本營建材部安排送貨：\`,
+      '02 建材店落單成功',
+      \`<a href="\${waUrl}" target="_blank" class="btn-std w-full h-11 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs shadow-sm">📲 一鍵 WhatsApp 發送建材單俾：大本營建材直銷部</a>\` + bookInstallBtn
+    );
+    return;
+  }
+
+  // 分支 B：03 五金店（師傅地盤執貨專屬結帳，進入 5 段式五金追蹤表）
+  const buyerName = document.getElementById('cart-buyer-name').value.trim() || '地盤師傅';
+  const buyerPhone = document.getElementById('cart-buyer-phone').value.trim() || '9123 8888';
+  const buyerAddr = document.getElementById('cart-buyer-address').value.trim() || '地盤交收';
+  const deliveryMethod = document.getElementById('cart-delivery-method').value;
+
+  const groups = {};
+  activeItems.forEach(item => {
+    if (!groups[item.storeId]) {
+      groups[item.storeId] = { storeId: item.storeId, storeName: item.storeName, storePhone: item.storePhone, items: [] };
+    }
+    groups[item.storeId].items.push(item);
+  });
+
+  const groupList = Object.values(groups);
+  const isMultiStore = groupList.length > 1;
+  const createdOrders = [];
+
+  groupList.forEach(g => {
+    const orderId = 'HW-' + Math.floor(10000 + Math.random() * 90000);
+    const subTotal = g.items.reduce((s, i) => s + i.price * i.qty, 0);
+    const summary = g.items.map(i => \`\${i.name} x\${i.qty}\`).join('、');
+    const newOrder = {
+      orderId,
+      storeId: g.storeId,
+      storeName: g.storeName,
+      storePhone: g.storePhone.replace(/\\s+/g, ''),
+      buyerName,
+      buyerPhone,
+      address: buyerAddr,
+      deliveryMethod,
+      itemsSummary: summary,
+      total: subTotal,
+      status: "已下單",
+      time: "剛剛",
+      isMultiStore
+    };
+    hardwareOrders.unshift(newOrder);
+    createdOrders.push(newOrder);
+  });
+
+  // 只清除已結帳嘅 03 五金店貨品，保留 02 建材店貨品
+  cart = cart.filter(i => i.storeId === 'materials-official');
+  persistDataLocally();
+  updateCartUI();
+  renderHardwareOrdersTracker();
+  toggleCart(false);
+
+  const waButtonsHtml = createdOrders.map(o => {
+    const multiNote = o.isMultiStore ? \`\\n💡 備註：師傅同時喺另一間街坊舖買咗少少料，如車隊順路可商議夾車減運費。\` : '';
+    const waText = \`你好 \${o.storeName} 老闆！我係 \${o.buyerName} (\${o.buyerPhone})，喺【香港裝修師傅大本營 · 03 五金店】落咗張五金單：\\n\\n📌 追蹤單號：#\${o.orderId}\\n🛒 訂購貨品：\${o.itemsSummary}\\n💰 物料小計：HK$\${o.total}\\n🚚 運送方式：\${o.deliveryMethod}\\n📍 送貨地盤：\${o.address}\${multiNote}\`;
+    const waUrl = \`https://wa.me/852\${o.storePhone}?text=\${encodeURIComponent(waText)}\`;
+    return \`<a href="\${waUrl}" target="_blank" class="btn-std w-full h-11 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs shadow-sm">📲 一鍵發送 WhatsApp 購物單俾：\${o.storeName}</a>\`;
+  }).join('');
+
+  showModal(
+    \`✅ 已建立 \${createdOrders.length} 張五金追蹤單！\`,
+    \`訂單已經同步加入【03 五金店 ➔ 5段式實時訂單狀態追蹤面板】！\\n請撳下方按鈕直接將購物單 WhatsApp 發送到五金店老闆手機：\`,
+    '03 五金店落單成功',
+    waButtonsHtml
+  );
+}
+
+function switchSection(sec) {
+  currentSection = sec;
+  applyHeroVisuals(sec);
+  const sections = {
+    repair: document.getElementById('section-repair'),
+    materials: document.getElementById('section-materials'),
+    hardware: document.getElementById('section-hardware')
+  };
+  Object.keys(sections).forEach(k => {
+    if (sec === 'all' || sec === k) sections[k].classList.remove('hidden');
+    else sections[k].classList.add('hidden');
+  });
+  ['all', 'repair', 'materials', 'hardware'].forEach(k => {
+    const dBtn = document.getElementById('nav-' + k);
+    const mBtn = document.getElementById('m-nav-' + k);
+    if (dBtn) dBtn.classList.toggle('tab-active', k === sec);
+    if (mBtn) mBtn.classList.toggle('tab-active', k === sec);
+  });
+}
+
+function resetDemoData() {
+  localStorage.removeItem(LOCAL_MASTERS_KEY);
+  localStorage.removeItem(LOCAL_JOBS_KEY);
+  localStorage.removeItem(LOCAL_HW_STORES_KEY);
+  localStorage.removeItem(LOCAL_HW_ORDERS_KEY);
+  localStorage.removeItem(LOCAL_REVIEWS_KEY);
+  localStorage.removeItem(LOCAL_PRICING_KEY);
+  location.reload();
+}
+
+function readCampParams() {
+  const own = new URLSearchParams(window.location.search);
+  let section = own.get('section');
+  let store = own.get('store');
+  if (window.parent && window.parent !== window) {
+    try {
+      const parent = new URLSearchParams(window.parent.location.search);
+      if (!section) section = parent.get('section');
+      if (!store) store = parent.get('store');
+    } catch (e) {}
+  }
+  return { section: section, store: store };
+}
+
+function bootCampApp() {
+  loadPersistedData();
+  renderRepairTrades();
+  renderTopMastersShowcase();
+  renderMutualReviewsWall();
+  renderMasterJobs();
+  renderMaterials();
+  renderHardwareStoresBar();
+  renderHardwareTrades();
+  renderHardwareProducts();
+  renderHardwareOrdersTracker();
+  updateCartUI();
+  updateMasterCountUI();
+  const params = readCampParams();
+  const allowed = { all: 1, repair: 1, materials: 1, hardware: 1 };
+  if (params.section && allowed[params.section]) switchSection(params.section);
+  else applyHeroVisuals('all');
+  if (params.store) selectHardwareStore(params.store);
+}
+window.bootCampApp = bootCampApp;
+if (document.readyState === 'complete') bootCampApp();
+else window.addEventListener('load', bootCampApp);
+
+<\/script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+import { getFirestore, doc, setDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+const appId = 'hkrenocamp3in1-flagship';
+const firebaseConfig = {
+  apiKey: "AIzaSyCv36XJiGfbSvcd61S0ToP9iolLdWy2Y90",
+  authDomain: "hkrenocamp3in1.firebaseapp.com",
+  projectId: "hkrenocamp3in1",
+  storageBucket: "hkrenocamp3in1.firebasestorage.app",
+  messagingSenderId: "44521991130",
+  appId: "1:44521991130:web:31eb42638383eb58f5aee3",
+  measurementId: "G-XWTMSEH1G9"
+};
+
+let db = null;
+let auth = null;
+let currentUser = null;
+let hasInitializedSeed = false;
+
+function updateCloudBadgeUI(statusText, isOnline) {
+  const badgeEl = document.getElementById('cloud-sync-badge');
+  const dotEl = document.getElementById('cloud-sync-dot');
+  const textEl = document.getElementById('cloud-sync-text');
+  if (textEl) textEl.textContent = statusText;
+  if (dotEl) {
+    dotEl.className = isOnline
+      ? "w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+      : "w-2 h-2 rounded-full bg-amber-400";
+  }
+  if (badgeEl) {
+    badgeEl.className = isOnline
+      ? "inline-flex items-center gap-1.5 bg-emerald-950/90 text-emerald-300 border border-emerald-500/40 px-2.5 py-0.5 rounded-full font-bold"
+      : "inline-flex items-center gap-1.5 bg-slate-800 text-stone-300 border border-slate-700 px-2.5 py-0.5 rounded-full font-bold";
+  }
+}
+
+let cloudWriting = false;
+window.syncStateToCloud = async function () {
+  if (cloudWriting || !currentUser || !db) return;
+  cloudWriting = true;
+  try {
+    updateCloudBadgeUI("☁️ 正在同步至雲端...", true);
+    const stateDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'camp_sync', 'global_state');
+    await setDoc(stateDocRef, {
+      mastersJson: JSON.stringify(registeredMasters),
+      jobsJson: JSON.stringify(liveMasterJobs),
+      reviewsJson: JSON.stringify(mutualReviews),
+      storesJson: JSON.stringify(hardwareStores),
+      ordersJson: JSON.stringify(hardwareOrders),
+      pricingJson: JSON.stringify(appliancePricingData),
+      updatedAt: Date.now(),
+      updatedBy: currentUser.uid
+    });
+    const nowStr = new Date().toLocaleTimeString('zh-HK', { hour12: false });
+    updateCloudBadgeUI(\`☁️ 雲端實時同步中 (\${nowStr})\`, true);
+  } catch (err) {
+    console.warn("雲端寫入失敗:", err);
+    updateCloudBadgeUI("⚡ 採用本機 LocalStorage 備援", false);
+  } finally {
+    cloudWriting = false;
+  }
+};
+
+async function initCloudSync() {
+  try {
+    const app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    db = getFirestore(app);
+
+    await signInAnonymously(auth);
+    currentUser = auth.currentUser;
+    const idEl = document.getElementById('cloud-user-id');
+    if (currentUser && idEl) idEl.textContent = currentUser.uid.substring(0, 6) + '...';
+
+    const syncColRef = collection(db, 'artifacts', appId, 'public', 'data', 'camp_sync');
+    onSnapshot(
+      syncColRef,
+      (snapshot) => {
+        if (!currentUser) return;
+        let foundGlobal = false;
+        snapshot.forEach((docSnap) => {
+          if (docSnap.id === 'global_state') {
+            foundGlobal = true;
+            const data = docSnap.data();
+            if (data.mastersJson) registeredMasters = JSON.parse(data.mastersJson);
+            if (data.jobsJson) liveMasterJobs = JSON.parse(data.jobsJson);
+            if (data.reviewsJson) mutualReviews = JSON.parse(data.reviewsJson);
+            if (data.storesJson) hardwareStores = JSON.parse(data.storesJson);
+            if (data.ordersJson) hardwareOrders = JSON.parse(data.ordersJson);
+            if (data.pricingJson) appliancePricingData = JSON.parse(data.pricingJson);
+          }
+        });
+
+        if (!foundGlobal && !hasInitializedSeed) {
+          hasInitializedSeed = true;
+          window.syncStateToCloud();
+        } else {
+          hasInitializedSeed = true;
+          refreshAllViewsFromCloud();
+          const nowStr = new Date().toLocaleTimeString('zh-HK', { hour12: false });
+          updateCloudBadgeUI(\`☁️ 雲端實時同步中 (\${nowStr})\`, true);
+        }
+      },
+      (err) => {
+        console.warn("雲端監聽受限，切換本機模式:", err);
+        updateCloudBadgeUI("⚡ 離線本機模式 (LocalStorage)", false);
+      }
+    );
+  } catch (err) {
+    console.warn("初始化雲端服務失敗:", err);
+    updateCloudBadgeUI("⚡ 採用本機 LocalStorage 備援", false);
+  }
+}
+
+initCloudSync();
+<\/script>
+</body>
+</html>
+`;function a(e){let t=[...e.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)].map(e=>e[1]??``).join(`
+`),n=[];for(let t of e.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)){let e=t[1]??``,r=(t[2]??``).trim();r&&n.push({module:/type\s*=\s*["']module["']/i.test(e),code:r})}let r=e.match(/<body[^>]*>([\s\S]*)<\/body>/i);return{styles:t,body:(r?r[1]:e).replace(/<script[\s\S]*?<\/script>/gi,``),scripts:n}}var o=n(),s=a(i);function c(e){if(e.querySelector(`#header-brand-logo`)||(e.innerHTML=s.body),!document.querySelector(`style[data-camp]`)){let e=document.createElement(`style`);e.dataset.camp=`1`,e.textContent=s.styles,document.head.appendChild(e)}let t=window;if(t.__CAMP_SCRIPT__)typeof t.bootCampApp==`function`&&t.bootCampApp();else{t.__CAMP_SCRIPT__=!0;for(let e of s.scripts){let t=document.createElement(`script`);e.module&&(t.type=`module`),t.textContent=e.code,document.body.appendChild(t)}}}function l(){let e=(0,r.useRef)(null);return(0,r.useLayoutEffect)(()=>{e.current&&c(e.current)},[]),(0,o.jsx)(`div`,{ref:e,className:`camp-root pb-24 lg:pb-12`,dangerouslySetInnerHTML:{__html:s.body}})}export{l as component};
