@@ -638,7 +638,11 @@ html, body {
     <div id="materials-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2 items-stretch"></div>
     <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 space-y-2">
       <h3 class="text-sm font-black text-emerald-950">建材訂單</h3>
-      <p class="text-[11px] text-stone-600">落單後會留在系統。接單、採購清單和送貨狀態在「建材接單台」處理，密碼 8888。</p>
+      <p class="text-[11px] text-stone-600">落單後會留在系統。用單號可再查進度。接單、採購、送貨、售後和對賬在「建材接單台」，密碼 8888。</p>
+      <div class="flex flex-wrap gap-2">
+        <input id="mat-lookup-input" placeholder="輸入 MAT-單號" class="h-9 w-40 bg-white border border-emerald-300 rounded-xl px-2 text-xs" />
+        <button type="button" onclick="lookupMaterialOrder()" class="btn-std h-9 px-3 rounded-xl bg-emerald-600 text-white font-black text-xs">查單</button>
+      </div>
       <div id="materials-orders-tracker" class="space-y-2"></div>
     </div>
     <p class="text-[11px] text-stone-500">撳商品圖片或名稱可看詳細介紹。睇緊介紹時，配對站同五金店會先收起。</p>
@@ -1943,6 +1947,7 @@ let hardwareOrders = [
 
 let materialsOrders = [];
 let materialsDeskUnlocked = false;
+let materialsSupplier = { name: '建材供應商', deposit: 5000, paused: false };
 const MAT_ORDER_STEPS = ["待確認", "已接單", "執貨中", "已送出", "已收貨"];
 
 let cart = [];
@@ -1957,6 +1962,7 @@ const FACTORY_STATE = {
   stores: JSON.parse(JSON.stringify(hardwareStores)),
   orders: JSON.parse(JSON.stringify(hardwareOrders)),
   matOrders: JSON.parse(JSON.stringify(materialsOrders)),
+  supplier: JSON.parse(JSON.stringify(materialsSupplier)),
   reviews: JSON.parse(JSON.stringify(mutualReviews)),
   pricing: JSON.parse(JSON.stringify(appliancePricingData)),
   promos: JSON.parse(JSON.stringify(productPromos))
@@ -1970,6 +1976,8 @@ function normalizeLoadedState() {
   });
   hardwareStores.forEach(store => {
     store.items = store.items || {};
+    if (store.deposit == null) store.deposit = 3000;
+    if (store.listingPaused == null) store.listingPaused = false;
     masterHardwareCatalog.forEach(p => {
       if (!store.items[p.id]) {
         const isTool = p.kind === 'tool';
@@ -1997,6 +2005,8 @@ function loadPersistedData() {
     if (savedPromo) productPromos = JSON.parse(savedPromo);
     const savedMat = localStorage.getItem(LOCAL_MAT_ORDERS_KEY);
     if (savedMat) materialsOrders = JSON.parse(savedMat);
+    const savedSupplier = localStorage.getItem('hk_camp_supplier_v1');
+    if (savedSupplier) materialsSupplier = JSON.parse(savedSupplier);
     normalizeLoadedState();
   } catch (e) { console.warn(e); }
 }
@@ -2011,6 +2021,7 @@ function persistDataLocally() {
     localStorage.setItem(LOCAL_PRICING_KEY, JSON.stringify(appliancePricingData));
     localStorage.setItem(LOCAL_PROMO_KEY, JSON.stringify(productPromos));
     localStorage.setItem(LOCAL_MAT_ORDERS_KEY, JSON.stringify(materialsOrders));
+    localStorage.setItem('hk_camp_supplier_v1', JSON.stringify(materialsSupplier));
   } catch (e) { console.warn(e); }
   if (typeof window.syncStateToCloud === 'function') {
     window.syncStateToCloud();
@@ -3299,6 +3310,10 @@ function readQty(qtyId) {
 function renderMaterials(filter = 'all') {
   currentMaterialsFilter = filter;
   const grid = document.getElementById('materials-grid');
+  if (materialsSupplier.paused) {
+    grid.innerHTML = `<div class="col-span-full rounded-2xl border border-red-200 bg-red-50 p-6 text-sm text-red-800">建材供應商按金低過 HK$2,500，貨架已暫停。補回按金至 HK$5,000 後先可以再賣。</div>`;
+    return;
+  }
   const list = filter === 'all' ? materialsProducts : materialsProducts.filter(p => p.cat === filter);
   grid.innerHTML = list.map(p => {
     const sale = saleOf(p.price, p.id);
@@ -3597,6 +3612,12 @@ function renderHardwareProducts(filter = 'all') {
   const keyword = searchInput ? searchInput.value.trim().toLowerCase() : '';
   const store = hardwareStores.find(s => s.id === selectedHardwareStoreId) || hardwareStores[0];
   renderToolPageContent(store);
+  if (store.listingPaused) {
+    shelfTitle.textContent = `${store.name} 已暫停上架`;
+    statusEl.textContent = `按金 HK$${Number(store.deposit || 0).toLocaleString()}，低過 HK$1,500。補回按金至 HK$3,000 先可以再賣。`;
+    grid.innerHTML = `<div class="col-span-full text-center py-10 bg-stone-800/50 rounded-2xl text-amber-200 text-xs">這間五金舖按金不足，貨架已暫停。</div>`;
+    return;
+  }
 
   const kindLabel = currentHardwareKind === 'tool' ? '工具' : '零件';
   shelfTitle.textContent = `🔥 ${store.name} · 現貨五金${kindLabel}`;
@@ -3786,7 +3807,7 @@ function renderHardwareOrdersTracker() {
         <div class="flex flex-wrap items-center gap-2">
           <span class="bg-amber-400 text-slate-950 font-mono font-black px-2 py-0.5 rounded">#${o.orderId}</span>
           <span class="font-black text-white">${o.storeName}</span>
-          <span class="text-stone-400 text-[11px]">🚚 ${o.deliveryMethod}</span>
+          <span class="text-stone-400 text-[11px]">🚚 ${escText(o.deliveryMethod)}${o.waybill ? ' · 運單 ' + escText(o.waybill) : ''}</span>
         </div>
         <span class="text-xs font-black ${isReceived ? 'text-emerald-400' : 'text-amber-300'}">目前狀態：${o.status}</span>
       </div>
@@ -3814,9 +3835,11 @@ function masterConfirmReceived(orderId) {
     return;
   }
   ord.status = '師傅已收貨';
+  settleHardwareFee(ord);
   persistDataLocally();
   renderHardwareOrdersTracker();
   renderOwnerOrdersList();
+  renderHardwareProducts(currentHardwareFilter);
   showModal('🎉 已確認收貨！', `單號 #${orderId} 狀態已更新為【師傅已收貨】！\n「${ord.storeName}」老闆喺管理後台已經即時收到你嘅收貨確認。`, '收貨完成');
 }
 
@@ -4068,12 +4091,19 @@ function renderOwnerOrdersList() {
   const listEl = document.getElementById('owner-orders-list');
   if (!listEl) return;
   const storeId = document.getElementById('owner-store-select')?.value || selectedHardwareStoreId;
+  const store = hardwareStores.find(item => item.id === storeId);
+  const storeDeposit = store && store.deposit != null ? store.deposit : 3000;
   const mine = hardwareOrders.filter(o => !storeId || o.storeId === storeId);
+  const head = `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 flex flex-wrap items-center justify-between gap-2">
+    <div class="text-xs text-stone-200">本店按金 HK$${Number(storeDeposit).toLocaleString()}。低過 HK$1,500 會暫停上架。介紹費在師傅收貨後按貨款 5% 從按金扣。</div>
+    <button type="button" onclick="topUpStoreDeposit('${storeId}')" class="btn-std h-8 px-3 rounded-lg bg-emerald-500 text-slate-950 font-black text-xs">補回按金至 HK$3,000</button>
+  </div>`;
+  const ledger = `<div class="bg-slate-900 border border-slate-700 rounded-2xl p-3 space-y-2"><div class="text-xs font-black text-amber-300">本店對賬</div>${ledgerHtml(ledgerRows(storeId))}</div>`;
   if (!mine.length) {
-    listEl.innerHTML = `<div class="text-stone-400 text-xs py-6 text-center bg-slate-900 rounded-2xl">這間舖暫時未有五金單。請切換店舖，或等師傅落單。</div>`;
+    listEl.innerHTML = head + `<div class="text-stone-400 text-xs py-6 text-center bg-slate-900 rounded-2xl">這間舖暫時未有五金單。請切換店舖，或等師傅落單。</div>` + ledger;
     return;
   }
-  listEl.innerHTML = mine.map(o => {
+  listEl.innerHTML = head + mine.map(o => {
     const current = orderStepIndex(o.status);
     const locked = o.status === '師傅已收貨';
     const btns = ["已下單", "執貨中", "打包好", "運送中"].map(st => {
@@ -4082,22 +4112,35 @@ function renderOwnerOrdersList() {
       const disabled = locked || idx < current;
       return `<button type="button" ${disabled && !active ? 'disabled' : ''} onclick="ownerUpdateOrderStatus('${o.orderId}', '${st}')" class="btn-std h-8 px-2.5 rounded-lg text-xs font-bold ${active ? 'bg-amber-400 text-slate-950 font-black' : disabled ? 'bg-slate-800 text-stone-600 cursor-not-allowed' : 'bg-slate-800 text-stone-300 hover:bg-slate-700'}">${st}</button>`;
     }).join('');
+    const lines = o.status === '執貨中' && o.items ? o.items.map((item, index) => `<div class="flex items-center gap-2 text-[11px]">
+      <span class="flex-1 text-stone-200">${escText(item.name)}</span>
+      <input type="number" min="0" value="${item.qty}" class="w-16 h-7 bg-slate-950 border border-slate-600 rounded px-1 text-white" onchange="setHardwareLineQty('${o.orderId}', ${index}, this.value)" />
+      <span class="text-stone-400">HK$${item.price}</span>
+    </div>`).join('') : '';
+    const waybill = o.status === '打包好' ? `<input id="waybill-${o.orderId}" value="${escText(o.waybill || '')}" placeholder="車號或街車單號" class="h-8 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white" />` : (o.waybill ? `<span class="text-[11px] text-sky-300">運單 ${escText(o.waybill)}</span>` : '');
+    const after = o.status === '師傅已收貨' && !o.closed ? `<div class="flex flex-wrap gap-2">
+      <select id="as-type-${o.orderId}" class="h-8 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs"><option value="缺貨">缺貨</option><option value="錯貨">錯貨</option><option value="退貨">退貨</option></select>
+      <input id="as-note-${o.orderId}" placeholder="情況" class="h-8 flex-1 min-w-24 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white" />
+      <button type="button" onclick="openAfterSale('hw','${o.orderId}')" class="btn-std h-8 px-2 rounded-lg bg-stone-700 text-white text-xs">開售後</button>
+      <button type="button" onclick="closeSettledOrder('hw','${o.orderId}')" class="btn-std h-8 px-2 rounded-lg bg-emerald-600 text-white text-xs">沒有問題，關閉</button>
+    </div>` : '';
+    const afterDone = o.afterSale ? `<p class="text-[11px] text-amber-200">售後：${escText(o.afterSale.type)} ${escText(o.afterSale.note)} ${o.afterSale.done ? '已處理' : ''}</p>${o.afterSale.done ? '' : `<button type="button" onclick="finishAfterSale('hw','${o.orderId}')" class="btn-std h-8 px-2 rounded-lg bg-amber-400 text-slate-950 text-xs font-black">完成售後</button>`}` : '';
+    const fee = o.feeSettled ? `<p class="text-[11px] text-emerald-300">介紹費 HK$${Number(o.feeAmount || 0).toLocaleString()} · ${escText(o.feeStatus)} · 到期 ${escText(o.feeDue || '')}</p>` : '';
     return `<div class="bg-slate-900 border border-slate-700 rounded-2xl p-4 space-y-2.5">
       <div class="flex flex-wrap items-center justify-between gap-2">
         <div>
           <span class="bg-sky-400 text-slate-950 font-mono font-black text-xs px-2 py-0.5 rounded">#${o.orderId}</span>
           <span class="font-bold text-white ml-2">${o.storeName}</span>
-          <span class="text-emerald-400 font-bold ml-2">👷‍♂️ ${o.buyerName} (${o.buyerPhone})</span>
+          <span class="text-emerald-400 font-bold ml-2">${o.buyerName}</span>
         </div>
-        <span class="text-xs font-black ${o.status === '師傅已收貨' ? 'text-emerald-400' : 'text-amber-300'}">狀態：${o.status}</span>
+        <span class="text-xs font-black ${o.status === '師傅已收貨' ? 'text-emerald-400' : 'text-amber-300'}">狀態：${o.status}${o.closed ? ' · 已關閉' : ''}</span>
       </div>
-      <div class="text-stone-300 text-xs">📦 貨品：${o.itemsSummary} ｜ 📍 地址：${o.address}</div>
-      <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-800">
-        <div class="flex flex-wrap gap-1.5">${btns}</div>
-        ${o.status === '師傅已收貨' ? `<span class="text-emerald-400 font-black text-xs">🎉 師傅已確認收到貨！</span>` : ''}
-      </div>
+      <div class="text-stone-300 text-xs">貨品：${escText(o.itemsSummary)} ｜ HK$${Number(o.total).toLocaleString()} ｜ ${escText(o.address)}</div>
+      ${lines ? `<div class="space-y-1">${lines}<p class="text-[10px] text-stone-500">執貨中可改數量，改成 0 即刪掉這行。</p></div>` : ''}
+      <div class="flex flex-wrap items-center gap-2">${btns}${waybill}</div>
+      ${fee}${after}${afterDone}
     </div>`;
-  }).join('');
+  }).join('') + ledger;
 }
 
 function orderStepIndex(status) {
@@ -4118,6 +4161,15 @@ function ownerUpdateOrderStatus(orderId, newStatus) {
     showModal('不能倒退狀態', `目前是「${ord.status}」。五金單只可以向前：已下單 → 執貨中 → 打包好 → 運送中 → 師傅已收貨。`, '狀態順序');
     return;
   }
+  if (newStatus === '運送中') {
+    const input = document.getElementById('waybill-' + orderId);
+    const waybill = (input && input.value.trim()) || ord.waybill || '';
+    if (!waybill) {
+      showModal('請填運單', '改到「運送中」之前，要填車號或街車單號。', '未填運單');
+      return;
+    }
+    ord.waybill = waybill;
+  }
   ord.status = newStatus;
   persistDataLocally();
   renderOwnerOrdersList();
@@ -4130,6 +4182,17 @@ function switchCartTab(tab) {
 }
 
 function addToCart(productId, storeId, storeName, storePhone, name, price, unit, qty, silent) {
+  if (storeId === 'materials-official' && materialsSupplier.paused) {
+    showModal('建材貨架已暫停', '供應商按金低過一半，暫不能落單。', '暫停上架');
+    return;
+  }
+  if (storeId !== 'materials-official') {
+    const store = hardwareStores.find(item => item.id === storeId);
+    if (store && store.listingPaused) {
+      showModal('這間舖已暫停上架', '按金低過一半，暫不能落單。', '暫停上架');
+      return;
+    }
+  }
   const addQty = Math.max(1, parseInt(qty, 10) || 1);
   const cartKey = `${storeId}__${productId}`;
   const existing = cart.find(item => item.cartKey === cartKey);
@@ -4355,6 +4418,7 @@ function renderMaterialsOrderTracker() {
       ? `<p class="text-[11px] text-red-700">已拒絕：${escText(order.rejectReason)}</p>`
       : '';
     const ship = order.deliveryMethod ? `<p class="text-[11px] text-stone-600">送貨方式：${escText(order.deliveryMethod)}</p>` : '';
+    const after = order.afterSale ? `<p class="text-[11px] text-amber-800">售後：${escText(order.afterSale.type)}${order.afterSale.done ? '，已處理' : '，處理中'}</p>` : '';
     return `<div class="bg-white border border-emerald-200 rounded-xl p-3 space-y-1">
       <div class="flex flex-wrap items-center justify-between gap-2">
         <span class="font-mono font-black text-xs text-emerald-800">#${escText(order.orderId)}</span>
@@ -4362,7 +4426,7 @@ function renderMaterialsOrderTracker() {
       </div>
       <p class="text-[11px] text-stone-600">${escText(order.items.map(i => i.name + ' x' + i.qty).join('、'))} · HK$${Number(order.total).toLocaleString()}</p>
       <div class="flex flex-wrap gap-1">${steps}</div>
-      ${ship}${extra}
+      ${ship}${extra}${after}
     </div>`;
   }).join('');
 }
@@ -4391,11 +4455,16 @@ function verifyMaterialsDeskPin() {
 function renderMaterialsDesk() {
   const box = document.getElementById('mat-desk-body');
   if (!box || box.classList.contains('hidden')) return;
+  const head = `<div class="bg-slate-800 border border-emerald-500/40 rounded-2xl p-3 flex flex-wrap items-center justify-between gap-2">
+    <div class="text-xs text-stone-200">建材供應商按金 HK$${Number(materialsSupplier.deposit).toLocaleString()}。低過 HK$2,500 暫停上架。收貨後按貨款 10% 扣介紹費。</div>
+    <button type="button" onclick="topUpMaterialsDeposit()" class="btn-std h-8 px-3 rounded-lg bg-emerald-400 text-slate-950 font-black text-xs">補回按金至 HK$5,000</button>
+  </div>`;
+  const ledger = `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2"><div class="text-xs font-black text-emerald-300">對賬</div>${ledgerHtml(ledgerRows())}</div>`;
   if (!materialsOrders.length) {
-    box.innerHTML = '<p class="text-xs text-stone-400 py-6 text-center">未有建材單。</p>';
+    box.innerHTML = head + '<p class="text-xs text-stone-400 py-6 text-center">未有建材單。</p>' + ledger;
     return;
   }
-  box.innerHTML = materialsOrders.map(order => {
+  box.innerHTML = head + materialsOrders.map(order => {
     const lines = order.items.map(i => `${escText(i.name)} x${i.qty} · HK$${i.price}`).join('<br/>');
     let actions = '';
     if (order.status === '待確認') {
@@ -4418,7 +4487,16 @@ function renderMaterialsDesk() {
       </div>`;
     } else if (order.status === '已送出') {
       actions = `<button type="button" onclick="advanceMaterialOrder('${order.orderId}', '已收貨')" class="btn-std h-8 px-3 rounded-xl bg-emerald-400 text-slate-950 font-black text-xs">確認客人已收貨</button>`;
+    } else if (order.status === '已收貨' && !order.closed && !(order.afterSale && !order.afterSale.done)) {
+      actions = `<div class="flex flex-wrap gap-2">
+        <select id="as-type-${order.orderId}" class="h-8 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs"><option value="缺貨">缺貨</option><option value="錯貨">錯貨</option><option value="退貨">退貨</option></select>
+        <input id="as-note-${order.orderId}" placeholder="情況" class="h-8 flex-1 min-w-24 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white" />
+        <button type="button" onclick="openAfterSale('mat','${order.orderId}')" class="btn-std h-8 px-2 rounded-lg bg-stone-700 text-white text-xs">開售後</button>
+        <button type="button" onclick="closeSettledOrder('mat','${order.orderId}')" class="btn-std h-8 px-2 rounded-lg bg-emerald-600 text-white text-xs">沒有問題，關閉</button>
+      </div>`;
     }
+    const after = order.afterSale ? `<p class="text-[11px] text-amber-200">售後：${escText(order.afterSale.type)} ${escText(order.afterSale.note)} ${order.afterSale.done ? '已處理' : ''}</p>${order.afterSale.done ? '' : `<button type="button" onclick="finishAfterSale('mat','${order.orderId}')" class="btn-std h-8 px-2 rounded-lg bg-amber-400 text-slate-950 text-xs font-black">完成售後</button>`}` : '';
+    const fee = order.feeSettled ? `<p class="text-[11px] text-emerald-300">介紹費 HK$${Number(order.feeAmount || 0).toLocaleString()} · ${escText(order.feeStatus)} · 到期 ${escText(order.feeDue || '')}</p>` : '';
     const purchase = order.purchaseList && order.purchaseList.length
       ? `<div class="bg-slate-950 border border-emerald-500/40 rounded-xl p-2 text-[11px] text-emerald-100"><div class="font-black text-emerald-300 mb-1">採購清單</div>${order.purchaseList.map(i => escText(i.name) + ' x' + i.qty).join('、')}</div>`
       : '';
@@ -4431,9 +4509,9 @@ function renderMaterialsDesk() {
       <p class="text-[11px] text-stone-300">${escText(order.buyerName)} · ${escText(order.buyerPhone)} · ${escText(order.address)}</p>
       <p class="text-[11px] text-stone-200">${lines}</p>
       <p class="text-xs font-black text-amber-300">HK$${Number(order.total).toLocaleString()}${order.deliveryMethod ? ' · ' + escText(order.deliveryMethod) : ''}</p>
-      ${purchase}${rejected}${actions}
+      ${purchase}${rejected}${fee}${after}${actions}
     </div>`;
-  }).join('');
+  }).join('') + ledger;
 }
 
 function findMaterialOrder(orderId) {
@@ -4466,15 +4544,69 @@ function rejectMaterialOrder(orderId) {
   renderMaterialsDesk();
 }
 
+function feeDueText() {
+  const day = new Date();
+  day.setDate(day.getDate() + 7);
+  return day.toISOString().slice(0, 10);
+}
+
+function markPurseLow(purse, floor) {
+  if (purse.deposit < floor) {
+    if ('listingPaused' in purse) purse.listingPaused = true;
+    else purse.paused = true;
+  }
+}
+
+function settleFee(order, rate, purse, floor) {
+  if (order.feeSettled) return;
+  const goods = Number(order.total) || 0;
+  const fee = Math.round(goods * rate);
+  order.feeRate = rate;
+  order.feeBase = goods;
+  order.feeAmount = fee;
+  order.feeDue = feeDueText();
+  order.feeSettled = true;
+  if (purse.deposit >= fee) {
+    purse.deposit -= fee;
+    order.feeStatus = '已扣';
+  } else {
+    order.feeStatus = '未付';
+  }
+  markPurseLow(purse, floor);
+}
+
+function refundFee(order, purse, floor) {
+  if (order.feeStatus === '已扣') purse.deposit += Number(order.feeAmount) || 0;
+  order.feeAmount = 0;
+  order.feeStatus = '已取消';
+  if (purse.deposit >= floor) {
+    if ('listingPaused' in purse) purse.listingPaused = false;
+    else purse.paused = false;
+  }
+}
+
+function settleHardwareFee(order) {
+  const store = hardwareStores.find(item => item.id === order.storeId);
+  if (!store) return;
+  if (store.deposit == null) store.deposit = 3000;
+  settleFee(order, 0.05, store, 1500);
+}
+
+function settleMaterialFee(order) {
+  settleFee(order, 0.1, materialsSupplier, 2500);
+}
+
 function advanceMaterialOrder(orderId, nextStatus) {
   const order = findMaterialOrder(orderId);
   const currentIndex = MAT_ORDER_STEPS.indexOf(order && order.status);
   const nextIndex = MAT_ORDER_STEPS.indexOf(nextStatus);
   if (!order || nextIndex !== currentIndex + 1) return;
   order.status = nextStatus;
+  if (nextStatus === '已收貨') settleMaterialFee(order);
   persistDataLocally();
   renderMaterialsOrderTracker();
   renderMaterialsDesk();
+  renderMaterials(currentMaterialsFilter);
 }
 
 function shipMaterialOrder(orderId) {
@@ -4491,6 +4623,145 @@ function shipMaterialOrder(orderId) {
   persistDataLocally();
   renderMaterialsOrderTracker();
   renderMaterialsDesk();
+}
+
+function lookupMaterialOrder() {
+  const input = document.getElementById('mat-lookup-input');
+  const id = input ? input.value.trim().toUpperCase() : '';
+  showMaterialOrderLookup(id);
+}
+
+function showMaterialOrderLookup(orderId) {
+  const order = materialsOrders.find(item => item.orderId === orderId);
+  if (!order) {
+    showModal('找不到這張建材單', '請核對單號，例如 MAT-12345。', '查單');
+    return;
+  }
+  switchSection('materials');
+  const goods = order.items.map(item => `${item.name} x${item.qty}`).join('、');
+  const after = order.afterSale ? `\n售後：${order.afterSale.type}${order.afterSale.done ? '（已處理）' : '（處理中）'}` : '';
+  showModal(
+    `#${order.orderId} · ${order.status}`,
+    `貨品：${goods}\n金額：HK$${Number(order.total).toLocaleString()}\n地址：${order.address}\n送貨：${order.deliveryMethod || '未送出'}${after}`,
+    '建材查單'
+  );
+}
+
+function ledgerRows(storeId) {
+  const rows = [];
+  hardwareOrders.forEach(order => {
+    if (!order.feeSettled) return;
+    if (storeId && order.storeId !== storeId) return;
+    rows.push({ id: order.orderId, side: order.storeName, goods: order.feeBase, fee: order.feeAmount, due: order.feeDue, status: order.feeStatus });
+  });
+  if (!storeId) {
+    materialsOrders.forEach(order => {
+      if (!order.feeSettled) return;
+      rows.push({ id: order.orderId, side: '建材供應商', goods: order.feeBase, fee: order.feeAmount, due: order.feeDue, status: order.feeStatus });
+    });
+  }
+  return rows;
+}
+
+function ledgerHtml(rows) {
+  if (!rows.length) return '<p class="text-[11px] text-stone-400">未有已收貨、可計介紹費的單。</p>';
+  const body = rows.map(row => `<tr class="border-t border-slate-700">
+    <td class="py-1 pr-2 font-mono">${escText(row.id)}</td>
+    <td class="py-1 pr-2">${escText(row.side)}</td>
+    <td class="py-1 pr-2 text-right">HK$${Number(row.goods || 0).toLocaleString()}</td>
+    <td class="py-1 pr-2 text-right">HK$${Number(row.fee || 0).toLocaleString()}</td>
+    <td class="py-1 pr-2">${escText(row.due || '')}</td>
+    <td class="py-1">${escText(row.status || '')}</td>
+  </tr>`).join('');
+  return `<table class="w-full text-[11px] text-left"><thead><tr class="text-stone-400"><th>單號</th><th>對象</th><th class="text-right">貨款</th><th class="text-right">介紹費</th><th>到期</th><th>狀態</th></tr></thead><tbody>${body}</tbody></table>`;
+}
+
+function openAfterSale(kind, orderId) {
+  const order = kind === 'mat' ? findMaterialOrder(orderId) : hardwareOrders.find(item => item.orderId === orderId);
+  const typeEl = document.getElementById('as-type-' + orderId);
+  const noteEl = document.getElementById('as-note-' + orderId);
+  const type = typeEl ? typeEl.value : '';
+  const note = noteEl ? noteEl.value.trim() : '';
+  const received = order && (kind === 'mat' ? order.status === '已收貨' : order.status === '師傅已收貨');
+  if (!order || !received || order.closed || (order.afterSale && !order.afterSale.done)) return;
+  if (!['缺貨', '錯貨', '退貨'].includes(type) || !note) {
+    showModal('售後未填完整', '請選缺貨、錯貨或退貨，並寫一句情況。', '售後');
+    return;
+  }
+  order.afterSale = { type, note, done: false };
+  order.closed = false;
+  persistDataLocally();
+  renderMaterialsOrderTracker();
+  renderMaterialsDesk();
+  renderHardwareOrdersTracker();
+  renderOwnerOrdersList();
+}
+
+function finishAfterSale(kind, orderId) {
+  const order = kind === 'mat' ? findMaterialOrder(orderId) : hardwareOrders.find(item => item.orderId === orderId);
+  if (!order || !order.afterSale || order.afterSale.done) return;
+  if (order.afterSale.type === '退貨') {
+    if (kind === 'mat') refundFee(order, materialsSupplier, 2500);
+    else {
+      const store = hardwareStores.find(item => item.id === order.storeId);
+      if (store) refundFee(order, store, 1500);
+    }
+  }
+  order.afterSale.done = true;
+  order.closed = true;
+  persistDataLocally();
+  renderMaterials(currentMaterialsFilter);
+  renderHardwareProducts(currentHardwareFilter);
+  renderMaterialsOrderTracker();
+  renderMaterialsDesk();
+  renderHardwareOrdersTracker();
+  renderOwnerOrdersList();
+}
+
+function closeSettledOrder(kind, orderId) {
+  const order = kind === 'mat' ? findMaterialOrder(orderId) : hardwareOrders.find(item => item.orderId === orderId);
+  const received = order && (kind === 'mat' ? order.status === '已收貨' : order.status === '師傅已收貨');
+  if (!order || !received || (order.afterSale && !order.afterSale.done)) return;
+  order.closed = true;
+  persistDataLocally();
+  renderMaterialsOrderTracker();
+  renderMaterialsDesk();
+  renderHardwareOrdersTracker();
+  renderOwnerOrdersList();
+}
+
+function topUpStoreDeposit(storeId) {
+  const store = hardwareStores.find(item => item.id === storeId);
+  if (!store) return;
+  store.deposit = 3000;
+  store.listingPaused = false;
+  persistDataLocally();
+  renderHardwareProducts(currentHardwareFilter);
+  renderOwnerOrdersList();
+}
+
+function topUpMaterialsDeposit() {
+  materialsSupplier.deposit = 5000;
+  materialsSupplier.paused = false;
+  persistDataLocally();
+  renderMaterials(currentMaterialsFilter);
+  renderMaterialsDesk();
+}
+
+function syncHardwareLines(order) {
+  order.items = (order.items || []).filter(item => item.qty > 0);
+  order.total = order.items.reduce((sum, item) => sum + item.price * item.qty, 0);
+  order.itemsSummary = order.items.map(item => `${item.name} x${item.qty}`).join('、') || '沒有貨品';
+}
+
+function setHardwareLineQty(orderId, index, qty) {
+  const order = hardwareOrders.find(item => item.orderId === orderId);
+  if (!order || order.status !== '執貨中' || !order.items || !order.items[index]) return;
+  order.items[index].qty = Math.max(0, parseInt(qty, 10) || 0);
+  syncHardwareLines(order);
+  persistDataLocally();
+  renderOwnerOrdersList();
+  renderHardwareOrdersTracker();
 }
 
 function checkoutOrder() {
@@ -4535,7 +4806,7 @@ function checkoutOrder() {
     updateCartUI();
     toggleCart(false);
 
-    const waText = `你好大本營建材直銷部！我係業主 ${ownerName} (${ownerPhone})，喺【02 建材店】落咗張建材訂單：\n\n📌 建材單號：#${matOrderId}\n🚿 選購建材：${summary}\n💰 淨料總計：HK$${subTotal}\n📍 送貨屋苑：${ownerAddr}\n🔧 安裝選項：${installOpt}`;
+    const waText = `你好大本營建材直銷部！我係業主 ${ownerName} (${ownerPhone})，喺【02 建材店】落咗張建材訂單：\n\n📌 建材單號：#${matOrderId}\n🚿 選購建材：${summary}\n💰 淨料總計：HK$${subTotal}\n📍 送貨屋苑：${ownerAddr}\n🔧 安裝選項：${installOpt}\n\n🔎 查進度：\n${orderLookupUrl(matOrderId)}`;
     const waUrl = `https://wa.me/85260000000?text=${encodeURIComponent(waText)}`;
 
     const bookInstallBtn = `<button onclick="closeModal(); bookInstallForMaterial('${summary}', '家居小型維修 / 建材家電標準安裝');" class="btn-std w-full h-10 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs mt-1.5">🔧 順便一鍵去【01 配對站】發單預約師傅上門安裝</button>`;
@@ -4580,6 +4851,8 @@ function checkoutOrder() {
       buyerPhone,
       address: buyerAddr,
       deliveryMethod,
+      waybill: '',
+      items: g.items.map(i => ({ id: i.productId, name: i.name, qty: i.qty, price: i.price, unit: i.unit })),
       itemsSummary: summary,
       total: subTotal,
       status: "已下單",
@@ -4599,7 +4872,7 @@ function checkoutOrder() {
 
   const waButtonsHtml = createdOrders.map(o => {
     const multiNote = o.isMultiStore ? `\n💡 備註：師傅同時喺另一間街坊舖買咗少少料，如車隊順路可商議夾車減運費。` : '';
-    const waText = `你好 ${o.storeName} 老闆！我係 ${o.buyerName} (${o.buyerPhone})，喺【香港裝修師傅大本營 · 03 五金店】落咗張五金單：\n\n📌 追蹤單號：#${o.orderId}\n🛒 訂購貨品：${o.itemsSummary}\n💰 物料小計：HK$${o.total}\n🚚 運送方式：${o.deliveryMethod}\n📍 送貨地盤：${o.address}${multiNote}`;
+    const waText = `你好 ${o.storeName} 老闆！我係 ${o.buyerName} (${o.buyerPhone})，喺【香港裝修師傅大本營 · 03 五金店】落咗張五金單：\n\n📌 追蹤單號：#${o.orderId}\n🛒 訂購貨品：${o.itemsSummary}\n💰 物料小計：HK$${o.total}\n🚚 運送方式：${o.deliveryMethod}\n📍 送貨地盤：${o.address}${multiNote}\n\n🔎 查進度：\n${orderLookupUrl(o.orderId)}`;
     const waUrl = `https://wa.me/852${o.storePhone}?text=${encodeURIComponent(waText)}`;
     return `<a href="${waUrl}" target="_blank" class="btn-std w-full h-11 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs shadow-sm">📲 一鍵發送 WhatsApp 購物單俾：${o.storeName}</a>`;
   }).join('');
@@ -4646,6 +4919,7 @@ async function resetDemoData() {
   appliancePricingData = JSON.parse(JSON.stringify(FACTORY_STATE.pricing));
   productPromos = JSON.parse(JSON.stringify(FACTORY_STATE.promos));
   materialsOrders = JSON.parse(JSON.stringify(FACTORY_STATE.matOrders));
+  materialsSupplier = JSON.parse(JSON.stringify(FACTORY_STATE.supplier));
   selectedHardwareStoreId = hardwareStores[0] ? hardwareStores[0].id : 'store-kt';
   cart = [];
   isMasterLoggedIn = false;
@@ -4660,6 +4934,7 @@ async function resetDemoData() {
     localStorage.setItem(LOCAL_PRICING_KEY, JSON.stringify(appliancePricingData));
     localStorage.setItem(LOCAL_PROMO_KEY, JSON.stringify(productPromos));
     localStorage.setItem(LOCAL_MAT_ORDERS_KEY, JSON.stringify(materialsOrders));
+    localStorage.setItem('hk_camp_supplier_v1', JSON.stringify(materialsSupplier));
   } catch (e) {}
   if (typeof window.syncStateToCloud === 'function') {
     try { await window.syncStateToCloud(); } catch (e) {}
@@ -4699,6 +4974,23 @@ function applyOrderLookupFromUrl() {
   const params = readCampParams();
   if (!params.job && !params.phone) return;
   let phone = (params.phone || '').trim();
+  if (params.job && /^MAT-/i.test(params.job)) {
+    orderLookupApplied = true;
+    switchSection('materials');
+    showMaterialOrderLookup(params.job.toUpperCase());
+    return;
+  }
+  if (params.job && /^HW-/i.test(params.job)) {
+    orderLookupApplied = true;
+    switchSection('hardware');
+    const order = hardwareOrders.find(item => item.orderId === params.job.toUpperCase());
+    if (!order) {
+      showModal('找不到這張五金單', '請核對單號。', '查單');
+      return;
+    }
+    showModal(`#${order.orderId} · ${order.status}`, `貨品：${order.itemsSummary}\n金額：HK$${Number(order.total).toLocaleString()}\n運單：${order.waybill || '未填'}\n地址：${order.address}`, '五金查單');
+    return;
+  }
   if (params.job) {
     const job = liveMasterJobs.find(j => j.id === params.job);
     if (!job) return;
@@ -4800,6 +5092,7 @@ window.syncStateToCloud = async function () {
         pricingJson: JSON.stringify(appliancePricingData),
         promosJson: JSON.stringify(productPromos),
         matOrdersJson: JSON.stringify(materialsOrders),
+        supplierJson: JSON.stringify(materialsSupplier),
         updatedAt: Date.now(),
         updatedBy: currentUser.uid
       });
@@ -4844,6 +5137,7 @@ async function initCloudSync() {
             if (data.pricingJson) appliancePricingData = JSON.parse(data.pricingJson);
             if (data.promosJson) productPromos = JSON.parse(data.promosJson);
             if (data.matOrdersJson) materialsOrders = JSON.parse(data.matOrdersJson);
+            if (data.supplierJson) materialsSupplier = JSON.parse(data.supplierJson);
             normalizeLoadedState();
           }
         });
