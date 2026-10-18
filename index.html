@@ -3492,15 +3492,28 @@ function renderHardwareTrades() {
   bar.className = currentHardwareKind === 'tool'
     ? "grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3 items-stretch"
     : "grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3 items-stretch";
-  bar.innerHTML = list.map(t => `<button onclick="filterHardware('${t.key}')" class="card-equal bg-stone-800 hover:bg-stone-700 border border-stone-700 rounded-2xl p-2.5 items-center text-center group min-h-[90px]">
-    <div class="w-11 h-11 mx-auto mb-1.5 icon-crop-white border-2 border-amber-400/50 shadow-sm shrink-0">
+  bar.innerHTML = list.map(t => {
+    const active = t.key === currentHardwareFilter;
+    return `<button type="button" onclick="filterHardware('${t.key}')" class="card-equal ${active ? 'bg-amber-400/15 border-2 border-amber-400' : 'bg-stone-800 border border-stone-700 hover:bg-stone-700'} rounded-2xl p-2.5 items-center text-center group min-h-[90px]">
+    <div class="w-11 h-11 mx-auto mb-1.5 icon-crop-white border-2 ${active ? 'border-amber-300' : 'border-amber-400/50'} shadow-sm shrink-0">
       <img src="${t.img}" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='https://placehold.co/96x96/1e293b/fbbf24?text=五金';" alt="${t.label}" />
     </div>
     <div class="w-full">
-      <div class="font-bold text-xs text-white group-hover:text-amber-400 line-clamp-1">${t.label}</div>
-      <div class="text-[10px] text-stone-400 line-clamp-1">${t.sub}</div>
+      <div class="font-bold text-xs ${active ? 'text-amber-300' : 'text-white'} line-clamp-1">${t.label}</div>
+      <div class="text-[10px] ${active ? 'text-amber-100' : 'text-stone-400'} line-clamp-1">${t.sub}</div>
     </div>
-  </button>`).join('');
+  </button>`;
+  }).join('');
+}
+
+function filterHardware(cat) {
+  currentHardwareFilter = cat || 'all';
+  const searchInput = document.getElementById('hardware-search-input');
+  if (searchInput && cat === 'all') searchInput.value = '';
+  renderHardwareTrades();
+  renderHardwareProducts(currentHardwareFilter);
+  const shelf = document.getElementById('hardware-shelf-title');
+  if (shelf) shelf.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function renderHardwareProducts(filter = 'all') {
