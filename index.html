@@ -1294,7 +1294,7 @@ html, body {
     <div class="flex items-center justify-between border-b border-slate-700 pb-3 gap-2 shrink-0">
       <div>
         <span class="bg-amber-400 text-slate-950 text-[11px] font-black px-2.5 py-0.5 rounded-full">五金店老闆專用後台</span>
-        <h3 class="text-base sm:text-xl font-black text-white mt-1">🏪 五金店老闆管理頁｜店主密碼鎖 · 庫存改價 · 家電安裝公價設定</h3>
+        <h3 class="text-base sm:text-xl font-black text-white mt-1">五金店老闆管理頁｜店舖資料 · 庫存改價 · 訂單</h3>
       </div>
       <button type="button" onclick="closeShopOwnerModal()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">✕</button>
     </div>
@@ -1322,9 +1322,8 @@ html, body {
         </div>
         <div class="flex flex-wrap gap-1 bg-slate-900 p-1 rounded-xl border border-slate-700">
           <button type="button" id="owner-tab-catalog" onclick="switchOwnerTab('catalog')" class="btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950">1. 店舖資料 & 改價</button>
-          <button type="button" id="owner-tab-pricing" onclick="switchOwnerTab('pricing')" class="btn-std h-8 px-3 rounded-lg text-xs font-bold text-stone-300">2. 📋 家電安裝公價設定</button>
-          <button type="button" id="owner-tab-orders" onclick="switchOwnerTab('orders')" class="btn-std h-8 px-3 rounded-lg text-xs font-bold text-stone-300">3. 訂單狀態管理</button>
-          <button type="button" id="owner-tab-promo" onclick="switchOwnerTab('promo')" class="btn-std h-8 px-3 rounded-lg text-xs font-bold text-stone-300">4. 貨品折扣</button>
+          <button type="button" id="owner-tab-orders" onclick="switchOwnerTab('orders')" class="btn-std h-8 px-3 rounded-lg text-xs font-bold text-stone-300">2. 訂單狀態管理</button>
+          <button type="button" id="owner-tab-promo" onclick="switchOwnerTab('promo')" class="btn-std h-8 px-3 rounded-lg text-xs font-bold text-stone-300">3. 貨品折扣</button>
         </div>
       </div>
 
@@ -1371,21 +1370,6 @@ html, body {
             </button>
           </div>
           <div id="owner-catalog-list" class="grid grid-cols-1 md:grid-cols-2 gap-2.5"></div>
-        </div>
-      </div>
-
-      <div id="owner-panel-pricing" class="hidden flex-1 overflow-y-auto space-y-4 pr-1 text-xs">
-        <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-4 space-y-3">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <div>
-              <h4 class="font-black text-sm text-amber-400">📋 編輯全港家電標準安裝與附加收費公價</h4>
-              <p class="text-stone-400 text-[11px]">此處修改之公價會即時同步至全站「家電標準安裝公價表」彈窗中，供所有業主查閱！</p>
-            </div>
-            <button type="button" onclick="saveAppliancePricingConfig()" class="btn-std h-10 px-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-xl text-xs shadow-md">
-              💾 儲存公價設定
-            </button>
-          </div>
-          <div id="owner-pricing-list" class="space-y-2.5"></div>
         </div>
       </div>
 
@@ -3972,36 +3956,31 @@ function addNewHardwareStore() {
 
 function switchOwnerTab(tab) {
   const catBtn = document.getElementById('owner-tab-catalog');
-  const priBtn = document.getElementById('owner-tab-pricing');
   const ordBtn = document.getElementById('owner-tab-orders');
   const promoBtn = document.getElementById('owner-tab-promo');
   const catPanel = document.getElementById('owner-panel-catalog');
-  const priPanel = document.getElementById('owner-panel-pricing');
   const ordPanel = document.getElementById('owner-panel-orders');
   const promoPanel = document.getElementById('owner-panel-promo');
+  if (tab === 'pricing') tab = 'catalog';
 
-  [catBtn, priBtn, ordBtn, promoBtn].forEach(b => {
+  [catBtn, ordBtn, promoBtn].forEach(b => {
     if (b) b.className = "btn-std h-8 px-3 rounded-lg text-xs font-bold text-stone-300 hover:text-white";
   });
-  [catPanel, priPanel, ordPanel, promoPanel].forEach(p => {
+  [catPanel, ordPanel, promoPanel].forEach(p => {
     if (p) p.classList.add('hidden');
   });
 
-  if (tab === 'catalog') {
-    catBtn.className = "btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950";
-    catPanel.classList.remove('hidden');
-  } else if (tab === 'pricing') {
-    priBtn.className = "btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950";
-    priPanel.classList.remove('hidden');
-    loadOwnerPricingForm();
-  } else if (tab === 'promo') {
+  if (tab === 'promo') {
     promoBtn.className = "btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950";
     promoPanel.classList.remove('hidden');
     renderPromoAdmin();
-  } else {
+  } else if (tab === 'orders') {
     ordBtn.className = "btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950";
     ordPanel.classList.remove('hidden');
     renderOwnerOrdersList();
+  } else {
+    catBtn.className = "btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950";
+    catPanel.classList.remove('hidden');
   }
 }
 
