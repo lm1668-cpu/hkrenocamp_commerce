@@ -692,7 +692,7 @@ html, body {
           <div class="p-3 bg-slate-900 border-b border-stone-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div class="min-w-0">
               <div class="flex items-center gap-2">
-                <span class="bg-emerald-500 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded">GOOGLE MAPS 實時地圖</span>
+                <span class="bg-emerald-500 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded">舖頭地圖</span>
                 <span id="gmap-store-name" class="font-black text-xs sm:text-sm text-white truncate">榮發五金建材行 (觀塘店)</span>
               </div>
               <p id="gmap-store-address" class="text-[11px] text-stone-400 truncate mt-0.5">📍 觀塘開源道 62 號駱駝漆大廈地下</p>
@@ -703,17 +703,7 @@ html, body {
               </a>
             </div>
           </div>
-          <div class="w-full h-[220px] sm:h-[260px] bg-slate-900 relative">
-            <iframe 
-              id="gmap-iframe"
-              title="十八區五金舖 Google Map"
-              src="https://maps.google.com/maps?q=%E9%A6%99%E6%B8%AF%E8%A7%80%E5%A1%98%E9%96%8B%E6%BA%90%E9%81%9362%E8%99%9F%E9%A7%B1%E9%A7%9D%E6%BC%86%E5%A4%A7%E5%BB%88&t=&z=16&ie=UTF8&iwloc=&output=embed"
-              class="w-full h-full border-0"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              allowfullscreen
-            ></iframe>
-          </div>
+          <div id="gmap-canvas" class="w-full bg-slate-800 relative overflow-hidden" style="height:220px"></div>
         </div>
 
         <div id="storefront-banner-box" class="hidden bg-gradient-to-r from-slate-900 to-stone-900 border-2 border-amber-400 rounded-2xl p-4 space-y-2">
@@ -3428,15 +3418,35 @@ function updateGoogleMapWidget() {
   const nameEl = document.getElementById('gmap-store-name');
   const addrEl = document.getElementById('gmap-store-address');
   const navBtn = document.getElementById('gmap-external-nav-btn');
-  const iframe = document.getElementById('gmap-iframe');
 
   if (nameEl) nameEl.textContent = `${store.name} (${store.district})`;
   if (addrEl) addrEl.textContent = `📍 ${store.address} ｜ 📱 WhatsApp: ${store.phone} ｜ 距地盤約 ${store.distanceKm} km`;
-  const encodedQuery = encodeURIComponent(store.address + ' ' + store.name);
+  const encodedQuery = encodeURIComponent((store.lat && store.lng) ? `${store.lat},${store.lng}` : (store.address + ' ' + store.name));
   if (navBtn) navBtn.href = `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`;
-  if (iframe) {
-    iframe.src = `https://maps.google.com/maps?q=${encodeURIComponent(store.address)}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
+  renderStoreMap(store);
+}
+
+function renderStoreMap(store) {
+  const box = document.getElementById('gmap-canvas');
+  if (!box || !store || store.lat == null || store.lng == null) return;
+  const zoom = 16;
+  const n = 2 ** zoom;
+  const xFloat = (store.lng + 180) / 360 * n;
+  const latRad = store.lat * Math.PI / 180;
+  const yFloat = (1 - Math.log(Math.tan(latRad) + 1 / Math.cos(latRad)) / Math.PI) / 2 * n;
+  const x0 = Math.floor(xFloat);
+  const y0 = Math.floor(yFloat);
+  let tiles = '';
+  for (let dy = -1; dy <= 1; dy += 1) {
+    for (let dx = -1; dx <= 1; dx += 1) {
+      const left = ((x0 + dx) - xFloat) * 256;
+      const top = ((y0 + dy) - yFloat) * 256;
+      tiles += `<img alt="" width="256" height="256" src="https://tile.openstreetmap.org/${zoom}/${x0 + dx}/${y0 + dy}.png" style="position:absolute;left:${left}px;top:${top}px;width:256px;height:256px" />`;
+    }
   }
+  box.innerHTML = `<div style="position:absolute;left:50%;top:50%;width:0;height:0">${tiles}</div>
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-100%);font-size:28px;line-height:1;z-index:2">📍</div>
+    <a href="https://www.openstreetmap.org/?mlat=${store.lat}&mlon=${store.lng}#map=${zoom}/${store.lat}/${store.lng}" target="_blank" rel="noopener noreferrer" style="position:absolute;right:4px;bottom:4px;z-index:3" class="bg-white/90 text-slate-700 text-[10px] px-1.5 py-0.5 rounded">© OpenStreetMap</a>`;
 }
 
 function renderHardwareStoresBar() {
