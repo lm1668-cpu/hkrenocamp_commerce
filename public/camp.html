@@ -612,12 +612,15 @@ html, body {
           標價只售物料。需要上門安裝的貨品先會有「搵師傅裝」。每件貨可先加減數量再入清單。有優惠的貨會顯示劃線原價同折扣價。
         </p>
       </div>
-      <div class="flex items-center gap-2 shrink-0">
+      <div class="flex flex-wrap items-center gap-2 shrink-0">
         <button onclick="openAppliancePricingModal()" class="btn-std bg-slate-900 hover:bg-slate-800 text-amber-400 font-black text-xs px-4 h-10 rounded-xl shadow-xs">
-          <span>📋 查看「家電標準安裝公價表」</span>
+          <span>查看「家電標準安裝公價表」</span>
         </button>
         <button onclick="openShopOwnerModal('promo')" class="btn-std bg-white hover:bg-stone-100 text-slate-900 border border-stone-300 font-black text-xs px-4 h-10 rounded-xl">
-          <span>🏷️ 貨品折扣管理</span>
+          <span>貨品折扣管理</span>
+        </button>
+        <button onclick="openMaterialsDesk()" class="btn-std bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs px-4 h-10 rounded-xl">
+          <span>建材接單台</span>
         </button>
       </div>
     </div>
@@ -633,6 +636,11 @@ html, body {
     </div>
 
     <div id="materials-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2 items-stretch"></div>
+    <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 space-y-2">
+      <h3 class="text-sm font-black text-emerald-950">建材訂單</h3>
+      <p class="text-[11px] text-stone-600">落單後會留在系統。接單、採購清單和送貨狀態在「建材接單台」處理，密碼 8888。</p>
+      <div id="materials-orders-tracker" class="space-y-2"></div>
+    </div>
     <p class="text-[11px] text-stone-500">撳商品圖片或名稱可看詳細介紹。睇緊介紹時，配對站同五金店會先收起。</p>
   </div>
 </section>
@@ -1500,6 +1508,28 @@ html, body {
   </div>
 </div>
 
+<div id="materials-desk-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+  <div onclick="closeMaterialsDesk()" class="fixed inset-0 bg-black/75 backdrop-blur-xs"></div>
+  <div class="relative bg-slate-900 text-white rounded-3xl max-w-4xl w-full p-4 sm:p-7 shadow-2xl border-2 border-emerald-400 z-10 space-y-4 my-8 max-h-[92vh] flex flex-col">
+    <div class="flex items-center justify-between border-b border-slate-700 pb-3 gap-2 shrink-0">
+      <div>
+        <span class="bg-emerald-400 text-slate-950 text-[11px] font-black px-2.5 py-0.5 rounded-full">大本營建材部</span>
+        <h3 class="text-base sm:text-xl font-black text-white mt-1">建材接單台｜接單 · 採購清單 · 送貨</h3>
+      </div>
+      <button type="button" onclick="closeMaterialsDesk()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">✕</button>
+    </div>
+    <div id="mat-desk-gate" class="py-8 px-4 text-center space-y-4 bg-slate-800/80 rounded-2xl border border-slate-700">
+      <h4 class="font-black text-base text-white">請輸入大本營密碼</h4>
+      <p class="text-xs text-stone-400">建材單只有大本營能接。密碼 <span class="text-emerald-300 font-mono font-bold">8888</span></p>
+      <div class="flex items-center justify-center gap-2 max-w-xs mx-auto">
+        <input type="password" id="mat-desk-pin" value="8888" class="flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm" />
+        <button type="button" onclick="verifyMaterialsDeskPin()" class="btn-std h-10 px-4 bg-emerald-400 text-slate-950 font-black rounded-xl text-xs">解鎖</button>
+      </div>
+    </div>
+    <div id="mat-desk-body" class="hidden flex-1 overflow-y-auto space-y-3 pr-1"></div>
+  </div>
+</div>
+
 <script>
 const heroConfig = {
   all: {
@@ -1561,6 +1591,7 @@ const LOCAL_HW_ORDERS_KEY = 'hk_camp_hw_orders_v9';
 const LOCAL_REVIEWS_KEY = 'hk_camp_mutual_reviews_v9';
 const LOCAL_PRICING_KEY = 'hk_camp_appliance_pricing_v3';
 const LOCAL_PROMO_KEY = 'hk_camp_product_promos_v1';
+const LOCAL_MAT_ORDERS_KEY = 'hk_camp_mat_orders_v1';
 
 let appliancePricingData = {
   kitchen: [
@@ -1910,6 +1941,10 @@ let hardwareOrders = [
   }
 ];
 
+let materialsOrders = [];
+let materialsDeskUnlocked = false;
+const MAT_ORDER_STEPS = ["待確認", "已接單", "執貨中", "已送出", "已收貨"];
+
 let cart = [];
 let activeCartTab = 'hardware';
 let pendingOwnerTab = 'catalog';
@@ -1921,6 +1956,7 @@ const FACTORY_STATE = {
   jobs: JSON.parse(JSON.stringify(liveMasterJobs)),
   stores: JSON.parse(JSON.stringify(hardwareStores)),
   orders: JSON.parse(JSON.stringify(hardwareOrders)),
+  matOrders: JSON.parse(JSON.stringify(materialsOrders)),
   reviews: JSON.parse(JSON.stringify(mutualReviews)),
   pricing: JSON.parse(JSON.stringify(appliancePricingData)),
   promos: JSON.parse(JSON.stringify(productPromos))
@@ -1959,6 +1995,8 @@ function loadPersistedData() {
     if (savedP) appliancePricingData = JSON.parse(savedP);
     const savedPromo = localStorage.getItem(LOCAL_PROMO_KEY);
     if (savedPromo) productPromos = JSON.parse(savedPromo);
+    const savedMat = localStorage.getItem(LOCAL_MAT_ORDERS_KEY);
+    if (savedMat) materialsOrders = JSON.parse(savedMat);
     normalizeLoadedState();
   } catch (e) { console.warn(e); }
 }
@@ -1972,6 +2010,7 @@ function persistDataLocally() {
     localStorage.setItem(LOCAL_REVIEWS_KEY, JSON.stringify(mutualReviews));
     localStorage.setItem(LOCAL_PRICING_KEY, JSON.stringify(appliancePricingData));
     localStorage.setItem(LOCAL_PROMO_KEY, JSON.stringify(productPromos));
+    localStorage.setItem(LOCAL_MAT_ORDERS_KEY, JSON.stringify(materialsOrders));
   } catch (e) { console.warn(e); }
   if (typeof window.syncStateToCloud === 'function') {
     window.syncStateToCloud();
@@ -1996,6 +2035,8 @@ function refreshAllViewsFromCloud() {
   renderHardwareStoresBar();
   renderHardwareProducts(currentHardwareFilter);
   renderHardwareOrdersTracker();
+  renderMaterialsOrderTracker();
+  renderMaterialsDesk();
   if (isAdminUnlocked) {
     renderAdminMasterList();
     renderAdminJobsList();
@@ -4293,6 +4334,165 @@ function toggleCart(show) {
   document.getElementById('cart-drawer').classList.toggle('hidden', !show);
 }
 
+function escText(value) {
+  return String(value || '').replace(/[&<>"']/g, ch => ({ '&': '&', '<': '<', '>': '>', '"': '"', "'": '&#39;' }[ch]));
+}
+
+function renderMaterialsOrderTracker() {
+  const box = document.getElementById('materials-orders-tracker');
+  if (!box) return;
+  if (!materialsOrders.length) {
+    box.innerHTML = '<p class="text-xs text-stone-500">暫時未有建材單。</p>';
+    return;
+  }
+  box.innerHTML = materialsOrders.map(order => {
+    const step = MAT_ORDER_STEPS.indexOf(order.status);
+    const steps = MAT_ORDER_STEPS.map((name, idx) => {
+      const on = order.status !== '已拒絕' && idx <= step;
+      return `<span class="text-[11px] font-bold ${on ? 'text-emerald-700' : 'text-stone-400'}">${idx + 1}.${name}</span>`;
+    }).join('<span class="text-stone-300"> → </span>');
+    const extra = order.status === '已拒絕'
+      ? `<p class="text-[11px] text-red-700">已拒絕：${escText(order.rejectReason)}</p>`
+      : '';
+    const ship = order.deliveryMethod ? `<p class="text-[11px] text-stone-600">送貨方式：${escText(order.deliveryMethod)}</p>` : '';
+    return `<div class="bg-white border border-emerald-200 rounded-xl p-3 space-y-1">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <span class="font-mono font-black text-xs text-emerald-800">#${escText(order.orderId)}</span>
+        <span class="text-[11px] font-black text-slate-900">${escText(order.status)}</span>
+      </div>
+      <p class="text-[11px] text-stone-600">${escText(order.items.map(i => i.name + ' x' + i.qty).join('、'))} · HK$${Number(order.total).toLocaleString()}</p>
+      <div class="flex flex-wrap gap-1">${steps}</div>
+      ${ship}${extra}
+    </div>`;
+  }).join('');
+}
+
+function openMaterialsDesk() {
+  document.getElementById('materials-desk-modal').classList.remove('hidden');
+  document.getElementById('mat-desk-gate').classList.toggle('hidden', materialsDeskUnlocked);
+  document.getElementById('mat-desk-body').classList.toggle('hidden', !materialsDeskUnlocked);
+  if (materialsDeskUnlocked) renderMaterialsDesk();
+}
+function closeMaterialsDesk() {
+  document.getElementById('materials-desk-modal').classList.add('hidden');
+}
+function verifyMaterialsDeskPin() {
+  const pin = document.getElementById('mat-desk-pin').value.trim();
+  if (pin !== '8888') {
+    showModal('密碼不正確', '建材接單台密碼是 8888。五金店老闆密碼不能接建材單。', '驗證失敗');
+    return;
+  }
+  materialsDeskUnlocked = true;
+  document.getElementById('mat-desk-gate').classList.add('hidden');
+  document.getElementById('mat-desk-body').classList.remove('hidden');
+  renderMaterialsDesk();
+}
+
+function renderMaterialsDesk() {
+  const box = document.getElementById('mat-desk-body');
+  if (!box || box.classList.contains('hidden')) return;
+  if (!materialsOrders.length) {
+    box.innerHTML = '<p class="text-xs text-stone-400 py-6 text-center">未有建材單。</p>';
+    return;
+  }
+  box.innerHTML = materialsOrders.map(order => {
+    const lines = order.items.map(i => `${escText(i.name)} x${i.qty} · HK$${i.price}`).join('<br/>');
+    let actions = '';
+    if (order.status === '待確認') {
+      actions = `<div class="flex flex-wrap gap-2">
+        <button type="button" onclick="acceptMaterialOrder('${order.orderId}')" class="btn-std h-8 px-3 rounded-xl bg-emerald-400 text-slate-950 font-black text-xs">接單</button>
+        <input id="reject-${order.orderId}" placeholder="拒絕原因" class="h-8 flex-1 min-w-32 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white" />
+        <button type="button" onclick="rejectMaterialOrder('${order.orderId}')" class="btn-std h-8 px-3 rounded-xl bg-stone-700 text-white font-bold text-xs">拒絕</button>
+      </div>`;
+    } else if (order.status === '已接單') {
+      actions = `<button type="button" onclick="advanceMaterialOrder('${order.orderId}', '執貨中')" class="btn-std h-8 px-3 rounded-xl bg-amber-400 text-slate-950 font-black text-xs">開始執貨</button>`;
+    } else if (order.status === '執貨中') {
+      actions = `<div class="flex flex-wrap gap-2">
+        <select id="ship-${order.orderId}" class="h-8 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white">
+          <option value="">送貨方式</option>
+          <option value="大本營送貨">大本營送貨</option>
+          <option value="供應商直送">供應商直送</option>
+          <option value="客戶自取">客戶自取</option>
+        </select>
+        <button type="button" onclick="shipMaterialOrder('${order.orderId}')" class="btn-std h-8 px-3 rounded-xl bg-sky-500 text-slate-950 font-black text-xs">標記已送出</button>
+      </div>`;
+    } else if (order.status === '已送出') {
+      actions = `<button type="button" onclick="advanceMaterialOrder('${order.orderId}', '已收貨')" class="btn-std h-8 px-3 rounded-xl bg-emerald-400 text-slate-950 font-black text-xs">確認客人已收貨</button>`;
+    }
+    const purchase = order.purchaseList && order.purchaseList.length
+      ? `<div class="bg-slate-950 border border-emerald-500/40 rounded-xl p-2 text-[11px] text-emerald-100"><div class="font-black text-emerald-300 mb-1">採購清單</div>${order.purchaseList.map(i => escText(i.name) + ' x' + i.qty).join('、')}</div>`
+      : '';
+    const rejected = order.status === '已拒絕' ? `<p class="text-[11px] text-red-300">已拒絕：${escText(order.rejectReason)}</p>` : '';
+    return `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
+      <div class="flex flex-wrap justify-between gap-2 text-xs">
+        <span class="font-mono font-black text-emerald-300">#${escText(order.orderId)}</span>
+        <span class="font-black">${escText(order.status)}</span>
+      </div>
+      <p class="text-[11px] text-stone-300">${escText(order.buyerName)} · ${escText(order.buyerPhone)} · ${escText(order.address)}</p>
+      <p class="text-[11px] text-stone-200">${lines}</p>
+      <p class="text-xs font-black text-amber-300">HK$${Number(order.total).toLocaleString()}${order.deliveryMethod ? ' · ' + escText(order.deliveryMethod) : ''}</p>
+      ${purchase}${rejected}${actions}
+    </div>`;
+  }).join('');
+}
+
+function findMaterialOrder(orderId) {
+  return materialsOrders.find(order => order.orderId === orderId);
+}
+
+function acceptMaterialOrder(orderId) {
+  const order = findMaterialOrder(orderId);
+  if (!order || order.status !== '待確認') return;
+  order.status = '已接單';
+  order.purchaseList = order.items.map(item => ({ id: item.id, name: item.name, qty: item.qty, unit: item.unit }));
+  persistDataLocally();
+  renderMaterialsOrderTracker();
+  renderMaterialsDesk();
+}
+
+function rejectMaterialOrder(orderId) {
+  const order = findMaterialOrder(orderId);
+  const reasonEl = document.getElementById('reject-' + orderId);
+  const reason = reasonEl ? reasonEl.value.trim() : '';
+  if (!order || order.status !== '待確認') return;
+  if (!reason) {
+    showModal('請寫拒絕原因', '拒絕前要寫原因，例如缺貨或地址不送。', '未填原因');
+    return;
+  }
+  order.status = '已拒絕';
+  order.rejectReason = reason;
+  persistDataLocally();
+  renderMaterialsOrderTracker();
+  renderMaterialsDesk();
+}
+
+function advanceMaterialOrder(orderId, nextStatus) {
+  const order = findMaterialOrder(orderId);
+  const currentIndex = MAT_ORDER_STEPS.indexOf(order && order.status);
+  const nextIndex = MAT_ORDER_STEPS.indexOf(nextStatus);
+  if (!order || nextIndex !== currentIndex + 1) return;
+  order.status = nextStatus;
+  persistDataLocally();
+  renderMaterialsOrderTracker();
+  renderMaterialsDesk();
+}
+
+function shipMaterialOrder(orderId) {
+  const order = findMaterialOrder(orderId);
+  const methodEl = document.getElementById('ship-' + orderId);
+  const method = methodEl ? methodEl.value.trim() : '';
+  if (!order || order.status !== '執貨中') return;
+  if (!method) {
+    showModal('請選送貨方式', '標記已送出之前，要選大本營送貨、供應商直送或客戶自取。', '未選送貨方式');
+    return;
+  }
+  order.deliveryMethod = method;
+  order.status = '已送出';
+  persistDataLocally();
+  renderMaterialsOrderTracker();
+  renderMaterialsDesk();
+}
+
 function checkoutOrder() {
   const activeItems = activeCartTab === 'materials'
     ? cart.filter(i => i.storeId === 'materials-official')
@@ -4313,6 +4513,22 @@ function checkoutOrder() {
     const matOrderId = 'MAT-' + Math.floor(10000 + Math.random() * 90000);
     const subTotal = activeItems.reduce((s, i) => s + i.price * i.qty, 0);
     const summary = activeItems.map(i => `${i.name} x${i.qty}`).join('、');
+    materialsOrders.unshift({
+      orderId: matOrderId,
+      buyerName: ownerName,
+      buyerPhone: ownerPhone,
+      address: ownerAddr,
+      installOpt,
+      items: activeItems.map(i => ({ id: i.productId, name: i.name, qty: i.qty, price: i.price, unit: i.unit })),
+      total: subTotal,
+      status: '待確認',
+      rejectReason: '',
+      deliveryMethod: '',
+      purchaseList: [],
+      time: '剛剛'
+    });
+    persistDataLocally();
+    renderMaterialsOrderTracker();
 
     // 只清除已結帳嘅 02 建材店貨品，保留 03 五金店貨品
     cart = cart.filter(i => i.storeId !== 'materials-official');
@@ -4326,7 +4542,7 @@ function checkoutOrder() {
 
     showModal(
       `✅ 已建立【02 建材店】業主訂單 #${matOrderId}！`,
-      `你選購嘅建材（${summary}）已獨立處理，唔會同師傅地盤五金單混淆！\n請撳下方按鈕發送 WhatsApp 俾大本營建材部安排送貨：`,
+      `訂單已存入系統，狀態是「待確認」。\n大本營要在建材接單台按「接單」，才會生成採購清單。\n你選購嘅建材：${summary}`,
       '02 建材店落單成功',
       `<a href="${waUrl}" target="_blank" class="btn-std w-full h-11 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs shadow-sm">📲 一鍵 WhatsApp 發送建材單俾：大本營建材直銷部</a>` + bookInstallBtn
     );
@@ -4429,6 +4645,7 @@ async function resetDemoData() {
   mutualReviews = JSON.parse(JSON.stringify(FACTORY_STATE.reviews));
   appliancePricingData = JSON.parse(JSON.stringify(FACTORY_STATE.pricing));
   productPromos = JSON.parse(JSON.stringify(FACTORY_STATE.promos));
+  materialsOrders = JSON.parse(JSON.stringify(FACTORY_STATE.matOrders));
   selectedHardwareStoreId = hardwareStores[0] ? hardwareStores[0].id : 'store-kt';
   cart = [];
   isMasterLoggedIn = false;
@@ -4442,6 +4659,7 @@ async function resetDemoData() {
     localStorage.setItem(LOCAL_REVIEWS_KEY, JSON.stringify(mutualReviews));
     localStorage.setItem(LOCAL_PRICING_KEY, JSON.stringify(appliancePricingData));
     localStorage.setItem(LOCAL_PROMO_KEY, JSON.stringify(productPromos));
+    localStorage.setItem(LOCAL_MAT_ORDERS_KEY, JSON.stringify(materialsOrders));
   } catch (e) {}
   if (typeof window.syncStateToCloud === 'function') {
     try { await window.syncStateToCloud(); } catch (e) {}
@@ -4505,6 +4723,7 @@ function bootCampApp() {
   renderHardwareTrades();
   renderHardwareProducts();
   renderHardwareOrdersTracker();
+  renderMaterialsOrderTracker();
   updateCartUI();
   updateMasterCountUI();
   const params = readCampParams();
@@ -4580,6 +4799,7 @@ window.syncStateToCloud = async function () {
         ordersJson: JSON.stringify(hardwareOrders),
         pricingJson: JSON.stringify(appliancePricingData),
         promosJson: JSON.stringify(productPromos),
+        matOrdersJson: JSON.stringify(materialsOrders),
         updatedAt: Date.now(),
         updatedBy: currentUser.uid
       });
@@ -4623,6 +4843,7 @@ async function initCloudSync() {
             if (data.ordersJson) hardwareOrders = JSON.parse(data.ordersJson);
             if (data.pricingJson) appliancePricingData = JSON.parse(data.pricingJson);
             if (data.promosJson) productPromos = JSON.parse(data.promosJson);
+            if (data.matOrdersJson) materialsOrders = JSON.parse(data.matOrdersJson);
             normalizeLoadedState();
           }
         });
