@@ -1699,10 +1699,10 @@ const hardwareToolTrades = [
 
 const hardwareTrades = [
   { key: "all", label: "全部五金", sub: "標準圖庫", img: "images/hardware/camp/five.jpg" },
-  { key: "電工", label: "電工", sub: "蘇、線、掣", img: "images/hardware/camp/elec.jpg" },
+  { key: "電工", label: "電工", sub: "蘇、線、底盒", img: "images/hardware/camp/elec.jpg" },
   { key: "水喉", label: "水喉", sub: "波曲、喉件", img: "images/hardware/camp/plumb.jpg" },
-  { key: "木工", label: "木工", sub: "螺絲、牆塞", img: "images/hardware/camp/wood.jpg" },
-  { key: "油漆", label: "油漆", sub: "滾筒、批灰", img: "images/hardware/camp/paint.jpg" },
+  { key: "木工", label: "木工", sub: "螺絲、路軌", img: "images/hardware/camp/wood.jpg" },
+  { key: "油漆", label: "油漆", sub: "砂紙、玻璃膠", img: "images/hardware/camp/paint.jpg" },
   { key: "鋁窗", label: "鋁窗", sub: "滑輪、膠邊", img: "images/hardware/camp/window.jpg" }
 ];
 
@@ -1753,6 +1753,52 @@ const masterHardwareCatalog = [
   { id: "h-gasket", cat: "鋁窗", sku: "DC-AW-GS", name: "窗膠邊", spec: "灰色密封膠條", size: "每條約 5 m", material: "EPDM 膠", pack: "1 條", standard: "窗縫", use: "窗邊入風、滲水", desc: "舊膠硬裂先清走，再壓入新膠邊。", defaultPrice: 15, unit: "條", img: "images/hardware/camp/window.jpg" },
   { id: "h-stay", cat: "鋁窗", sku: "DC-AW-ST12", name: "窗風撐 12寸", spec: "不鏽鋼風撐", size: "12 寸", material: "不鏽鋼", pack: "1 支", standard: "上懸窗", use: "窗扇打開後固定角度", desc: "左右邊各一。長度不對會頂住窗框。", defaultPrice: 35, unit: "支", img: "images/hardware/camp/window.jpg" },
   { id: "h-winscrew", cat: "鋁窗", sku: "DC-AW-SC", name: "不鏽鋼窗螺絲", spec: "盤頭自攻", size: "8 × 1/2 寸", material: "不鏽鋼", pack: "100 粒盒", standard: "鋁窗", use: "窗鎖、滑輪、風撐", desc: "不要用普通黑螺絲，會生鏽留痕。", defaultPrice: 18, unit: "盒", img: "images/hardware/products/fastener.jpg" },
+
+  { id: "h-etape", cat: "電工", sku: "DC-EL-TAPE", name: "電工膠布", spec: "PVC 絕緣，黑、紅、黃綠", size: "18 mm × 10 m", material: "PVC", pack: "3 卷", standard: "絕緣膠布", use: "駁線收口、分色", desc: "接頭要先接實，膠布只是絕緣，不是用來駁緊電線。", defaultPrice: 15, unit: "排", img: "images/hardware/products/electrical.jpg" },
+  { id: "h-lever", cat: "電工", sku: "DC-EL-LV2", name: "快速接線端子 2位", spec: "按壓式，適合 0.5–2.5mm", size: "2 位", material: "阻燃膠、銅片", pack: "10 隻", standard: "接線端子", use: "燈位、蘇位駁線", desc: "比膠布絞線穩。實芯線直接插入，多芯線要先拗實。", defaultPrice: 28, unit: "排", img: "images/hardware/camp/elec.jpg" },
+  { id: "h-backbox", cat: "電工", sku: "DC-EL-BB35", name: "暗裝底盒 35mm", spec: "一位，連螺絲", size: "35 mm 深", material: "鐵", pack: "1 個", standard: "86 型", use: "新做蘇位、燈掣", desc: "深度不夠，面板會頂住電線。舊牆換掣多數不用換底盒。", defaultPrice: 8, unit: "個", img: "images/hardware/products/electrical.jpg" },
+  { id: "h-coup20", cat: "電工", sku: "DC-EL-CP20", name: "膠管直通 20mm", spec: "套入 20mm 電線管", size: "20 mm", material: "PVC", pack: "10 個", standard: "BS 4607", use: "駁長電線管", desc: "要套到管端的止位，不要只插一點。", defaultPrice: 12, unit: "包", img: "images/hardware/camp/elec.jpg" },
+  { id: "h-bend20", cat: "電工", sku: "DC-EL-BD20", name: "膠管彎頭 20mm", spec: "90 度檢查彎", size: "20 mm", material: "PVC", pack: "5 個", standard: "BS 4607", use: "線管轉角", desc: "拉線轉角要用彎頭，硬拗膠管會扁。", defaultPrice: 15, unit: "包", img: "images/hardware/camp/elec.jpg" },
+  { id: "h-saddle", cat: "電工", sku: "DC-EL-SD20", name: "電線碼 20mm", spec: "配 20mm 膠管", size: "20 mm", material: "鍍鋅", pack: "20 隻", standard: "管碼", use: "明線固定膠管", desc: "約每 400mm 一個。石膏板牆要配合適螺絲。", defaultPrice: 12, unit: "包", img: "images/hardware/products/electrical.jpg" },
+  { id: "h-dp20", cat: "電工", sku: "DC-EL-DP20", name: "20A 雙極開關", spec: "帶指示燈，雙極隔離", size: "86 型", material: "阻燃膠面", pack: "1 件", standard: "BS EN 60669", use: "熱水器、冷氣隔離", desc: "大功率電器要用雙極開關，不要用普通燈掣。", defaultPrice: 48, unit: "件", img: "images/hardware/products/electrical.jpg" },
+  { id: "h-fuse13", cat: "電工", sku: "DC-EL-F13", name: "13A 保險絲", spec: "英式插頭用", size: "13 A", material: "陶瓷", pack: "10 隻", standard: "BS 1362", use: "換插頭保險絲", desc: "細電器不要一律用 13A，要跟電器原裝安培。", defaultPrice: 15, unit: "排", img: "images/hardware/camp/elec.jpg" },
+  { id: "h-wire60", cat: "電工", sku: "DC-EL-60W", name: "6mm 單支銅芯電線", spec: "單支銅芯，PVC 絕緣", size: "6 mm² × 100 m", material: "電解銅", pack: "1 圈", standard: "BS 6004", use: "煮食爐、大電流專線", desc: "爐具專線不要用 4mm 頂替。", defaultPrice: 780, unit: "圈", img: "images/hardware/products/electrical.jpg" },
+  { id: "h-rccb", cat: "電工", sku: "DC-EL-RC63", name: "漏電斷路器 63A", spec: "雙極，30mA", size: "2 單位 DIN", material: "阻燃外殼", pack: "1 件", standard: "IEC 61008", use: "電箱總漏電保護", desc: "只防漏電，不代替 MCB 過流保護。", defaultPrice: 180, unit: "件", img: "images/hardware/camp/elec.jpg" },
+  { id: "h-rose", cat: "電工", sku: "DC-EL-ROSE", name: "天花燈玫瑰", spec: "三位接線，連蓋", size: "90 mm", material: "阻燃膠", pack: "1 個", standard: "燈玫瑰", use: "吊燈、燈胆座接電", desc: "天花出線先接入玫瑰，不要把燈線直接扭在一起。", defaultPrice: 18, unit: "個", img: "images/hardware/products/electrical.jpg" },
+  { id: "h-trunk", cat: "電工", sku: "DC-EL-TR25", name: "明裝線槽 25mm", spec: "帶蓋", size: "25 × 16 mm × 2 m", material: "PVC", pack: "1 支", standard: "線槽", use: "不想開牆時的明線", desc: "轉角要配線槽彎，硬拗會裂。", defaultPrice: 16, unit: "支", img: "images/hardware/camp/elec.jpg" },
+
+  { id: "h-tee12", cat: "水喉", sku: "DC-PB-T12", name: "鍍鋅三通 1/2寸", spec: "內牙三通", size: "1/2 寸", material: "鍍鋅鐵", pack: "1 件", standard: "英制喉件", use: "分一支去洗衣機或水煲", desc: "三個口都是內牙，要配外牙直咀。", defaultPrice: 12, unit: "件", img: "images/hardware/products/plumbing.jpg" },
+  { id: "h-union12", cat: "水喉", sku: "DC-PB-U12", name: "鍍鋅活接 1/2寸", spec: "可拆接頭", size: "1/2 寸", material: "鍍鋅鐵", pack: "1 件", standard: "英制喉件", use: "日後要拆的位置", desc: "泵、爐、濾水機前裝一隻，維修不用鋸喉。", defaultPrice: 22, unit: "件", img: "images/hardware/camp/plumb.jpg" },
+  { id: "h-soc12", cat: "水喉", sku: "DC-PB-S12", name: "鍍鋅內牙直通 1/2寸", spec: "內牙對內牙", size: "1/2 寸", material: "鍍鋅鐵", pack: "1 件", standard: "英制喉件", use: "駁兩條外牙", desc: "不要當活接用，上緊後不能單獨拆開一邊。", defaultPrice: 8, unit: "件", img: "images/hardware/products/plumbing.jpg" },
+  { id: "h-flex300", cat: "水喉", sku: "DC-PB-F300", name: "不鏽鋼軟喉 300mm", spec: "1/2 寸母牙兩頭", size: "300 mm", material: "304 編織軟喉", pack: "1 條", standard: "常用駁喉", use: "短距離駁角閥", desc: "300mm 不夠就換 400mm，不要拉到筆直。", defaultPrice: 38, unit: "條", img: "images/hardware/products/plumbing.jpg" },
+  { id: "h-pvc40", cat: "水喉", sku: "DC-PB-PVC40", name: "PVC 排水管 40mm", spec: "排水用", size: "40 mm × 4 m", material: "PVC", pack: "1 支", standard: "排水管", use: "星盆、洗衣機主去水", desc: "食水不要用這條。駁口要用 PVC 膠。", defaultPrice: 36, unit: "支", img: "images/hardware/camp/plumb.jpg" },
+  { id: "h-elb40", cat: "水喉", sku: "DC-PB-E40", name: "PVC 彎頭 40mm", spec: "90 度排水彎", size: "40 mm", material: "PVC", pack: "1 件", standard: "排水管", use: "去水轉角", desc: "先乾插試位，再上膠。上膠後不能扭正。", defaultPrice: 6, unit: "件", img: "images/hardware/camp/plumb.jpg" },
+  { id: "h-pvcglue", cat: "水喉", sku: "DC-PB-GLUE", name: "PVC 水管膠", spec: "排水管粘合", size: "125 ml", material: "溶劑膠", pack: "1 支", standard: "PVC 膠", use: "膠喉、彎頭駁口", desc: "只粘 PVC。鐵喉和軟喉不能用這支膠。", defaultPrice: 22, unit: "支", img: "images/hardware/products/plumbing.jpg" },
+  { id: "h-wmtap", cat: "水喉", sku: "DC-PB-WM", name: "洗衣機龍頭", spec: "1/2 寸，可接洗衣機喉", size: "1/2 寸", material: "黃銅", pack: "1 件", standard: "洗衣機掣", use: "洗衣機入水", desc: "要裝在容易開關的高度，不要藏在機後最入。", defaultPrice: 65, unit: "件", img: "images/hardware/camp/plumb.jpg" },
+  { id: "h-fillv", cat: "水喉", sku: "DC-PB-FILL", name: "馬桶進水器", spec: "底入或側入要先看原裝", size: "常用水箱", material: "塑膠", pack: "1 套", standard: "進水閥", use: "水箱不停入水", desc: "買之前先看水箱是底入水還是側入水。", defaultPrice: 48, unit: "套", img: "images/hardware/products/plumbing.jpg" },
+  { id: "h-flush", cat: "水喉", sku: "DC-PB-FL", name: "馬桶落水器", spec: "連密封圈", size: "常用水箱", material: "塑膠", pack: "1 套", standard: "排水閥", use: "水箱漏落馬桶", desc: "密封圈一定要換新，不要只用舊圈。", defaultPrice: 42, unit: "套", img: "images/hardware/camp/plumb.jpg" },
+  { id: "h-pclip", cat: "水喉", sku: "DC-PB-CL12", name: "喉碼 1/2寸", spec: "騎碼，連螺絲", size: "1/2 寸", material: "鍍鋅", pack: "10 隻", standard: "管碼", use: "固定明喉", desc: "約每 500mm 一個，轉角兩邊都要碼。", defaultPrice: 18, unit: "包", img: "images/hardware/products/plumbing.jpg" },
+
+  { id: "h-screw16", cat: "木工", sku: "DC-WD-316", name: "自攻螺絲 3.5×16", spec: "十字頭", size: "3.5 × 16 mm", material: "鍍鋅", pack: "200 粒盒", standard: "地盤盒裝", use: "鉸鏈杯、細五金", desc: "短螺絲用來鎖鉸和小碼，不要用來掛重物。", defaultPrice: 26, unit: "盒", img: "images/hardware/products/fastener.jpg" },
+  { id: "h-screw50", cat: "木工", sku: "DC-WD-550", name: "自攻螺絲 5×50", spec: "十字頭，粗牙", size: "5 × 50 mm", material: "鍍鋅", pack: "100 粒盒", standard: "地盤盒裝", use: "木方、門套骨架", desc: "入硬木要預鑽，否則木方會裂。", defaultPrice: 42, unit: "盒", img: "images/hardware/camp/wood.jpg" },
+  { id: "h-drywall", cat: "木工", sku: "DC-WD-DW25", name: "石膏板釘 3.5×25", spec: "喇叭頭，幼牙", size: "3.5 × 25 mm", material: "黑磷化", pack: "200 粒盒", standard: "乾壁釘", use: "石膏板封板", desc: "釘頭要沉入紙面一點，不要打穿紙皮。", defaultPrice: 36, unit: "盒", img: "images/hardware/products/fastener.jpg" },
+  { id: "h-langle", cat: "木工", sku: "DC-WD-L40", name: "L型角碼 40mm", spec: "四孔，連螺絲", size: "40 × 40 mm", material: "鍍鋅鋼", pack: "10 隻", standard: "角碼", use: "木方直角、層板加固", desc: "只加固直角，不能當膨脹螺絲掛電視。", defaultPrice: 16, unit: "包", img: "images/hardware/camp/wood.jpg" },
+  { id: "h-slide", cat: "木工", sku: "DC-WD-SL35", name: "抽屜路軌 350mm", spec: "三節靜音，一對", size: "350 mm", material: "鋼", pack: "1 對", standard: "路軌", use: "櫃桶", desc: "要量櫃內淨深。350 裝不進 300 深的櫃。", defaultPrice: 45, unit: "對", img: "images/hardware/products/fastener.jpg" },
+  { id: "h-magnet", cat: "木工", sku: "DC-WD-MG", name: "櫃門磁吸", spec: "磁力吸，連鐵片", size: "細號", material: "塑膠、磁鐵", pack: "2 隻", standard: "門吸", use: "櫃門保持關閉", desc: "門邊先試吸力，再鎖死。", defaultPrice: 12, unit: "對", img: "images/hardware/camp/wood.jpg" },
+  { id: "h-doorstop", cat: "木工", sku: "DC-WD-DS", name: "門吸", spec: "牆身或地吸", size: "常用房門", material: "不鏽鋼、磁鐵", pack: "1 套", standard: "門吸", use: "防止門柄撞牆", desc: "空心磚和石膏板要找實位，否則會脫。", defaultPrice: 22, unit: "套", img: "images/hardware/products/fastener.jpg" },
+  { id: "h-staple", cat: "木工", sku: "DC-WD-ST10", name: "碼釘 10mm", spec: "U 型碼", size: "10 mm", material: "鍍鋅鋼", pack: "1000 粒盒", standard: "碼釘", use: "固定網、薄板、線", desc: "配碼釘槍。10mm 不要打入會穿透的薄板。", defaultPrice: 28, unit: "盒", img: "images/hardware/camp/wood.jpg" },
+  { id: "h-anchor", cat: "木工", sku: "DC-WD-M8", name: "膨脹螺絲 M8", spec: "套管膨脹，連螺絲", size: "M8 × 60 mm", material: "鍍鋅鋼", pack: "8 套", standard: "膨脹螺絲", use: "混凝土掛架、機架", desc: "只適合實心混凝土。石膏板要用專用空心牆錨。", defaultPrice: 24, unit: "包", img: "images/hardware/products/fastener.jpg" },
+  { id: "h-foam", cat: "木工", sku: "DC-WD-FM", name: "發泡膠", spec: "填縫，固化後可切", size: "750 ml", material: "聚氨酯", pack: "1 支", standard: "填縫膠", use: "門套、窗框四周空隙", desc: "會膨脹。縫太大先塞背桿，不要一次噴滿。", defaultPrice: 48, unit: "支", img: "images/hardware/camp/wood.jpg" },
+
+  { id: "h-roller4", cat: "油漆", sku: "DC-PT-R4", name: "細滾筒 4寸", spec: "中毛", size: "4 寸", material: "羊毛混紡", pack: "1 個", standard: "室內", use: "門邊、窄位", desc: "大面積仍用 9 寸，這隻只補邊。", defaultPrice: 18, unit: "個", img: "images/hardware/products/paint.jpg" },
+  { id: "h-brush4", cat: "油漆", sku: "DC-PT-B4", name: "油掃 4寸", spec: "平頭", size: "4 寸", material: "木柄、混合毛", pack: "1 支", standard: "牆身", use: "窗邊、門頭線", desc: "新掃先抖走浮毛，再落油。", defaultPrice: 22, unit: "支", img: "images/hardware/camp/paint.jpg" },
+  { id: "h-sand80", cat: "油漆", sku: "DC-PT-S80", name: "砂紙 80號", spec: "乾磨，較粗", size: "230×280 mm", material: "氧化鋁", pack: "10 張", standard: "P80", use: "舊漆、粗批灰打底", desc: "粗砂只做第一遍，完工面前要換幼砂。", defaultPrice: 22, unit: "包", img: "images/hardware/products/paint.jpg" },
+  { id: "h-sand240", cat: "油漆", sku: "DC-PT-S240", name: "砂紙 240號", spec: "乾磨，較幼", size: "230×280 mm", material: "氧化鋁", pack: "10 張", standard: "P240", use: "面漆前最後打磨", desc: "用來收滑，不能用來剷厚灰。", defaultPrice: 24, unit: "包", img: "images/hardware/camp/paint.jpg" },
+  { id: "h-putty", cat: "油漆", sku: "DC-PT-KN3", name: "油灰刀 3寸", spec: "彈性鋼片", size: "3 寸", material: "鋼、膠柄", pack: "1 把", standard: "批灰刀", use: "補釘孔、刮灰", desc: "刀口彎了就換，否則越補越不平。", defaultPrice: 18, unit: "把", img: "images/hardware/products/paint.jpg" },
+  { id: "h-film", cat: "油漆", sku: "DC-PT-FM", name: "遮蔽膜連膠紙", spec: "靜電膜，一邊有膠紙", size: "550 mm × 20 m", material: "塑料膜", pack: "1 卷", standard: "保護", use: "保護地板、傢俬、玻璃", desc: "貼在乾淨位置。留太久會難撕。", defaultPrice: 36, unit: "卷", img: "images/hardware/camp/paint.jpg" },
+  { id: "h-primer", cat: "油漆", sku: "DC-PT-PR1", name: "內牆底漆", spec: "封底，減少面漆被吸", size: "1 L", material: "水性底漆", pack: "1 罐", standard: "室內", use: "新批灰、舊牆翻油前", desc: "底漆未乾不要掃面漆。深色牆要先封底。", defaultPrice: 68, unit: "罐", img: "images/hardware/products/paint.jpg" },
+  { id: "h-silicone", cat: "油漆", sku: "DC-PT-SI", name: "中性玻璃膠", spec: "透明，防黴", size: "300 ml", material: "中性矽酮", pack: "1 支", standard: "密封膠", use: "浴室邊、星盆、窗邊", desc: "要配膠槍。舊膠要先清乾淨，否則新膠黏不住。", defaultPrice: 28, unit: "支", img: "images/hardware/camp/paint.jpg" },
+  { id: "h-thinner", cat: "油漆", sku: "DC-PT-TH", name: "松節水", spec: "稀釋和洗刷", size: "500 ml", material: "溶劑", pack: "1 支", standard: "溶劑", use: "油性漆開油、洗油掃", desc: "水性乳膠漆不要用松節水開。遠離火種。", defaultPrice: 32, unit: "支", img: "images/hardware/products/paint.jpg" },
 
   { id: "t-drill", kind: "tool", cat: "電動", sku: "DC-TL-DR12", name: "12V 充電電鑽套裝", spec: "雙速，連充電器、電池、批咀", size: "夾頭 10 mm", material: "鋰電", pack: "1 套", standard: "12V", use: "上螺絲、鑽木、鑽薄金屬", desc: "家居維修最常用的一把電鑽。", defaultPrice: 680, unit: "套", img: "images/hardware/tools/t-drill.jpg" },
   { id: "t-hammer", kind: "tool", cat: "電動", sku: "DC-TL-HM", name: "充電衝擊鑽", spec: "可切錘鑽，鑽混凝土", size: "夾頭 13 mm", material: "鋰電", pack: "1 套", standard: "18V", use: "紅磚、混凝土開牆塞孔", desc: "普通電鑽鑽不動混凝土，要用衝擊鑽。", defaultPrice: 1280, unit: "套", img: "images/hardware/tools/t-hammer.jpg" },
@@ -1857,8 +1903,8 @@ function stockStore(store, activeIds, tweaks) {
   store.items = items;
 }
 stockStore(hardwareStores[0], null, { "h-socket": 38, "h-socket2": 54, "h-wire": 375, "h-valve": 68, "h-ptfe": 28, "h-screw": 32, "h-hinge": 45, "h-roller": 42 });
-stockStore(hardwareStores[1], ["h-socket", "h-socket2", "h-switch", "h-wire", "h-wire15", "h-plug", "h-valve", "h-angle", "h-ptfe", "h-screw", "h-screw40", "h-plug6", "h-hinge", "h-winroller", "t-drill", "t-driver", "t-screwset", "t-wrench", "t-tape", "t-level", "t-tester", "t-glass"], { "h-socket": 39, "h-wire": 370, "h-valve": 66, "h-hinge": 43, "h-screw": 32 });
-stockStore(hardwareStores[2], ["h-socket", "h-socket2", "h-wire", "h-valve", "h-valve34", "h-angle", "h-flex", "h-pvc20", "h-trap", "h-drain", "h-ptfe", "h-screw", "h-roller", "h-brush", "h-sand", "h-filler", "t-pipewrench", "t-pump", "t-wrench", "t-tape", "t-hammer", "t-mask"], { "h-socket": 36, "h-socket2": 55, "h-valve": 65, "h-ptfe": 26, "h-screw": 30, "h-roller": 40 });
+stockStore(hardwareStores[1], ["h-socket", "h-socket2", "h-switch", "h-wire", "h-wire15", "h-plug", "h-etape", "h-lever", "h-backbox", "h-fuse13", "h-valve", "h-angle", "h-ptfe", "h-tee12", "h-screw", "h-screw40", "h-screw16", "h-plug6", "h-hinge", "h-winroller", "t-drill", "t-driver", "t-screwset", "t-wrench", "t-tape", "t-level", "t-tester", "t-glass"], { "h-socket": 39, "h-wire": 370, "h-valve": 66, "h-hinge": 43, "h-screw": 32 });
+stockStore(hardwareStores[2], ["h-socket", "h-socket2", "h-wire", "h-valve", "h-valve34", "h-angle", "h-flex", "h-pvc20", "h-pvc40", "h-elb40", "h-pvcglue", "h-wmtap", "h-trap", "h-drain", "h-ptfe", "h-tee12", "h-screw", "h-roller", "h-roller4", "h-brush", "h-sand", "h-sand80", "h-filler", "h-putty", "h-silicone", "t-pipewrench", "t-pump", "t-wrench", "t-tape", "t-hammer", "t-mask"], { "h-socket": 36, "h-socket2": 55, "h-valve": 65, "h-ptfe": 26, "h-screw": 30, "h-roller": 40 });
 
 let selectedHardwareStoreId = "store-kt";
 const ORDER_STEPS = ["已下單", "執貨中", "打包好", "運送中", "師傅已收貨"];
@@ -1906,7 +1952,8 @@ function normalizeLoadedState() {
     store.items = store.items || {};
     masterHardwareCatalog.forEach(p => {
       if (!store.items[p.id]) {
-        store.items[p.id] = { active: store.id === 'store-kt', price: p.defaultPrice };
+        const isTool = p.kind === 'tool';
+      store.items[p.id] = { active: isTool ? store.id === 'store-kt' : true, price: p.defaultPrice };
       }
     });
   });
