@@ -679,7 +679,7 @@ html, body {
           <span>📍 GPS 定位最近五金舖</span>
         </button>
         <button onclick="openShopOwnerModal()" class="btn-std bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs sm:text-sm px-3.5 h-10 sm:h-11 rounded-xl shadow-md">
-          <span>🏪 五金店老闆管理頁 (帶密碼鎖)</span>
+          <span>🏪 店主登入 / 登記我的五金店</span>
         </button>
       </div>
     </div>
@@ -1306,27 +1306,34 @@ html, body {
     <div id="owner-pin-gate" class="py-10 px-4 text-center space-y-4 bg-slate-800/80 rounded-2xl border border-slate-700">
       <div class="text-3xl">🏪🔒</div>
       <div class="space-y-1">
-        <h4 class="font-black text-base text-white">請輸入五金店老闆專用管理密碼</h4>
-        <p class="text-xs text-stone-400">只限店主。密碼不會在網頁上顯示。</p>
+        <h4 class="font-black text-base text-white">五金店老闆登記或登入</h4>
+        <p class="text-xs text-stone-400">新店先登記。登記後只用自己的電郵管理這間店。觀塘、旺角、荃灣是示範店。</p>
       </div>
-      <div class="space-y-2 max-w-sm mx-auto text-left">
-        <label class="block text-xs text-stone-400">店舖帳戶</label>
-        <select id="owner-login-store" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-sm text-white">
-          <option value="store-kt">觀塘店 · store-kt@renocamp.io</option>
-          <option value="store-mk">旺角店 · store-mk@renocamp.io</option>
-          <option value="store-tw">荃灣店 · store-tw@renocamp.io</option>
-        </select>
-        <input type="password" id="owner-pin-input" placeholder="Firebase 密碼" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm focus:outline-none focus:border-amber-400" />
-        <button type="button" onclick="verifyOwnerPin()" class="btn-std w-full h-10 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">登入這間店</button>
+      <div class="flex gap-2 justify-center">
+        <button type="button" id="owner-mode-login" onclick="setOwnerGateMode('login')" class="btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950">已有店舖，登入</button>
+        <button type="button" id="owner-mode-reg" onclick="setOwnerGateMode('register')" class="btn-std h-8 px-3 rounded-lg text-xs font-bold bg-slate-900 text-stone-300 border border-slate-600">登記新店</button>
       </div>
+      <div id="owner-login-box" class="space-y-2 max-w-sm mx-auto text-left">
+        <input type="email" id="owner-login-email" placeholder="登入電郵" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-sm text-white" />
+        <input type="password" id="owner-pin-input" placeholder="密碼" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm focus:outline-none focus:border-amber-400" />
+        <button type="button" onclick="verifyOwnerPin()" class="btn-std w-full h-10 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">登入我的店</button>
+      </div>
+      <form id="owner-reg-box" class="hidden space-y-2 max-w-sm mx-auto text-left" onsubmit="submitHardwareStoreRegistration(event)">
+        <input id="reg-store-name" required placeholder="店舖名稱" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-sm text-white" />
+        <input id="reg-store-district" required placeholder="地區，例如九龍 - 觀塘" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-sm text-white" />
+        <input id="reg-store-address" required placeholder="門市地址" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-sm text-white" />
+        <input id="reg-store-phone" required placeholder="WhatsApp 電話" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-sm text-white" />
+        <input id="reg-store-email" type="email" required placeholder="登入電郵" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-sm text-white" />
+        <input id="reg-store-password" type="password" required minlength="6" placeholder="密碼，最少 6 位" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-sm text-white" />
+        <button type="submit" class="btn-std w-full h-10 bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black rounded-xl text-xs">登記並進入管理</button>
+      </form>
     </div>
 
     <div id="owner-roster-content" class="hidden flex-1 overflow-hidden flex flex-col space-y-4">
       <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-800 p-3 rounded-2xl border border-slate-700 shrink-0">
         <div class="flex flex-wrap items-center gap-2">
-          <span class="text-xs font-bold text-amber-300">切換管理店舖：</span>
+          <span class="text-xs font-bold text-amber-300">我管理的店：</span>
           <select id="owner-store-select" onchange="loadOwnerStoreForm(); renderOwnerOrdersList()" class="h-9 bg-slate-900 border border-slate-600 rounded-xl px-3 text-xs font-bold text-white"></select>
-          <button type="button" id="owner-add-store" onclick="addNewHardwareStore()" class="btn-std h-8 px-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold">＋ 新增五金店</button>
         </div>
         <div class="flex flex-wrap gap-1 bg-slate-900 p-1 rounded-xl border border-slate-700">
           <button type="button" id="owner-tab-catalog" onclick="switchOwnerTab('catalog')" class="btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950">1. 店舖資料 & 改價</button>
@@ -1566,7 +1573,21 @@ let currentMemberUser = null;
 let uploadedPhotos = [];
 let isAdminUnlocked = false;
 let staffStoreId = '';
-window.applyStaffRole = function(role) {
+window.storeRoleForEmail = function (email) {
+  const found = hardwareStores.find(store => (store.ownerEmail || '').toLowerCase() === String(email || '').toLowerCase());
+  return found ? found.id : '';
+};
+function setOwnerGateMode(mode) {
+  const login = document.getElementById('owner-login-box');
+  const reg = document.getElementById('owner-reg-box');
+  const loginBtn = document.getElementById('owner-mode-login');
+  const regBtn = document.getElementById('owner-mode-reg');
+  if (login) login.classList.toggle('hidden', mode !== 'login');
+  if (reg) reg.classList.toggle('hidden', mode !== 'register');
+  if (loginBtn) loginBtn.className = 'btn-std h-8 px-3 rounded-lg text-xs ' + (mode === 'login' ? 'font-black bg-amber-400 text-slate-950' : 'font-bold bg-slate-900 text-stone-300 border border-slate-600');
+  if (regBtn) regBtn.className = 'btn-std h-8 px-3 rounded-lg text-xs ' + (mode === 'register' ? 'font-black bg-amber-400 text-slate-950' : 'font-bold bg-slate-900 text-stone-300 border border-slate-600');
+}
+window.applyStaffRole = function (role) {
   window.staffRole = role || '';
   if (role === 'admin') isAdminUnlocked = true;
   if (role === 'materials') materialsDeskUnlocked = true;
@@ -1578,6 +1599,12 @@ window.applyStaffRole = function(role) {
 async function signInRole(email, password, expected) {
   if (typeof window.signInStaff !== 'function') throw new Error('雲端登入尚未準備好');
   const role = await window.signInStaff(email, password);
+  const storeRole = window.storeRoleForEmail(email);
+  if (expected === 'store-owner') {
+    if (role !== 'admin' && !storeRole && String(role).indexOf('store-') !== 0) throw new Error('不是店主');
+    window.applyStaffRole(storeRole || role);
+    return storeRole || role;
+  }
   if (role !== expected && role !== 'admin') throw new Error('權限不符');
   window.applyStaffRole(role === 'admin' && expected !== 'admin' ? expected : role);
   return role;
@@ -1981,6 +2008,11 @@ function normalizeLoadedState() {
     store.items = store.items || {};
     if (store.deposit == null) store.deposit = 3000;
     if (store.listingPaused == null) store.listingPaused = false;
+    const demoEmail = { 'store-kt': 'store-kt@renocamp.io', 'store-mk': 'store-mk@renocamp.io', 'store-tw': 'store-tw@renocamp.io' }[store.id];
+    if (demoEmail) {
+      store.demo = true;
+      if (!store.ownerEmail) store.ownerEmail = demoEmail;
+    }
     masterHardwareCatalog.forEach(p => {
       if (!store.items[p.id]) {
         const isTool = p.kind === 'tool';
@@ -4131,8 +4163,11 @@ function renderStoreMap(store) {
   const box = document.getElementById('gmap-canvas');
   if (!box || !store) return;
   const local = { 'store-kt': 1, 'store-mk': 1, 'store-tw': 1 };
-  if (!local[store.id]) {
-    box.innerHTML = `<div class="h-full flex items-center justify-center text-center text-xs text-stone-100 px-4">${store.name}<br/>${store.address}</div>`;
+  if (!local[store.id] && store.lat && store.lng) {
+    const lat = Number(store.lat);
+    const lng = Number(store.lng);
+    const pad = 0.012;
+    box.innerHTML = `<iframe title="${store.name}地圖" src="https://www.openstreetmap.org/export/embed.html?bbox=${lng - pad}%2C${lat - pad}%2C${lng + pad}%2C${lat + pad}&layer=mapnik&marker=${lat}%2C${lng}" style="width:100%;height:100%;border:0"></iframe>`;
     return;
   }
   box.innerHTML = `<img src="images/maps/${store.id}.jpg" alt="${store.name}地圖" style="width:100%;height:100%;object-fit:cover;display:block" />
@@ -4152,8 +4187,8 @@ function renderHardwareStoresBar() {
     return `<div onclick="selectHardwareStore('${s.id}')" class="cursor-pointer rounded-2xl p-3.5 border transition card-equal ${isSel ? 'bg-slate-950 border-amber-400 shadow-lg ring-2 ring-amber-400/30' : 'bg-stone-900/80 border-stone-700 hover:border-stone-500'}">
       <div class="space-y-1.5">
         <div class="flex items-center justify-between gap-2">
-          <span class="text-[10px] font-black px-2 py-0.5 rounded ${isSel ? 'bg-amber-400 text-slate-950' : 'bg-stone-700 text-stone-300'}">${s.district}</span>
-          <span class="text-[11px] font-mono text-amber-300 font-bold">📍 距你 ${s.distanceKm} km</span>
+          <span class="text-[10px] font-black px-2 py-0.5 rounded ${isSel ? 'bg-amber-400 text-slate-950' : 'bg-stone-700 text-stone-300'}">${s.demo ? '示範 · ' : ''}${s.district}</span>
+          <span class="text-[11px] font-mono text-amber-300 font-bold">${s.distanceKm ? '📍 距你 ' + s.distanceKm + ' km' : '新登記店'}</span>
         </div>
         <h4 class="font-black text-xs sm:text-sm text-white truncate">${s.name}</h4>
         <p class="text-[11px] text-stone-400 truncate">${s.address}</p>
@@ -4558,23 +4593,92 @@ function openShopOwnerModal(defaultTab = 'catalog') {
 }
 function closeShopOwnerModal() { document.getElementById('shop-owner-modal').classList.add('hidden'); }
 
+function unlockHardwareOwner(storeId) {
+  staffStoreId = storeId;
+  selectedHardwareStoreId = storeId;
+  document.getElementById('owner-pin-input').value = '';
+  document.getElementById('owner-pin-gate').classList.add('hidden');
+  document.getElementById('owner-roster-content').classList.remove('hidden');
+  populateOwnerStoreSelect();
+  loadOwnerStoreForm();
+  loadOwnerPricingForm();
+  switchOwnerTab(pendingOwnerTab || 'catalog');
+}
+
 function verifyOwnerPin() {
-  const storeId = (document.getElementById('owner-login-store') || {}).value || 'store-kt';
-  const email = storeId + '@renocamp.io';
+  const email = (document.getElementById('owner-login-email').value || '').trim();
   const pin = document.getElementById('owner-pin-input').value;
-  signInRole(email, pin, storeId).then(() => {
-    staffStoreId = storeId;
-    selectedHardwareStoreId = storeId;
-    document.getElementById('owner-pin-input').value = '';
-    document.getElementById('owner-pin-gate').classList.add('hidden');
-    document.getElementById('owner-roster-content').classList.remove('hidden');
-    const addBtn = document.getElementById('owner-add-store');
-    if (addBtn) addBtn.classList.add('hidden');
-    populateOwnerStoreSelect();
-    loadOwnerStoreForm();
-    loadOwnerPricingForm();
-    switchOwnerTab(pendingOwnerTab || 'catalog');
-  }).catch(() => showModal('密碼不正確', '這間店的登入失敗。請用你在 Firebase 設定的密碼。', '驗證失敗'));
+  if (!email || !pin) {
+    showModal('請填電郵和密碼', '用登記時的電郵登入。示範店可用 store-kt@renocamp.io、store-mk@renocamp.io 或 store-tw@renocamp.io。', '未填登入資料');
+    return;
+  }
+  signInRole(email, pin, 'store-owner').then(role => {
+    const store = hardwareStores.find(item => (item.ownerEmail || '').toLowerCase() === email.toLowerCase() || item.id === role);
+    if (!store) throw new Error('找不到店舖');
+    unlockHardwareOwner(store.id);
+  }).catch(() => showModal('登入失敗', '電郵或密碼不正確。如果未開過店，請先按「登記新店」。', '驗證失敗'));
+}
+
+async function submitHardwareStoreRegistration(event) {
+  event.preventDefault();
+  const name = document.getElementById('reg-store-name').value.trim();
+  const district = document.getElementById('reg-store-district').value.trim();
+  const address = document.getElementById('reg-store-address').value.trim();
+  const phone = document.getElementById('reg-store-phone').value.trim();
+  const email = document.getElementById('reg-store-email').value.trim();
+  const password = document.getElementById('reg-store-password').value;
+  if (hardwareStores.some(store => (store.ownerEmail || '').toLowerCase() === email.toLowerCase())) {
+    showModal('這個電郵已有店舖', '請改用「已有店舖，登入」。', '未能登記');
+    return;
+  }
+  if (typeof window.registerStaffAccount !== 'function') {
+    showModal('雲端未準備好', '請稍後再登記。', '未能登記');
+    return;
+  }
+  try {
+    await window.registerStaffAccount(email, password);
+  } catch (error) {
+    const code = String(error && error.code || '');
+    showModal('未能建立帳戶', code.includes('email-already-in-use') ? '這個電郵已登記，請直接登入。' : '請用有效電郵，密碼最少 6 位。', '未能登記');
+    return;
+  }
+  let lat = 22.3193;
+  let lng = 114.1694;
+  try {
+    const found = await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + encodeURIComponent(address + ' 香港'));
+    const rows = await found.json();
+    if (rows[0]) {
+      lat = Number(rows[0].lat) || lat;
+      lng = Number(rows[0].lon) || lng;
+    }
+  } catch (error) {}
+  const storeId = 'store-' + Date.now().toString(36);
+  const items = {};
+  masterHardwareCatalog.forEach(item => {
+    items[item.id] = { active: item.kind !== 'tool', price: item.defaultPrice };
+  });
+  hardwareStores.push({
+    id: storeId,
+    name,
+    district,
+    address,
+    lat,
+    lng,
+    phone,
+    ownerEmail: email,
+    demo: false,
+    fleet: 'both',
+    distanceKm: 0,
+    etaText: '自家車隊最快 1.5 小時 / Lalamove 45 分鐘',
+    items,
+    deposit: 3000,
+    listingPaused: false
+  });
+  window.applyStaffRole(storeId);
+  persistDataLocally();
+  renderHardwareStoresBar();
+  unlockHardwareOwner(storeId);
+  showModal('店舖已登記', `「${name}」已出現在五金店地圖。你可以改貨品、價錢和訂單。`, '登記完成');
 }
 
 function populateOwnerStoreSelect() {
@@ -5754,7 +5858,7 @@ else window.addEventListener('load', bootCampApp);
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-import { getAuth, signInAnonymously, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+import { getAuth, signInAnonymously, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { getFirestore, doc, setDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
 const appId = 'hkrenocamp3in1-flagship';
@@ -5841,10 +5945,16 @@ const STAFF_ROLES = {
 
 window.signInStaff = async function (email, password) {
   const cred = await signInWithEmailAndPassword(auth, email, password);
-  const role = STAFF_ROLES[cred.user.email] || '';
-  if (!role) throw new Error('這個帳戶沒有管理權限');
+  const known = STAFF_ROLES[cred.user.email] || (window.storeRoleForEmail ? window.storeRoleForEmail(cred.user.email) : '');
+  if (!known) throw new Error('這個帳戶沒有管理權限');
   currentUser = cred.user;
-  return role;
+  return known;
+};
+
+window.registerStaffAccount = async function (email, password) {
+  const cred = await createUserWithEmailAndPassword(auth, email, password);
+  currentUser = cred.user;
+  return cred.user;
 };
 
 async function initCloudSync() {
