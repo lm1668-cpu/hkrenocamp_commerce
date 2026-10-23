@@ -12,7 +12,7 @@ export function splitCampHtml(html: string): CampParts {
   for (const m of html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)) {
     const attrs = m[1] ?? "";
     const code = (m[2] ?? "").trim();
-    if (!code) continue;
+    if (/type\s*=\s*["']application\/json["']/i.test(attrs)) continue;
     scripts.push({
       module: /type\s*=\s*["']module["']/i.test(attrs),
       code,

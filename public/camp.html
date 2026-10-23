@@ -1655,7 +1655,7 @@ const repairTrades = [
   { name: "浴室防漏 / 泥水", desc: "企缸滲水、掃口粉、換地磚" }
 ];
 
-const materialsProducts = [
+let materialsProducts = [
   { id: "m-ro", install: true, cat: "飲水機", name: "廚下式 RO 濾水機", desc: "三樽濾芯加專用龍頭。只售物料，唔包安裝。", price: 2480, unit: "套", img: "images/materials/catalog/ro.jpg", trade: "水喉漏水 / 換龍頭",
     intro: "放在廚櫃內的三樽式 RO 濾水機，連專用出水位龍頭。適合想在星盆旁直接取過濾水、又不想佔枱面的單位。",
     includes: ["主機連三樽濾芯", "專用廚房龍頭", "基本說明"],
@@ -1718,7 +1718,7 @@ const hardwareTrades = [
   { key: "鋁窗", label: "鋁窗", sub: "滑輪、膠邊", img: "images/hardware/camp/window.jpg" }
 ];
 
-const masterHardwareCatalog = [
+let masterHardwareCatalog = [
   { id: "h-socket", cat: "電工", sku: "DC-EL-013", name: "英式 13A 單蘇面板", spec: "86 型單蘇，連開關", size: "86×86 mm", material: "阻燃膠面、銅接線柱", pack: "1 件", standard: "BS 1363", use: "一般插座回路，2.5mm 銅線", desc: "白色英式三腳單蘇，帶開關。", defaultPrice: 38, unit: "件", img: "images/hardware/products/electrical.jpg" },
   { id: "h-socket2", cat: "電工", sku: "DC-EL-026", name: "英式 13A 雙蘇面板", spec: "86 型雙蘇，兩位獨立開關", size: "146×86 mm", material: "阻燃膠面、銅接線柱", pack: "1 件", standard: "BS 1363", use: "廚房、廳櫃多位電器", desc: "雙位帶獨立開關。", defaultPrice: 55, unit: "件", img: "images/hardware/products/electrical.jpg" },
   { id: "h-switch", cat: "電工", sku: "DC-EL-SW1", name: "單位單控燈掣", spec: "一位單控，10AX", size: "86×86 mm", material: "阻燃膠面", pack: "1 件", standard: "BS EN 60669", use: "一個燈位由一處開關", desc: "替換舊燈掣最常用。", defaultPrice: 28, unit: "件", img: "images/hardware/products/electrical.jpg" },
@@ -3342,6 +3342,8 @@ function campSnapshot() {
     orders: hardwareOrders,
     matOrders: materialsOrders,
     supplier: materialsSupplier,
+    materialsProducts,
+    hardwareCatalog: masterHardwareCatalog,
     reviews: mutualReviews,
     pricing: appliancePricingData,
     promos: productPromos
@@ -3356,6 +3358,8 @@ function applyCampSnapshot(data) {
   if (Array.isArray(data.orders)) hardwareOrders = data.orders;
   if (Array.isArray(data.matOrders)) materialsOrders = data.matOrders;
   if (data.supplier) materialsSupplier = data.supplier;
+  if (Array.isArray(data.materialsProducts)) materialsProducts = data.materialsProducts;
+  if (Array.isArray(data.hardwareCatalog)) masterHardwareCatalog = data.hardwareCatalog;
   if (Array.isArray(data.reviews)) mutualReviews = data.reviews;
   if (data.pricing) appliancePricingData = data.pricing;
   if (data.promos) productPromos = data.promos;
