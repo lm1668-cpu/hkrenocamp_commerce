@@ -1310,11 +1310,15 @@ html, body {
         <h4 class="font-black text-base text-white">請輸入五金店老闆專用管理密碼</h4>
         <p class="text-xs text-stone-400">只限店主。密碼不會在網頁上顯示。</p>
       </div>
-      <div class="flex items-center justify-center gap-2 max-w-xs mx-auto">
-        <input type="password" id="owner-pin-input" placeholder="輸入密碼" class="flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm focus:outline-none focus:border-amber-400" />
-        <button type="button" onclick="verifyOwnerPin()" class="btn-std h-10 px-4 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">
-          解鎖後台
-        </button>
+      <div class="space-y-2 max-w-sm mx-auto text-left">
+        <label class="block text-xs text-stone-400">店舖帳戶</label>
+        <select id="owner-login-store" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-sm text-white">
+          <option value="store-kt">觀塘店 · store-kt@renocamp.io</option>
+          <option value="store-mk">旺角店 · store-mk@renocamp.io</option>
+          <option value="store-tw">荃灣店 · store-tw@renocamp.io</option>
+        </select>
+        <input type="password" id="owner-pin-input" placeholder="Firebase 密碼" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm focus:outline-none focus:border-amber-400" />
+        <button type="button" onclick="verifyOwnerPin()" class="btn-std w-full h-10 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">登入這間店</button>
       </div>
     </div>
 
@@ -1323,7 +1327,7 @@ html, body {
         <div class="flex flex-wrap items-center gap-2">
           <span class="text-xs font-bold text-amber-300">切換管理店舖：</span>
           <select id="owner-store-select" onchange="loadOwnerStoreForm(); renderOwnerOrdersList()" class="h-9 bg-slate-900 border border-slate-600 rounded-xl px-3 text-xs font-bold text-white"></select>
-          <button type="button" onclick="addNewHardwareStore()" class="btn-std h-8 px-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold">＋ 新增五金店</button>
+          <button type="button" id="owner-add-store" onclick="addNewHardwareStore()" class="btn-std h-8 px-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold">＋ 新增五金店</button>
         </div>
         <div class="flex flex-wrap gap-1 bg-slate-900 p-1 rounded-xl border border-slate-700">
           <button type="button" id="owner-tab-catalog" onclick="switchOwnerTab('catalog')" class="btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950">1. 店舖資料 & 改價</button>
@@ -1476,13 +1480,11 @@ html, body {
       <div class="text-3xl">🔒</div>
       <div class="space-y-1">
         <h4 class="font-black text-base text-white">請輸入大本營管理員密碼</h4>
-        <p class="text-xs text-stone-400">只限管理員。密碼不會在網頁上顯示。</p>
+        <p class="text-xs text-stone-400">帳戶 admin@renocamp.io。密碼由 Firebase 核對，網頁不保存。</p>
       </div>
-      <div class="flex items-center justify-center gap-2 max-w-xs mx-auto">
-        <input type="password" id="admin-pin-input" placeholder="輸入密碼" class="flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm focus:outline-none focus:border-amber-400" />
-        <button type="button" onclick="verifyAdminPin()" class="btn-std h-10 px-4 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">
-          解鎖名冊
-        </button>
+      <div class="space-y-2 max-w-sm mx-auto">
+        <input type="password" id="admin-pin-input" placeholder="管理員密碼" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm focus:outline-none focus:border-amber-400" />
+        <button type="button" onclick="verifyAdminPin()" class="btn-std w-full h-10 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">登入</button>
       </div>
     </div>
     <div id="admin-roster-content" class="hidden flex-1 overflow-hidden flex flex-col space-y-3">
@@ -1504,10 +1506,10 @@ html, body {
     </div>
     <div id="mat-desk-gate" class="py-8 px-4 text-center space-y-4 bg-slate-800/80 rounded-2xl border border-slate-700">
       <h4 class="font-black text-base text-white">請輸入大本營密碼</h4>
-      <p class="text-xs text-stone-400">建材單只有大本營能接。</p>
-      <div class="flex items-center justify-center gap-2 max-w-xs mx-auto">
-        <input type="password" id="mat-desk-pin" placeholder="輸入密碼" class="flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm" />
-        <button type="button" onclick="verifyMaterialsDeskPin()" class="btn-std h-10 px-4 bg-emerald-400 text-slate-950 font-black rounded-xl text-xs">解鎖</button>
+      <p class="text-xs text-stone-400">帳戶 materials@renocamp.io。密碼由 Firebase 核對。</p>
+      <div class="space-y-2 max-w-sm mx-auto">
+        <input type="password" id="mat-desk-pin" placeholder="建材接單密碼" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm" />
+        <button type="button" onclick="verifyMaterialsDeskPin()" class="btn-std w-full h-10 bg-emerald-400 text-slate-950 font-black rounded-xl text-xs">登入</button>
       </div>
     </div>
     <div id="mat-desk-body" class="hidden flex-1 overflow-y-auto space-y-3 pr-1"></div>
@@ -1564,6 +1566,23 @@ let currentMasterProfile = null;
 let currentMemberUser = null;
 let uploadedPhotos = [];
 let isAdminUnlocked = false;
+let staffStoreId = '';
+window.applyStaffRole = function(role) {
+  window.staffRole = role || '';
+  if (role === 'admin') isAdminUnlocked = true;
+  if (role === 'materials') materialsDeskUnlocked = true;
+  if (role && role.indexOf('store-') === 0) {
+    staffStoreId = role;
+    selectedHardwareStoreId = role;
+  }
+};
+async function signInRole(email, password, expected) {
+  if (typeof window.signInStaff !== 'function') throw new Error('雲端登入尚未準備好');
+  const role = await window.signInStaff(email, password);
+  if (role !== expected && role !== 'admin') throw new Error('權限不符');
+  window.applyStaffRole(role === 'admin' && expected !== 'admin' ? expected : role);
+  return role;
+}
 let currentAdminTab = 'masters';
 let currentHardwareFilter = 'all';
 let currentHardwareKind = 'part';
@@ -3113,13 +3132,14 @@ function openAdminMasterModal() {
 function closeAdminMasterModal() { document.getElementById('admin-master-modal').classList.add('hidden'); }
 
 function verifyAdminPin() {
-  const pin = document.getElementById('admin-pin-input').value.trim();
-  if (pin === '8888') {
+  const pin = document.getElementById('admin-pin-input').value;
+  signInRole('admin@renocamp.io', pin, 'admin').then(() => {
     isAdminUnlocked = true;
+    document.getElementById('admin-pin-input').value = '';
     document.getElementById('admin-pin-gate').classList.add('hidden');
     document.getElementById('admin-roster-content').classList.remove('hidden');
     renderSuperAdmin();
-  } else { showModal('密碼不正確', '管理員密碼不正確。', '驗證失敗'); }
+  }).catch(() => showModal('密碼不正確', '管理員登入失敗。請用你在 Firebase 設定的密碼。', '驗證失敗'));
 }
 
 function renderAdminMasterList() {
@@ -4530,22 +4550,29 @@ function openShopOwnerModal(defaultTab = 'catalog') {
 function closeShopOwnerModal() { document.getElementById('shop-owner-modal').classList.add('hidden'); }
 
 function verifyOwnerPin() {
-  const pin = document.getElementById('owner-pin-input').value.trim();
-  if (pin === '6688' || pin === '8888') {
+  const storeId = (document.getElementById('owner-login-store') || {}).value || 'store-kt';
+  const email = storeId + '@renocamp.io';
+  const pin = document.getElementById('owner-pin-input').value;
+  signInRole(email, pin, storeId).then(() => {
+    staffStoreId = storeId;
+    selectedHardwareStoreId = storeId;
+    document.getElementById('owner-pin-input').value = '';
     document.getElementById('owner-pin-gate').classList.add('hidden');
     document.getElementById('owner-roster-content').classList.remove('hidden');
+    const addBtn = document.getElementById('owner-add-store');
+    if (addBtn) addBtn.classList.add('hidden');
     populateOwnerStoreSelect();
     loadOwnerStoreForm();
     loadOwnerPricingForm();
     switchOwnerTab(pendingOwnerTab || 'catalog');
-  } else {
-    showModal('密碼不正確', '五金店老闆密碼不正確。', '驗證失敗');
-  }
+  }).catch(() => showModal('密碼不正確', '這間店的登入失敗。請用你在 Firebase 設定的密碼。', '驗證失敗'));
 }
 
 function populateOwnerStoreSelect() {
   const sel = document.getElementById('owner-store-select');
-  sel.innerHTML = hardwareStores.map(s => `<option value="${s.id}" ${s.id === selectedHardwareStoreId ? 'selected' : ''}>${s.name} (${s.district})</option>`).join('');
+  const list = staffStoreId ? hardwareStores.filter(s => s.id === staffStoreId) : hardwareStores;
+  if (staffStoreId) selectedHardwareStoreId = staffStoreId;
+  sel.innerHTML = list.map(s => `<option value="${s.id}" ${s.id === selectedHardwareStoreId ? 'selected' : ''}>${s.name} (${s.district})</option>`).join('');
 }
 
 function loadOwnerStoreForm() {
@@ -5116,15 +5143,14 @@ function closeMaterialsDesk() {
   document.getElementById('materials-desk-modal').classList.add('hidden');
 }
 function verifyMaterialsDeskPin() {
-  const pin = document.getElementById('mat-desk-pin').value.trim();
-  if (pin !== '8888') {
-    showModal('密碼不正確', '建材接單台密碼不正確。', '驗證失敗');
-    return;
-  }
-  materialsDeskUnlocked = true;
-  document.getElementById('mat-desk-gate').classList.add('hidden');
-  document.getElementById('mat-desk-body').classList.remove('hidden');
-  renderMaterialsDesk();
+  const pin = document.getElementById('mat-desk-pin').value;
+  signInRole('materials@renocamp.io', pin, 'materials').then(() => {
+    materialsDeskUnlocked = true;
+    document.getElementById('mat-desk-pin').value = '';
+    document.getElementById('mat-desk-gate').classList.add('hidden');
+    document.getElementById('mat-desk-body').classList.remove('hidden');
+    renderMaterialsDesk();
+  }).catch(() => showModal('密碼不正確', '建材接單登入失敗。請用你在 Firebase 設定的密碼。', '驗證失敗'));
 }
 
 function renderMaterialsDesk() {
@@ -5714,7 +5740,7 @@ else window.addEventListener('load', bootCampApp);
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+import { getAuth, signInAnonymously, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import { getFirestore, doc, setDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
 const appId = 'hkrenocamp3in1-flagship';
@@ -5791,14 +5817,37 @@ window.syncStateToCloud = async function () {
   }
 };
 
+const STAFF_ROLES = {
+  'admin@renocamp.io': 'admin',
+  'materials@renocamp.io': 'materials',
+  'store-kt@renocamp.io': 'store-kt',
+  'store-mk@renocamp.io': 'store-mk',
+  'store-tw@renocamp.io': 'store-tw'
+};
+
+window.signInStaff = async function (email, password) {
+  const cred = await signInWithEmailAndPassword(auth, email, password);
+  const role = STAFF_ROLES[cred.user.email] || '';
+  if (!role) throw new Error('這個帳戶沒有管理權限');
+  currentUser = cred.user;
+  return role;
+};
+
 async function initCloudSync() {
   try {
     const app = initializeApp(firebaseConfig);
     auth = getAuth(app);
     db = getFirestore(app);
-
-    await signInAnonymously(auth);
-    currentUser = auth.currentUser;
+    if (typeof auth.authStateReady === 'function') await auth.authStateReady();
+    if (auth.currentUser && STAFF_ROLES[auth.currentUser.email]) {
+      currentUser = auth.currentUser;
+      if (typeof window.applyStaffRole === 'function') window.applyStaffRole(STAFF_ROLES[auth.currentUser.email]);
+    } else if (!auth.currentUser) {
+      await signInAnonymously(auth);
+      currentUser = auth.currentUser;
+    } else {
+      currentUser = auth.currentUser;
+    }
     const idEl = document.getElementById('cloud-user-id');
     if (currentUser && idEl) idEl.textContent = currentUser.uid.substring(0, 6) + '...';
 
