@@ -3354,7 +3354,7 @@ function applyCampSnapshot(data) {
 
 function renderSuperSync() {
   const token = localStorage.getItem('hk_camp_github_token') || '';
-  const url = localStorage.getItem('hk_camp_supabase_url') || '';
+  const url = localStorage.getItem('hk_camp_supabase_url') || 'https://ajtowtqrubwteklfruev.supabase.co';
   const key = localStorage.getItem('hk_camp_supabase_key') || '';
   return `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
     <p class="text-xs font-black text-amber-300">一鍵上傳 GitHub，更新網站 HTML</p>
