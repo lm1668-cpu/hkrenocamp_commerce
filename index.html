@@ -789,7 +789,7 @@ html, body {
         <button onclick="openMemberModal()" class="btn-std bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-lg text-xs font-black">👤 會員登入 & 互評中心</button>
         <button onclick="openMasterDashboard()" class="btn-std bg-amber-500 hover:bg-amber-400 text-slate-950 px-3 py-1.5 rounded-lg text-xs font-black">🛠️ 師傅工作台</button>
         <button onclick="openShopOwnerModal()" class="btn-std bg-amber-400 hover:bg-amber-300 text-slate-950 px-3 py-1.5 rounded-lg text-xs font-black">🏪 五金店老闆管理頁</button>
-        <button onclick="openAdminMasterModal()" class="btn-std bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold">🔐 管理員後台</button>
+        <button onclick="openAdminMasterModal()" class="btn-std bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold">🔐 超級管理員</button>
         <button onclick="resetDemoData()" class="btn-std bg-stone-900 hover:bg-red-950 text-stone-400 hover:text-red-300 border border-stone-800 px-3 py-1.5 rounded-lg text-xs font-medium">🔄 重置示範數據</button>
       </div>
     </div>
@@ -1464,8 +1464,8 @@ html, body {
   <div class="relative bg-slate-900 text-white rounded-3xl max-w-4xl w-full p-5 sm:p-7 shadow-2xl border-2 border-amber-400 z-10 space-y-4 my-8 max-h-[90vh] flex flex-col">
     <div class="flex items-center justify-between border-b border-slate-700 pb-3 gap-2 shrink-0">
       <div>
-        <span class="bg-amber-400 text-slate-950 text-[11px] font-black px-2.5 py-0.5 rounded-full">管理員後台</span>
-        <h3 class="text-lg sm:text-xl font-black text-white mt-1">🔐 大本營管理員後台｜師傅誠信分名冊 ＆ 派單管理</h3>
+        <span class="bg-amber-400 text-slate-950 text-[11px] font-black px-2.5 py-0.5 rounded-full">超級管理員</span>
+        <h3 class="text-lg sm:text-xl font-black text-white mt-1">三個範疇的行政與財務</h3>
       </div>
       <button type="button" onclick="closeAdminMasterModal()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">✕</button>
     </div>
@@ -1482,22 +1482,9 @@ html, body {
         </button>
       </div>
     </div>
-    <div id="admin-roster-content" class="hidden flex-1 overflow-hidden flex flex-col space-y-4">
-      <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-800 p-3 rounded-2xl border border-slate-700 shrink-0">
-        <div class="flex flex-wrap bg-slate-900 p-1 rounded-xl border border-slate-700 gap-1">
-          <button type="button" id="admin-tab-masters" onclick="switchAdminTab('masters')" class="btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950">
-            👷‍♂️ 師傅名冊 (<span id="admin-tab-masters-count">0</span>)
-          </button>
-          <button type="button" id="admin-tab-jobs" onclick="switchAdminTab('jobs')" class="btn-std h-8 px-3 rounded-lg text-xs font-bold text-stone-300 hover:text-white">
-            📋 業主派單 (<span id="admin-tab-jobs-count">0</span>)
-          </button>
-        </div>
-        <button type="button" onclick="closeAdminMasterModal(); openMasterRegModal();" class="btn-std h-9 px-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">
-          ＋ 新增師傅
-        </button>
-      </div>
-      <div id="admin-masters-list" class="flex-1 overflow-y-auto space-y-2.5 pr-1"></div>
-      <div id="admin-jobs-list" class="hidden flex-1 overflow-y-auto space-y-2.5 pr-1"></div>
+    <div id="admin-roster-content" class="hidden flex-1 overflow-hidden flex flex-col space-y-3">
+      <div id="super-admin-tabs" class="flex flex-wrap gap-1 shrink-0"></div>
+      <div id="super-admin-body" class="flex-1 overflow-y-auto space-y-3 pr-1"></div>
     </div>
   </div>
 </div>
@@ -1524,6 +1511,9 @@ html, body {
   </div>
 </div>
 
+<!--CAMP_STATE_START-->
+<script type="application/json" id="camp-published-state">null</script>
+<!--CAMP_STATE_END-->
 <script>
 const heroConfig = {
   all: {
@@ -2012,10 +2002,12 @@ function persistDataLocally() {
     localStorage.setItem(LOCAL_PROMO_KEY, JSON.stringify(productPromos));
     localStorage.setItem(LOCAL_MAT_ORDERS_KEY, JSON.stringify(materialsOrders));
     localStorage.setItem('hk_camp_supplier_v1', JSON.stringify(materialsSupplier));
+    localStorage.setItem('hk_camp_state_updated_at', new Date().toISOString());
   } catch (e) { console.warn(e); }
   if (typeof window.syncStateToCloud === 'function') {
     window.syncStateToCloud();
   }
+  renderSuperAdminIfOpen();
 }
 
 function rebindCurrentMaster() {
@@ -2038,10 +2030,7 @@ function refreshAllViewsFromCloud() {
   renderHardwareOrdersTracker();
   renderMaterialsOrderTracker();
   renderMaterialsDesk();
-  if (isAdminUnlocked) {
-    renderAdminMasterList();
-    renderAdminJobsList();
-  }
+  if (isAdminUnlocked) renderSuperAdmin();
   const memberModal = document.getElementById('member-modal');
   if (memberModal && !memberModal.classList.contains('hidden')) {
     renderMemberCenterOrders();
@@ -3091,25 +3080,10 @@ function submitMasterRegistration(e) {
   showModal(`🎉 歡迎入駐大本營（#${masterId}）`, `${name}你好！你嘅師傅帳號及專屬密碼已設定完成，獲得 100 分初始誠信分，並已即時解鎖派單大廳內所有業主嘅完整電話！`, '入駐成功');
 }
 
+let superAdminTab = 'finance';
+
 function switchAdminTab(tab) {
-  currentAdminTab = tab;
-  const mBtn = document.getElementById('admin-tab-masters');
-  const jBtn = document.getElementById('admin-tab-jobs');
-  const mList = document.getElementById('admin-masters-list');
-  const jList = document.getElementById('admin-jobs-list');
-  mBtn.className = "btn-std h-8 px-3 rounded-lg text-xs font-bold text-stone-300 hover:text-white";
-  jBtn.className = "btn-std h-8 px-3 rounded-lg text-xs font-bold text-stone-300 hover:text-white";
-  mList.classList.add('hidden');
-  jList.classList.add('hidden');
-  if (tab === 'masters') {
-    mBtn.className = "btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950";
-    mList.classList.remove('hidden');
-    renderAdminMasterList();
-  } else if (tab === 'jobs') {
-    jBtn.className = "btn-std h-8 px-3 rounded-lg text-xs font-black bg-amber-400 text-slate-950";
-    jList.classList.remove('hidden');
-    renderAdminJobsList();
-  }
+  switchSuperTab(tab === 'jobs' ? 'repair' : 'repair');
 }
 
 function openAdminMasterModal() {
@@ -3118,8 +3092,7 @@ function openAdminMasterModal() {
   if (isAdminUnlocked) {
     document.getElementById('admin-pin-gate').classList.add('hidden');
     document.getElementById('admin-roster-content').classList.remove('hidden');
-    renderAdminMasterList();
-    renderAdminJobsList();
+    renderSuperAdmin();
   }
 }
 function closeAdminMasterModal() { document.getElementById('admin-master-modal').classList.add('hidden'); }
@@ -3130,8 +3103,7 @@ function verifyAdminPin() {
     isAdminUnlocked = true;
     document.getElementById('admin-pin-gate').classList.add('hidden');
     document.getElementById('admin-roster-content').classList.remove('hidden');
-    renderAdminMasterList();
-    renderAdminJobsList();
+    renderSuperAdmin();
   } else { showModal('密碼不正確', '管理員密碼為 8888！', '驗證失敗'); }
 }
 
@@ -3145,6 +3117,378 @@ function renderAdminJobsList() {
   const listEl = document.getElementById('admin-jobs-list');
   if (!listEl) return;
   listEl.innerHTML = liveMasterJobs.map(j => `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3"><div class="space-y-1 min-w-0"><div class="flex flex-wrap items-center gap-2"><span class="bg-sky-400 text-slate-950 font-mono font-black text-[11px] px-2 py-0.5 rounded">${j.id}</span><span class="font-black text-sm text-amber-300">${j.trade}</span><span class="text-emerald-400 font-mono font-bold text-xs">📞 ${j.phone}</span></div><div class="text-xs text-white font-bold">📍 ${j.district} — ${j.estate} (${j.status})</div><div class="text-xs text-stone-300">📝 ${j.desc}</div></div><a href="https://wa.me/852${j.phone.replace(/\s+/g,'')}" target="_blank" class="btn-std h-9 px-3 bg-sky-600 hover:bg-sky-500 text-white font-black rounded-xl text-xs">💬 WhatsApp 業主</a></div>`).join('');
+}
+
+function moneyText(value) {
+  return 'HK$' + Number(value || 0).toLocaleString();
+}
+
+function feeTotals(orders) {
+  const rows = orders.filter(order => order.feeSettled);
+  return rows.reduce((sum, order) => {
+    const fee = Number(order.feeAmount) || 0;
+    sum.goods += Number(order.feeBase) || 0;
+    sum.fee += fee;
+    if (order.feeStatus === '未付') sum.unpaid += fee;
+    else sum.collected += fee;
+    return sum;
+  }, { goods: 0, fee: 0, unpaid: 0, collected: 0 });
+}
+
+function switchSuperTab(tab) {
+  superAdminTab = tab;
+  renderSuperAdmin();
+}
+
+function renderSuperAdminIfOpen() {
+  const modal = document.getElementById('admin-master-modal');
+  const body = document.getElementById('super-admin-body');
+  if (!modal || !body || modal.classList.contains('hidden') || !isAdminUnlocked) return;
+  renderSuperAdmin();
+}
+
+function renderSuperAdmin() {
+  const tabs = document.getElementById('super-admin-tabs');
+  const body = document.getElementById('super-admin-body');
+  if (!tabs || !body) return;
+  const items = [
+    ['finance', '財務總覽'],
+    ['repair', '維修行政'],
+    ['materials', '建材財務'],
+    ['hardware', '五金財務'],
+    ['sync', '上傳']
+  ];
+  tabs.innerHTML = items.map(([id, label]) => `<button type="button" onclick="switchSuperTab('${id}')" class="btn-std h-8 px-3 rounded-lg text-xs ${superAdminTab === id ? 'font-black bg-amber-400 text-slate-950' : 'font-bold text-stone-300 bg-slate-800'}">${label}</button>`).join('');
+  const view = {
+    finance: renderSuperFinance,
+    repair: renderSuperRepair,
+    materials: renderSuperMaterials,
+    hardware: renderSuperHardware,
+    sync: renderSuperSync
+  }[superAdminTab] || renderSuperFinance;
+  body.innerHTML = view();
+}
+
+function renderSuperFinance() {
+  const mat = feeTotals(materialsOrders);
+  const hw = feeTotals(hardwareOrders);
+  const openMat = materialsOrders.filter(order => !['已收貨', '已拒絕'].includes(order.status)).reduce((sum, order) => sum + (Number(order.total) || 0), 0);
+  const openHw = hardwareOrders.filter(order => order.status !== '師傅已收貨').reduce((sum, order) => sum + (Number(order.total) || 0), 0);
+  const lowMasters = registeredMasters.filter(master => Number(master.creditScore) < 80 || master.frozen).length;
+  const card = (title, lines) => `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-1"><div class="text-xs font-black text-amber-300">${title}</div>${lines.map(line => `<p class="text-xs text-stone-200">${line}</p>`).join('')}</div>`;
+  return `<div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+    ${card('維修', [`師傅 ${registeredMasters.length} 人，須跟進 ${lowMasters} 人`, `維修單 ${liveMasterJobs.length} 張`, '維修派單不收款'])}
+    ${card('建材', [`未完成貨款 ${moneyText(openMat)}`, `介紹費 ${moneyText(mat.fee)}，未收 ${moneyText(mat.unpaid)}`, `供應商按金 ${moneyText(materialsSupplier.deposit)}${materialsSupplier.paused ? '，已暫停' : ''}`])}
+    ${card('五金', [`未完成貨款 ${moneyText(openHw)}`, `介紹費 ${moneyText(hw.fee)}，未收 ${moneyText(hw.unpaid)}`, `三間舖按金 ${moneyText(hardwareStores.reduce((sum, store) => sum + (Number(store.deposit) || 0), 0))}`])}
+  </div>
+  <div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
+    <div class="text-xs font-black text-emerald-300">全部介紹費</div>
+    ${ledgerHtml(ledgerRows())}
+  </div>`;
+}
+
+function renderSuperRepair() {
+  const masters = registeredMasters.map(master => `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
+    <div class="flex flex-wrap items-center gap-2 text-xs"><span class="font-mono font-black text-amber-300">${escText(master.masterId)}</span><span class="font-black">${escText(master.name)}</span><span class="text-stone-400">${escText(master.phone)}</span></div>
+    <div class="flex flex-wrap items-center gap-2">
+      <label class="text-[11px] text-stone-400">誠信分</label>
+      <input id="adm-credit-${escText(master.masterId)}" type="number" min="0" max="100" value="${Number(master.creditScore) || 0}" class="w-20 h-8 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white" />
+      <label class="text-[11px] text-stone-300"><input id="adm-frozen-${escText(master.masterId)}" type="checkbox" ${master.frozen ? 'checked' : ''} /> 凍結接單</label>
+      <button type="button" onclick="saveMasterAdmin('${escText(master.masterId)}')" class="btn-std h-8 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">儲存</button>
+      <a href="https://wa.me/852${String(master.phone || '').replace(/\s+/g, '')}" target="_blank" class="btn-std h-8 px-3 rounded-lg bg-emerald-600 text-white font-bold text-xs">WhatsApp</a>
+    </div>
+  </div>`).join('');
+  const options = `<option value="">未指派</option>` + registeredMasters.map(master => `<option value="${escText(master.masterId)}">${escText(master.name)}</option>`).join('');
+  const jobs = liveMasterJobs.map(job => `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
+    <div class="text-xs"><span class="font-mono font-black text-sky-300">${escText(job.id)}</span> ${escText(job.trade)} · ${escText(job.estate)}</div>
+    <p class="text-[11px] text-stone-400">${escText(job.status)} · ${escText(job.phone)}</p>
+    <div class="flex flex-wrap gap-2">
+      <select id="adm-job-master-${escText(job.id)}" class="h-8 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white">${options.replace(`value="${escText(job.assignedMasterId || '')}"`, `value="${escText(job.assignedMasterId || '')}" selected`)}</select>
+      <select id="adm-job-status-${escText(job.id)}" class="h-8 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white">
+        ${['候選接單', '已接單', '已完工', '甩底後備'].map(status => `<option ${repairStatusValue(job.status) === status ? 'selected' : ''}>${status}</option>`).join('')}
+      </select>
+      <button type="button" onclick="saveRepairJobAdmin('${escText(job.id)}')" class="btn-std h-8 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">儲存派單</button>
+    </div>
+  </div>`).join('');
+  return `<div class="flex justify-end"><button type="button" onclick="closeAdminMasterModal(); openMasterRegModal();" class="btn-std h-8 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">＋ 新增師傅</button></div>
+    <div class="text-xs font-black text-amber-300">師傅</div>${masters || '<p class="text-xs text-stone-400">未有師傅。</p>'}
+    <div class="text-xs font-black text-amber-300">維修單</div>${jobs || '<p class="text-xs text-stone-400">未有維修單。</p>'}`;
+}
+
+function saveMasterAdmin(masterId) {
+  const master = registeredMasters.find(item => item.masterId === masterId);
+  if (!master) return;
+  const credit = Number(document.getElementById('adm-credit-' + masterId).value);
+  master.creditScore = Number.isFinite(credit) ? Math.max(0, Math.min(100, credit)) : 100;
+  master.frozen = !!document.getElementById('adm-frozen-' + masterId).checked;
+  persistDataLocally();
+  renderMasterJobs();
+}
+
+function repairStatusValue(status) {
+  if (!status) return '候選接單';
+  if (status.includes('甩底')) return '甩底後備';
+  if (status.includes('完工')) return '已完工';
+  if (status.includes('已接單')) return '已接單';
+  return '候選接單';
+}
+
+function saveRepairJobAdmin(jobId) {
+  const job = liveMasterJobs.find(item => item.id === jobId);
+  if (!job) return;
+  const masterId = document.getElementById('adm-job-master-' + jobId).value;
+  const status = document.getElementById('adm-job-status-' + jobId).value;
+  const master = registeredMasters.find(item => item.masterId === masterId);
+  if (master) {
+    job.assignedMaster = master.name;
+    job.assignedMasterId = master.masterId;
+  } else if (status === '候選接單' || status === '甩底後備') {
+    job.assignedMaster = '';
+    job.assignedMasterId = '';
+  }
+  if (status === '已接單' && job.assignedMaster) job.status = `師傅已接單 (防甩底鎖定：${job.assignedMaster})`;
+  else if (status === '甩底後備') job.status = '甩底，後備師傅可頂上';
+  else job.status = status;
+  persistDataLocally();
+  renderMasterJobs();
+}
+
+function renderSuperMaterials() {
+  const orders = materialsOrders.map(order => `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-1 text-xs">
+    <div class="flex justify-between gap-2"><span class="font-mono font-black text-emerald-300">#${escText(order.orderId)}</span><span>${escText(order.status)}</span></div>
+    <p class="text-stone-300">${escText(order.buyerName)} · ${moneyText(order.total)}</p>
+    <p class="text-stone-400">${order.feeSettled ? `介紹費 ${moneyText(order.feeAmount)} · ${escText(order.feeStatus)}` : '未到計費'}</p>
+    ${order.feeStatus === '未付' ? `<button type="button" onclick="markFeeCollected('mat','${escText(order.orderId)}')" class="btn-std h-8 px-3 rounded-lg bg-emerald-500 text-slate-950 font-black text-xs">記低已收介紹費</button>` : ''}
+  </div>`).join('');
+  return `<div class="bg-slate-800 border border-emerald-500/40 rounded-2xl p-3 space-y-2">
+    <p class="text-xs text-stone-200">建材介紹費是收貨後貨款的 10%。按金低過 HK$2,500 會暫停賣貨。</p>
+    <div class="flex flex-wrap items-center gap-2">
+      <input id="adm-mat-deposit" type="number" min="0" value="${Number(materialsSupplier.deposit) || 0}" class="w-32 h-8 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white" />
+      <button type="button" onclick="saveMaterialsPurse()" class="btn-std h-8 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">儲存按金</button>
+      <button type="button" onclick="topUpMaterialsDeposit()" class="btn-std h-8 px-3 rounded-lg bg-emerald-400 text-slate-950 font-black text-xs">補回 HK$5,000</button>
+    </div>
+  </div>
+  ${orders || '<p class="text-xs text-stone-400">未有建材單。</p>'}
+  <div class="bg-slate-800 border border-slate-700 rounded-2xl p-3">${ledgerHtml(ledgerRows().filter(row => row.side === '建材供應商'))}</div>
+  <button type="button" onclick="closeAdminMasterModal(); openMaterialsDesk();" class="btn-std h-8 px-3 rounded-lg bg-slate-700 text-white text-xs">打開建材接單台處理送貨</button>`;
+}
+
+function saveMaterialsPurse() {
+  const deposit = Number(document.getElementById('adm-mat-deposit').value);
+  materialsSupplier.deposit = Number.isFinite(deposit) ? Math.max(0, deposit) : 0;
+  materialsSupplier.paused = materialsSupplier.deposit < 2500;
+  persistDataLocally();
+  renderMaterials(currentMaterialsFilter);
+}
+
+function renderSuperHardware() {
+  const stores = hardwareStores.map(store => `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
+    <div class="text-xs font-black">${escText(store.name)}${store.listingPaused ? ' · 已暫停' : ''}</div>
+    <div class="flex flex-wrap items-center gap-2">
+      <input id="adm-store-deposit-${escText(store.id)}" type="number" min="0" value="${Number(store.deposit) || 0}" class="w-32 h-8 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white" />
+      <button type="button" onclick="saveStorePurse('${escText(store.id)}')" class="btn-std h-8 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">儲存按金</button>
+      <button type="button" onclick="topUpStoreDeposit('${escText(store.id)}')" class="btn-std h-8 px-3 rounded-lg bg-emerald-500 text-slate-950 font-black text-xs">補回 HK$3,000</button>
+    </div>
+  </div>`).join('');
+  const orders = hardwareOrders.map(order => `<div class="bg-slate-900 border border-slate-700 rounded-2xl p-3 space-y-1 text-xs">
+    <div class="flex justify-between gap-2"><span class="font-mono font-black text-sky-300">#${escText(order.orderId)}</span><span>${escText(order.status)}</span></div>
+    <p class="text-stone-300">${escText(order.storeName)} · ${moneyText(order.total)}</p>
+    <p class="text-stone-400">${order.feeSettled ? `介紹費 ${moneyText(order.feeAmount)} · ${escText(order.feeStatus)}` : '未到計費'} ${order.waybill ? '· 運單 ' + escText(order.waybill) : ''}</p>
+    ${order.feeStatus === '未付' ? `<button type="button" onclick="markFeeCollected('hw','${escText(order.orderId)}')" class="btn-std h-8 px-3 rounded-lg bg-emerald-500 text-slate-950 font-black text-xs">記低已收介紹費</button>` : ''}
+  </div>`).join('');
+  return `<p class="text-xs text-stone-300">五金介紹費是師傅收貨後貨款的 5%。按金低過 HK$1,500 會暫停上架。改運單和送貨狀態仍在五金店老闆頁。</p>
+    ${stores}${orders || '<p class="text-xs text-stone-400">未有五金單。</p>'}
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-3">${ledgerHtml(ledgerRows().filter(row => row.side !== '建材供應商'))}</div>`;
+}
+
+function saveStorePurse(storeId) {
+  const store = hardwareStores.find(item => item.id === storeId);
+  if (!store) return;
+  const deposit = Number(document.getElementById('adm-store-deposit-' + storeId).value);
+  store.deposit = Number.isFinite(deposit) ? Math.max(0, deposit) : 0;
+  store.listingPaused = store.deposit < 1500;
+  persistDataLocally();
+  renderHardwareProducts(currentHardwareFilter);
+}
+
+function markFeeCollected(kind, orderId) {
+  const order = kind === 'mat' ? findMaterialOrder(orderId) : hardwareOrders.find(item => item.orderId === orderId);
+  if (!order || order.feeStatus !== '未付') return;
+  order.feeStatus = '已收現';
+  persistDataLocally();
+  renderMaterials(currentMaterialsFilter);
+  renderHardwareProducts(currentHardwareFilter);
+}
+
+function campSnapshot() {
+  return {
+    updatedAt: new Date().toISOString(),
+    masters: registeredMasters,
+    jobs: liveMasterJobs,
+    stores: hardwareStores,
+    orders: hardwareOrders,
+    matOrders: materialsOrders,
+    supplier: materialsSupplier,
+    reviews: mutualReviews,
+    pricing: appliancePricingData,
+    promos: productPromos
+  };
+}
+
+function applyCampSnapshot(data) {
+  if (!data || typeof data !== 'object') return;
+  if (Array.isArray(data.masters)) registeredMasters = data.masters;
+  if (Array.isArray(data.jobs)) liveMasterJobs = data.jobs;
+  if (Array.isArray(data.stores)) hardwareStores = data.stores;
+  if (Array.isArray(data.orders)) hardwareOrders = data.orders;
+  if (Array.isArray(data.matOrders)) materialsOrders = data.matOrders;
+  if (data.supplier) materialsSupplier = data.supplier;
+  if (Array.isArray(data.reviews)) mutualReviews = data.reviews;
+  if (data.pricing) appliancePricingData = data.pricing;
+  if (data.promos) productPromos = data.promos;
+  normalizeLoadedState();
+  if (data.updatedAt) localStorage.setItem('hk_camp_state_updated_at', data.updatedAt);
+  persistDataLocally();
+  refreshAllViewsFromCloud();
+}
+
+function renderSuperSync() {
+  const token = localStorage.getItem('hk_camp_github_token') || '';
+  const url = localStorage.getItem('hk_camp_supabase_url') || '';
+  const key = localStorage.getItem('hk_camp_supabase_key') || '';
+  return `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
+    <p class="text-xs font-black text-amber-300">一鍵上傳 GitHub，更新網站 HTML</p>
+    <p class="text-[11px] text-stone-400">令牌只存在這部瀏覽器，不會寫進網頁。需要 repo 寫入權限。會更新 index.html、public/camp.html 和 data/camp-state.json。</p>
+    <input id="gh-token" type="password" value="${escText(token)}" placeholder="GitHub token" class="w-full h-9 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white" />
+    <button type="button" onclick="pushCampToGitHub()" class="btn-std h-9 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">上傳到 GitHub</button>
+  </div>
+  <div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
+    <p class="text-xs font-black text-emerald-300">一鍵上傳 Supabase，更新資料庫</p>
+    <p class="text-[11px] text-stone-400">先在 Supabase SQL Editor 執行下面語句。服務金鑰只留在這部瀏覽器。</p>
+    <pre class="text-[10px] text-stone-300 whitespace-pre-wrap bg-slate-950 rounded-lg p-2">create table if not exists camp_state (
+  id text primary key,
+  payload jsonb not null,
+  updated_at timestamptz default now()
+);</pre>
+    <input id="sb-url" value="${escText(url)}" placeholder="https://xxxx.supabase.co" class="w-full h-9 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white" />
+    <input id="sb-key" type="password" value="${escText(key)}" placeholder="service_role key" class="w-full h-9 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white" />
+    <button type="button" onclick="pushCampToSupabase()" class="btn-std h-9 px-3 rounded-lg bg-emerald-400 text-slate-950 font-black text-xs">上傳到 Supabase</button>
+  </div>
+  <p id="super-sync-status" class="text-xs text-stone-300 whitespace-pre-wrap"></p>`;
+}
+
+function setSyncStatus(text) {
+  const el = document.getElementById('super-sync-status');
+  if (el) el.textContent = text;
+}
+
+function utf8ToBase64(text) {
+  const bytes = new TextEncoder().encode(text);
+  let binary = '';
+  for (let index = 0; index < bytes.length; index += 0x8000) {
+    binary += String.fromCharCode(...bytes.subarray(index, index + 0x8000));
+  }
+  return btoa(binary);
+}
+
+function base64ToUtf8(value) {
+  const binary = atob(String(value || '').replace(/\n/g, ''));
+  const bytes = new Uint8Array(binary.length);
+  for (let index = 0; index < binary.length; index += 1) bytes[index] = binary.charCodeAt(index);
+  return new TextDecoder().decode(bytes);
+}
+
+async function githubFile(path, token) {
+  const response = await fetch('https://api.github.com/repos/lm1668-cpu/hkrenocamp_commerce/contents/' + path, {
+    headers: { Authorization: 'Bearer ' + token, Accept: 'application/vnd.github+json' }
+  });
+  if (response.status === 404) return null;
+  if (!response.ok) throw new Error(await response.text());
+  return response.json();
+}
+
+async function githubWrite(path, text, message, token, sha) {
+  const response = await fetch('https://api.github.com/repos/lm1668-cpu/hkrenocamp_commerce/contents/' + path, {
+    method: 'PUT',
+    headers: {
+      Authorization: 'Bearer ' + token,
+      Accept: 'application/vnd.github+json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(Object.assign({ message, content: utf8ToBase64(text), branch: 'main' }, sha ? { sha } : {}))
+  });
+  if (!response.ok) throw new Error(await response.text());
+}
+
+async function pushCampToGitHub() {
+  const token = document.getElementById('gh-token').value.trim();
+  if (!token) {
+    showModal('未有 GitHub 令牌', '請貼上有這個倉庫寫入權限的 token。令牌只會留在這部瀏覽器。', '未填令牌');
+    return;
+  }
+  localStorage.setItem('hk_camp_github_token', token);
+  const json = JSON.stringify(campSnapshot()).replace(/</g, '\\u003c');
+  try {
+    setSyncStatus('正在上傳資料檔…');
+    const dataFile = await githubFile('data/camp-state.json', token);
+    await githubWrite('data/camp-state.json', json, 'Update camp data from super admin', token, dataFile && dataFile.sha);
+    for (const path of ['index.html', 'public/camp.html']) {
+      setSyncStatus('正在更新 ' + path);
+      const file = await githubFile(path, token);
+      if (!file) continue;
+      let html = base64ToUtf8(file.content);
+      const block = '<!--CAMP_STATE_START-->\n<script type="application/json" id="camp-published-state">' + json + '</scr' + 'ipt>\n<!--CAMP_STATE_END-->';
+      if (!html.includes('<!--CAMP_STATE_START-->')) throw new Error(path + ' 缺少資料標記');
+      html = html.replace(/<!--CAMP_STATE_START-->[\s\S]*?<!--CAMP_STATE_END-->/, block);
+      await githubWrite(path, html, 'Update camp HTML from super admin', token, file.sha);
+    }
+    setSyncStatus('GitHub 已更新 HTML 和資料檔。公開網站約一分鐘後先會見到。');
+  } catch (error) {
+    setSyncStatus('GitHub 上傳失敗：' + String(error.message || error).slice(0, 400));
+  }
+}
+
+async function pushCampToSupabase() {
+  const url = document.getElementById('sb-url').value.trim().replace(/\/$/, '');
+  const key = document.getElementById('sb-key').value.trim();
+  if (!url || !key) {
+    showModal('未填 Supabase', '請填專案網址和 service_role key。key 只會留在這部瀏覽器。', '未填資料');
+    return;
+  }
+  localStorage.setItem('hk_camp_supabase_url', url);
+  localStorage.setItem('hk_camp_supabase_key', key);
+  setSyncStatus('正在上傳 Supabase…');
+  try {
+    const response = await fetch(url + '/rest/v1/camp_state', {
+      method: 'POST',
+      headers: {
+        apikey: key,
+        Authorization: 'Bearer ' + key,
+        'Content-Type': 'application/json',
+        Prefer: 'resolution=merge-duplicates'
+      },
+      body: JSON.stringify({ id: 'live', payload: campSnapshot(), updated_at: new Date().toISOString() })
+    });
+    if (!response.ok) throw new Error(await response.text());
+    setSyncStatus('Supabase 已更新 camp_state 的 live 一列。');
+  } catch (error) {
+    setSyncStatus('Supabase 上傳失敗：' + String(error.message || error).slice(0, 400));
+  }
+}
+
+async function pullPublishedState() {
+  try {
+    const response = await fetch('data/camp-state.json?t=' + Date.now());
+    if (!response.ok) return;
+    const data = await response.json();
+    const localAt = localStorage.getItem('hk_camp_state_updated_at') || '';
+    const hasLocal = !!localStorage.getItem(LOCAL_JOBS_KEY);
+    if (hasLocal && !localAt) {
+      localStorage.setItem('hk_camp_state_updated_at', new Date().toISOString());
+      return;
+    }
+    if (data.updatedAt && data.updatedAt > localAt) applyCampSnapshot(data);
+  } catch (error) { console.warn(error); }
 }
 
 function acceptJob(jobId) {
@@ -5025,6 +5369,7 @@ function bootCampApp() {
   else applyHeroVisuals('all');
   if (params.store) selectHardwareStore(params.store);
   applyOrderLookupFromUrl();
+  pullPublishedState();
 }
 window.bootCampApp = bootCampApp;
 if (document.readyState === 'complete') bootCampApp();
