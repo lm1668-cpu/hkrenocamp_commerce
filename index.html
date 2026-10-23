@@ -1589,6 +1589,8 @@ const LOCAL_REVIEWS_KEY = 'hk_camp_mutual_reviews_v9';
 const LOCAL_PRICING_KEY = 'hk_camp_appliance_pricing_v3';
 const LOCAL_PROMO_KEY = 'hk_camp_product_promos_v1';
 const LOCAL_MAT_ORDERS_KEY = 'hk_camp_mat_orders_v1';
+const LOCAL_MATERIALS_KEY = 'hk_camp_materials_v1';
+const LOCAL_CATALOG_KEY = 'hk_camp_hw_catalog_v1';
 
 let appliancePricingData = {
   kitchen: [
@@ -2000,11 +2002,15 @@ function loadPersistedData() {
     if (savedMat) materialsOrders = JSON.parse(savedMat);
     const savedSupplier = localStorage.getItem('hk_camp_supplier_v1');
     if (savedSupplier) materialsSupplier = JSON.parse(savedSupplier);
+    const savedMaterials = localStorage.getItem(LOCAL_MATERIALS_KEY);
+    if (savedMaterials) materialsProducts = JSON.parse(savedMaterials);
+    const savedCatalog = localStorage.getItem(LOCAL_CATALOG_KEY);
+    if (savedCatalog) masterHardwareCatalog = JSON.parse(savedCatalog);
     normalizeLoadedState();
   } catch (e) { console.warn(e); }
 }
 
-function persistDataLocally() {
+function persistDataLocally(options) {
   try {
     localStorage.setItem(LOCAL_MASTERS_KEY, JSON.stringify(registeredMasters));
     localStorage.setItem(LOCAL_JOBS_KEY, JSON.stringify(liveMasterJobs));
@@ -2015,10 +2021,14 @@ function persistDataLocally() {
     localStorage.setItem(LOCAL_PROMO_KEY, JSON.stringify(productPromos));
     localStorage.setItem(LOCAL_MAT_ORDERS_KEY, JSON.stringify(materialsOrders));
     localStorage.setItem('hk_camp_supplier_v1', JSON.stringify(materialsSupplier));
+    localStorage.setItem(LOCAL_MATERIALS_KEY, JSON.stringify(materialsProducts));
+    localStorage.setItem(LOCAL_CATALOG_KEY, JSON.stringify(masterHardwareCatalog));
     localStorage.setItem('hk_camp_state_updated_at', new Date().toISOString());
+    localStorage.removeItem('hk_camp_supabase_key');
+    localStorage.removeItem('hk_camp_supabase_url');
   } catch (e) { console.warn(e); }
-  if (typeof window.syncStateToCloud === 'function') {
-    window.syncStateToCloud();
+  if (!options || options.sync !== false) {
+    if (typeof window.syncStateToCloud === 'function') window.syncStateToCloud();
   }
   renderSuperAdminIfOpen();
 }
@@ -3726,25 +3736,11 @@ function applyCampSnapshot(data) {
 
 function renderSuperSync() {
   const token = localStorage.getItem('hk_camp_github_token') || '';
-  const url = localStorage.getItem('hk_camp_supabase_url') || 'https://ajtowtqrubwteklfruev.supabase.co';
-  const key = localStorage.getItem('hk_camp_supabase_key') || '';
   return `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
-    <p class="text-xs font-black text-amber-300">一鍵上傳 GitHub，更新網站 HTML</p>
-    <p class="text-[11px] text-stone-400">令牌只存在這部瀏覽器，不會寫進網頁。需要 repo 寫入權限。會更新 index.html、public/camp.html 和 data/camp-state.json。</p>
+    <p class="text-xs font-black text-amber-300">發佈網頁到 GitHub</p>
+    <p class="text-[11px] text-stone-400">師傅、維修單、五金、建材和公價已即時寫入 Firebase，不用再上傳到 Supabase。這裡只更新公開網頁檔案。令牌只存在這部瀏覽器。</p>
     <input id="gh-token" type="password" value="${escText(token)}" placeholder="GitHub token" class="w-full h-9 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white" />
     <button type="button" onclick="pushCampToGitHub()" class="btn-std h-9 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">上傳到 GitHub</button>
-  </div>
-  <div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
-    <p class="text-xs font-black text-emerald-300">一鍵上傳 Supabase，更新資料庫</p>
-    <p class="text-[11px] text-stone-400">先在 Supabase SQL Editor 執行下面語句。服務金鑰只留在這部瀏覽器。</p>
-    <pre class="text-[10px] text-stone-300 whitespace-pre-wrap bg-slate-950 rounded-lg p-2">create table if not exists camp_state (
-  id text primary key,
-  payload jsonb not null,
-  updated_at timestamptz default now()
-);</pre>
-    <input id="sb-url" value="${escText(url)}" placeholder="https://xxxx.supabase.co" class="w-full h-9 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white" />
-    <input id="sb-key" type="password" value="${escText(key)}" placeholder="service_role key" class="w-full h-9 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white" />
-    <button type="button" onclick="pushCampToSupabase()" class="btn-std h-9 px-3 rounded-lg bg-emerald-400 text-slate-950 font-black text-xs">上傳到 Supabase</button>
   </div>
   <p id="super-sync-status" class="text-xs text-stone-300 whitespace-pre-wrap"></p>`;
 }
@@ -3817,34 +3813,6 @@ async function pushCampToGitHub() {
     setSyncStatus('GitHub 已更新 HTML 和資料檔。公開網站約一分鐘後先會見到。');
   } catch (error) {
     setSyncStatus('GitHub 上傳失敗：' + String(error.message || error).slice(0, 400));
-  }
-}
-
-async function pushCampToSupabase() {
-  const url = document.getElementById('sb-url').value.trim().replace(/\/$/, '');
-  const key = document.getElementById('sb-key').value.trim();
-  if (!url || !key) {
-    showModal('未填 Supabase', '請填專案網址和 service_role key。key 只會留在這部瀏覽器。', '未填資料');
-    return;
-  }
-  localStorage.setItem('hk_camp_supabase_url', url);
-  localStorage.setItem('hk_camp_supabase_key', key);
-  setSyncStatus('正在上傳 Supabase…');
-  try {
-    const response = await fetch(url + '/rest/v1/camp_state', {
-      method: 'POST',
-      headers: {
-        apikey: key,
-        Authorization: 'Bearer ' + key,
-        'Content-Type': 'application/json',
-        Prefer: 'resolution=merge-duplicates'
-      },
-      body: JSON.stringify({ id: 'live', payload: campSnapshot(), updated_at: new Date().toISOString() })
-    });
-    if (!response.ok) throw new Error(await response.text());
-    setSyncStatus('Supabase 已更新 camp_state 的 live 一列。');
-  } catch (error) {
-    setSyncStatus('Supabase 上傳失敗：' + String(error.message || error).slice(0, 400));
   }
 }
 
@@ -5723,6 +5691,10 @@ function applyOrderLookupFromUrl() {
 }
 
 function bootCampApp() {
+  try {
+    localStorage.removeItem('hk_camp_supabase_key');
+    localStorage.removeItem('hk_camp_supabase_url');
+  } catch (e) {}
   loadPersistedData();
   renderRepairTrades();
   renderTopMastersShowcase();
@@ -5812,9 +5784,11 @@ window.syncStateToCloud = async function () {
         promosJson: JSON.stringify(productPromos),
         matOrdersJson: JSON.stringify(materialsOrders),
         supplierJson: JSON.stringify(materialsSupplier),
+        materialsJson: JSON.stringify(materialsProducts),
+        catalogJson: JSON.stringify(masterHardwareCatalog),
         updatedAt: Date.now(),
         updatedBy: currentUser.uid
-      });
+      }, { merge: true });
     } while (cloudPending);
     const nowStr = new Date().toLocaleTimeString('zh-HK', { hour12: false });
     updateCloudBadgeUI(`☁️ 雲端實時同步中 (${nowStr})`, true);
@@ -5857,7 +5831,10 @@ async function initCloudSync() {
             if (data.promosJson) productPromos = JSON.parse(data.promosJson);
             if (data.matOrdersJson) materialsOrders = JSON.parse(data.matOrdersJson);
             if (data.supplierJson) materialsSupplier = JSON.parse(data.supplierJson);
+            if (data.materialsJson) materialsProducts = JSON.parse(data.materialsJson);
+            if (data.catalogJson) masterHardwareCatalog = JSON.parse(data.catalogJson);
             normalizeLoadedState();
+            persistDataLocally({ sync: false });
           }
         });
 
