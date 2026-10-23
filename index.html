@@ -803,7 +803,6 @@ html, body {
         <button onclick="openMasterDashboard()" class="btn-std bg-amber-500 hover:bg-amber-400 text-slate-950 px-3 py-1.5 rounded-lg text-xs font-black">🛠️ 師傅工作台</button>
         <button onclick="openShopOwnerModal()" class="btn-std bg-amber-400 hover:bg-amber-300 text-slate-950 px-3 py-1.5 rounded-lg text-xs font-black">🏪 五金店老闆管理頁</button>
         <button onclick="openAdminMasterModal()" class="btn-std bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold">🔐 超級管理員</button>
-        <button onclick="resetDemoData()" class="btn-std bg-stone-900 hover:bg-red-950 text-stone-400 hover:text-red-300 border border-stone-800 px-3 py-1.5 rounded-lg text-xs font-medium">🔄 重置示範數據</button>
       </div>
     </div>
   </div>
@@ -2655,11 +2654,14 @@ function renderMemberCenterOrders() {
   }
 
   const waiting = myJobs.filter(j => !jobOwnerAccepted(j));
+  const waitingMaster = waiting.filter(j => !j.assignedMaster);
   if (hint) {
     hint.textContent = waiting.length
       ? (isMaster
         ? '你負責的單在下面。完工後可撳「一鍵確認完工 & 打星評價」評價業主。評價業主不會代替業主驗收。'
-        : '下一步：未驗收的單，撳綠色「一鍵確認完工 & 打星評價」。師傅已接單但甩底，先撳紅色「舉報甩底換人」。')
+        : waitingMaster.length
+          ? '有單未有師傅接。要等師傅在大廳接單，綠色驗收按鈕才會出現。'
+          : '師傅已接單。完工後撳綠色「一鍵確認完工 & 打星評價」。如果師傅甩底，撳紅色「舉報甩底換人」。')
       : '這張單業主已驗收。可撳「追加/查看互評」，或發起新維修單。';
   }
   if (note && !isMaster) {
@@ -2700,9 +2702,9 @@ function renderMemberCenterOrders() {
 
         <div class="flex flex-wrap items-center gap-1.5">
           ${!isCompleted && isOwnerJob && j.assignedMaster ? `<button type="button" onclick="reportMasterDefault('${j.id}')" class="btn-std h-8 px-2.5 bg-red-950/80 hover:bg-red-900 text-red-300 border border-red-500/40 rounded-xl text-[11px] font-bold">🚨 舉報甩底換人</button>` : ''}
-          <button type="button" onclick="jumpToReviewJob('${j.id}')" class="btn-std h-8 px-3 ${isCompleted ? 'bg-slate-700 hover:bg-slate-600 text-amber-300' : 'bg-emerald-500 hover:bg-emerald-400 text-slate-950'} font-black rounded-xl text-xs shadow-xs">
-            ${isCompleted ? '⭐ 追加/查看互評' : '✅ 一鍵確認完工 & 打星評價'}
-          </button>
+          ${isCompleted || isMaster || j.assignedMaster
+            ? `<button type="button" onclick="jumpToReviewJob('${j.id}')" class="btn-std h-8 px-3 ${isCompleted ? 'bg-slate-700 hover:bg-slate-600 text-amber-300' : 'bg-emerald-500 hover:bg-emerald-400 text-slate-950'} font-black rounded-xl text-xs shadow-xs">${isCompleted ? '⭐ 追加/查看互評' : '✅ 一鍵確認完工 & 打星評價'}</button>`
+            : `<span class="text-[11px] text-stone-400">等師傅接單後才可驗收</span>`}
         </div>
       </div>
     </div>`;
@@ -3752,6 +3754,11 @@ function renderSuperSync() {
     <input id="gh-token" type="password" value="${escText(token)}" placeholder="GitHub token" class="w-full h-9 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white" />
     <button type="button" onclick="pushCampToGitHub()" class="btn-std h-9 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">上傳到 GitHub</button>
   </div>
+  <div class="bg-slate-800 border border-red-900 rounded-2xl p-3 space-y-2">
+    <p class="text-xs font-black text-red-300">重置示範數據</p>
+    <p class="text-[11px] text-stone-400">只限已登入的管理員。會把師傅、維修單和訂單回復到出廠示範，並寫入 Firebase。</p>
+    <button type="button" onclick="resetDemoData()" class="btn-std h-9 px-3 rounded-lg bg-stone-900 text-red-300 border border-red-900 font-bold text-xs">重置示範數據</button>
+  </div>
   <p id="super-sync-status" class="text-xs text-stone-300 whitespace-pre-wrap"></p>`;
 }
 
@@ -3852,7 +3859,7 @@ function acceptJob(jobId) {
   if (!job) return;
   const alreadyMine = jobBelongsToMaster(job, currentMasterProfile);
   if (currentMasterProfile.frozen && !alreadyMine) {
-    showModal('接單權限已凍結', `「${currentMasterProfile.name}」因甩底被扣誠信分（現時 ${currentMasterProfile.creditScore} 分），不能再接新單。已接的單仍可聯絡業主。可按頁尾「重置示範數據」恢復。`, '無法接單');
+    showModal('接單權限已凍結', `「${currentMasterProfile.name}」因甩底被扣誠信分（現時 ${currentMasterProfile.creditScore} 分），不能再接新單。已接的單仍可聯絡業主。`, '無法接單');
     return;
   }
   if (jobOwnerAccepted(job)) {
@@ -4510,8 +4517,10 @@ function renderHardwareOrdersTracker() {
       <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-stone-800">
         <div class="flex flex-wrap items-center gap-1.5">${stepsHtml}</div>
         ${isReceived
-          ? `<span class="inline-flex items-center gap-1 bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 px-3 py-1 rounded-xl text-xs font-black">🎉 師傅已確認收貨（五金店已知悉）</span>`
-          : `<button onclick="masterConfirmReceived('${o.orderId}')" class="btn-std h-8 px-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs">📦 師傅確認已收貨 (通知五金店)</button>`
+          ? `<span class="inline-flex items-center gap-1 bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 px-3 py-1 rounded-xl text-xs font-black">${o.closed ? '已關閉' : '師傅已確認收貨'}</span>`
+          : o.status === '運送中'
+            ? `<button onclick="masterConfirmReceived('${o.orderId}')" class="btn-std h-8 px-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs">確認已收貨</button>`
+            : `<span class="text-[11px] text-stone-400">等店主更新到「運送中」，才可以確認收貨</span>`
         }
       </div>
     </div>`;
@@ -5120,7 +5129,8 @@ function renderMaterialsOrderTracker() {
       ? `<p class="text-[11px] text-red-700">已拒絕：${escText(order.rejectReason)}</p>`
       : '';
     const ship = order.deliveryMethod ? `<p class="text-[11px] text-stone-600">送貨方式：${escText(order.deliveryMethod)}</p>` : '';
-    const after = order.afterSale ? `<p class="text-[11px] text-amber-800">售後：${escText(order.afterSale.type)}${order.afterSale.done ? '，已處理' : '，處理中'}</p>` : '';
+    const after = order.afterSale ? `<p class="text-[11px] text-amber-800">售後：${escText(order.afterSale.type)}${order.afterSale.done ? '，已處理並關閉' : '，處理中'}</p>` : '';
+    const closed = order.closed && !order.afterSale ? `<p class="text-[11px] text-emerald-700">已確認沒有問題，訂單關閉。</p>` : '';
     return `<div class="bg-white border border-emerald-200 rounded-xl p-3 space-y-1">
       <div class="flex flex-wrap items-center justify-between gap-2">
         <span class="font-mono font-black text-xs text-emerald-800">#${escText(order.orderId)}</span>
@@ -5128,7 +5138,7 @@ function renderMaterialsOrderTracker() {
       </div>
       <p class="text-[11px] text-stone-600">${escText(order.items.map(i => i.name + ' x' + i.qty).join('、'))} · HK$${Number(order.total).toLocaleString()}</p>
       <div class="flex flex-wrap gap-1">${steps}</div>
-      ${ship}${extra}${after}
+      ${ship}${extra}${after}${closed}
     </div>`;
   }).join('');
 }
@@ -5613,6 +5623,10 @@ function switchSection(sec) {
 }
 
 async function resetDemoData() {
+  if (window.staffRole !== 'admin') {
+    showModal('只限管理員', '請先用管理員帳戶登入，才可以重置資料。', '未能重置');
+    return;
+  }
   registeredMasters = JSON.parse(JSON.stringify(FACTORY_STATE.masters));
   liveMasterJobs = JSON.parse(JSON.stringify(FACTORY_STATE.jobs));
   hardwareStores = JSON.parse(JSON.stringify(FACTORY_STATE.stores));
