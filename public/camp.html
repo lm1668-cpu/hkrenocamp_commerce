@@ -572,8 +572,8 @@ html, body {
           <span id="master-auth-badge" class="text-[10px] bg-stone-700 text-stone-300 px-2.5 py-0.5 rounded-full font-bold">未登入</span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-12 gap-1.5 bg-slate-900 border border-slate-700 rounded-xl p-1.5 items-center">
-          <input type="tel" id="master-login-phone" value="91238888" placeholder="師傅電話 (91238888)" class="sm:col-span-5 h-9 bg-transparent border-b sm:border-b-0 sm:border-r border-slate-700 px-2 text-white text-xs font-mono focus:outline-none" />
-          <input type="password" id="master-login-pin" value="8888" placeholder="密碼 (8888)" class="sm:col-span-3 h-9 bg-transparent px-2 text-amber-300 text-xs font-mono focus:outline-none" />
+          <input type="tel" id="master-login-phone" placeholder="師傅電話" class="sm:col-span-5 h-9 bg-transparent border-b sm:border-b-0 sm:border-r border-slate-700 px-2 text-white text-xs font-mono focus:outline-none" />
+          <input type="password" id="master-login-pin" placeholder="密碼" class="sm:col-span-3 h-9 bg-transparent px-2 text-amber-300 text-xs font-mono focus:outline-none" />
           <button type="button" onclick="masterLoginAction()" class="sm:col-span-4 btn-std h-9 px-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-lg text-xs shrink-0">
             🔓 驗證登入
           </button>
@@ -651,7 +651,7 @@ html, body {
     <div id="materials-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2 items-stretch"></div>
     <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 space-y-2">
       <h3 class="text-sm font-black text-emerald-950">建材訂單</h3>
-      <p class="text-[11px] text-stone-600">落單後會留在系統。用單號可再查進度。接單、採購、送貨、售後和對賬在「建材接單台」，密碼 8888。</p>
+      <p class="text-[11px] text-stone-600">落單後會留在系統。用單號可再查進度。接單、採購、送貨、售後和對賬在「建材接單台」。</p>
       <div class="flex flex-wrap gap-2">
         <input id="mat-lookup-input" placeholder="輸入 MAT-單號" class="h-9 w-40 bg-white border border-emerald-300 rounded-xl px-2 text-xs" />
         <button type="button" onclick="lookupMaterialOrder()" class="btn-std h-9 px-3 rounded-xl bg-emerald-600 text-white font-black text-xs">查單</button>
@@ -854,11 +854,11 @@ html, body {
       <div class="text-3xl">👷‍♂️🔒</div>
       <div class="space-y-1">
         <h4 class="font-black text-base text-white">請輸入師傅電話號碼及登入密碼進入工作台</h4>
-        <p class="text-xs text-stone-400">示範師傅電話：<span class="text-amber-300 font-mono font-bold">91238888</span> ｜ 預設密碼：<span class="text-amber-300 font-mono font-bold">8888</span> (張志強師傅)</p>
+        <p class="text-xs text-stone-400">請用登記時的電話和密碼。密碼不會在網頁上顯示。</p>
       </div>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-2 max-w-md mx-auto">
-        <input type="tel" id="dash-pin-phone" value="91238888" placeholder="師傅電話號碼" class="w-full sm:flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm focus:outline-none focus:border-amber-400" />
-        <input type="password" id="dash-pin-code" value="8888" placeholder="登入密碼 (預設 8888)" class="w-full sm:w-36 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-amber-300 font-mono text-sm focus:outline-none focus:border-amber-400" />
+        <input type="tel" id="dash-pin-phone" placeholder="師傅電話號碼" class="w-full sm:flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm focus:outline-none focus:border-amber-400" />
+        <input type="password" id="dash-pin-code" placeholder="登入密碼" class="w-full sm:w-36 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-amber-300 font-mono text-sm focus:outline-none focus:border-amber-400" />
         <button type="button" onclick="verifyMasterDashboardPhone()" class="w-full sm:w-auto btn-std h-10 px-5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">
           進入工作台
         </button>
@@ -873,7 +873,7 @@ html, body {
         <div class="font-black text-amber-400">🔄 師傅自助重設登入密碼</div>
         <p class="text-stone-400 text-[11px] leading-relaxed">請輸入你登記時嘅<strong>手提電話</strong>及<strong>師傅稱呼關鍵字</strong>（例如：張志強 或 強哥），核對無誤即可即時設定新密碼：</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          <input type="tel" id="reset-master-phone" value="91238888" placeholder="登記電話 (例: 91238888)" class="h-9 bg-slate-800 border border-slate-600 rounded-xl px-3 text-white font-mono" />
+          <input type="tel" id="reset-master-phone" placeholder="登記電話" class="h-9 bg-slate-800 border border-slate-600 rounded-xl px-3 text-white font-mono" />
           <input type="text" id="reset-master-name" value="強哥" placeholder="登記稱呼 (例: 強哥)" class="h-9 bg-slate-800 border border-slate-600 rounded-xl px-3 text-white" />
         </div>
         <div class="flex items-center gap-2">
@@ -1050,17 +1050,12 @@ html, body {
             <div>
               <label class="block text-stone-300 font-bold mb-1">業主 WhatsApp / 手提電話</label>
               <div class="flex gap-2">
-                <input type="tel" id="mem-owner-phone" value="9123 8392" placeholder="輸入電話 (例：9123 8392)" class="flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-emerald-400 font-mono font-bold text-sm focus:outline-none focus:border-amber-400" />
+                <input type="tel" id="mem-owner-phone" placeholder="輸入發單電話" class="flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-emerald-400 font-mono font-bold text-sm focus:outline-none focus:border-amber-400" />
                 <button type="button" onclick="loginAsMember('owner')" class="btn-std px-4 h-10 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs shrink-0">
                   🔍 查單
                 </button>
               </div>
             </div>
-          </div>
-          <div class="pt-2 border-t border-slate-700/80 flex flex-wrap items-center gap-1.5">
-            <span class="text-[11px] text-stone-400">一鍵測試示範業主：</span>
-            <button type="button" onclick="quickFillMemberOwner('9123 8392')" class="btn-std h-6 px-2 bg-slate-900 hover:bg-slate-700 text-amber-300 border border-slate-600 rounded-lg text-[10px] font-mono">9123 8392 (淘大陳生)</button>
-            <button type="button" onclick="quickFillMemberOwner('6888 4120')" class="btn-std h-6 px-2 bg-slate-900 hover:bg-slate-700 text-amber-300 border border-slate-600 rounded-lg text-[10px] font-mono">6888 4120 (第一城李太)</button>
           </div>
           <p id="mem-lookup-note" class="text-[11px] text-amber-200 leading-relaxed"></p>
         </div>
@@ -1079,11 +1074,11 @@ html, body {
             <div class="grid grid-cols-12 gap-2">
               <div class="col-span-5">
                 <label class="block text-stone-300 font-bold mb-1">師傅電話</label>
-                <input type="tel" id="mem-master-phone" value="91238888" placeholder="91238888" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-2.5 text-emerald-400 font-mono font-bold text-xs focus:outline-none focus:border-emerald-400" />
+                <input type="tel" id="mem-master-phone" placeholder="師傅電話" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-2.5 text-emerald-400 font-mono font-bold text-xs focus:outline-none focus:border-emerald-400" />
               </div>
               <div class="col-span-3">
                 <label class="block text-stone-300 font-bold mb-1">密碼</label>
-                <input type="password" id="mem-master-pin" value="8888" placeholder="8888" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-2.5 text-amber-300 font-mono font-bold text-xs focus:outline-none focus:border-emerald-400" />
+                <input type="password" id="mem-master-pin" placeholder="密碼" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-2.5 text-amber-300 font-mono font-bold text-xs focus:outline-none focus:border-emerald-400" />
               </div>
               <div class="col-span-4 flex items-end">
                 <button type="button" onclick="loginAsMember('master')" class="btn-std w-full h-10 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-xl text-xs">
@@ -1093,11 +1088,6 @@ html, body {
             </div>
           </div>
           <div class="pt-2 border-t border-slate-700/80 flex flex-wrap items-center justify-between gap-1.5">
-            <div class="flex flex-wrap items-center gap-1">
-              <span class="text-[11px] text-stone-400">示範師傅：</span>
-              <button type="button" onclick="quickFillMemberMaster('91238888', '8888')" class="btn-std h-6 px-2 bg-slate-900 hover:bg-slate-700 text-emerald-300 border border-slate-600 rounded-lg text-[10px]">強哥(91238888)</button>
-              <button type="button" onclick="quickFillMemberMaster('98761234', '8888')" class="btn-std h-6 px-2 bg-slate-900 hover:bg-slate-700 text-emerald-300 border border-slate-600 rounded-lg text-[10px]">明哥(98761234)</button>
-            </div>
             <button type="button" onclick="closeMemberModal(); openMasterDashboard();" class="text-[11px] text-amber-300 hover:underline font-bold">🛠️ 進入師傅工作台 ➔</button>
           </div>
         </div>
@@ -1255,7 +1245,7 @@ html, body {
         </div>
         <div class="grid grid-cols-2 gap-2">
           <input type="text" id="cart-mat-buyer-name" value="陳先生 (業主)" placeholder="業主稱呼" class="h-9 bg-white border border-emerald-300 rounded-xl px-2.5 text-xs font-bold" />
-          <input type="tel" id="cart-mat-buyer-phone" value="9123 8392" placeholder="WhatsApp 電話" class="h-9 bg-white border border-emerald-300 rounded-xl px-2.5 text-xs font-bold" />
+          <input type="tel" id="cart-mat-buyer-phone" placeholder="WhatsApp 電話" class="h-9 bg-white border border-emerald-300 rounded-xl px-2.5 text-xs font-bold" />
         </div>
         <input type="text" id="cart-mat-buyer-address" value="觀塘淘大花園 H座 12樓 B室" placeholder="送貨屋苑及單位地址" class="w-full h-9 bg-white border border-emerald-300 rounded-xl px-2.5 text-xs" />
         <div class="pt-1 space-y-1">
@@ -1275,7 +1265,7 @@ html, body {
         </div>
         <div class="grid grid-cols-2 gap-2">
           <input type="text" id="cart-buyer-name" value="張師傅 (強哥)" placeholder="師傅稱呼" class="h-9 bg-stone-50 border border-stone-300 rounded-xl px-2.5 text-xs font-bold" />
-          <input type="tel" id="cart-buyer-phone" value="9123 8888" placeholder="聯絡電話" class="h-9 bg-stone-50 border border-stone-300 rounded-xl px-2.5 text-xs font-bold" />
+          <input type="tel" id="cart-buyer-phone" placeholder="聯絡電話" class="h-9 bg-stone-50 border border-stone-300 rounded-xl px-2.5 text-xs font-bold" />
         </div>
         <input type="text" id="cart-buyer-address" value="觀塘淘大花園 H座樓下交收" placeholder="送貨地盤詳細地址" class="w-full h-9 bg-stone-50 border border-stone-300 rounded-xl px-2.5 text-xs" />
         
@@ -1318,10 +1308,10 @@ html, body {
       <div class="text-3xl">🏪🔒</div>
       <div class="space-y-1">
         <h4 class="font-black text-base text-white">請輸入五金店老闆專用管理密碼</h4>
-        <p class="text-xs text-stone-400">示範店主密碼：<span class="text-amber-300 font-mono font-bold">6688</span> (測試用)</p>
+        <p class="text-xs text-stone-400">只限店主。密碼不會在網頁上顯示。</p>
       </div>
       <div class="flex items-center justify-center gap-2 max-w-xs mx-auto">
-        <input type="password" id="owner-pin-input" value="6688" placeholder="輸入密碼" class="flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm focus:outline-none focus:border-amber-400" />
+        <input type="password" id="owner-pin-input" placeholder="輸入密碼" class="flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm focus:outline-none focus:border-amber-400" />
         <button type="button" onclick="verifyOwnerPin()" class="btn-std h-10 px-4 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">
           解鎖後台
         </button>
@@ -1356,7 +1346,7 @@ html, body {
             </div>
             <div>
               <label class="block text-stone-300 font-bold mb-1">老闆接單 WhatsApp 手機 *</label>
-              <input type="tel" id="owner-shop-phone" placeholder="例：91238888" class="w-full h-9 bg-slate-900 border border-slate-600 rounded-xl px-3 text-emerald-400 font-mono font-bold" />
+              <input type="tel" id="owner-shop-phone" placeholder="店舖電話" class="w-full h-9 bg-slate-900 border border-slate-600 rounded-xl px-3 text-emerald-400 font-mono font-bold" />
             </div>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -1443,7 +1433,7 @@ html, body {
         </div>
         <div>
           <label class="block text-xs font-bold text-stone-300 mb-1">設定登入密碼 *</label>
-          <input type="password" id="reg-master-pin" placeholder="例：8888 (最少4位)" required class="w-full h-10 bg-slate-800 border border-slate-600 rounded-xl px-3 text-amber-300 font-mono placeholder-stone-500 focus:outline-none focus:border-amber-400" />
+          <input type="password" id="reg-master-pin" placeholder="最少 4 位" required class="w-full h-10 bg-slate-800 border border-slate-600 rounded-xl px-3 text-amber-300 font-mono placeholder-stone-500 focus:outline-none focus:border-amber-400" />
         </div>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -1486,10 +1476,10 @@ html, body {
       <div class="text-3xl">🔒</div>
       <div class="space-y-1">
         <h4 class="font-black text-base text-white">請輸入大本營管理員密碼</h4>
-        <p class="text-xs text-stone-400">預設管理員密碼：<span class="text-amber-300 font-mono font-bold">8888</span></p>
+        <p class="text-xs text-stone-400">只限管理員。密碼不會在網頁上顯示。</p>
       </div>
       <div class="flex items-center justify-center gap-2 max-w-xs mx-auto">
-        <input type="password" id="admin-pin-input" value="8888" placeholder="輸入密碼" class="flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm focus:outline-none focus:border-amber-400" />
+        <input type="password" id="admin-pin-input" placeholder="輸入密碼" class="flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm focus:outline-none focus:border-amber-400" />
         <button type="button" onclick="verifyAdminPin()" class="btn-std h-10 px-4 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">
           解鎖名冊
         </button>
@@ -1514,9 +1504,9 @@ html, body {
     </div>
     <div id="mat-desk-gate" class="py-8 px-4 text-center space-y-4 bg-slate-800/80 rounded-2xl border border-slate-700">
       <h4 class="font-black text-base text-white">請輸入大本營密碼</h4>
-      <p class="text-xs text-stone-400">建材單只有大本營能接。密碼 <span class="text-emerald-300 font-mono font-bold">8888</span></p>
+      <p class="text-xs text-stone-400">建材單只有大本營能接。</p>
       <div class="flex items-center justify-center gap-2 max-w-xs mx-auto">
-        <input type="password" id="mat-desk-pin" value="8888" class="flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm" />
+        <input type="password" id="mat-desk-pin" placeholder="輸入密碼" class="flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-center text-white font-mono text-sm" />
         <button type="button" onclick="verifyMaterialsDeskPin()" class="btn-std h-10 px-4 bg-emerald-400 text-slate-950 font-black rounded-xl text-xs">解鎖</button>
       </div>
     </div>
@@ -2366,7 +2356,7 @@ function reportMasterDefault(jobId) {
       '請先確認你是這張單的業主',
       '舉報甩底會扣該師傅 25 分並凍結接單。為避免其他師傅一鍵凍結對手，請輸入發單時的業主電話。',
       '業主驗證',
-      `<input id="report-owner-phone" inputmode="numeric" placeholder="業主電話，示範單可填 ${shown}" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-white text-sm" />
+      `<input id="report-owner-phone" inputmode="numeric" placeholder="輸入發單時的業主電話" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-white text-sm" />
        <button onclick="submitReportOwnerPhone('${job.id}')" class="btn-std w-full h-10 bg-red-600 hover:bg-red-500 text-white font-black rounded-xl text-xs">確認電話並舉報甩底</button>`
     );
     return;
@@ -2578,14 +2568,14 @@ function loginAsMember(role) {
     setOwnerSessionByPhone(phone, true);
   } else {
     const phone = document.getElementById('mem-master-phone').value.trim().replace(/\s+/g, '');
-    const pinInput = (document.getElementById('mem-master-pin')?.value || '8888').trim();
+    const pinInput = (document.getElementById('mem-master-pin')?.value || '').trim();
     const matched = registeredMasters.find(m => (m.phone || '').replace(/\s+/g, '') === phone);
     if (!matched) {
-      showModal('找不到此師傅電話', `系統未找到電話為「${phone}」嘅師傅記錄。可點擊下方示範師傅按鈕（91238888）測試！`, '師傅驗證');
+      showModal('找不到此師傅電話', '系統未找到這個電話的師傅記錄。', '師傅驗證');
       return;
     }
     if ((matched.pin || '8888') !== pinInput) {
-      showModal('師傅登入密碼不正確', '請輸入正確嘅師傅專屬密碼（示範師傅預設密碼為 8888）。', '密碼錯誤');
+      showModal('師傅登入密碼不正確', '請輸入這個師傅的登入密碼。', '密碼錯誤');
       return;
     }
     currentMasterProfile = matched;
@@ -2640,7 +2630,7 @@ function renderMemberCenterOrders() {
     if (hint) hint.textContent = isMaster
       ? '你未有已接的單。請到派單大廳撳「立即接單鎖定」。'
       : '這個電話未有維修單。請核對發單電話，或撳右上角「發起新維修單」。';
-    if (note && !isMaster) note.textContent = '未搵到單。示範業主可撳 9123 8392 或 6888 4120。';
+    if (note && !isMaster) note.textContent = '未搵到這個電話的維修單。';
     listEl.innerHTML = `<div class="text-center text-stone-400 text-xs py-6 bg-slate-900 rounded-2xl border border-slate-700">未有屬於這個身份的維修單。</div>`;
     return;
   }
@@ -2947,7 +2937,7 @@ function fillMasterDashboard(master) {
   const loginPhone = document.getElementById('master-login-phone');
   const loginPin = document.getElementById('master-login-pin');
   if (loginPhone) loginPhone.value = (master.phone || '').replace(/\s+/g, '');
-  if (loginPin) loginPin.value = master.pin || '8888';
+  if (loginPin) loginPin.value = '';
   renderMasterJobs();
 }
 
@@ -2971,11 +2961,11 @@ function verifyMasterDashboardPhone() {
   const pin = (document.getElementById('dash-pin-code').value || '').trim();
   const matched = registeredMasters.find(m => (m.phone || '').replace(/\s+/g, '') === phone);
   if (!matched) {
-    showModal('找不到此師傅電話', `系統未找到電話為「${phone}」嘅師傅記錄。示範電話：91238888。`, '師傅驗證');
+    showModal('找不到此師傅電話', '系統未找到這個電話的師傅記錄。', '師傅驗證');
     return;
   }
   if ((matched.pin || '8888') !== pin) {
-    showModal('師傅登入密碼不正確', '請輸入正確嘅師傅專屬密碼（示範預設密碼為 8888）。', '密碼錯誤');
+    showModal('師傅登入密碼不正確', '請輸入這個師傅的登入密碼。', '密碼錯誤');
     return;
   }
   fillMasterDashboard(matched);
@@ -3050,9 +3040,9 @@ function closeMasterRegModal() { document.getElementById('master-reg-modal').cla
 
 function masterLoginAction() {
   const inputPhone = document.getElementById('master-login-phone').value.trim().replace(/\s+/g, '');
-  const inputPin = (document.getElementById('master-login-pin')?.value || '8888').trim();
+  const inputPin = (document.getElementById('master-login-pin')?.value || '').trim();
   if (!inputPhone) {
-    showModal('請輸入電話號碼', '請輸入你登記師傅時使用嘅電話號碼（或輸入示範師傅電話：91238888，密碼：8888）進行驗證解鎖！', '師傅驗證');
+    showModal('請輸入電話號碼', '請輸入登記師傅時使用的電話和密碼。', '師傅驗證');
     return;
   }
   const matched = registeredMasters.find(m => (m.phone || '').replace(/\s+/g, '') === inputPhone);
@@ -3061,7 +3051,7 @@ function masterLoginAction() {
     return;
   }
   if ((matched.pin || '8888') !== inputPin) {
-    showModal('師傅密碼不正確', '你輸入嘅師傅登入密碼不正確（示範預設密碼：8888）。如忘記密碼，可打開「🛠️ 師傅工作台」進行自助重設！', '密碼錯誤');
+    showModal('師傅密碼不正確', '登入密碼不正確。如果忘記密碼，可在師傅工作台自助重設。', '密碼錯誤');
     return;
   }
   isMasterLoggedIn = true;
@@ -3080,7 +3070,7 @@ function submitMasterRegistration(e) {
   e.preventDefault();
   const name = document.getElementById('reg-master-name').value.trim();
   const phone = document.getElementById('reg-master-phone').value.trim();
-  const pin = (document.getElementById('reg-master-pin')?.value || '8888').trim();
+  const pin = (document.getElementById('reg-master-pin')?.value || '').trim();
   const district = document.getElementById('reg-master-district').value;
   const cert = document.getElementById('reg-master-cert').value.trim() || '熟手師傅';
   const masterId = 'MST-' + Math.floor(1000 + Math.random() * 9000);
@@ -3129,7 +3119,7 @@ function verifyAdminPin() {
     document.getElementById('admin-pin-gate').classList.add('hidden');
     document.getElementById('admin-roster-content').classList.remove('hidden');
     renderSuperAdmin();
-  } else { showModal('密碼不正確', '管理員密碼為 8888！', '驗證失敗'); }
+  } else { showModal('密碼不正確', '管理員密碼不正確。', '驗證失敗'); }
 }
 
 function renderAdminMasterList() {
@@ -3271,7 +3261,7 @@ function renderSuperPeople() {
     <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
       <input id="adm-new-name" placeholder="姓名" class="${field}" />
       <input id="adm-new-phone" placeholder="電話" class="${field}" />
-      <input id="adm-new-pin" placeholder="密碼，最少 4 位" value="8888" class="${field}" />
+      <input id="adm-new-pin" placeholder="密碼，最少 4 位" class="${field}" />
       <input id="adm-new-district" placeholder="地區" class="${field}" />
       <input id="adm-new-trades" placeholder="工種" class="${field}" />
       <input id="adm-new-cert" placeholder="牌照" class="${field}" />
@@ -3834,7 +3824,7 @@ async function pullPublishedState() {
 function acceptJob(jobId) {
   if (!isMasterLoggedIn || !currentMasterProfile) {
     isMasterLoggedIn = false;
-    showModal('請先驗證或登入師傅身份', '為保障業主私隱並落實「防甩底誠信分機制」，請先輸入已登記師傅電話（示範電話：91238888）驗證，或免費註冊成為大本營認證師傅！', '防甩底接單驗證', `<button onclick="closeModal(); openMemberModal('login');" class="btn-std w-full h-10 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">🔓 前往師傅快速登入</button>`);
+    showModal('請先驗證或登入師傅身份', '請先用已登記的師傅電話和密碼登入，或免費註冊成為認證師傅。', '防甩底接單驗證', `<button onclick="closeModal(); openMemberModal('login');" class="btn-std w-full h-10 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">🔓 前往師傅快速登入</button>`);
     return;
   }
   rebindCurrentMaster();
@@ -4549,7 +4539,7 @@ function verifyOwnerPin() {
     loadOwnerPricingForm();
     switchOwnerTab(pendingOwnerTab || 'catalog');
   } else {
-    showModal('密碼不正確', '五金店老闆管理密碼為 6688！', '驗證失敗');
+    showModal('密碼不正確', '五金店老闆密碼不正確。', '驗證失敗');
   }
 }
 
@@ -5128,7 +5118,7 @@ function closeMaterialsDesk() {
 function verifyMaterialsDeskPin() {
   const pin = document.getElementById('mat-desk-pin').value.trim();
   if (pin !== '8888') {
-    showModal('密碼不正確', '建材接單台密碼是 8888。五金店老闆密碼不能接建材單。', '驗證失敗');
+    showModal('密碼不正確', '建材接單台密碼不正確。', '驗證失敗');
     return;
   }
   materialsDeskUnlocked = true;
