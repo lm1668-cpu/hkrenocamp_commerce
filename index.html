@@ -3094,6 +3094,8 @@ function submitMasterRegistration(e) {
 }
 
 let superAdminTab = 'finance';
+let superHwStoreId = 'store-kt';
+let superHwQuery = '';
 
 function switchAdminTab(tab) {
   switchSuperTab(tab === 'jobs' ? 'repair' : 'repair');
@@ -3160,23 +3162,49 @@ function renderSuperAdminIfOpen() {
   renderSuperAdmin();
 }
 
+function admVal(id) {
+  const el = document.getElementById(id);
+  return el ? String(el.value || '').trim() : '';
+}
+
+function admBox(id) {
+  const el = document.getElementById(id);
+  return !!(el && el.checked);
+}
+
+function refreshOpsViews() {
+  updateMasterCountUI();
+  renderTopMastersShowcase();
+  renderMutualReviewsWall();
+  renderMasterJobs();
+  renderMaterials(currentMaterialsFilter);
+  renderHardwareStoresBar();
+  renderHardwareProducts(currentHardwareFilter);
+  renderHardwareOrdersTracker();
+  renderMaterialsOrderTracker();
+}
+
 function renderSuperAdmin() {
   const tabs = document.getElementById('super-admin-tabs');
   const body = document.getElementById('super-admin-body');
   if (!tabs || !body) return;
   const items = [
-    ['finance', '財務總覽'],
-    ['repair', '維修行政'],
-    ['materials', '建材財務'],
-    ['hardware', '五金財務'],
+    ['finance', '財務'],
+    ['people', '人士'],
+    ['repair', '維修單'],
+    ['materials', '建材'],
+    ['hardware', '五金'],
+    ['pricing', '安裝公價'],
     ['sync', '上傳']
   ];
   tabs.innerHTML = items.map(([id, label]) => `<button type="button" onclick="switchSuperTab('${id}')" class="btn-std h-8 px-3 rounded-lg text-xs ${superAdminTab === id ? 'font-black bg-amber-400 text-slate-950' : 'font-bold text-stone-300 bg-slate-800'}">${label}</button>`).join('');
   const view = {
     finance: renderSuperFinance,
+    people: renderSuperPeople,
     repair: renderSuperRepair,
     materials: renderSuperMaterials,
     hardware: renderSuperHardware,
+    pricing: renderSuperPricing,
     sync: renderSuperSync
   }[superAdminTab] || renderSuperFinance;
   body.innerHTML = view();
@@ -3185,14 +3213,15 @@ function renderSuperAdmin() {
 function renderSuperFinance() {
   const mat = feeTotals(materialsOrders);
   const hw = feeTotals(hardwareOrders);
+  const matRate = Math.round((materialsSupplier.feeRate != null ? Number(materialsSupplier.feeRate) : 0.1) * 100);
   const openMat = materialsOrders.filter(order => !['已收貨', '已拒絕'].includes(order.status)).reduce((sum, order) => sum + (Number(order.total) || 0), 0);
   const openHw = hardwareOrders.filter(order => order.status !== '師傅已收貨').reduce((sum, order) => sum + (Number(order.total) || 0), 0);
-  const lowMasters = registeredMasters.filter(master => Number(master.creditScore) < 80 || master.frozen).length;
+  const pausedStores = hardwareStores.filter(store => store.listingPaused).map(store => store.name).join('、');
   const card = (title, lines) => `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-1"><div class="text-xs font-black text-amber-300">${title}</div>${lines.map(line => `<p class="text-xs text-stone-200">${line}</p>`).join('')}</div>`;
   return `<div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-    ${card('維修', [`師傅 ${registeredMasters.length} 人，須跟進 ${lowMasters} 人`, `維修單 ${liveMasterJobs.length} 張`, '維修派單不收款'])}
-    ${card('建材', [`未完成貨款 ${moneyText(openMat)}`, `介紹費 ${moneyText(mat.fee)}，未收 ${moneyText(mat.unpaid)}`, `供應商按金 ${moneyText(materialsSupplier.deposit)}${materialsSupplier.paused ? '，已暫停' : ''}`])}
-    ${card('五金', [`未完成貨款 ${moneyText(openHw)}`, `介紹費 ${moneyText(hw.fee)}，未收 ${moneyText(hw.unpaid)}`, `三間舖按金 ${moneyText(hardwareStores.reduce((sum, store) => sum + (Number(store.deposit) || 0), 0))}`])}
+    ${card('人士與維修', [`師傅 ${registeredMasters.length} 人，維修單 ${liveMasterJobs.length} 張`, `評價 ${mutualReviews.length} 則`, '人、單、評價在「人士」和「維修單」'])}
+    ${card('建材', [`未完成貨款 ${moneyText(openMat)}`, `介紹費 ${matRate}% · 已計 ${moneyText(mat.fee)} · 未收 ${moneyText(mat.unpaid)}`, `按金 ${moneyText(materialsSupplier.deposit)}${materialsSupplier.paused ? ' · 貨架已暫停' : ''}`])}
+    ${card('五金', [`未完成貨款 ${moneyText(openHw)}`, `介紹費已計 ${moneyText(hw.fee)} · 未收 ${moneyText(hw.unpaid)}`, pausedStores ? '暫停：' + pausedStores : '三間舖都在賣'])}
   </div>
   <div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
     <div class="text-xs font-black text-emerald-300">全部介紹費</div>
@@ -3200,42 +3229,141 @@ function renderSuperFinance() {
   </div>`;
 }
 
-function renderSuperRepair() {
+function renderSuperPeople() {
+  const field = 'h-8 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white';
   const masters = registeredMasters.map(master => `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
-    <div class="flex flex-wrap items-center gap-2 text-xs"><span class="font-mono font-black text-amber-300">${escText(master.masterId)}</span><span class="font-black">${escText(master.name)}</span><span class="text-stone-400">${escText(master.phone)}</span></div>
+    <div class="text-[11px] font-mono text-amber-300">${escText(master.masterId)}</div>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+      <input id="adm-name-${escText(master.masterId)}" value="${escText(master.name)}" placeholder="姓名" class="${field}" />
+      <input id="adm-phone-${escText(master.masterId)}" value="${escText(master.phone)}" placeholder="電話" class="${field}" />
+      <input id="adm-pin-${escText(master.masterId)}" value="${escText(master.pin || '')}" placeholder="密碼" class="${field}" />
+      <input id="adm-cert-${escText(master.masterId)}" value="${escText(master.cert || '')}" placeholder="牌照" class="${field}" />
+      <input id="adm-district-${escText(master.masterId)}" value="${escText(master.district || '')}" placeholder="地區" class="col-span-2 ${field}" />
+      <input id="adm-trades-${escText(master.masterId)}" value="${escText(master.trades || '')}" placeholder="工種" class="col-span-2 ${field}" />
+    </div>
     <div class="flex flex-wrap items-center gap-2">
+      <label class="text-[11px] text-stone-400">星級</label>
+      <input id="adm-stars-${escText(master.masterId)}" type="number" min="1" max="5" step="0.1" value="${Number(master.stars) || 5}" class="w-16 ${field}" />
       <label class="text-[11px] text-stone-400">誠信分</label>
-      <input id="adm-credit-${escText(master.masterId)}" type="number" min="0" max="100" value="${Number(master.creditScore) || 0}" class="w-20 h-8 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white" />
+      <input id="adm-credit-${escText(master.masterId)}" type="number" min="0" max="100" value="${Number(master.creditScore) || 0}" class="w-16 ${field}" />
       <label class="text-[11px] text-stone-300"><input id="adm-frozen-${escText(master.masterId)}" type="checkbox" ${master.frozen ? 'checked' : ''} /> 凍結接單</label>
       <button type="button" onclick="saveMasterAdmin('${escText(master.masterId)}')" class="btn-std h-8 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">儲存</button>
-      <a href="https://wa.me/852${String(master.phone || '').replace(/\s+/g, '')}" target="_blank" class="btn-std h-8 px-3 rounded-lg bg-emerald-600 text-white font-bold text-xs">WhatsApp</a>
+      <button type="button" onclick="deleteMasterAdmin('${escText(master.masterId)}')" class="btn-std h-8 px-3 rounded-lg bg-red-800 text-white text-xs">刪除</button>
+      <a href="https://wa.me/852${String(master.phone || '').replace(/\s+/g, '')}" target="_blank" class="btn-std h-8 px-3 rounded-lg bg-emerald-600 text-white text-xs">WhatsApp</a>
     </div>
   </div>`).join('');
-  const options = `<option value="">未指派</option>` + registeredMasters.map(master => `<option value="${escText(master.masterId)}">${escText(master.name)}</option>`).join('');
+  const reviews = mutualReviews.map(review => `<div class="bg-slate-900 border border-slate-700 rounded-xl p-2 text-[11px] text-stone-300 flex justify-between gap-2">
+    <div><span class="text-amber-300">${escText(review.role)}</span> ${escText(review.reviewer)} → ${escText(review.target)} · ${review.stars} 星<br/>${escText(review.comment)}</div>
+    <button type="button" onclick="deleteReviewAdmin('${escText(review.id)}')" class="btn-std h-7 px-2 rounded-lg bg-red-900 text-white shrink-0">刪</button>
+  </div>`).join('');
+  return `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
+    <div class="text-xs font-black text-amber-300">新增師傅</div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+      <input id="adm-new-name" placeholder="姓名" class="${field}" />
+      <input id="adm-new-phone" placeholder="電話" class="${field}" />
+      <input id="adm-new-pin" placeholder="密碼，最少 4 位" value="8888" class="${field}" />
+      <input id="adm-new-district" placeholder="地區" class="${field}" />
+      <input id="adm-new-trades" placeholder="工種" class="${field}" />
+      <input id="adm-new-cert" placeholder="牌照" class="${field}" />
+    </div>
+    <button type="button" onclick="addMasterAdmin()" class="btn-std h-8 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">加入師傅</button>
+  </div>
+  ${masters || '<p class="text-xs text-stone-400">未有師傅。</p>'}
+  <div class="text-xs font-black text-amber-300">評價</div>
+  ${reviews || '<p class="text-xs text-stone-400">未有評價。</p>'}`;
+}
+
+function renderSuperRepair() {
+  const field = 'h-8 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white';
+  const options = '<option value="">未指派</option>' + registeredMasters.map(master => `<option value="${escText(master.masterId)}">${escText(master.name)}</option>`).join('');
   const jobs = liveMasterJobs.map(job => `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
-    <div class="text-xs"><span class="font-mono font-black text-sky-300">${escText(job.id)}</span> ${escText(job.trade)} · ${escText(job.estate)}</div>
-    <p class="text-[11px] text-stone-400">${escText(job.status)} · ${escText(job.phone)}</p>
+    <div class="text-[11px] font-mono text-sky-300">${escText(job.id)}</div>
+    <div class="grid grid-cols-2 gap-2">
+      <input id="adm-job-trade-${escText(job.id)}" value="${escText(job.trade)}" class="${field}" />
+      <input id="adm-job-phone-${escText(job.id)}" value="${escText(job.phone)}" class="${field}" />
+      <input id="adm-job-district-${escText(job.id)}" value="${escText(job.district || '')}" class="${field}" />
+      <input id="adm-job-estate-${escText(job.id)}" value="${escText(job.estate || '')}" class="${field}" />
+      <input id="adm-job-owner-${escText(job.id)}" value="${escText(job.ownerName || '')}" placeholder="業主" class="${field}" />
+      <input id="adm-job-desc-${escText(job.id)}" value="${escText(job.desc || '')}" placeholder="情況" class="${field}" />
+    </div>
     <div class="flex flex-wrap gap-2">
-      <select id="adm-job-master-${escText(job.id)}" class="h-8 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white">${options.replace(`value="${escText(job.assignedMasterId || '')}"`, `value="${escText(job.assignedMasterId || '')}" selected`)}</select>
-      <select id="adm-job-status-${escText(job.id)}" class="h-8 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white">
+      <select id="adm-job-master-${escText(job.id)}" class="${field}">${options.replace(`value="${escText(job.assignedMasterId || '')}"`, `value="${escText(job.assignedMasterId || '')}" selected`)}</select>
+      <select id="adm-job-status-${escText(job.id)}" class="${field}">
         ${['候選接單', '已接單', '已完工', '甩底後備'].map(status => `<option ${repairStatusValue(job.status) === status ? 'selected' : ''}>${status}</option>`).join('')}
       </select>
-      <button type="button" onclick="saveRepairJobAdmin('${escText(job.id)}')" class="btn-std h-8 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">儲存派單</button>
+      <button type="button" onclick="saveRepairJobAdmin('${escText(job.id)}')" class="btn-std h-8 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">儲存</button>
+      <button type="button" onclick="deleteRepairJobAdmin('${escText(job.id)}')" class="btn-std h-8 px-3 rounded-lg bg-red-800 text-white text-xs">刪單</button>
+      <a href="https://wa.me/852${String(job.phone || '').replace(/\s+/g, '')}" target="_blank" class="btn-std h-8 px-3 rounded-lg bg-sky-600 text-white text-xs">WhatsApp 業主</a>
     </div>
   </div>`).join('');
-  return `<div class="flex justify-end"><button type="button" onclick="closeAdminMasterModal(); openMasterRegModal();" class="btn-std h-8 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">＋ 新增師傅</button></div>
-    <div class="text-xs font-black text-amber-300">師傅</div>${masters || '<p class="text-xs text-stone-400">未有師傅。</p>'}
-    <div class="text-xs font-black text-amber-300">維修單</div>${jobs || '<p class="text-xs text-stone-400">未有維修單。</p>'}`;
+  return `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
+    <div class="text-xs font-black text-amber-300">管理員開單</div>
+    <div class="grid grid-cols-2 gap-2">
+      <input id="adm-new-trade" placeholder="工種" value="家居小型維修" class="${field}" />
+      <input id="adm-new-phone" placeholder="業主電話" class="${field}" />
+      <input id="adm-new-district" placeholder="地區" class="${field}" />
+      <input id="adm-new-estate" placeholder="屋苑" class="${field}" />
+      <input id="adm-new-owner" placeholder="業主稱呼" class="${field}" />
+      <input id="adm-new-desc" placeholder="情況" class="${field}" />
+    </div>
+    <button type="button" onclick="addRepairJobAdmin()" class="btn-std h-8 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">開單</button>
+  </div>
+  ${jobs || '<p class="text-xs text-stone-400">未有維修單。</p>'}`;
 }
 
 function saveMasterAdmin(masterId) {
   const master = registeredMasters.find(item => item.masterId === masterId);
   if (!master) return;
-  const credit = Number(document.getElementById('adm-credit-' + masterId).value);
+  master.name = admVal('adm-name-' + masterId) || master.name;
+  master.phone = admVal('adm-phone-' + masterId) || master.phone;
+  const pin = admVal('adm-pin-' + masterId);
+  if (pin.length >= 4) master.pin = pin;
+  master.cert = admVal('adm-cert-' + masterId);
+  master.district = admVal('adm-district-' + masterId);
+  master.trades = admVal('adm-trades-' + masterId);
+  const stars = Number(admVal('adm-stars-' + masterId));
+  master.stars = Number.isFinite(stars) ? Math.max(1, Math.min(5, stars)) : master.stars;
+  const credit = Number(admVal('adm-credit-' + masterId));
   master.creditScore = Number.isFinite(credit) ? Math.max(0, Math.min(100, credit)) : 100;
-  master.frozen = !!document.getElementById('adm-frozen-' + masterId).checked;
+  master.frozen = admBox('adm-frozen-' + masterId);
   persistDataLocally();
-  renderMasterJobs();
+  refreshOpsViews();
+}
+
+function addMasterAdmin() {
+  const name = admVal('adm-new-name');
+  const phone = admVal('adm-new-phone').replace(/\s+/g, '');
+  const pin = admVal('adm-new-pin');
+  if (!name || phone.length < 8 || pin.length < 4) {
+    showModal('未填完整', '姓名、8 位電話和最少 4 位密碼都要填。', '未加入');
+    return;
+  }
+  registeredMasters.push({
+    masterId: 'MST-' + Math.floor(1000 + Math.random() * 9000),
+    name, phone, pin,
+    district: admVal('adm-new-district'),
+    trades: admVal('adm-new-trades'),
+    cert: admVal('adm-new-cert'),
+    stars: 5, reviewsCount: 0, onTimeRate: '100%', creditScore: 100,
+    timeStr: '管理員新增', frozen: false
+  });
+  persistDataLocally();
+  refreshOpsViews();
+}
+
+function deleteMasterAdmin(masterId) {
+  const master = registeredMasters.find(item => item.masterId === masterId);
+  if (!master || !confirm('刪除 ' + master.name + '？已開的維修單會保留。')) return;
+  registeredMasters = registeredMasters.filter(item => item.masterId !== masterId);
+  persistDataLocally();
+  refreshOpsViews();
+}
+
+function deleteReviewAdmin(reviewId) {
+  if (!confirm('刪除這則評價？')) return;
+  mutualReviews = mutualReviews.filter(item => item.id !== reviewId);
+  persistDataLocally();
+  refreshOpsViews();
 }
 
 function repairStatusValue(status) {
@@ -3249,8 +3377,14 @@ function repairStatusValue(status) {
 function saveRepairJobAdmin(jobId) {
   const job = liveMasterJobs.find(item => item.id === jobId);
   if (!job) return;
-  const masterId = document.getElementById('adm-job-master-' + jobId).value;
-  const status = document.getElementById('adm-job-status-' + jobId).value;
+  job.trade = admVal('adm-job-trade-' + jobId) || job.trade;
+  job.phone = admVal('adm-job-phone-' + jobId) || job.phone;
+  job.district = admVal('adm-job-district-' + jobId);
+  job.estate = admVal('adm-job-estate-' + jobId);
+  job.ownerName = admVal('adm-job-owner-' + jobId);
+  job.desc = admVal('adm-job-desc-' + jobId);
+  const masterId = admVal('adm-job-master-' + jobId);
+  const status = admVal('adm-job-status-' + jobId);
   const master = registeredMasters.find(item => item.masterId === masterId);
   if (master) {
     job.assignedMaster = master.name;
@@ -3260,68 +3394,289 @@ function saveRepairJobAdmin(jobId) {
     job.assignedMasterId = '';
   }
   if (status === '已接單' && job.assignedMaster) job.status = `師傅已接單 (防甩底鎖定：${job.assignedMaster})`;
+  else if (status === '已完工') job.status = '✅ 已完工驗收 (管理員核實)';
   else if (status === '甩底後備') job.status = '甩底，後備師傅可頂上';
-  else job.status = status;
+  else job.status = status || job.status;
   persistDataLocally();
-  renderMasterJobs();
+  refreshOpsViews();
+}
+
+function addRepairJobAdmin() {
+  const phone = admVal('adm-new-phone');
+  const estate = admVal('adm-new-estate');
+  if (!phone || !estate) {
+    showModal('未填完整', '業主電話和屋苑要填。', '未開單');
+    return;
+  }
+  liveMasterJobs.unshift({
+    id: 'FIX-' + Math.floor(10000 + Math.random() * 90000),
+    trade: admVal('adm-new-trade') || '家居小型維修',
+    district: admVal('adm-new-district'),
+    estate,
+    ownerName: admVal('adm-new-owner') || estate + '業主',
+    desc: admVal('adm-new-desc') || '管理員開單',
+    phone, photos: [], time: '剛剛',
+    status: '候選接單',
+    assignMode: '管理員開單',
+    assignedMaster: ''
+  });
+  persistDataLocally();
+  refreshOpsViews();
+}
+
+function deleteRepairJobAdmin(jobId) {
+  if (!confirm('刪除維修單 ' + jobId + '？')) return;
+  liveMasterJobs = liveMasterJobs.filter(item => item.id !== jobId);
+  persistDataLocally();
+  refreshOpsViews();
 }
 
 function renderSuperMaterials() {
-  const orders = materialsOrders.map(order => `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-1 text-xs">
-    <div class="flex justify-between gap-2"><span class="font-mono font-black text-emerald-300">#${escText(order.orderId)}</span><span>${escText(order.status)}</span></div>
-    <p class="text-stone-300">${escText(order.buyerName)} · ${moneyText(order.total)}</p>
+  const field = 'h-8 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white';
+  const rate = Math.round((materialsSupplier.feeRate != null ? Number(materialsSupplier.feeRate) : 0.1) * 100);
+  const products = materialsProducts.map(product => {
+    const promo = productPromos[product.id] || {};
+    return `<div class="bg-slate-900 border border-slate-700 rounded-xl p-2 space-y-2">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+        <input id="adm-mat-name-${product.id}" value="${escText(product.name)}" class="sm:col-span-2 ${field}" />
+        <input id="adm-mat-price-${product.id}" type="number" min="1" value="${Number(product.price) || 0}" class="${field}" />
+        <input id="adm-mat-off-${product.id}" type="number" min="1" max="90" value="${Number(promo.percent) || 10}" class="${field}" />
+      </div>
+      <div class="flex flex-wrap items-center gap-2 text-[11px] text-stone-300">
+        <label><input id="adm-mat-promo-${product.id}" type="checkbox" ${promo.on ? 'checked' : ''} /> 折扣</label>
+        <label><input id="adm-mat-install-${product.id}" type="checkbox" ${product.install ? 'checked' : ''} /> 可約安裝</label>
+        <button type="button" onclick="saveMaterialProduct('${product.id}')" class="btn-std h-8 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">儲存貨品</button>
+      </div>
+    </div>`;
+  }).join('');
+  const steps = ['待確認', '已接單', '執貨中', '已送出', '已收貨', '已拒絕'];
+  const orders = materialsOrders.map(order => `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2 text-xs">
+    <div class="flex justify-between gap-2"><span class="font-mono font-black text-emerald-300">#${escText(order.orderId)}</span><span>${escText(order.status)} · ${moneyText(order.total)}</span></div>
+    <p class="text-stone-300">${escText(order.buyerName)} · ${escText(order.buyerPhone)} · ${escText(order.address)}</p>
     <p class="text-stone-400">${order.feeSettled ? `介紹費 ${moneyText(order.feeAmount)} · ${escText(order.feeStatus)}` : '未到計費'}</p>
-    ${order.feeStatus === '未付' ? `<button type="button" onclick="markFeeCollected('mat','${escText(order.orderId)}')" class="btn-std h-8 px-3 rounded-lg bg-emerald-500 text-slate-950 font-black text-xs">記低已收介紹費</button>` : ''}
+    <div class="flex flex-wrap gap-1">
+      ${steps.map(step => `<button type="button" onclick="adminSetMaterialStatus('${escText(order.orderId)}','${step}')" class="btn-std h-7 px-2 rounded-lg text-[11px] ${order.status === step ? 'bg-emerald-400 text-slate-950 font-black' : 'bg-slate-900 text-stone-300'}">${step}</button>`).join('')}
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <input id="ship-${escText(order.orderId)}" value="${escText(order.deliveryMethod || '')}" placeholder="送貨方式" class="flex-1 ${field}" />
+      <input id="reject-${escText(order.orderId)}" value="${escText(order.rejectReason || '')}" placeholder="拒絕原因" class="flex-1 ${field}" />
+      ${order.feeStatus === '未付' ? `<button type="button" onclick="markFeeCollected('mat','${escText(order.orderId)}')" class="btn-std h-8 px-3 rounded-lg bg-emerald-500 text-slate-950 font-black text-xs">已收介紹費</button>` : ''}
+      ${order.feeSettled ? `<button type="button" onclick="adminCancelFee('mat','${escText(order.orderId)}')" class="btn-std h-8 px-3 rounded-lg bg-stone-700 text-white text-xs">取消介紹費</button>` : ''}
+    </div>
   </div>`).join('');
   return `<div class="bg-slate-800 border border-emerald-500/40 rounded-2xl p-3 space-y-2">
-    <p class="text-xs text-stone-200">建材介紹費是收貨後貨款的 10%。按金低過 HK$2,500 會暫停賣貨。</p>
-    <div class="flex flex-wrap items-center gap-2">
-      <input id="adm-mat-deposit" type="number" min="0" value="${Number(materialsSupplier.deposit) || 0}" class="w-32 h-8 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white" />
-      <button type="button" onclick="saveMaterialsPurse()" class="btn-std h-8 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">儲存按金</button>
-      <button type="button" onclick="topUpMaterialsDeposit()" class="btn-std h-8 px-3 rounded-lg bg-emerald-400 text-slate-950 font-black text-xs">補回 HK$5,000</button>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+      <input id="adm-mat-supplier" value="${escText(materialsSupplier.name || '')}" placeholder="供應商" class="${field}" />
+      <input id="adm-mat-deposit" type="number" min="0" value="${Number(materialsSupplier.deposit) || 0}" class="${field}" />
+      <input id="adm-mat-rate" type="number" min="0" max="50" value="${rate}" class="${field}" />
+      <label class="text-[11px] text-stone-300 flex items-center gap-1"><input id="adm-mat-paused" type="checkbox" ${materialsSupplier.paused ? 'checked' : ''} /> 暫停貨架</label>
     </div>
+    <p class="text-[11px] text-stone-400">按金、介紹費百分比、貨架開關由你決定。低過 HK$2,500 只是提醒，不會自動鎖死。</p>
+    <button type="button" onclick="saveMaterialsPurse()" class="btn-std h-8 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">儲存建材設定</button>
   </div>
+  <div class="text-xs font-black text-amber-300">貨品價錢</div>
+  ${products}
+  <div class="text-xs font-black text-amber-300">建材單</div>
   ${orders || '<p class="text-xs text-stone-400">未有建材單。</p>'}
-  <div class="bg-slate-800 border border-slate-700 rounded-2xl p-3">${ledgerHtml(ledgerRows().filter(row => row.side === '建材供應商'))}</div>
-  <button type="button" onclick="closeAdminMasterModal(); openMaterialsDesk();" class="btn-std h-8 px-3 rounded-lg bg-slate-700 text-white text-xs">打開建材接單台處理送貨</button>`;
+  <div class="bg-slate-800 border border-slate-700 rounded-2xl p-3">${ledgerHtml(ledgerRows().filter(row => row.side === '建材供應商'))}</div>`;
 }
 
 function saveMaterialsPurse() {
-  const deposit = Number(document.getElementById('adm-mat-deposit').value);
+  materialsSupplier.name = admVal('adm-mat-supplier') || materialsSupplier.name;
+  const deposit = Number(admVal('adm-mat-deposit'));
   materialsSupplier.deposit = Number.isFinite(deposit) ? Math.max(0, deposit) : 0;
-  materialsSupplier.paused = materialsSupplier.deposit < 2500;
+  const rate = Number(admVal('adm-mat-rate'));
+  materialsSupplier.feeRate = Number.isFinite(rate) ? Math.min(50, Math.max(0, rate)) / 100 : 0.1;
+  materialsSupplier.paused = admBox('adm-mat-paused');
   persistDataLocally();
-  renderMaterials(currentMaterialsFilter);
+  refreshOpsViews();
+}
+
+function saveMaterialProduct(productId) {
+  const product = materialsProducts.find(item => item.id === productId);
+  if (!product) return;
+  product.name = admVal('adm-mat-name-' + productId) || product.name;
+  const price = Number(admVal('adm-mat-price-' + productId));
+  if (price > 0) product.price = Math.round(price);
+  product.install = admBox('adm-mat-install-' + productId);
+  if (admBox('adm-mat-promo-' + productId)) {
+    const percent = Number(admVal('adm-mat-off-' + productId));
+    productPromos[productId] = { on: true, percent: Math.min(90, Math.max(1, percent || 10)) };
+  } else delete productPromos[productId];
+  persistDataLocally();
+  refreshOpsViews();
+}
+
+function adminSetMaterialStatus(orderId, status) {
+  const order = findMaterialOrder(orderId);
+  if (!order) return;
+  if (status === '已拒絕') {
+    const reason = admVal('reject-' + orderId);
+    if (!reason) {
+      showModal('請寫拒絕原因', '改成已拒絕之前要寫原因。', '未填原因');
+      return;
+    }
+    order.rejectReason = reason;
+  }
+  if (status === '已送出') order.deliveryMethod = admVal('ship-' + orderId) || order.deliveryMethod || '大本營送貨';
+  if (status === '已接單' && !order.purchaseList) order.purchaseList = (order.items || []).map(item => ({ id: item.id, name: item.name, qty: item.qty, unit: item.unit }));
+  order.status = status;
+  if (status === '已收貨') settleMaterialFee(order);
+  persistDataLocally();
+  refreshOpsViews();
 }
 
 function renderSuperHardware() {
-  const stores = hardwareStores.map(store => `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
-    <div class="text-xs font-black">${escText(store.name)}${store.listingPaused ? ' · 已暫停' : ''}</div>
-    <div class="flex flex-wrap items-center gap-2">
-      <input id="adm-store-deposit-${escText(store.id)}" type="number" min="0" value="${Number(store.deposit) || 0}" class="w-32 h-8 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white" />
-      <button type="button" onclick="saveStorePurse('${escText(store.id)}')" class="btn-std h-8 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">儲存按金</button>
-      <button type="button" onclick="topUpStoreDeposit('${escText(store.id)}')" class="btn-std h-8 px-3 rounded-lg bg-emerald-500 text-slate-950 font-black text-xs">補回 HK$3,000</button>
+  const field = 'h-8 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white';
+  if (!hardwareStores.some(store => store.id === superHwStoreId)) superHwStoreId = hardwareStores[0] ? hardwareStores[0].id : '';
+  const store = hardwareStores.find(item => item.id === superHwStoreId) || hardwareStores[0];
+  const rate = store ? Math.round((store.feeRate != null ? Number(store.feeRate) : 0.05) * 100) : 5;
+  const storeOptions = hardwareStores.map(item => `<option value="${escText(item.id)}" ${item.id === superHwStoreId ? 'selected' : ''}>${escText(item.name)}</option>`).join('');
+  const query = superHwQuery.trim().toLowerCase();
+  const rows = !store ? '' : masterHardwareCatalog.filter(item => !query || (item.name + item.sku + item.cat).toLowerCase().includes(query)).slice(0, 30).map(item => {
+    const stock = (store.items && store.items[item.id]) || { active: false, price: item.defaultPrice };
+    return `<div class="grid grid-cols-[1fr_5rem_4rem_auto] gap-1 items-center text-[11px]">
+      <span class="text-stone-200 truncate">${escText(item.name)}</span>
+      <input id="adm-hw-price-${escText(item.id)}" type="number" min="1" value="${Number(stock.price) || 0}" class="${field}" />
+      <label class="text-stone-300"><input id="adm-hw-on-${escText(item.id)}" type="checkbox" ${stock.active ? 'checked' : ''} /> 賣</label>
+      <button type="button" onclick="saveHardwareItem('${escText(store.id)}','${escText(item.id)}')" class="btn-std h-8 px-2 rounded-lg bg-amber-400 text-slate-950 font-black">存</button>
+    </div>`;
+  }).join('');
+  const steps = ['已下單', '執貨中', '打包好', '運送中', '師傅已收貨'];
+  const orders = hardwareOrders.filter(order => !store || order.storeId === store.id).map(order => `<div class="bg-slate-900 border border-slate-700 rounded-2xl p-3 space-y-2 text-xs">
+    <div class="flex justify-between gap-2"><span class="font-mono font-black text-sky-300">#${escText(order.orderId)}</span><span>${escText(order.status)} · ${moneyText(order.total)}</span></div>
+    <p class="text-stone-300">${escText(order.buyerName)} · ${escText(order.itemsSummary)}</p>
+    <p class="text-stone-400">${order.feeSettled ? `介紹費 ${moneyText(order.feeAmount)} · ${escText(order.feeStatus)}` : '未到計費'}</p>
+    <input id="waybill-${escText(order.orderId)}" value="${escText(order.waybill || '')}" placeholder="車號或街車單號" class="w-full ${field}" />
+    <div class="flex flex-wrap gap-1">
+      ${steps.map(step => `<button type="button" onclick="adminSetHardwareStatus('${escText(order.orderId)}','${step}')" class="btn-std h-7 px-2 rounded-lg text-[11px] ${order.status === step ? 'bg-amber-400 text-slate-950 font-black' : 'bg-slate-800 text-stone-300'}">${step}</button>`).join('')}
+    </div>
+    <div class="flex flex-wrap gap-2">
+      ${order.feeStatus === '未付' ? `<button type="button" onclick="markFeeCollected('hw','${escText(order.orderId)}')" class="btn-std h-8 px-2 rounded-lg bg-emerald-500 text-slate-950 font-black text-xs">已收介紹費</button>` : ''}
+      ${order.feeSettled ? `<button type="button" onclick="adminCancelFee('hw','${escText(order.orderId)}')" class="btn-std h-8 px-2 rounded-lg bg-stone-700 text-white text-xs">取消介紹費</button>` : ''}
     </div>
   </div>`).join('');
-  const orders = hardwareOrders.map(order => `<div class="bg-slate-900 border border-slate-700 rounded-2xl p-3 space-y-1 text-xs">
-    <div class="flex justify-between gap-2"><span class="font-mono font-black text-sky-300">#${escText(order.orderId)}</span><span>${escText(order.status)}</span></div>
-    <p class="text-stone-300">${escText(order.storeName)} · ${moneyText(order.total)}</p>
-    <p class="text-stone-400">${order.feeSettled ? `介紹費 ${moneyText(order.feeAmount)} · ${escText(order.feeStatus)}` : '未到計費'} ${order.waybill ? '· 運單 ' + escText(order.waybill) : ''}</p>
-    ${order.feeStatus === '未付' ? `<button type="button" onclick="markFeeCollected('hw','${escText(order.orderId)}')" class="btn-std h-8 px-3 rounded-lg bg-emerald-500 text-slate-950 font-black text-xs">記低已收介紹費</button>` : ''}
-  </div>`).join('');
-  return `<p class="text-xs text-stone-300">五金介紹費是師傅收貨後貨款的 5%。按金低過 HK$1,500 會暫停上架。改運單和送貨狀態仍在五金店老闆頁。</p>
-    ${stores}${orders || '<p class="text-xs text-stone-400">未有五金單。</p>'}
-    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-3">${ledgerHtml(ledgerRows().filter(row => row.side !== '建材供應商'))}</div>`;
+  return `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
+    <select id="adm-hw-store" onchange="setSuperHwFilter()" class="${field}">${storeOptions}</select>
+    <div class="grid grid-cols-2 gap-2">
+      <input id="adm-store-name" value="${escText(store ? store.name : '')}" placeholder="店名" class="${field}" />
+      <input id="adm-store-phone" value="${escText(store ? store.phone : '')}" placeholder="電話" class="${field}" />
+      <input id="adm-store-district" value="${escText(store ? store.district : '')}" placeholder="地區" class="${field}" />
+      <input id="adm-store-address" value="${escText(store ? store.address : '')}" placeholder="地址" class="${field}" />
+      <input id="adm-store-deposit" type="number" min="0" value="${store ? Number(store.deposit) || 0 : 0}" class="${field}" />
+      <input id="adm-store-rate" type="number" min="0" max="50" value="${rate}" class="${field}" />
+    </div>
+    <label class="text-[11px] text-stone-300"><input id="adm-store-paused" type="checkbox" ${store && store.listingPaused ? 'checked' : ''} /> 暫停這間舖上架</label>
+    <button type="button" onclick="saveStorePurse('${store ? escText(store.id) : ''}')" class="btn-std h-8 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">儲存店舖</button>
+  </div>
+  <div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
+    <div class="flex gap-2">
+      <input id="adm-hw-q" value="${escText(superHwQuery)}" placeholder="搜貨名、編號或分類" class="flex-1 ${field}" />
+      <button type="button" onclick="setSuperHwFilter()" class="btn-std h-8 px-3 rounded-lg bg-slate-700 text-white text-xs">搜尋</button>
+    </div>
+    <p class="text-[11px] text-stone-500">顯示頭 30 項。價錢是這間舖的賣價。</p>
+    ${rows}
+  </div>
+  ${orders || '<p class="text-xs text-stone-400">這間舖未有單。</p>'}
+  <div class="bg-slate-800 border border-slate-700 rounded-2xl p-3">${ledgerHtml(ledgerRows(store && store.id))}</div>`;
+}
+
+function setSuperHwFilter() {
+  const storeEl = document.getElementById('adm-hw-store');
+  const queryEl = document.getElementById('adm-hw-q');
+  if (storeEl) superHwStoreId = storeEl.value;
+  if (queryEl) superHwQuery = queryEl.value;
+  renderSuperAdmin();
 }
 
 function saveStorePurse(storeId) {
   const store = hardwareStores.find(item => item.id === storeId);
   if (!store) return;
-  const deposit = Number(document.getElementById('adm-store-deposit-' + storeId).value);
+  store.name = admVal('adm-store-name') || store.name;
+  store.phone = admVal('adm-store-phone') || store.phone;
+  store.district = admVal('adm-store-district') || store.district;
+  store.address = admVal('adm-store-address') || store.address;
+  const deposit = Number(admVal('adm-store-deposit'));
   store.deposit = Number.isFinite(deposit) ? Math.max(0, deposit) : 0;
-  store.listingPaused = store.deposit < 1500;
+  const rate = Number(admVal('adm-store-rate'));
+  store.feeRate = Number.isFinite(rate) ? Math.min(50, Math.max(0, rate)) / 100 : 0.05;
+  store.listingPaused = admBox('adm-store-paused');
   persistDataLocally();
-  renderHardwareProducts(currentHardwareFilter);
+  refreshOpsViews();
+}
+
+function saveHardwareItem(storeId, productId) {
+  const store = hardwareStores.find(item => item.id === storeId);
+  const product = masterHardwareCatalog.find(item => item.id === productId);
+  if (!store || !product) return;
+  store.items = store.items || {};
+  const price = Number(admVal('adm-hw-price-' + productId));
+  store.items[productId] = {
+    active: admBox('adm-hw-on-' + productId),
+    price: price > 0 ? Math.round(price) : product.defaultPrice
+  };
+  persistDataLocally();
+  refreshOpsViews();
+}
+
+function adminSetHardwareStatus(orderId, status) {
+  const order = hardwareOrders.find(item => item.orderId === orderId);
+  if (!order) return;
+  if (status === '運送中' || status === '師傅已收貨') {
+    const waybill = admVal('waybill-' + orderId) || order.waybill || '';
+    if (status === '運送中' && !waybill) {
+      showModal('請填運單', '改到運送中之前，要填車號或街車單號。', '未填運單');
+      return;
+    }
+    if (waybill) order.waybill = waybill;
+  }
+  order.status = status;
+  if (status === '師傅已收貨') settleHardwareFee(order);
+  persistDataLocally();
+  refreshOpsViews();
+  renderOwnerOrdersList();
+}
+
+function adminCancelFee(kind, orderId) {
+  const order = kind === 'mat' ? findMaterialOrder(orderId) : hardwareOrders.find(item => item.orderId === orderId);
+  if (!order || !order.feeSettled) return;
+  if (kind === 'mat') refundFee(order, materialsSupplier, 2500);
+  else {
+    const store = hardwareStores.find(item => item.id === order.storeId);
+    if (store) refundFee(order, store, 1500);
+    else { order.feeAmount = 0; order.feeStatus = '已取消'; }
+  }
+  persistDataLocally();
+  refreshOpsViews();
+}
+
+function renderSuperPricing() {
+  const field = 'h-8 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white';
+  const block = (list, prefix) => list.map((item, index) => `<div class="grid grid-cols-1 sm:grid-cols-[1fr_1fr_8rem] gap-1">
+    <input id="adm-${prefix}-name-${index}" value="${escText(item.name)}" class="${field}" />
+    <input id="adm-${prefix}-desc-${index}" value="${escText(item.desc)}" class="${field}" />
+    <input id="adm-${prefix}-price-${index}" value="${escText(item.price)}" class="${field}" />
+  </div>`).join('');
+  return `<p class="text-[11px] text-stone-400">這是全站家電安裝公價，五金店老闆改不到。</p>
+    <div class="text-xs font-black text-amber-300">標準安裝</div>
+    ${block(appliancePricingData.kitchen, 'pk')}
+    <div class="text-xs font-black text-amber-300">附加收費</div>
+    ${block(appliancePricingData.extra, 'pe')}
+    <button type="button" onclick="saveSuperPricing()" class="btn-std h-8 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">儲存公價</button>`;
+}
+
+function saveSuperPricing() {
+  appliancePricingData.kitchen.forEach((item, index) => {
+    item.name = admVal('adm-pk-name-' + index) || item.name;
+    item.desc = admVal('adm-pk-desc-' + index);
+    item.price = admVal('adm-pk-price-' + index) || item.price;
+  });
+  appliancePricingData.extra.forEach((item, index) => {
+    item.name = admVal('adm-pe-name-' + index) || item.name;
+    item.desc = admVal('adm-pe-desc-' + index);
+    item.price = admVal('adm-pe-price-' + index) || item.price;
+  });
+  persistDataLocally();
 }
 
 function markFeeCollected(kind, orderId) {
@@ -4951,11 +5306,12 @@ function settleHardwareFee(order) {
   const store = hardwareStores.find(item => item.id === order.storeId);
   if (!store) return;
   if (store.deposit == null) store.deposit = 3000;
-  settleFee(order, 0.05, store, 1500);
+  settleFee(order, Number(store.feeRate) >= 0 && store.feeRate != null ? Number(store.feeRate) : 0.05, store, 1500);
 }
 
 function settleMaterialFee(order) {
-  settleFee(order, 0.1, materialsSupplier, 2500);
+  const materialRate = Number(materialsSupplier.feeRate);
+  settleFee(order, materialRate >= 0 && materialsSupplier.feeRate != null ? materialRate : 0.1, materialsSupplier, 2500);
 }
 
 function advanceMaterialOrder(orderId, nextStatus) {
