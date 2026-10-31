@@ -35,7 +35,9 @@ function installCamp(host: HTMLElement) {
   if (typeof w.bootCampApp === "function") w.bootCampApp();
 }
 
-export const Route = createFileRoute("/")({ component: Home });
+export const Route = createFileRoute("/")({
+  component: Home,
+});
 
 function Home() {
   const ref = useRef<HTMLDivElement>(null);

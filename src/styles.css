@@ -1,6 +1,19 @@
 @import "tailwindcss";
 @source "../public/camp.html";
 
+@theme {
+  --color-paper: #f6f1e8;
+  --color-card: #fffdf8;
+  --color-ink: #1c1915;
+  --color-muted: #6f675e;
+  --color-line: #e4dccd;
+  --color-brass: #8c5a2b;
+  --color-brass-soft: #f3e6d4;
+  --font-sans: "Noto Sans HK", sans-serif;
+  --font-serif: "Noto Serif HK", serif;
+  --radius-card: 1.25rem;
+}
+
 @layer base {
   button:not(:disabled),
   [role="button"]:not(:disabled) {
@@ -10,9 +23,10 @@
   html,
   body {
     margin: 0;
-    background: #faf7f2;
-    color: #1e242b;
-    font-family: "Noto Sans HK", sans-serif;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.5;
   }
 }
 
