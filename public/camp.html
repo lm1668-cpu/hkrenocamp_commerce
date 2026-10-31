@@ -70,7 +70,9 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  height: 96px;
+  max-height: 104px;
+  overflow: hidden;
   transition: background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
 }
 .hero-card-active {
@@ -114,18 +116,45 @@ html, body {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+}
 .hero-grid > * {
   min-width: 0;
   min-height: 0;
 }
 .hero-visual {
-  height: 220px;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 200px;
+  max-height: 220px;
 }
-@media (min-width: 640px) {
-  .hero-visual { height: 280px; }
+.hero-visual img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+}
+@media (min-width: 768px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr);
+  }
+  .hero-visual {
+    height: 300px;
+    max-height: 300px;
+  }
 }
 @media (min-width: 1024px) {
-  .hero-visual { height: 420px; }
+  .hero-visual {
+    height: 340px;
+    max-height: 360px;
+  }
 }
 .hero-layer {
   position: absolute;
@@ -240,8 +269,8 @@ html, body {
 
 <section class="max-w-7xl mx-auto px-3 sm:px-6 pt-4 pb-4">
   <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-stone-900 rounded-3xl overflow-hidden shadow-xl border border-stone-700">
-    <div class="hero-grid grid lg:grid-cols-12 items-stretch">
-      <div class="lg:col-span-7 p-4 sm:p-7 text-white flex flex-col justify-between gap-5">
+    <div class="hero-grid">
+      <div class="hero-copy p-4 sm:p-7 text-white flex flex-col gap-5">
         <div class="space-y-3">
           <div class="flex flex-wrap items-center gap-2">
             <div id="hero-badge" class="inline-flex items-center gap-2 bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs font-bold px-3 py-1 rounded-full">
@@ -292,11 +321,11 @@ html, body {
         </div>
       </div>
 
-      <div class="hero-visual lg:col-span-5 relative bg-slate-950 overflow-hidden shrink-0">
-        <img id="hero-img-all" src="images/materials/brand/team.jpg" onerror="this.onerror=null; this.src='https://placehold.co/800x600/1e293b/fbbf24?text=香港裝修師傅大本營';" alt="總覽主視覺" class="hero-layer opacity-100" decoding="async" />
-        <img id="hero-img-repair" src="images/repair/camp/hero.jpg" onerror="this.onerror=null; this.src='https://placehold.co/800x600/1e293b/fbbf24?text=配對站';" alt="配對站主視覺" class="hero-layer opacity-0 pointer-events-none" decoding="async" />
-        <img id="hero-img-materials" src="images/materials/brand/hero.jpg" onerror="this.onerror=null; this.src='https://placehold.co/800x600/064e3b/34d399?text=建材店';" alt="建材店主視覺" class="hero-layer opacity-0 pointer-events-none" decoding="async" />
-        <img id="hero-img-hardware" src="images/hardware/camp/warehouse-banner-13.jpg" onerror="this.onerror=null; this.src='https://placehold.co/800x600/0c4a6e/38bdf8?text=五金店';" alt="五金店主視覺" class="hero-layer opacity-0 pointer-events-none" decoding="async" />
+      <div class="hero-visual bg-slate-950" style="position:relative;overflow:hidden;height:clamp(200px,32vw,340px);max-height:340px">
+        <img id="hero-img-all" src="images/materials/brand/team.jpg" width="1080" height="1080" onerror="this.onerror=null; this.src='https://placehold.co/800x600/1e293b/fbbf24?text=香港裝修師傅大本營';" alt="總覽主視覺" class="hero-layer opacity-100" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" decoding="async" />
+        <img id="hero-img-repair" src="images/repair/camp/hero.jpg" width="1600" height="900" onerror="this.onerror=null; this.src='https://placehold.co/800x600/1e293b/fbbf24?text=配對站';" alt="配對站主視覺" class="hero-layer opacity-0 pointer-events-none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" decoding="async" />
+        <img id="hero-img-materials" src="images/materials/brand/hero.jpg" width="1280" height="720" onerror="this.onerror=null; this.src='https://placehold.co/800x600/064e3b/34d399?text=建材店';" alt="建材店主視覺" class="hero-layer opacity-0 pointer-events-none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" decoding="async" />
+        <img id="hero-img-hardware" src="images/hardware/camp/warehouse-banner-13.jpg" width="1500" height="844" onerror="this.onerror=null; this.src='https://placehold.co/800x600/0c4a6e/38bdf8?text=五金店';" alt="五金店主視覺" class="hero-layer opacity-0 pointer-events-none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" decoding="async" />
 
         <div class="absolute bottom-3 right-3 left-3 sm:left-auto bg-slate-950/85 backdrop-blur-md border border-white/20 text-white px-3.5 py-2 rounded-xl flex items-center justify-between gap-2 shadow-lg z-10">
           <span id="hero-img-caption" class="text-xs font-bold text-amber-300 truncate">📍 大本營三合一總站 · 獅子山師傅團隊</span>
@@ -868,9 +897,7 @@ html, body {
         </button>
       </div>
       <div class="pt-1">
-        <button type="button" onclick="toggleMasterResetBox()" class="text-xs text-amber-300 hover:text-amber-200 underline font-bold">
-          🔑 唔記得密碼？點此自助驗證重設密碼
-        </button>
+        <p class="text-xs text-stone-400">忘記密碼請聯絡管理員，在後台「人士」頁重設。網頁不會再用電話加稱呼自助改密碼。</p>
       </div>
 
       <div id="master-reset-box" class="hidden max-w-md mx-auto mt-3 p-4 bg-slate-900 border border-amber-400/50 rounded-2xl text-left space-y-3 text-xs">
@@ -1613,6 +1640,23 @@ async function signInRole(email, password, expected) {
   if (role !== expected && role !== 'admin') throw new Error('權限不符');
   window.applyStaffRole(role === 'admin' && expected !== 'admin' ? expected : role);
   return role;
+}
+function denyRole(message) {
+  showModal('沒有權限', message || '請先用正確帳戶登入。', '未能操作');
+  return false;
+}
+function requireAdmin() {
+  if (isAdminUnlocked && window.staffRole === 'admin') return true;
+  return denyRole('這項只限管理員。');
+}
+function requireMaterials() {
+  if ((isAdminUnlocked && window.staffRole === 'admin') || materialsDeskUnlocked) return true;
+  return denyRole('這項只限建材台或管理員。');
+}
+function requireStore(storeId) {
+  if (isAdminUnlocked && window.staffRole === 'admin') return true;
+  if (staffStoreId && (!storeId || staffStoreId === storeId)) return true;
+  return denyRole('這項只限這間舖的店主。');
 }
 let currentAdminTab = 'masters';
 let currentHardwareFilter = 'all';
@@ -3034,23 +3078,7 @@ function toggleMasterResetBox() {
 }
 
 function submitMasterPasswordReset() {
-  const phone = (document.getElementById('reset-master-phone').value || '').trim().replace(/\s+/g, '');
-  const nameKey = (document.getElementById('reset-master-name').value || '').trim();
-  const newPin = (document.getElementById('reset-master-newpin').value || '').trim();
-  if (newPin.length < 4) {
-    showModal('密碼太短', '新密碼最少要 4 位。', '重設密碼');
-    return;
-  }
-  const matched = registeredMasters.find(m => (m.phone || '').replace(/\s+/g, '') === phone && (m.name || '').includes(nameKey));
-  if (!matched) {
-    showModal('核對失敗', '電話或稱呼關鍵字同登記資料不符，請再試。', '重設密碼');
-    return;
-  }
-  matched.pin = newPin;
-  persistDataLocally();
-  const pinInput = document.getElementById('dash-pin-code');
-  if (pinInput) pinInput.value = newPin;
-  showModal('密碼已重設', `${matched.name} 的登入密碼已更新。請用新密碼進入工作台。`, '重設成功');
+  showModal('請聯絡管理員', '自助重設已關閉。別人只要知道你的電話和稱呼，就可以改走密碼。請管理員在後台「人士」頁替你設定新密碼。', '未能重設');
 }
 
 function logoutMasterDashboard() {
@@ -3371,6 +3399,7 @@ function renderSuperRepair() {
 }
 
 function saveMasterAdmin(masterId) {
+  if (!requireAdmin()) return;
   const master = registeredMasters.find(item => item.masterId === masterId);
   if (!master) return;
   master.name = admVal('adm-name-' + masterId) || master.name;
@@ -3390,6 +3419,7 @@ function saveMasterAdmin(masterId) {
 }
 
 function addMasterAdmin() {
+  if (!requireAdmin()) return;
   const name = admVal('adm-new-name');
   const phone = admVal('adm-new-phone').replace(/\s+/g, '');
   const pin = admVal('adm-new-pin');
@@ -3411,6 +3441,7 @@ function addMasterAdmin() {
 }
 
 function deleteMasterAdmin(masterId) {
+  if (!requireAdmin()) return;
   const master = registeredMasters.find(item => item.masterId === masterId);
   if (!master || !confirm('刪除 ' + master.name + '？已開的維修單會保留。')) return;
   registeredMasters = registeredMasters.filter(item => item.masterId !== masterId);
@@ -3419,6 +3450,7 @@ function deleteMasterAdmin(masterId) {
 }
 
 function deleteReviewAdmin(reviewId) {
+  if (!requireAdmin()) return;
   if (!confirm('刪除這則評價？')) return;
   mutualReviews = mutualReviews.filter(item => item.id !== reviewId);
   persistDataLocally();
@@ -3434,6 +3466,7 @@ function repairStatusValue(status) {
 }
 
 function saveRepairJobAdmin(jobId) {
+  if (!requireAdmin()) return;
   const job = liveMasterJobs.find(item => item.id === jobId);
   if (!job) return;
   job.trade = admVal('adm-job-trade-' + jobId) || job.trade;
@@ -3461,6 +3494,7 @@ function saveRepairJobAdmin(jobId) {
 }
 
 function addRepairJobAdmin() {
+  if (!requireAdmin()) return;
   const phone = admVal('adm-new-phone');
   const estate = admVal('adm-new-estate');
   if (!phone || !estate) {
@@ -3484,6 +3518,7 @@ function addRepairJobAdmin() {
 }
 
 function deleteRepairJobAdmin(jobId) {
+  if (!requireAdmin()) return;
   if (!confirm('刪除維修單 ' + jobId + '？')) return;
   liveMasterJobs = liveMasterJobs.filter(item => item.id !== jobId);
   persistDataLocally();
@@ -3541,6 +3576,7 @@ function renderSuperMaterials() {
 }
 
 function saveMaterialsPurse() {
+  if (!requireAdmin()) return;
   materialsSupplier.name = admVal('adm-mat-supplier') || materialsSupplier.name;
   const deposit = Number(admVal('adm-mat-deposit'));
   materialsSupplier.deposit = Number.isFinite(deposit) ? Math.max(0, deposit) : 0;
@@ -3552,6 +3588,7 @@ function saveMaterialsPurse() {
 }
 
 function saveMaterialProduct(productId) {
+  if (!requireAdmin()) return;
   const product = materialsProducts.find(item => item.id === productId);
   if (!product) return;
   product.name = admVal('adm-mat-name-' + productId) || product.name;
@@ -3567,6 +3604,7 @@ function saveMaterialProduct(productId) {
 }
 
 function adminSetMaterialStatus(orderId, status) {
+  if (!requireAdmin()) return;
   const order = findMaterialOrder(orderId);
   if (!order) return;
   if (status === '已拒絕') {
@@ -3649,6 +3687,7 @@ function setSuperHwFilter() {
 }
 
 function saveStorePurse(storeId) {
+  if (!requireAdmin()) return;
   const store = hardwareStores.find(item => item.id === storeId);
   if (!store) return;
   store.name = admVal('adm-store-name') || store.name;
@@ -3665,6 +3704,7 @@ function saveStorePurse(storeId) {
 }
 
 function saveHardwareItem(storeId, productId) {
+  if (!requireAdmin()) return;
   const store = hardwareStores.find(item => item.id === storeId);
   const product = masterHardwareCatalog.find(item => item.id === productId);
   if (!store || !product) return;
@@ -3679,6 +3719,7 @@ function saveHardwareItem(storeId, productId) {
 }
 
 function adminSetHardwareStatus(orderId, status) {
+  if (!requireAdmin()) return;
   const order = hardwareOrders.find(item => item.orderId === orderId);
   if (!order) return;
   if (status === '運送中' || status === '師傅已收貨') {
@@ -3697,6 +3738,7 @@ function adminSetHardwareStatus(orderId, status) {
 }
 
 function adminCancelFee(kind, orderId) {
+  if (!requireAdmin()) return;
   const order = kind === 'mat' ? findMaterialOrder(orderId) : hardwareOrders.find(item => item.orderId === orderId);
   if (!order || !order.feeSettled) return;
   if (kind === 'mat') refundFee(order, materialsSupplier, 2500);
@@ -3725,6 +3767,7 @@ function renderSuperPricing() {
 }
 
 function saveSuperPricing() {
+  if (!requireAdmin()) return;
   appliancePricingData.kitchen.forEach((item, index) => {
     item.name = admVal('adm-pk-name-' + index) || item.name;
     item.desc = admVal('adm-pk-desc-' + index);
@@ -3739,6 +3782,7 @@ function saveSuperPricing() {
 }
 
 function markFeeCollected(kind, orderId) {
+  if (!requireAdmin()) return;
   const order = kind === 'mat' ? findMaterialOrder(orderId) : hardwareOrders.find(item => item.orderId === orderId);
   if (!order || order.feeStatus !== '未付') return;
   order.feeStatus = '已收現';
@@ -3843,6 +3887,7 @@ async function githubWrite(path, text, message, token, sha) {
 }
 
 async function pushCampToGitHub() {
+  if (!requireAdmin()) return;
   const token = document.getElementById('gh-token').value.trim();
   if (!token) {
     showModal('未有 GitHub 令牌', '請貼上有這個倉庫寫入權限的 token。令牌只會留在這部瀏覽器。', '未填令牌');
@@ -4763,6 +4808,7 @@ function loadOwnerPricingForm() {
 }
 
 function saveAppliancePricingConfig() {
+  if (!requireAdmin()) return;
   appliancePricingData.kitchen.forEach((item, idx) => {
     const n = document.getElementById(`pricing-k-name-${idx}`);
     const d = document.getElementById(`pricing-k-desc-${idx}`);
@@ -4787,6 +4833,7 @@ function saveAppliancePricingConfig() {
 }
 
 function saveOwnerStoreConfig() {
+  if (!requireStore(document.getElementById('owner-store-select').value)) return;
   const storeId = document.getElementById('owner-store-select').value;
   const store = hardwareStores.find(s => s.id === storeId);
   if (!store) return;
@@ -4816,6 +4863,7 @@ function saveOwnerStoreConfig() {
 }
 
 function addNewHardwareStore() {
+  if (!requireAdmin()) return;
   const newId = 'store-' + Math.floor(100 + Math.random() * 900);
   const newStore = {
     id: newId,
@@ -4877,8 +4925,11 @@ function switchOwnerTab(tab) {
 function renderPromoAdmin() {
   const box = document.getElementById('promo-admin-list');
   if (!box) return;
+  const materialRows = (isAdminUnlocked || materialsDeskUnlocked)
+    ? materialsProducts.map(p => ({ id: p.id, name: p.name, group: '建材店', price: p.price }))
+    : [];
   const rows = [
-    ...materialsProducts.map(p => ({ id: p.id, name: p.name, group: '建材店', price: p.price })),
+    ...materialRows,
     ...masterHardwareCatalog.map(p => ({ id: p.id, name: p.name, group: p.kind === 'tool' ? '工具' : '五金零件', price: p.defaultPrice }))
   ];
   box.innerHTML = rows.map(p => {
@@ -4899,12 +4950,21 @@ function renderPromoAdmin() {
 }
 
 function saveProductPromos() {
-  const next = {};
+  const admin = isAdminUnlocked && window.staffRole === 'admin';
+  const materials = materialsDeskUnlocked || admin;
+  if (!materials && !staffStoreId) {
+    denyRole('折扣只限管理員、建材台或已登入的店主。');
+    return;
+  }
+  const hardwareIds = new Set(masterHardwareCatalog.map(item => item.id));
+  const next = materials ? {} : { ...productPromos };
   document.querySelectorAll('[data-promo-id]').forEach(chk => {
     const id = chk.getAttribute('data-promo-id');
+    if (!materials && !hardwareIds.has(id)) return;
     const percentEl = document.querySelector(`[data-promo-percent="${id}"]`);
     const percent = Math.min(90, Math.max(1, Number(percentEl && percentEl.value) || 10));
     if (chk.checked) next[id] = { on: true, percent };
+    else if (!materials) delete next[id];
   });
   productPromos = next;
   persistDataLocally();
@@ -4976,7 +5036,7 @@ function orderStepIndex(status) {
 
 function ownerUpdateOrderStatus(orderId, newStatus) {
   const ord = hardwareOrders.find(o => o.orderId === orderId);
-  if (!ord) return;
+  if (!ord || !requireStore(ord.storeId)) return;
   if (ord.status === '師傅已收貨') {
     showModal('這張單已收貨', '師傅已確認收貨，店主不能再改回前面的狀態。', '訂單已完成');
     return;
@@ -5352,6 +5412,7 @@ function findMaterialOrder(orderId) {
 }
 
 function acceptMaterialOrder(orderId) {
+  if (!requireMaterials()) return;
   const order = findMaterialOrder(orderId);
   if (!order || order.status !== '待確認') return;
   order.status = '已接單';
@@ -5362,6 +5423,7 @@ function acceptMaterialOrder(orderId) {
 }
 
 function rejectMaterialOrder(orderId) {
+  if (!requireMaterials()) return;
   const order = findMaterialOrder(orderId);
   const reasonEl = document.getElementById('reject-' + orderId);
   const reason = reasonEl ? reasonEl.value.trim() : '';
@@ -5430,7 +5492,8 @@ function settleMaterialFee(order) {
   settleFee(order, materialRate >= 0 && materialsSupplier.feeRate != null ? materialRate : 0.1, materialsSupplier, 2500);
 }
 
-function advanceMaterialOrder(orderId, nextStatus) {
+function advanceMaterialOrder(orderId, nextStatus, fromCustomer) {
+  if (!fromCustomer && !requireMaterials()) return;
   const order = findMaterialOrder(orderId);
   const currentIndex = MAT_ORDER_STEPS.indexOf(order && order.status);
   const nextIndex = MAT_ORDER_STEPS.indexOf(nextStatus);
@@ -5444,6 +5507,7 @@ function advanceMaterialOrder(orderId, nextStatus) {
 }
 
 function shipMaterialOrder(orderId) {
+  if (!requireMaterials()) return;
   const order = findMaterialOrder(orderId);
   const methodEl = document.getElementById('ship-' + orderId);
   const method = methodEl ? methodEl.value.trim() : '';
@@ -5471,7 +5535,7 @@ function customerConfirmMaterial(orderId) {
     showModal('電話不符', '請輸入落單時的電話，先可以確認收貨。', '未能收貨');
     return;
   }
-  advanceMaterialOrder(orderId, '已收貨');
+  advanceMaterialOrder(orderId, '已收貨', true);
   showModal('已確認收貨', `建材單 #${orderId} 已收貨。`, '收貨完成');
 }
 
@@ -5534,6 +5598,8 @@ function openAfterSale(kind, orderId) {
   const note = noteEl ? noteEl.value.trim() : '';
   const received = order && (kind === 'mat' ? order.status === '已收貨' : order.status === '師傅已收貨');
   if (!order || !received || order.closed || (order.afterSale && !order.afterSale.done)) return;
+  if (kind === 'mat' && !requireMaterials()) return;
+  if (kind !== 'mat' && !requireStore(order.storeId)) return;
   if (!['缺貨', '錯貨', '退貨'].includes(type) || !note) {
     showModal('售後未填完整', '請選缺貨、錯貨或退貨，並寫一句情況。', '售後');
     return;
@@ -5550,6 +5616,8 @@ function openAfterSale(kind, orderId) {
 function finishAfterSale(kind, orderId) {
   const order = kind === 'mat' ? findMaterialOrder(orderId) : hardwareOrders.find(item => item.orderId === orderId);
   if (!order || !order.afterSale || order.afterSale.done) return;
+  if (kind === 'mat' && !requireMaterials()) return;
+  if (kind !== 'mat' && !requireStore(order.storeId)) return;
   if (order.afterSale.type === '退貨') {
     if (kind === 'mat') refundFee(order, materialsSupplier, 2500);
     else {
@@ -5572,6 +5640,8 @@ function closeSettledOrder(kind, orderId) {
   const order = kind === 'mat' ? findMaterialOrder(orderId) : hardwareOrders.find(item => item.orderId === orderId);
   const received = order && (kind === 'mat' ? order.status === '已收貨' : order.status === '師傅已收貨');
   if (!order || !received || (order.afterSale && !order.afterSale.done)) return;
+  if (kind === 'mat' && !requireMaterials()) return;
+  if (kind !== 'mat' && !requireStore(order.storeId)) return;
   order.closed = true;
   persistDataLocally();
   renderMaterialsOrderTracker();
@@ -5581,6 +5651,7 @@ function closeSettledOrder(kind, orderId) {
 }
 
 function topUpStoreDeposit(storeId) {
+  if (!requireStore(storeId)) return;
   const store = hardwareStores.find(item => item.id === storeId);
   if (!store) return;
   store.deposit = 3000;
@@ -5591,6 +5662,7 @@ function topUpStoreDeposit(storeId) {
 }
 
 function topUpMaterialsDeposit() {
+  if (!requireMaterials()) return;
   materialsSupplier.deposit = 5000;
   materialsSupplier.paused = false;
   persistDataLocally();
@@ -5606,6 +5678,7 @@ function syncHardwareLines(order) {
 
 function setHardwareLineQty(orderId, index, qty) {
   const order = hardwareOrders.find(item => item.orderId === orderId);
+  if (!requireStore(order && order.storeId)) return;
   if (!order || order.status !== '執貨中' || !order.items || !order.items[index]) return;
   order.items[index].qty = Math.max(0, parseInt(qty, 10) || 0);
   syncHardwareLines(order);

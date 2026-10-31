@@ -13,13 +13,6 @@ type CampWindow = Window & {
 function installCamp(host: HTMLElement) {
   if (!host.querySelector("#header-brand-logo")) host.innerHTML = camp.body;
 
-  if (!document.querySelector("style[data-camp]")) {
-    const style = document.createElement("style");
-    style.dataset.camp = "1";
-    style.textContent = camp.styles;
-    document.head.appendChild(style);
-  }
-
   const w = window as CampWindow;
   if (!w.__CAMP_SCRIPT__) {
     w.__CAMP_SCRIPT__ = true;
@@ -47,10 +40,13 @@ function Home() {
   }, []);
 
   return (
-    <div
-      ref={ref}
-      className="camp-root pb-24 lg:pb-12"
-      dangerouslySetInnerHTML={{ __html: camp.body }}
-    />
+    <>
+      <style data-camp dangerouslySetInnerHTML={{ __html: camp.styles }} />
+      <div
+        ref={ref}
+        className="camp-root pb-24 lg:pb-12"
+        dangerouslySetInnerHTML={{ __html: camp.body }}
+      />
+    </>
   );
 }
