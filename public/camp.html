@@ -224,7 +224,7 @@ html, body {
           <span class="font-black text-sm sm:text-base text-slate-900 tracking-tight truncate">香港裝修師傅大本營</span>
           <span class="hidden xl:inline-flex text-[11px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-bold border border-amber-300 shrink-0">三合一總站</span>
         </div>
-        <p class="text-[11px] text-stone-500 font-medium truncate">防甩底履約保障 · 家電公價安裝 · 十八區五金</p>
+        <p id="header-tagline" class="text-[11px] text-stone-500 font-medium truncate">防甩底履約保障 · 家電公價安裝 · 十八區五金</p>
       </div>
     </a>
 
@@ -233,7 +233,6 @@ html, body {
       <button onclick="switchSection('repair')" id="nav-repair" class="nav-btn btn-std px-3.5 h-9 rounded-xl text-xs sm:text-sm text-stone-700 hover:bg-stone-200/80 font-medium">01 配對站 & 評價</button>
       <button onclick="switchSection('materials')" id="nav-materials" class="nav-btn btn-std px-3.5 h-9 rounded-xl text-xs sm:text-sm text-stone-700 hover:bg-stone-200/80 font-medium">02 建材店</button>
       <button onclick="switchSection('hardware')" id="nav-hardware" class="nav-btn btn-std px-3.5 h-9 rounded-xl text-xs sm:text-sm text-stone-700 hover:bg-stone-200/80 font-medium">03 五金店 (地圖)</button>
-      <a href="/quote" class="nav-btn btn-std px-3.5 h-9 rounded-xl text-xs sm:text-sm text-slate-950 bg-amber-400 hover:bg-amber-300 font-black">報價</a>
     </nav>
 
     <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
@@ -245,10 +244,7 @@ html, body {
         <span class="cta-icon" aria-hidden="true">🙋</span>
         <span class="cta-label">免費搵師傅</span>
       </button>
-      <a href="/quote" class="btn-std header-cta bg-slate-900 hover:bg-slate-800 text-amber-300 font-black text-xs px-2.5 sm:px-3 rounded-xl">
-        <span class="cta-label">報價</span>
-      </a>
-      <button onclick="toggleCart(true)" class="btn-std header-cta bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-2.5 sm:px-3.5 rounded-xl shadow-xs">
+      <button id="header-cart-btn" onclick="toggleCart(true)" class="btn-std header-cta bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-2.5 sm:px-3.5 rounded-xl shadow-xs">
         <span class="cta-icon">🛒</span>
         <span class="cta-label hidden sm:inline">揀貨清單</span>
         <span id="cart-count" class="bg-amber-400 text-slate-950 px-1.5 py-0.5 rounded-full text-[11px] font-black min-w-[20px] text-center">0</span>
@@ -257,12 +253,11 @@ html, body {
   </div>
 
   <div class="lg:hidden bg-white border-t border-stone-100 px-3 py-1.5">
-    <div class="grid grid-cols-5 gap-1">
+    <div id="mobile-nav-grid" class="grid grid-cols-4 gap-1">
       <button onclick="switchSection('all')" id="m-nav-all" class="m-nav-btn btn-std tab-active w-full h-9 px-1 rounded-xl text-xs">總覽</button>
       <button onclick="switchSection('repair')" id="m-nav-repair" class="m-nav-btn btn-std w-full h-9 px-1 rounded-xl text-xs bg-stone-100 text-stone-700 font-medium">配對</button>
       <button onclick="switchSection('materials')" id="m-nav-materials" class="m-nav-btn btn-std w-full h-9 px-1 rounded-xl text-xs bg-stone-100 text-stone-700 font-medium">建材</button>
       <button onclick="switchSection('hardware')" id="m-nav-hardware" class="m-nav-btn btn-std w-full h-9 px-1 rounded-xl text-xs bg-stone-100 text-stone-700 font-medium">五金</button>
-      <a href="/quote" class="m-nav-btn btn-std w-full h-9 px-1 rounded-xl text-xs bg-amber-400 text-slate-950 font-black inline-flex items-center justify-center">報價</a>
     </div>
   </div>
 </header>
@@ -290,10 +285,10 @@ html, body {
 
         <div class="space-y-2">
           <div class="flex items-center justify-between text-xs text-stone-400 px-1">
-            <span>👇 點擊切換三大專區（零延遲秒切）：</span>
+            <span id="hero-switch-label">👇 點擊切換三大專區（零延遲秒切）：</span>
             <span id="hero-current-indicator" class="text-amber-400 font-bold">目前顯示：全部總覽</span>
           </div>
-          <div class="grid grid-cols-3 gap-2 sm:gap-3">
+          <div id="hero-cards" class="grid grid-cols-3 gap-2 sm:gap-3">
             <button type="button" id="hero-card-repair" onclick="switchSection('repair')" class="hero-card-btn text-left bg-white/10 hover:bg-white/15 border border-white/15 rounded-2xl p-2.5 sm:p-3 h-[96px] sm:h-[104px]">
               <div class="w-full">
                 <div class="text-amber-400 font-black text-[10px] uppercase tracking-wider mb-0.5 truncate">01 · 配對站</div>
@@ -336,7 +331,7 @@ html, body {
 </section>
 
 <section class="max-w-7xl mx-auto px-3 sm:px-6 pb-2">
-  <div class="bg-white border border-stone-200 rounded-2xl p-3 sm:p-4 shadow-2xs grid grid-cols-1 md:grid-cols-3 gap-2.5 text-xs">
+  <div id="shop-lanes" class="bg-white border border-stone-200 rounded-2xl p-3 sm:p-4 shadow-2xs grid grid-cols-1 md:grid-cols-3 gap-2.5 text-xs">
     <div onclick="switchSection('repair')" class="cursor-pointer flex items-center gap-3 p-2 rounded-xl hover:bg-amber-50 transition">
       <span class="w-8 h-8 rounded-xl bg-amber-400 text-slate-950 font-black flex items-center justify-center shrink-0">1</span>
       <div>
@@ -344,14 +339,14 @@ html, body {
         <div class="text-stone-500 text-[11px]">免費發單 ➔ 認證師傅接單 ➔ 完工驗收雙向打星</div>
       </div>
     </div>
-    <div onclick="switchSection('materials')" class="cursor-pointer flex items-center gap-3 p-2 rounded-xl hover:bg-emerald-50 transition">
+    <div id="lane-materials" onclick="switchSection('materials')" class="cursor-pointer flex items-center gap-3 p-2 rounded-xl hover:bg-emerald-50 transition">
       <span class="w-8 h-8 rounded-xl bg-emerald-500 text-white font-black flex items-center justify-center shrink-0">2</span>
       <div>
         <div class="font-black text-slate-900">我是業主：買建材與查看家電安裝公價表</div>
         <div class="text-stone-500 text-[11px]">查看抽油煙機/煮食爐標準安裝費 ➔ 一鍵預約</div>
       </div>
     </div>
-    <div onclick="switchSection('hardware')" class="cursor-pointer flex items-center gap-3 p-2 rounded-xl hover:bg-sky-50 transition">
+    <div id="lane-hardware" onclick="switchSection('hardware')" class="cursor-pointer flex items-center gap-3 p-2 rounded-xl hover:bg-sky-50 transition">
       <span class="w-8 h-8 rounded-xl bg-sky-500 text-white font-black flex items-center justify-center shrink-0">3</span>
       <div>
         <div class="font-black text-slate-900">我是師傅 / 五金舖：地盤執貨 & 接單</div>
@@ -2031,6 +2026,7 @@ const MAT_ORDER_STEPS = ["待確認", "已接單", "執貨中", "已送出", "�
 
 let cart = [];
 let activeCartTab = 'hardware';
+let shopModules = { materials: true, hardware: true };
 let pendingOwnerTab = 'catalog';
 let currentMaterialsFilter = 'all';
 let productPromos = { "m-downlight": { on: true, percent: 20 } };
@@ -2095,6 +2091,8 @@ function loadPersistedData() {
     if (savedMaterials) materialsProducts = JSON.parse(savedMaterials);
     const savedCatalog = localStorage.getItem(LOCAL_CATALOG_KEY);
     if (savedCatalog) masterHardwareCatalog = JSON.parse(savedCatalog);
+    const savedModules = localStorage.getItem('hk_camp_modules_v1');
+    if (savedModules) shopModules = Object.assign({ materials: true, hardware: true }, JSON.parse(savedModules));
     normalizeLoadedState();
   } catch (e) { console.warn(e); }
 }
@@ -2112,6 +2110,7 @@ function persistDataLocally(options) {
     localStorage.setItem('hk_camp_supplier_v1', JSON.stringify(materialsSupplier));
     localStorage.setItem(LOCAL_MATERIALS_KEY, JSON.stringify(materialsProducts));
     localStorage.setItem(LOCAL_CATALOG_KEY, JSON.stringify(masterHardwareCatalog));
+    localStorage.setItem('hk_camp_modules_v1', JSON.stringify(shopModules));
     localStorage.setItem('hk_camp_state_updated_at', new Date().toISOString());
     localStorage.removeItem('hk_camp_supabase_key');
     localStorage.removeItem('hk_camp_supabase_url');
@@ -2157,6 +2156,17 @@ function refreshAllViewsFromCloud() {
     renderOwnerOrdersList();
   }
   applyOrderLookupFromUrl(true);
+  if (currentSection === 'materials' && shopModules.materials === false) switchSection('repair');
+  else if (currentSection === 'hardware' && shopModules.hardware === false) switchSection('repair');
+  else {
+    if (currentSection === 'all') {
+      const matSec = document.getElementById('section-materials');
+      const hwSec = document.getElementById('section-hardware');
+      if (matSec) matSec.classList.toggle('hidden', shopModules.materials === false);
+      if (hwSec) hwSec.classList.toggle('hidden', shopModules.hardware === false);
+      applyHeroVisuals('all');
+    } else applyShopChrome();
+  }
 }
 
 function applyHeroVisuals(secKey) {
@@ -2191,6 +2201,23 @@ function applyHeroVisuals(secKey) {
   if (titleEl) titleEl.innerHTML = cfg.title;
   if (descEl) descEl.innerHTML = cfg.desc;
   if (resetBtn) resetBtn.classList.toggle('hidden', secKey === 'all');
+  if (secKey === 'all') {
+    const mat = shopModules.materials !== false;
+    const hw = shopModules.hardware !== false;
+    if (!mat || !hw) {
+      const openBits = ['業主 $0 搵師傅'];
+      if (mat) openBits.push('建材店');
+      if (hw) openBits.push('五金店');
+      if (badgeEl) badgeEl.innerHTML = `<span>✨ ${openBits.join(' · ')}</span>`;
+    }
+    if (!mat && !hw) {
+      if (titleEl) titleEl.innerHTML = '屋企小工程維修、<br/><span class="text-amber-400">防甩底派單大廳</span>';
+      if (descEl) descEl.innerHTML = '業主漏水跳掣免費發單；<strong class="text-amber-400">嚴格師傅誠信分防甩底＋雙向星級互評</strong>。建材店同五金店暫時未開放。';
+      if (captionEl) captionEl.textContent = '📍 大本營配對站 · 獅子山師傅團隊';
+      if (indicatorEl) indicatorEl.textContent = '目前顯示：配對站';
+    }
+  }
+  applyShopChrome();
 }
 
 function showModal(title, body, badge = "大本營通知", actionsHtml = '') {
@@ -2319,6 +2346,10 @@ function jumpToRepairForm() {
 }
 
 function jumpToGoogleMap() {
+  if (shopModules.hardware === false) {
+    showModal('五金店暫停', '五金店暫時未開放，地圖亦未顯示。', '暫停');
+    return;
+  }
   switchSection('hardware');
   setTimeout(() => { document.getElementById('google-map-container').scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 60);
 }
@@ -3276,6 +3307,7 @@ function renderSuperAdmin() {
   const body = document.getElementById('super-admin-body');
   if (!tabs || !body) return;
   const items = [
+    ['modules', '板塊'],
     ['finance', '財務'],
     ['people', '人士'],
     ['repair', '維修單'],
@@ -3286,6 +3318,7 @@ function renderSuperAdmin() {
   ];
   tabs.innerHTML = items.map(([id, label]) => `<button type="button" onclick="switchSuperTab('${id}')" class="btn-std h-8 px-3 rounded-lg text-xs ${superAdminTab === id ? 'font-black bg-amber-400 text-slate-950' : 'font-bold text-stone-300 bg-slate-800'}">${label}</button>`).join('');
   const view = {
+    modules: renderSuperModules,
     finance: renderSuperFinance,
     people: renderSuperPeople,
     repair: renderSuperRepair,
@@ -3295,6 +3328,84 @@ function renderSuperAdmin() {
     sync: renderSuperSync
   }[superAdminTab] || renderSuperFinance;
   body.innerHTML = view();
+}
+
+function renderSuperModules() {
+  const matOn = shopModules.materials !== false;
+  const hwOn = shopModules.hardware !== false;
+  const row = (id, title, on, note) => `<label class="flex items-start gap-3 bg-slate-900 border border-slate-700 rounded-2xl p-4 cursor-pointer">
+    <input id="${id}" type="checkbox" ${on ? 'checked' : ''} onchange="saveShopModules()" class="mt-1 w-4 h-4" />
+    <span>
+      <span class="block font-black text-white">${title}</span>
+      <span class="block text-[11px] mt-1 ${on ? 'text-emerald-300' : 'text-amber-300'}">${on ? '對外運作' : '已暫停'}</span>
+      <span class="block text-[11px] text-stone-400 mt-1 leading-relaxed">${note}</span>
+    </span>
+  </label>`;
+  return `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-1">
+    <div class="font-black text-amber-300">前台板塊</div>
+    <p class="text-[11px] text-stone-400 leading-relaxed">剔選代表對外運作。取消剔選就暫停。配對站不能暫停。暫停只收起訪客入口和落單，貨品、訂單和店主帳戶仍留在後面的分頁。</p>
+  </div>
+  <div class="bg-slate-900 border border-emerald-700/50 rounded-2xl p-4">
+    <div class="font-black text-white">配對站</div>
+    <div class="text-[11px] text-emerald-300 mt-1">一直運作</div>
+    <p class="text-[11px] text-stone-400 mt-1">搵師傅、接單和評價保持開放。</p>
+  </div>
+  ${row('mod-materials', '建材店', matOn, '暫停後，導覽、首頁入口和建材結帳都會收起。已有建材單仍可在「建材」頁處理。')}
+  ${row('mod-hardware', '五金店', hwOn, '暫停後，導覽、地圖入口和五金結帳都會收起。店舖貨架和訂單仍可在「五金」頁處理。')}`;
+}
+
+function saveShopModules() {
+  if (!requireAdmin()) return;
+  shopModules = {
+    materials: admBox('mod-materials'),
+    hardware: admBox('mod-hardware')
+  };
+  persistDataLocally();
+  if (shopModules.materials === false && currentSection === 'materials') switchSection('repair');
+  else if (shopModules.hardware === false && currentSection === 'hardware') switchSection('repair');
+  else switchSection(currentSection || 'all');
+}
+
+function applyShopChrome() {
+  const mat = shopModules.materials !== false;
+  const hw = shopModules.hardware !== false;
+  const hide = (id, open) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.toggle('hidden', !open);
+    el.style.display = open ? '' : 'none';
+  };
+  hide('nav-materials', mat);
+  hide('m-nav-materials', mat);
+  hide('nav-hardware', hw);
+  hide('m-nav-hardware', hw);
+  hide('hero-card-materials', mat);
+  hide('hero-card-hardware', hw);
+  hide('lane-materials', mat);
+  hide('lane-hardware', hw);
+  hide('cart-tab-materials', mat);
+  hide('cart-tab-hardware', hw);
+  hide('header-cart-btn', mat || hw);
+  const cols = (count, el) => { if (el) el.style.gridTemplateColumns = `repeat(${count}, minmax(0, 1fr))`; };
+  cols(2 + (mat ? 1 : 0) + (hw ? 1 : 0), document.getElementById('mobile-nav-grid'));
+  cols(1 + (mat ? 1 : 0) + (hw ? 1 : 0), document.getElementById('hero-cards'));
+  const lanes = document.getElementById('shop-lanes');
+  if (lanes) lanes.style.gridTemplateColumns = window.innerWidth >= 768
+    ? `repeat(${1 + (mat ? 1 : 0) + (hw ? 1 : 0)}, minmax(0, 1fr))`
+    : 'minmax(0, 1fr)';
+  const tag = document.getElementById('header-tagline');
+  const switchLabel = document.getElementById('hero-switch-label');
+  if (switchLabel) {
+    const n = 1 + (mat ? 1 : 0) + (hw ? 1 : 0);
+    switchLabel.textContent = n === 1 ? '目前開放配對站：' : `👇 點擊切換${n === 3 ? '三大' : '兩個'}專區：`;
+  }
+  if (tag) {
+    tag.textContent = mat && hw
+      ? '防甩底履約保障 · 家電公價安裝 · 十八區五金'
+      : mat ? '防甩底履約保障 · 建材店'
+      : hw ? '防甩底履約保障 · 十八區五金'
+      : '防甩底履約保障 · 免費配對師傅';
+  }
 }
 
 function renderSuperFinance() {
@@ -5069,6 +5180,14 @@ function switchCartTab(tab) {
 }
 
 function addToCart(productId, storeId, storeName, storePhone, name, price, unit, qty, silent) {
+  if (storeId === 'materials-official' && shopModules.materials === false) {
+    showModal('建材店暫停', '建材店暫時未開放，不能落單。', '暫停');
+    return;
+  }
+  if (storeId !== 'materials-official' && shopModules.hardware === false) {
+    showModal('五金店暫停', '五金店暫時未開放，不能落單。', '暫停');
+    return;
+  }
   if (storeId === 'materials-official' && materialsSupplier.paused) {
     showModal('建材貨架已暫停', '供應商按金低過一半，暫不能落單。', '暫停上架');
     return;
@@ -5688,6 +5807,14 @@ function setHardwareLineQty(orderId, index, qty) {
 }
 
 function checkoutOrder() {
+  if (activeCartTab === 'materials' && shopModules.materials === false) {
+    showModal('建材店暫停', '建材店暫時未開放，不能結帳。', '暫停');
+    return;
+  }
+  if (activeCartTab !== 'materials' && shopModules.hardware === false) {
+    showModal('五金店暫停', '五金店暫時未開放，不能結帳。', '暫停');
+    return;
+  }
   const activeItems = activeCartTab === 'materials'
     ? cart.filter(i => i.storeId === 'materials-official')
     : cart.filter(i => i.storeId !== 'materials-official');
@@ -5845,6 +5972,14 @@ function checkoutOrder() {
 }
 
 function switchSection(sec) {
+  if (sec === 'materials' && shopModules.materials === false) {
+    showModal('建材店暫停', '建材店暫時未開放。配對站仍然可以搵師傅。', '暫停');
+    sec = 'repair';
+  }
+  if (sec === 'hardware' && shopModules.hardware === false) {
+    showModal('五金店暫停', '五金店暫時未開放。配對站仍然可以搵師傅。', '暫停');
+    sec = 'repair';
+  }
   const detail = document.getElementById('product-detail');
   if (detail && !detail.classList.contains('hidden')) {
     detail.classList.add('hidden');
@@ -5858,7 +5993,7 @@ function switchSection(sec) {
     hardware: document.getElementById('section-hardware')
   };
   Object.keys(sections).forEach(k => {
-    if (sec === 'all' || sec === k) sections[k].classList.remove('hidden');
+    if ((sec === 'all' || sec === k) && (k === 'repair' || shopModules[k] !== false)) sections[k].classList.remove('hidden');
     else sections[k].classList.add('hidden');
   });
   ['all', 'repair', 'materials', 'hardware'].forEach(k => {
@@ -6004,6 +6139,7 @@ function bootCampApp() {
   const allowed = { all: 1, repair: 1, materials: 1, hardware: 1 };
   if (params.section && allowed[params.section]) switchSection(params.section);
   else applyHeroVisuals('all');
+  applyShopChrome();
   if (params.store) selectHardwareStore(params.store);
   applyOrderLookupFromUrl();
   pullPublishedState();
@@ -6078,6 +6214,7 @@ window.syncStateToCloud = async function () {
         supplierJson: JSON.stringify(materialsSupplier),
         materialsJson: JSON.stringify(materialsProducts),
         catalogJson: JSON.stringify(masterHardwareCatalog),
+        modulesJson: JSON.stringify(shopModules),
         updatedAt: Date.now(),
         updatedBy: currentUser.uid
       }, { merge: true });
@@ -6154,6 +6291,7 @@ async function initCloudSync() {
             if (data.supplierJson) materialsSupplier = JSON.parse(data.supplierJson);
             if (data.materialsJson) materialsProducts = JSON.parse(data.materialsJson);
             if (data.catalogJson) masterHardwareCatalog = JSON.parse(data.catalogJson);
+            if (data.modulesJson) shopModules = Object.assign({ materials: true, hardware: true }, JSON.parse(data.modulesJson));
             normalizeLoadedState();
             persistDataLocally({ sync: false });
           }
