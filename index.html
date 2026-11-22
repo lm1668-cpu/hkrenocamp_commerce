@@ -4,6 +4,16 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
 <title>香港裝修師傅大本營 | 配對站 · 建材店 · 五金店</title>
+<script>
+(function () {
+  var h = location.hostname;
+  if (h !== 'shop.renocamp.io' && h !== 'lm1668-cpu.github.io' && h !== 'localhost' && h !== '127.0.0.1') {
+    var b = document.createElement('base');
+    b.href = 'https://shop.renocamp.io/';
+    document.head.appendChild(b);
+  }
+})();
+</script>
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
@@ -220,12 +230,12 @@ html, body {
       🛠️ 香港裝修師傅大本營旗艦總站 ｜ 家電標準安裝公價 · 淘寶式雙向互評 · 十八區五金直發
     </div>
     <div class="flex flex-wrap items-center justify-center gap-2 text-[11px] shrink-0">
-      <span id="cloud-sync-badge" class="inline-flex items-center gap-1.5 bg-emerald-950/90 text-emerald-300 border border-emerald-500/40 px-2.5 py-0.5 rounded-full font-bold">
-        <span id="cloud-sync-dot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span id="cloud-sync-text">☁️ 雲端實時同步中</span>
+      <span id="cloud-sync-badge" class="inline-flex items-center gap-1.5 bg-slate-800 text-stone-300 border border-slate-700 px-2.5 py-0.5 rounded-full font-bold">
+        <span id="cloud-sync-dot" class="w-2 h-2 rounded-full bg-amber-400"></span>
+        <span id="cloud-sync-text">📱 訪客本機模式（落單暫存本機）</span>
       </span>
-      <span class="bg-slate-800/90 text-stone-400 border border-slate-700 px-2.5 py-0.5 rounded-full font-mono text-[10px]">
-        雲端 ID: <strong id="cloud-user-id" class="text-amber-300 select-all">連線中</strong>
+      <span id="cloud-user-id-wrap" class="hidden bg-slate-800/90 text-stone-400 border border-slate-700 px-2.5 py-0.5 rounded-full font-mono text-[10px]">
+        職員同步: <strong id="cloud-user-id" class="text-amber-300 select-all">未登入</strong>
       </span>
     </div>
   </div>
@@ -306,7 +316,7 @@ html, body {
             屋企小工程維修、<br/><span class="text-amber-400">防甩底派單大廳、建材五金直銷</span>
           </h1>
           <p id="hero-desc" class="text-stone-300 text-xs sm:text-sm leading-relaxed">
-            業主漏水跳掣免費發單；<strong class="text-amber-400">嚴格師傅誠信分防甩底＋雙向星級互評</strong>；建材店及家電安裝公價透明；地盤買料支援 Google Maps 導航直達！
+            業主漏水跳掣免費發單；<strong class="text-amber-400">嚴格師傅誠信分防甩底＋雙向星級互評</strong>；濾水機、燈飾、龍頭、電子鎖淨料直銷兼附家電安裝公價；地盤買料支援一鍵打開 Google Maps 導航直達！
           </p>
         </div>
       </div>
@@ -361,21 +371,21 @@ html, body {
       <span class="w-8 h-8 rounded-xl bg-amber-400 text-slate-950 font-black flex items-center justify-center shrink-0">1</span>
       <div>
         <div class="font-black text-slate-900">我是業主：想搵師傅維修 / 給星級評價</div>
-        <div class="text-stone-500 text-[11px]">免費發單 ➔ 認證師傅接單 ➔ 完工驗收雙向打星</div>
+        <div class="text-stone-500 text-[11px]">免費發單 → 認證師傅接單 → 完工驗收雙向打星</div>
       </div>
     </div>
     <div id="lane-materials" onclick="switchSection('materials')" class="cursor-pointer flex items-center gap-3 p-2 rounded-xl hover:bg-emerald-50 transition">
       <span class="w-8 h-8 rounded-xl bg-emerald-500 text-white font-black flex items-center justify-center shrink-0">2</span>
       <div>
-        <div class="font-black text-slate-900">我是業主：買建材與查看家電安裝公價表</div>
-        <div class="text-stone-500 text-[11px]">查看抽油煙機/煮食爐標準安裝費 ➔ 一鍵預約</div>
+        <div class="font-black text-slate-900">我是業主：買家居主材與查家電安裝公價</div>
+        <div class="text-stone-500 text-[11px]">選購濾水機、燈飾、龍頭、電子鎖或查安裝公價 → 一鍵預約</div>
       </div>
     </div>
     <div id="lane-hardware" onclick="switchSection('hardware')" class="cursor-pointer flex items-center gap-3 p-2 rounded-xl hover:bg-sky-50 transition">
       <span class="w-8 h-8 rounded-xl bg-sky-500 text-white font-black flex items-center justify-center shrink-0">3</span>
       <div>
         <div class="font-black text-slate-900">我是師傅 / 五金舖：地盤執貨 & 接單</div>
-        <div class="text-stone-500 text-[11px]">Google Maps 搵最近五金舖直發地盤 · 大廳搶單</div>
+        <div class="text-stone-500 text-[11px]">搵最近五金舖直發地盤 · 一鍵打開 Google Maps 導航</div>
       </div>
     </div>
   </div>
@@ -400,8 +410,8 @@ html, body {
     </div>
     <div class="grid grid-cols-3 gap-2 w-full lg:w-[360px] shrink-0">
       <div class="bg-white p-3 rounded-2xl border border-amber-200 flex flex-col items-center justify-center text-center shadow-2xs">
-        <div class="text-xl sm:text-2xl font-black text-slate-900 leading-none">18</div>
-        <div class="text-[11px] font-bold text-stone-500 mt-1">個專業工種</div>
+        <div class="text-xl sm:text-2xl font-black text-slate-900 leading-none">9</div>
+        <div class="text-[11px] font-bold text-stone-500 mt-1">大維修工種</div>
       </div>
       <div class="bg-white p-3 rounded-2xl border border-amber-200 flex flex-col items-center justify-center text-center shadow-2xs">
         <div class="text-xl sm:text-2xl font-black text-slate-900 leading-none">九龍新界港島</div>
@@ -640,15 +650,12 @@ html, body {
             🔓 驗證登入
           </button>
         </div>
-        <div class="grid grid-cols-3 gap-1.5 pt-0.5">
+        <div class="grid grid-cols-2 gap-1.5 pt-0.5">
           <button type="button" onclick="openMasterDashboard()" class="btn-std w-full h-9 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">
             🛠️ 師傅工作台
           </button>
           <button type="button" onclick="openMasterRegModal()" class="btn-std w-full h-9 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs">
             👷‍♂️ 免費入駐
-          </button>
-          <button type="button" onclick="openAdminMasterModal()" class="btn-std w-full h-9 bg-slate-700 hover:bg-slate-600 text-amber-300 font-bold rounded-xl text-xs">
-            🔐 管理員 (<span id="registered-masters-count">0</span>)
           </button>
         </div>
       </div>
@@ -682,20 +689,14 @@ html, body {
         <div class="inline-flex items-center gap-2 bg-emerald-100 text-emerald-900 border border-emerald-300 font-black text-xs px-3 py-1 rounded-full">
           02 建材店｜原廠淨料直銷 ＆ 家電標準安裝公價透明
         </div>
-        <h2 class="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900">飲水機、抽油煙機、煮食爐、大門電子鎖直銷</h2>
+        <h2 class="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900">濾水機、燈飾、龍頭、電子門鎖、油漆防漏直銷</h2>
         <p class="text-stone-600 text-xs sm:text-sm leading-relaxed">
-          標價只售物料。需要上門安裝的貨品先會有「搵師傅裝」。每件貨可先加減數量再入清單。有優惠的貨會顯示劃線原價同折扣價。
+          標價只售物料，另附抽油煙機、煮食爐等全港家電標準安裝公價參考。需要上門安裝的貨品會有「搵師傅裝」，每件貨可先加減數量再入清單。
         </p>
       </div>
       <div class="flex flex-wrap items-center gap-2 shrink-0">
         <button onclick="openAppliancePricingModal()" class="btn-std bg-slate-900 hover:bg-slate-800 text-amber-400 font-black text-xs px-4 h-10 rounded-xl shadow-xs">
-          <span>查看「家電標準安裝公價表」</span>
-        </button>
-        <button onclick="openShopOwnerModal('promo')" class="btn-std bg-white hover:bg-stone-100 text-slate-900 border border-stone-300 font-black text-xs px-4 h-10 rounded-xl">
-          <span>貨品折扣管理</span>
-        </button>
-        <button onclick="openMaterialsDesk()" class="btn-std bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs px-4 h-10 rounded-xl">
-          <span>建材接單台</span>
+          <span>📋 查看「家電標準安裝公價表」</span>
         </button>
       </div>
     </div>
@@ -733,7 +734,7 @@ html, body {
         </div>
         <h2 class="text-xl sm:text-2xl lg:text-3xl font-black text-white">全行五金，就近五金舖直接送達地盤。</h2>
         <p class="text-stone-300 text-xs sm:text-sm leading-relaxed">
-          手機與電腦版均內置 <strong>Google Maps 實時地圖與導航功能</strong>！揀選離你地盤最近嘅聯盟五金舖，支援<strong>店舖自家車隊直送</strong>或<strong>街車速遞 (Lalamove)</strong>，落單即發 WhatsApp 到五金店老闆手機！
+          內置各區舖頭位置地圖，並支援<strong>一鍵打開 Google Maps 導航直達</strong>！揀選離你地盤最近嘅聯盟五金舖，支援<strong>店舖自家車隊直送</strong>或<strong>街車速遞 (Lalamove)</strong>，落單直達五金店！
         </p>
       </div>
       <div class="flex flex-wrap items-center gap-2 shrink-0">
@@ -750,8 +751,8 @@ html, body {
       <div class="bg-stone-800/90 border border-stone-700 rounded-2xl p-3.5 sm:p-5 space-y-4">
         <div class="flex flex-wrap items-center justify-between gap-2">
           <div>
-            <span class="text-xs font-black text-sky-400 uppercase">🗺️ 十八區聯盟五金舖雷達 & Google Maps 實時定位（手機/電腦通用）</span>
-            <h3 class="text-sm sm:text-base font-black text-white mt-0.5">點擊下方店舖即可切換五金貨架及更新 Google Maps 地圖位置：</h3>
+            <span class="text-xs font-black text-sky-400 uppercase">🗺️ 十八區聯盟五金舖位置圖 & Google Maps 導航（手機/電腦通用）</span>
+            <h3 class="text-sm sm:text-base font-black text-white mt-0.5">點擊下方店舖即可切換五金貨架、查看位置地圖及開啟導航：</h3>
           </div>
           <div class="flex flex-wrap items-center gap-2">
             <span id="gps-status-text" class="text-xs text-emerald-400 font-bold"></span>
@@ -801,11 +802,9 @@ html, body {
         <div class="flex flex-wrap items-center justify-between gap-2">
           <div class="flex flex-wrap items-center gap-2">
             <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-black px-2.5 py-1 rounded-full">📦 師傅五金訂單實時狀態追蹤</span>
-            <span class="text-xs text-stone-400">（5段式進度：已下單 ➔ 執貨中 ➔ 打包好 ➔ 運送中 ➔ 師傅已收貨）</span>
+            <span class="text-xs text-stone-400">（5段式進度：已下單 → 執貨中 → 打包好 → 運送中 → 師傅已收貨）</span>
           </div>
-          <button onclick="openShopOwnerModal('orders')" class="btn-std text-xs bg-stone-800 hover:bg-stone-700 text-amber-300 border border-stone-600 px-3 h-8 rounded-lg font-bold">
-            🔧 模擬五金店老闆更新進度
-          </button>
+          <span class="text-[11px] text-stone-400">由五金店老闆登入後台實時更新進度</span>
         </div>
         <div id="hardware-orders-tracker" class="space-y-3"></div>
       </div>
@@ -858,15 +857,22 @@ html, body {
       <p class="text-white font-bold">會員與防甩底保障機制</p>
       <p>業主與師傅免費註冊 · 完工驗收後雙向 1-5 星互評 · 師傅無故甩底即扣分並安排後備師傅頂上</p>
     </div>
-    <div class="space-y-2">
-      <p class="text-white font-bold">快速入口與管理後台</p>
+    <div class="space-y-2.5">
+      <p class="text-white font-bold">常用入口</p>
       <div class="flex flex-wrap gap-2">
         <button onclick="openSiteHelp()" class="btn-std bg-white text-slate-950 border border-white/30 px-3 py-1.5 rounded-lg text-xs font-black">點用這個網站</button>
-        <button onclick="openMemberModal()" class="btn-std bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-lg text-xs font-black">👤 會員登入 & 互評中心</button>
+        <button onclick="openMemberModal()" class="btn-std bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-lg text-xs font-black">👤 會員查單 & 互評</button>
         <button onclick="openMasterDashboard()" class="btn-std bg-amber-500 hover:bg-amber-400 text-slate-950 px-3 py-1.5 rounded-lg text-xs font-black">🛠️ 師傅工作台</button>
-        <button onclick="openShopOwnerModal()" class="btn-std bg-amber-400 hover:bg-amber-300 text-slate-950 px-3 py-1.5 rounded-lg text-xs font-black">🏪 五金店老闆管理頁</button>
-        <button onclick="openAdminMasterModal()" class="btn-std bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold">🔐 超級管理員</button>
       </div>
+      <details class="pt-1 text-xs">
+        <summary class="cursor-pointer text-stone-500 hover:text-stone-300 font-bold select-none w-fit">🔐 職員 / 店主後台入口</summary>
+        <div class="flex flex-wrap gap-2 pt-2">
+          <button onclick="openShopOwnerModal()" class="btn-std bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold">🏪 五金店老闆後台</button>
+          <button onclick="openMaterialsDesk()" class="btn-std bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold">📦 建材接單台</button>
+          <button onclick="openShopOwnerModal('promo')" class="btn-std bg-slate-800 hover:bg-slate-700 text-stone-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold">🏷️ 貨品折扣管理</button>
+          <button onclick="openAdminMasterModal()" class="btn-std bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-bold">🔐 超級管理員 (<span id="registered-masters-count">0</span>)</button>
+        </div>
+      </details>
     </div>
   </div>
 </footer>
@@ -1003,7 +1009,7 @@ html, body {
         <span class="bg-amber-400 text-slate-950 text-[11px] font-black px-2.5 py-0.5 rounded-full">師傅專屬個人工作台</span>
         <h3 class="text-base sm:text-xl font-black text-white mt-1">🛠️ 師傅檔案管理 · 已接工作清單 · 誠信分與真實評價</h3>
       </div>
-      <button type="button" onclick="closeMasterDashboard()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">✕</button>
+      <button type="button" onclick="closeMasterDashboard()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">×</button>
     </div>
 
     <div id="master-dash-gate" class="py-8 px-4 text-center space-y-4 bg-slate-800/80 rounded-2xl border border-slate-700">
@@ -1107,7 +1113,7 @@ html, body {
         <span class="bg-amber-100 text-amber-900 text-[11px] font-black px-2.5 py-0.5 rounded-full border border-amber-300">大本營明碼實價公價表</span>
         <h3 class="text-base sm:text-xl font-black text-slate-900 mt-1">📋 香港家庭大型電器標準安裝及附加收費參考</h3>
       </div>
-      <button type="button" onclick="closeAppliancePricingModal()" class="btn-std text-stone-400 hover:text-slate-900 font-bold w-8 h-8 rounded-lg bg-stone-100">✕</button>
+      <button type="button" onclick="closeAppliancePricingModal()" class="btn-std text-stone-400 hover:text-slate-900 font-bold w-8 h-8 rounded-lg bg-stone-100">×</button>
     </div>
     
     <div class="flex-1 overflow-y-auto space-y-4 pr-1 text-xs sm:text-sm">
@@ -1142,7 +1148,7 @@ html, body {
         <span class="bg-amber-400 text-slate-950 text-[11px] font-black px-2.5 py-0.5 rounded-full">免填姓名 · 電話即查即評</span>
         <h3 class="text-base sm:text-xl font-black text-white mt-1">👤 大本營會員中心 · 維修單追蹤 & 雙向星級互評</h3>
       </div>
-      <button type="button" onclick="closeMemberModal()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">✕</button>
+      <button type="button" onclick="closeMemberModal()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">×</button>
     </div>
 
     <!-- 頂部當前會員身份狀態列 -->
@@ -1200,13 +1206,19 @@ html, body {
               </span>
               <span class="text-[11px] text-stone-400">自動配對發單記錄</span>
             </div>
-            <h4 class="font-black text-sm text-white">輸入發單手提電話，即睇維修進度 & 驗收</h4>
-            <div>
-              <label class="block text-stone-300 font-bold mb-1">業主 WhatsApp / 手提電話</label>
-              <div class="flex gap-2">
-                <input type="tel" id="mem-owner-phone" placeholder="輸入發單電話" class="flex-1 h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-emerald-400 font-mono font-bold text-sm focus:outline-none focus:border-amber-400" />
-                <button type="button" onclick="loginAsMember('owner')" class="btn-std px-4 h-10 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs shrink-0">
-                  🔍 查單
+            <h4 class="font-black text-sm text-white">輸入發單手提電話 ＋ 單號後 4 碼，即睇維修進度 & 驗收</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
+              <div class="sm:col-span-6">
+                <label class="block text-stone-300 font-bold mb-1">業主 WhatsApp / 手提電話</label>
+                <input type="tel" id="mem-owner-phone" placeholder="例：9123 8392" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-emerald-400 font-mono font-bold text-sm focus:outline-none focus:border-amber-400" />
+              </div>
+              <div class="sm:col-span-3">
+                <label class="block text-stone-300 font-bold mb-1">單號後 4 碼</label>
+                <input type="text" id="mem-owner-job-code" maxlength="6" placeholder="例：8821" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-3 text-amber-300 font-mono font-bold text-sm focus:outline-none focus:border-amber-400" />
+              </div>
+              <div class="sm:col-span-3 flex items-end">
+                <button type="button" onclick="loginAsMember('owner')" class="btn-std w-full h-10 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">
+                  🔍 核對查單
                 </button>
               </div>
             </div>
@@ -1242,7 +1254,7 @@ html, body {
             </div>
           </div>
           <div class="pt-2 border-t border-slate-700/80 flex flex-wrap items-center justify-between gap-1.5">
-            <button type="button" onclick="closeMemberModal(); openMasterDashboard();" class="text-[11px] text-amber-300 hover:underline font-bold">🛠️ 進入師傅工作台 ➔</button>
+            <button type="button" onclick="closeMemberModal(); openMasterDashboard();" class="text-[11px] text-amber-300 hover:underline font-bold">🛠️ 進入師傅工作台 →</button>
           </div>
         </div>
         </div>
@@ -1278,8 +1290,8 @@ html, body {
             <div>
               <label class="block text-stone-300 font-bold mb-1">1. 你的評價身份</label>
               <select id="rev-role" onchange="handleReviewRoleOrJobChange()" class="w-full h-10 bg-slate-900 border border-slate-600 rounded-xl px-2.5 text-amber-300 font-bold">
-                <option value="業主評師傅">🏠 我係業主 ➔ 驗收及評價師傅</option>
-                <option value="師傅評業主">👷‍♂️ 我係師傅 ➔ 完工互評業主</option>
+                <option value="業主評師傅">🏠 我係業主 → 驗收及評價師傅</option>
+                <option value="師傅評業主">👷‍♂️ 我係師傅 → 完工互評業主</option>
               </select>
             </div>
             <div>
@@ -1361,7 +1373,7 @@ html, body {
           <h3 id="cart-drawer-title" class="font-black text-base">🛒 大本營分區獨立清單</h3>
           <p id="cart-drawer-subtitle" class="text-xs text-stone-400">建材店（業主）與五金店（師傅）分開獨立結帳，清晰唔混亂</p>
         </div>
-        <button onclick="toggleCart(false)" class="btn-std text-stone-400 hover:text-white text-lg font-bold w-8 h-8 rounded-lg">✕</button>
+        <button onclick="toggleCart(false)" class="btn-std text-stone-400 hover:text-white text-lg font-bold w-8 h-8 rounded-lg">×</button>
       </div>
 
       <!-- 獨立雙通道切換 Tab -->
@@ -1455,7 +1467,7 @@ html, body {
         <span class="bg-amber-400 text-slate-950 text-[11px] font-black px-2.5 py-0.5 rounded-full">五金店老闆專用後台</span>
         <h3 class="text-base sm:text-xl font-black text-white mt-1">五金店老闆管理頁｜店舖資料 · 庫存改價 · 訂單</h3>
       </div>
-      <button type="button" onclick="closeShopOwnerModal()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">✕</button>
+      <button type="button" onclick="closeShopOwnerModal()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">×</button>
     </div>
 
     <div id="owner-pin-gate" class="py-10 px-4 text-center space-y-4 bg-slate-800/80 rounded-2xl border border-slate-700">
@@ -1546,7 +1558,7 @@ html, body {
       <div id="owner-panel-orders" class="hidden flex-1 overflow-y-auto space-y-3 pr-1 text-xs">
         <div class="bg-slate-800 border border-slate-700 rounded-2xl p-4 space-y-2">
           <h4 class="font-black text-sm text-amber-400">📦 更新師傅訂單狀態（師傅端會實時同步顯示）</h4>
-          <p class="text-stone-300 text-[11px]">點擊下方狀態按鈕即可切換：<strong>已下單 ➔ 執貨中 ➔ 打包好 ➔ 運送中</strong>。</p>
+          <p class="text-stone-300 text-[11px]">點擊下方狀態按鈕即可切換：<strong>已下單 → 執貨中 → 打包好 → 運送中</strong>。</p>
         </div>
         <div id="owner-orders-list" class="space-y-3"></div>
       </div>
@@ -1568,7 +1580,7 @@ html, body {
   <div class="relative bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-stone-200 z-10 space-y-4">
     <div class="flex items-center justify-between">
       <span id="modal-badge" class="bg-amber-400 text-slate-950 text-xs font-black px-3 py-1 rounded-full">系統通知</span>
-      <button onclick="closeModal()" class="btn-std text-stone-400 hover:text-slate-900 font-bold w-8 h-8 rounded-lg">✕</button>
+      <button onclick="closeModal()" class="btn-std text-stone-400 hover:text-slate-900 font-bold w-8 h-8 rounded-lg">×</button>
     </div>
     <h4 id="modal-title" class="text-lg font-black text-slate-900"></h4>
     <div id="modal-body" class="text-xs sm:text-sm text-stone-600 space-y-1.5 leading-relaxed whitespace-pre-line"></div>
@@ -1584,7 +1596,7 @@ html, body {
         <span class="bg-amber-400 text-slate-950 text-[11px] font-black px-2.5 py-0.5 rounded-full">0 入駐費 · 100分初始誠信分</span>
         <h3 class="text-lg sm:text-xl font-black text-white mt-1.5">👷‍♂️ 大本營師傅免費入駐登記</h3>
       </div>
-      <button type="button" onclick="closeMasterRegModal()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">✕</button>
+      <button type="button" onclick="closeMasterRegModal()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">×</button>
     </div>
     <form onsubmit="submitMasterRegistration(event)" class="space-y-3.5 text-xs sm:text-sm">
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -1635,7 +1647,7 @@ html, body {
         <span class="bg-amber-400 text-slate-950 text-[11px] font-black px-2.5 py-0.5 rounded-full">超級管理員</span>
         <h3 class="text-lg sm:text-xl font-black text-white mt-1">三個範疇的行政與財務</h3>
       </div>
-      <button type="button" onclick="closeAdminMasterModal()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">✕</button>
+      <button type="button" onclick="closeAdminMasterModal()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">×</button>
     </div>
     <div id="admin-pin-gate" class="py-8 px-4 text-center space-y-4 bg-slate-800/70 rounded-2xl border border-slate-700">
       <div class="text-3xl">🔒</div>
@@ -1663,7 +1675,7 @@ html, body {
         <span class="bg-emerald-400 text-slate-950 text-[11px] font-black px-2.5 py-0.5 rounded-full">大本營建材部</span>
         <h3 class="text-base sm:text-xl font-black text-white mt-1">建材接單台｜接單 · 採購清單 · 送貨</h3>
       </div>
-      <button type="button" onclick="closeMaterialsDesk()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">✕</button>
+      <button type="button" onclick="closeMaterialsDesk()" class="btn-std text-stone-400 hover:text-white font-bold w-8 h-8 rounded-lg bg-slate-800">×</button>
     </div>
     <div id="mat-desk-gate" class="py-8 px-4 text-center space-y-4 bg-slate-800/80 rounded-2xl border border-slate-700">
       <h4 class="font-black text-base text-white">請輸入大本營密碼</h4>
@@ -1678,7 +1690,7 @@ html, body {
 </div>
 
 <!--CAMP_STATE_START-->
-<script type="application/json" id="camp-published-state">{"updatedAt":"2026-10-23T13:36:27.374Z","masters":[{"masterId":"MST-8001","name":"張志強師傅 (強哥)","phone":"91238888","district":"九龍區為主（觀塘/旺角等）","trades":"水喉漏水/潔具、電力跳掣/燈飾","cert":"20年經驗 · 電工A牌 · 水喉匠","stars":4.9,"reviewsCount":128,"onTimeRate":"99.6%","creditScore":100,"timeStr":"皇牌認證師傅"},{"masterId":"MST-8002","name":"林國明師傅 (明哥)","phone":"98761234","district":"新界東為主（沙田/大埔等）","trades":"大門鎖/電子鎖、鋁窗維修/防水","cert":"15年經驗 · 持牌鎖匠及鋁窗檢驗","stars":4.9,"reviewsCount":94,"onTimeRate":"99.1%","creditScore":100,"timeStr":"皇牌認證師傅"}],"jobs":[{"id":"FIX-41225","trade":"家居小型維修","district":"九龍 - 啟德/九龍灣/黃大仙","estate":"dadsa","ownerName":"aefa (dadsa業主)","assignMode":"大廳公開搶單（最快 5 分鐘內多位師傅報價）","desc":"sadsadqwqw","photos":[],"time":"剛剛","status":"候選接單 (防甩底保護中)","phone":"65652333"},{"id":"FIX-98922","trade":"家居小型維修","district":"九龍 - 觀塘/將軍澳","estate":"回曲","ownerName":"畈哂 (回曲業主)","assignMode":"大廳公開搶單（最快 5 分鐘內多位師傅報價）","desc":"回曲啦","photos":[],"time":"剛剛","status":"候選接單 (防甩底保護中)","phone":"65955999"},{"id":"FIX-26453","trade":"家居小型維修","district":"九龍 - 觀塘/將軍澳","estate":"回曲","ownerName":"畈哂 (回曲業主)","assignMode":"大廳公開搶單（最快 5 分鐘內多位師傅報價）","desc":"回曲啦","photos":[],"time":"剛剛","status":"✅ 已完工驗收 (雙向 5★ 互評完成)","phone":"65955999"},{"id":"FIX-38158","trade":"家居小型維修","district":"九龍 - 觀塘/將軍澳","estate":"回曲","ownerName":"畈哂 (回曲業主)","assignMode":"大廳公開搶單（最快 5 分鐘內多位師傅報價）","desc":"回曲啦","photos":[],"time":"剛剛","status":"候選接單 (防甩底保護中)","phone":"65955999"},{"id":"FIX-79830","trade":"家居小型維修","district":"九龍 - 觀塘/將軍澳","estate":"回曲","ownerName":"畈哂 (回曲業主)","assignMode":"系統優先指派 4.8★ 以上零甩底師傅（含後備師傅保障）","desc":"回曲啦","photos":[],"time":"剛剛","status":"候選接單 (防甩底保護中)","phone":"65955999"},{"id":"FIX-8821","trade":"水喉漏水 / 換龍頭","district":"九龍 - 觀塘/將軍澳","estate":"淘大花園 H座","ownerName":"陳先生 (淘大業主)","desc":"廚房單控龍頭底部不斷滲水落櫃桶，想盡快換個新龍頭。","time":"10分鐘前","status":"✅ 已完工驗收 (雙向 5★ 互評完成)","assignMode":"系統優先指派 4.8★ 以上零甩底師傅","assignedMaster":"張志強師傅 (強哥)","phone":"9123 8392"},{"id":"FIX-8819","trade":"電力跳掣 / 換燈掣","estate":"沙田第一城 23座","district":"新界 - 沙田/大圍/馬鞍山","ownerName":"李太 (第一城業主)","desc":"開冷氣時全屋總掣突然跳掣，試過推唔返上，懷疑短路。","time":"25分鐘前","status":"候選接單","assignMode":"系統優先指派","assignedMaster":"","phone":"6888 4120"}],"stores":[{"id":"store-kt","name":"榮發五金建材行 (觀塘店)","district":"九龍 - 觀塘","address":"香港觀塘開源道62號駱駝漆大廈","lat":22.3105,"lng":114.2261,"phone":"91238888","fleet":"both","distanceKm":1.1,"etaText":"自家車隊最快 1.5 小時 / Lalamove 45 分鐘","items":{"h-socket":{"active":true,"price":38},"h-socket2":{"active":true,"price":54},"h-wire":{"active":true,"price":375},"h-valve":{"active":true,"price":68},"h-ptfe":{"active":true,"price":28},"h-screw":{"active":true,"price":32},"h-hinge":{"active":true,"price":45},"h-roller":{"active":true,"price":42},"h-switch":{"active":true,"price":28},"h-switch2":{"active":true,"price":36},"h-wire15":{"active":true,"price":240},"h-wire40":{"active":true,"price":560},"h-mcb20":{"active":true,"price":68},"h-mcb32":{"active":true,"price":78},"h-conduit":{"active":true,"price":18},"h-box":{"active":true,"price":42},"h-plug":{"active":true,"price":12},"h-valve34":{"active":true,"price":88},"h-angle":{"active":true,"price":38},"h-flex":{"active":true,"price":45},"h-elbow":{"active":true,"price":9},"h-nipple":{"active":true,"price":6},"h-pvc20":{"active":true,"price":22},"h-trap":{"active":true,"price":78},"h-drain":{"active":true,"price":65},"h-screw40":{"active":true,"price":36},"h-plug6":{"active":true,"price":18},"h-plug8":{"active":true,"price":20},"h-brad":{"active":true,"price":16},"h-glue":{"active":true,"price":28},"h-bracket":{"active":true,"price":14},"h-nail":{"active":true,"price":42},"h-brush":{"active":true,"price":16},"h-sand":{"active":true,"price":22},"h-filler":{"active":true,"price":24},"h-tape":{"active":true,"price":8},"h-tray":{"active":true,"price":18},"h-winroller":{"active":true,"price":22},"h-wlock":{"active":true,"price":26},"h-gasket":{"active":true,"price":15},"h-stay":{"active":true,"price":35},"h-winscrew":{"active":true,"price":18},"h-etape":{"active":true,"price":15},"h-lever":{"active":true,"price":28},"h-backbox":{"active":true,"price":8},"h-coup20":{"active":true,"price":12},"h-bend20":{"active":true,"price":15},"h-saddle":{"active":true,"price":12},"h-dp20":{"active":true,"price":48},"h-fuse13":{"active":true,"price":15},"h-wire60":{"active":true,"price":780},"h-rccb":{"active":true,"price":180},"h-rose":{"active":true,"price":18},"h-trunk":{"active":true,"price":16},"h-tee12":{"active":true,"price":12},"h-union12":{"active":true,"price":22},"h-soc12":{"active":true,"price":8},"h-flex300":{"active":true,"price":38},"h-pvc40":{"active":true,"price":36},"h-elb40":{"active":true,"price":6},"h-pvcglue":{"active":true,"price":22},"h-wmtap":{"active":true,"price":65},"h-fillv":{"active":true,"price":48},"h-flush":{"active":true,"price":42},"h-pclip":{"active":true,"price":18},"h-screw16":{"active":true,"price":26},"h-screw50":{"active":true,"price":42},"h-drywall":{"active":true,"price":36},"h-langle":{"active":true,"price":16},"h-slide":{"active":true,"price":45},"h-magnet":{"active":true,"price":12},"h-doorstop":{"active":true,"price":22},"h-staple":{"active":true,"price":28},"h-anchor":{"active":true,"price":24},"h-foam":{"active":true,"price":48},"h-roller4":{"active":true,"price":18},"h-brush4":{"active":true,"price":22},"h-sand80":{"active":true,"price":22},"h-sand240":{"active":true,"price":24},"h-putty":{"active":true,"price":18},"h-film":{"active":true,"price":36},"h-primer":{"active":true,"price":68},"h-silicone":{"active":true,"price":28},"h-thinner":{"active":true,"price":32},"t-drill":{"active":true,"price":680},"t-hammer":{"active":true,"price":1280},"t-grinder":{"active":true,"price":420},"t-heat":{"active":true,"price":260},"t-driver":{"active":true,"price":220},"t-jigsaw":{"active":true,"price":480},"t-screwset":{"active":true,"price":88},"t-wrench":{"active":true,"price":48},"t-pump":{"active":true,"price":55},"t-pipewrench":{"active":true,"price":95},"t-plier":{"active":true,"price":38},"t-claw":{"active":true,"price":62},"t-mallet":{"active":true,"price":42},"t-knife":{"active":true,"price":18},"t-tape":{"active":true,"price":28},"t-level":{"active":true,"price":45},"t-laser":{"active":true,"price":320},"t-tester":{"active":true,"price":22},"t-glass":{"active":true,"price":18},"t-glove":{"active":true,"price":25},"t-mask":{"active":true,"price":32},"t-helmet":{"active":true,"price":68}},"deposit":3000,"listingPaused":false},{"id":"store-mk","name":"新填地街強記五金 (旺角店)","district":"九龍 - 旺角","address":"香港旺角新填地街388號","lat":22.3168,"lng":114.1675,"phone":"61239999","fleet":"both","distanceKm":2.8,"etaText":"自家車隊最快 1.5 小時 / 門市即取","items":{"h-socket":{"active":true,"price":39},"h-wire":{"active":true,"price":370},"h-valve":{"active":true,"price":66},"h-hinge":{"active":true,"price":43},"h-screw":{"active":true,"price":32},"h-socket2":{"active":true,"price":55},"h-switch":{"active":true,"price":28},"h-switch2":{"active":true,"price":36},"h-wire15":{"active":true,"price":240},"h-wire40":{"active":true,"price":560},"h-mcb20":{"active":true,"price":68},"h-mcb32":{"active":true,"price":78},"h-conduit":{"active":true,"price":18},"h-box":{"active":true,"price":42},"h-plug":{"active":true,"price":12},"h-valve34":{"active":true,"price":88},"h-angle":{"active":true,"price":38},"h-flex":{"active":true,"price":45},"h-elbow":{"active":true,"price":9},"h-nipple":{"active":true,"price":6},"h-pvc20":{"active":true,"price":22},"h-trap":{"active":true,"price":78},"h-drain":{"active":true,"price":65},"h-ptfe":{"active":true,"price":28},"h-screw40":{"active":true,"price":36},"h-plug6":{"active":true,"price":18},"h-plug8":{"active":true,"price":20},"h-brad":{"active":true,"price":16},"h-glue":{"active":true,"price":28},"h-bracket":{"active":true,"price":14},"h-nail":{"active":true,"price":42},"h-roller":{"active":true,"price":42},"h-brush":{"active":true,"price":16},"h-sand":{"active":true,"price":22},"h-filler":{"active":true,"price":24},"h-tape":{"active":true,"price":8},"h-tray":{"active":true,"price":18},"h-winroller":{"active":true,"price":22},"h-wlock":{"active":true,"price":26},"h-gasket":{"active":true,"price":15},"h-stay":{"active":true,"price":35},"h-winscrew":{"active":true,"price":18},"h-etape":{"active":true,"price":15},"h-lever":{"active":true,"price":28},"h-backbox":{"active":true,"price":8},"h-coup20":{"active":true,"price":12},"h-bend20":{"active":true,"price":15},"h-saddle":{"active":true,"price":12},"h-dp20":{"active":true,"price":48},"h-fuse13":{"active":true,"price":15},"h-wire60":{"active":true,"price":780},"h-rccb":{"active":true,"price":180},"h-rose":{"active":true,"price":18},"h-trunk":{"active":true,"price":16},"h-tee12":{"active":true,"price":12},"h-union12":{"active":true,"price":22},"h-soc12":{"active":true,"price":8},"h-flex300":{"active":true,"price":38},"h-pvc40":{"active":true,"price":36},"h-elb40":{"active":true,"price":6},"h-pvcglue":{"active":true,"price":22},"h-wmtap":{"active":true,"price":65},"h-fillv":{"active":true,"price":48},"h-flush":{"active":true,"price":42},"h-pclip":{"active":true,"price":18},"h-screw16":{"active":true,"price":26},"h-screw50":{"active":true,"price":42},"h-drywall":{"active":true,"price":36},"h-langle":{"active":true,"price":16},"h-slide":{"active":true,"price":45},"h-magnet":{"active":true,"price":12},"h-doorstop":{"active":true,"price":22},"h-staple":{"active":true,"price":28},"h-anchor":{"active":true,"price":24},"h-foam":{"active":true,"price":48},"h-roller4":{"active":true,"price":18},"h-brush4":{"active":true,"price":22},"h-sand80":{"active":true,"price":22},"h-sand240":{"active":true,"price":24},"h-putty":{"active":true,"price":18},"h-film":{"active":true,"price":36},"h-primer":{"active":true,"price":68},"h-silicone":{"active":true,"price":28},"h-thinner":{"active":true,"price":32},"t-drill":{"active":false,"price":680},"t-hammer":{"active":false,"price":1280},"t-grinder":{"active":false,"price":420},"t-heat":{"active":false,"price":260},"t-driver":{"active":false,"price":220},"t-jigsaw":{"active":false,"price":480},"t-screwset":{"active":false,"price":88},"t-wrench":{"active":false,"price":48},"t-pump":{"active":false,"price":55},"t-pipewrench":{"active":false,"price":95},"t-plier":{"active":false,"price":38},"t-claw":{"active":false,"price":62},"t-mallet":{"active":false,"price":42},"t-knife":{"active":false,"price":18},"t-tape":{"active":false,"price":28},"t-level":{"active":false,"price":45},"t-laser":{"active":false,"price":320},"t-tester":{"active":false,"price":22},"t-glass":{"active":false,"price":18},"t-glove":{"active":false,"price":25},"t-mask":{"active":false,"price":32},"t-helmet":{"active":false,"price":68}},"deposit":3000,"listingPaused":false},{"id":"store-tw","name":"順景水電五金倉 (荃灣店)","district":"新界 - 荃灣","address":"香港荃灣沙咀道210號","lat":22.3698,"lng":114.1145,"phone":"98765432","fleet":"van_only","distanceKm":4.8,"etaText":"支援街車速遞 (Lalamove 45-60分鐘)","items":{"h-socket":{"active":true,"price":36},"h-socket2":{"active":true,"price":55},"h-valve":{"active":true,"price":65},"h-ptfe":{"active":true,"price":26},"h-screw":{"active":true,"price":30},"h-roller":{"active":true,"price":40},"h-switch":{"active":true,"price":28},"h-switch2":{"active":true,"price":36},"h-wire15":{"active":true,"price":240},"h-wire":{"active":true,"price":375},"h-wire40":{"active":true,"price":560},"h-mcb20":{"active":true,"price":68},"h-mcb32":{"active":true,"price":78},"h-conduit":{"active":true,"price":18},"h-box":{"active":true,"price":42},"h-plug":{"active":true,"price":12},"h-valve34":{"active":true,"price":88},"h-angle":{"active":true,"price":38},"h-flex":{"active":true,"price":45},"h-elbow":{"active":true,"price":9},"h-nipple":{"active":true,"price":6},"h-pvc20":{"active":true,"price":22},"h-trap":{"active":true,"price":78},"h-drain":{"active":true,"price":65},"h-screw40":{"active":true,"price":36},"h-plug6":{"active":true,"price":18},"h-plug8":{"active":true,"price":20},"h-brad":{"active":true,"price":16},"h-glue":{"active":true,"price":28},"h-bracket":{"active":true,"price":14},"h-nail":{"active":true,"price":42},"h-brush":{"active":true,"price":16},"h-sand":{"active":true,"price":22},"h-filler":{"active":true,"price":24},"h-tape":{"active":true,"price":8},"h-tray":{"active":true,"price":18},"h-hinge":{"active":true,"price":45},"h-winroller":{"active":true,"price":22},"h-wlock":{"active":true,"price":26},"h-gasket":{"active":true,"price":15},"h-stay":{"active":true,"price":35},"h-winscrew":{"active":true,"price":18},"h-etape":{"active":true,"price":15},"h-lever":{"active":true,"price":28},"h-backbox":{"active":true,"price":8},"h-coup20":{"active":true,"price":12},"h-bend20":{"active":true,"price":15},"h-saddle":{"active":true,"price":12},"h-dp20":{"active":true,"price":48},"h-fuse13":{"active":true,"price":15},"h-wire60":{"active":true,"price":780},"h-rccb":{"active":true,"price":180},"h-rose":{"active":true,"price":18},"h-trunk":{"active":true,"price":16},"h-tee12":{"active":true,"price":12},"h-union12":{"active":true,"price":22},"h-soc12":{"active":true,"price":8},"h-flex300":{"active":true,"price":38},"h-pvc40":{"active":true,"price":36},"h-elb40":{"active":true,"price":6},"h-pvcglue":{"active":true,"price":22},"h-wmtap":{"active":true,"price":65},"h-fillv":{"active":true,"price":48},"h-flush":{"active":true,"price":42},"h-pclip":{"active":true,"price":18},"h-screw16":{"active":true,"price":26},"h-screw50":{"active":true,"price":42},"h-drywall":{"active":true,"price":36},"h-langle":{"active":true,"price":16},"h-slide":{"active":true,"price":45},"h-magnet":{"active":true,"price":12},"h-doorstop":{"active":true,"price":22},"h-staple":{"active":true,"price":28},"h-anchor":{"active":true,"price":24},"h-foam":{"active":true,"price":48},"h-roller4":{"active":true,"price":18},"h-brush4":{"active":true,"price":22},"h-sand80":{"active":true,"price":22},"h-sand240":{"active":true,"price":24},"h-putty":{"active":true,"price":18},"h-film":{"active":true,"price":36},"h-primer":{"active":true,"price":68},"h-silicone":{"active":true,"price":28},"h-thinner":{"active":true,"price":32},"t-drill":{"active":false,"price":680},"t-hammer":{"active":false,"price":1280},"t-grinder":{"active":false,"price":420},"t-heat":{"active":false,"price":260},"t-driver":{"active":false,"price":220},"t-jigsaw":{"active":false,"price":480},"t-screwset":{"active":false,"price":88},"t-wrench":{"active":false,"price":48},"t-pump":{"active":false,"price":55},"t-pipewrench":{"active":false,"price":95},"t-plier":{"active":false,"price":38},"t-claw":{"active":false,"price":62},"t-mallet":{"active":false,"price":42},"t-knife":{"active":false,"price":18},"t-tape":{"active":false,"price":28},"t-level":{"active":false,"price":45},"t-laser":{"active":false,"price":320},"t-tester":{"active":false,"price":22},"t-glass":{"active":false,"price":18},"t-glove":{"active":false,"price":25},"t-mask":{"active":false,"price":32},"t-helmet":{"active":false,"price":68}},"deposit":3000,"listingPaused":false}],"orders":[{"orderId":"HW-90218","storeId":"store-kt","storeName":"榮發五金建材行 (觀塘店)","storePhone":"91238888","buyerName":"張師傅 (強哥)","buyerPhone":"9123 8888","address":"觀塘淘大花園 H座樓下交收","deliveryMethod":"五金店自家車隊直送","itemsSummary":"英式 13A 單蘇面板 x4、不鏽鋼自攻螺絲 4×25 x2","total":216,"status":"運送中","time":"15分鐘前"}],"matOrders":[],"supplier":{"name":"建材供應商","deposit":5000,"paused":false},"reviews":[{"id":"REV-510","role":"業主評師傅","reviewer":"畈哂 (回曲業主)","target":"張志強師傅 (強哥 · MST-8001)","jobId":"FIX-26453 · 家居小型維修","stars":5,"tags":["👍 手工企理","💰 明碼實價","🛠️ 工具齊全"],"comment":"👍 手工企理，💰 明碼實價，🛠️ 工具齊全！過程順暢滿意，值得五星推薦！","time":"剛剛"},{"id":"REV-499","role":"業主評師傅","reviewer":"陳先生 (淘大業主)","target":"張志強師傅 (強哥)","jobId":"FIX-8821 · 水喉漏水 / 換龍頭","stars":5,"tags":["🔥 準時唔甩底","👍 手工企理"],"comment":"🔥 準時唔甩底，👍 手工企理！過程順暢滿意，值得五星推薦！","time":"剛剛"},{"id":"REV-301","role":"業主評師傅","reviewer":"陳先生 (淘大花園業主)","target":"張志強師傅 (強哥 · MST-8001)","jobId":"FIX-8790 · 廚房換單控龍頭","stars":5,"tags":["🔥 準時唔甩底","👍 手工企理","💰 明碼實價"],"comment":"強哥接單後 5 分鐘就 WhatsApp 我約實今日朝早 10 點，完全準時無甩底！幫我換埋喺建材店買嘅炭灰龍頭，手工好企理，收費公道！","time":"今日 11:40"},{"id":"REV-302","role":"師傅評業主","reviewer":"張志強師傅 (強哥)","target":"陳先生 (淘大花園業主)","jobId":"FIX-8790 · 廚房換單控龍頭","stars":5,"tags":["🤝 溝通清晰","⚡ 找數爽快","📷 現場相片準確"],"comment":"陳生事先影晒相俾我睇廚櫃底個波曲位，去到現場一裝就合尺碼，完工即刻驗收 FPS 找數，好業主！","time":"今日 11:45"}],"pricing":{"kitchen":[{"id":"pk-1","name":"抽油煙機（標準換位安裝）","desc":"包基本掛機、接駁 8 呎標準排氣鋁喉","price":"$590 – $890 起"},{"id":"pk-2","name":"嵌入式 / 座檯煮食爐（氣體/電磁）","desc":"包原位接駁煤氣喉 / 接駁電源插蘇","price":"$450 – $680 起"},{"id":"pk-3","name":"嵌入式焗爐 / 微波爐 / 蒸爐","desc":"包放入現成木櫃開口及接駁電源","price":"$500 – $690 起"},{"id":"pk-4","name":"洗衣機 / 乾衣機","desc":"包駁入水喉、去水喉及試機","price":"$450 – $590 起"},{"id":"pk-5","name":"電熱水爐 / 氣體熱水爐","desc":"包掛牆安裝、接駁冷熱水銅喉及減壓閥","price":"$590 – $890 起"}],"extra":[{"id":"pe-1","name":"拆走舊機（一般電器）","desc":"不含煙導式抽油煙機","price":"$100 / 件"},{"id":"pe-2","name":"拆走舊抽油煙機（煙導式）","desc":"需拆排氣喉及封口","price":"$300 / 件"},{"id":"pe-3","name":"開木孔 / 擴闊石屎/木板位","desc":"現場特殊尺寸修改","price":"$50 – $300 / 件"},{"id":"pe-4","name":"超長排氣鋁喉（每 8 呎）","desc":"超出標準長度額外加長","price":"$100"},{"id":"pe-5","name":"唐樓無升降機（人力搬運上樓費）","desc":"無升降機唐樓搬運上樓","price":"$30 – $50 / 每層 / 每件"},{"id":"pe-6","name":"偏遠地區附加費（如東涌/馬灣）","desc":"偏遠地區交通補貼","price":"$200 – $400"}]},"promos":{"m-downlight":{"on":true,"percent":20}}}</script>
+<script type="application/json" id="camp-published-state">{"updatedAt":"2026-10-23T13:36:27.374Z","masters":[{"masterId":"MST-8001","name":"張志強師傅 (強哥)","phone":"91238888","district":"九龍區為主（觀塘/旺角等）","trades":"水喉漏水/潔具、電力跳掣/燈飾","cert":"20年經驗 · 電工A牌 · 水喉匠","stars":4.9,"reviewsCount":128,"onTimeRate":"99.6%","creditScore":100,"timeStr":"皇牌認證師傅"},{"masterId":"MST-8002","name":"林國明師傅 (明哥)","phone":"98761234","district":"新界東為主（沙田/大埔等）","trades":"大門鎖/電子鎖、鋁窗維修/防水","cert":"15年經驗 · 持牌鎖匠及鋁窗檢驗","stars":4.9,"reviewsCount":94,"onTimeRate":"99.1%","creditScore":100,"timeStr":"皇牌認證師傅"}],"jobs":[{"id":"FIX-8821","trade":"水喉漏水 / 換龍頭","district":"九龍 - 觀塘/將軍澳","estate":"淘大花園 H座","ownerName":"陳先生 (淘大業主)","desc":"廚房單控龍頭底部不斷滲水落櫃桶，想盡快換個新龍頭。","time":"10分鐘前","status":"✅ 已完工驗收 (雙向 5★ 互評完成)","assignMode":"系統優先指派 4.8★ 以上零甩底師傅","assignedMaster":"張志強師傅 (強哥)","phone":"9123 8392"},{"id":"FIX-8819","trade":"電力跳掣 / 換燈掣","estate":"沙田第一城 23座","district":"新界 - 沙田/大圍/馬鞍山","ownerName":"李太 (第一城業主)","desc":"開冷氣時全屋總掣突然跳掣，試過推唔返上，懷疑短路。","time":"25分鐘前","status":"候選接單","assignMode":"系統優先指派","assignedMaster":"","phone":"6888 4120"}],"stores":[{"id":"store-kt","name":"榮發五金建材行 (觀塘店)","district":"九龍 - 觀塘","address":"香港觀塘開源道62號駱駝漆大廈","lat":22.3105,"lng":114.2261,"phone":"91238888","fleet":"both","distanceKm":1.1,"etaText":"自家車隊最快 1.5 小時 / Lalamove 45 分鐘","items":{"h-socket":{"active":true,"price":38},"h-socket2":{"active":true,"price":54},"h-wire":{"active":true,"price":375},"h-valve":{"active":true,"price":68},"h-ptfe":{"active":true,"price":28},"h-screw":{"active":true,"price":32},"h-hinge":{"active":true,"price":45},"h-roller":{"active":true,"price":42},"h-switch":{"active":true,"price":28},"h-switch2":{"active":true,"price":36},"h-wire15":{"active":true,"price":240},"h-wire40":{"active":true,"price":560},"h-mcb20":{"active":true,"price":68},"h-mcb32":{"active":true,"price":78},"h-conduit":{"active":true,"price":18},"h-box":{"active":true,"price":42},"h-plug":{"active":true,"price":12},"h-valve34":{"active":true,"price":88},"h-angle":{"active":true,"price":38},"h-flex":{"active":true,"price":45},"h-elbow":{"active":true,"price":9},"h-nipple":{"active":true,"price":6},"h-pvc20":{"active":true,"price":22},"h-trap":{"active":true,"price":78},"h-drain":{"active":true,"price":65},"h-screw40":{"active":true,"price":36},"h-plug6":{"active":true,"price":18},"h-plug8":{"active":true,"price":20},"h-brad":{"active":true,"price":16},"h-glue":{"active":true,"price":28},"h-bracket":{"active":true,"price":14},"h-nail":{"active":true,"price":42},"h-brush":{"active":true,"price":16},"h-sand":{"active":true,"price":22},"h-filler":{"active":true,"price":24},"h-tape":{"active":true,"price":8},"h-tray":{"active":true,"price":18},"h-winroller":{"active":true,"price":22},"h-wlock":{"active":true,"price":26},"h-gasket":{"active":true,"price":15},"h-stay":{"active":true,"price":35},"h-winscrew":{"active":true,"price":18},"h-etape":{"active":true,"price":15},"h-lever":{"active":true,"price":28},"h-backbox":{"active":true,"price":8},"h-coup20":{"active":true,"price":12},"h-bend20":{"active":true,"price":15},"h-saddle":{"active":true,"price":12},"h-dp20":{"active":true,"price":48},"h-fuse13":{"active":true,"price":15},"h-wire60":{"active":true,"price":780},"h-rccb":{"active":true,"price":180},"h-rose":{"active":true,"price":18},"h-trunk":{"active":true,"price":16},"h-tee12":{"active":true,"price":12},"h-union12":{"active":true,"price":22},"h-soc12":{"active":true,"price":8},"h-flex300":{"active":true,"price":38},"h-pvc40":{"active":true,"price":36},"h-elb40":{"active":true,"price":6},"h-pvcglue":{"active":true,"price":22},"h-wmtap":{"active":true,"price":65},"h-fillv":{"active":true,"price":48},"h-flush":{"active":true,"price":42},"h-pclip":{"active":true,"price":18},"h-screw16":{"active":true,"price":26},"h-screw50":{"active":true,"price":42},"h-drywall":{"active":true,"price":36},"h-langle":{"active":true,"price":16},"h-slide":{"active":true,"price":45},"h-magnet":{"active":true,"price":12},"h-doorstop":{"active":true,"price":22},"h-staple":{"active":true,"price":28},"h-anchor":{"active":true,"price":24},"h-foam":{"active":true,"price":48},"h-roller4":{"active":true,"price":18},"h-brush4":{"active":true,"price":22},"h-sand80":{"active":true,"price":22},"h-sand240":{"active":true,"price":24},"h-putty":{"active":true,"price":18},"h-film":{"active":true,"price":36},"h-primer":{"active":true,"price":68},"h-silicone":{"active":true,"price":28},"h-thinner":{"active":true,"price":32},"t-drill":{"active":true,"price":680},"t-hammer":{"active":true,"price":1280},"t-grinder":{"active":true,"price":420},"t-heat":{"active":true,"price":260},"t-driver":{"active":true,"price":220},"t-jigsaw":{"active":true,"price":480},"t-screwset":{"active":true,"price":88},"t-wrench":{"active":true,"price":48},"t-pump":{"active":true,"price":55},"t-pipewrench":{"active":true,"price":95},"t-plier":{"active":true,"price":38},"t-claw":{"active":true,"price":62},"t-mallet":{"active":true,"price":42},"t-knife":{"active":true,"price":18},"t-tape":{"active":true,"price":28},"t-level":{"active":true,"price":45},"t-laser":{"active":true,"price":320},"t-tester":{"active":true,"price":22},"t-glass":{"active":true,"price":18},"t-glove":{"active":true,"price":25},"t-mask":{"active":true,"price":32},"t-helmet":{"active":true,"price":68}},"deposit":3000,"listingPaused":false},{"id":"store-mk","name":"新填地街強記五金 (旺角店)","district":"九龍 - 旺角","address":"香港旺角新填地街388號","lat":22.3168,"lng":114.1675,"phone":"61239999","fleet":"both","distanceKm":2.8,"etaText":"自家車隊最快 1.5 小時 / 門市即取","items":{"h-socket":{"active":true,"price":39},"h-wire":{"active":true,"price":370},"h-valve":{"active":true,"price":66},"h-hinge":{"active":true,"price":43},"h-screw":{"active":true,"price":32},"h-socket2":{"active":true,"price":55},"h-switch":{"active":true,"price":28},"h-switch2":{"active":true,"price":36},"h-wire15":{"active":true,"price":240},"h-wire40":{"active":true,"price":560},"h-mcb20":{"active":true,"price":68},"h-mcb32":{"active":true,"price":78},"h-conduit":{"active":true,"price":18},"h-box":{"active":true,"price":42},"h-plug":{"active":true,"price":12},"h-valve34":{"active":true,"price":88},"h-angle":{"active":true,"price":38},"h-flex":{"active":true,"price":45},"h-elbow":{"active":true,"price":9},"h-nipple":{"active":true,"price":6},"h-pvc20":{"active":true,"price":22},"h-trap":{"active":true,"price":78},"h-drain":{"active":true,"price":65},"h-ptfe":{"active":true,"price":28},"h-screw40":{"active":true,"price":36},"h-plug6":{"active":true,"price":18},"h-plug8":{"active":true,"price":20},"h-brad":{"active":true,"price":16},"h-glue":{"active":true,"price":28},"h-bracket":{"active":true,"price":14},"h-nail":{"active":true,"price":42},"h-roller":{"active":true,"price":42},"h-brush":{"active":true,"price":16},"h-sand":{"active":true,"price":22},"h-filler":{"active":true,"price":24},"h-tape":{"active":true,"price":8},"h-tray":{"active":true,"price":18},"h-winroller":{"active":true,"price":22},"h-wlock":{"active":true,"price":26},"h-gasket":{"active":true,"price":15},"h-stay":{"active":true,"price":35},"h-winscrew":{"active":true,"price":18},"h-etape":{"active":true,"price":15},"h-lever":{"active":true,"price":28},"h-backbox":{"active":true,"price":8},"h-coup20":{"active":true,"price":12},"h-bend20":{"active":true,"price":15},"h-saddle":{"active":true,"price":12},"h-dp20":{"active":true,"price":48},"h-fuse13":{"active":true,"price":15},"h-wire60":{"active":true,"price":780},"h-rccb":{"active":true,"price":180},"h-rose":{"active":true,"price":18},"h-trunk":{"active":true,"price":16},"h-tee12":{"active":true,"price":12},"h-union12":{"active":true,"price":22},"h-soc12":{"active":true,"price":8},"h-flex300":{"active":true,"price":38},"h-pvc40":{"active":true,"price":36},"h-elb40":{"active":true,"price":6},"h-pvcglue":{"active":true,"price":22},"h-wmtap":{"active":true,"price":65},"h-fillv":{"active":true,"price":48},"h-flush":{"active":true,"price":42},"h-pclip":{"active":true,"price":18},"h-screw16":{"active":true,"price":26},"h-screw50":{"active":true,"price":42},"h-drywall":{"active":true,"price":36},"h-langle":{"active":true,"price":16},"h-slide":{"active":true,"price":45},"h-magnet":{"active":true,"price":12},"h-doorstop":{"active":true,"price":22},"h-staple":{"active":true,"price":28},"h-anchor":{"active":true,"price":24},"h-foam":{"active":true,"price":48},"h-roller4":{"active":true,"price":18},"h-brush4":{"active":true,"price":22},"h-sand80":{"active":true,"price":22},"h-sand240":{"active":true,"price":24},"h-putty":{"active":true,"price":18},"h-film":{"active":true,"price":36},"h-primer":{"active":true,"price":68},"h-silicone":{"active":true,"price":28},"h-thinner":{"active":true,"price":32},"t-drill":{"active":false,"price":680},"t-hammer":{"active":false,"price":1280},"t-grinder":{"active":false,"price":420},"t-heat":{"active":false,"price":260},"t-driver":{"active":false,"price":220},"t-jigsaw":{"active":false,"price":480},"t-screwset":{"active":false,"price":88},"t-wrench":{"active":false,"price":48},"t-pump":{"active":false,"price":55},"t-pipewrench":{"active":false,"price":95},"t-plier":{"active":false,"price":38},"t-claw":{"active":false,"price":62},"t-mallet":{"active":false,"price":42},"t-knife":{"active":false,"price":18},"t-tape":{"active":false,"price":28},"t-level":{"active":false,"price":45},"t-laser":{"active":false,"price":320},"t-tester":{"active":false,"price":22},"t-glass":{"active":false,"price":18},"t-glove":{"active":false,"price":25},"t-mask":{"active":false,"price":32},"t-helmet":{"active":false,"price":68}},"deposit":3000,"listingPaused":false},{"id":"store-tw","name":"順景水電五金倉 (荃灣店)","district":"新界 - 荃灣","address":"香港荃灣沙咀道210號","lat":22.3698,"lng":114.1145,"phone":"98765432","fleet":"van_only","distanceKm":4.8,"etaText":"支援街車速遞 (Lalamove 45-60分鐘)","items":{"h-socket":{"active":true,"price":36},"h-socket2":{"active":true,"price":55},"h-valve":{"active":true,"price":65},"h-ptfe":{"active":true,"price":26},"h-screw":{"active":true,"price":30},"h-roller":{"active":true,"price":40},"h-switch":{"active":true,"price":28},"h-switch2":{"active":true,"price":36},"h-wire15":{"active":true,"price":240},"h-wire":{"active":true,"price":375},"h-wire40":{"active":true,"price":560},"h-mcb20":{"active":true,"price":68},"h-mcb32":{"active":true,"price":78},"h-conduit":{"active":true,"price":18},"h-box":{"active":true,"price":42},"h-plug":{"active":true,"price":12},"h-valve34":{"active":true,"price":88},"h-angle":{"active":true,"price":38},"h-flex":{"active":true,"price":45},"h-elbow":{"active":true,"price":9},"h-nipple":{"active":true,"price":6},"h-pvc20":{"active":true,"price":22},"h-trap":{"active":true,"price":78},"h-drain":{"active":true,"price":65},"h-screw40":{"active":true,"price":36},"h-plug6":{"active":true,"price":18},"h-plug8":{"active":true,"price":20},"h-brad":{"active":true,"price":16},"h-glue":{"active":true,"price":28},"h-bracket":{"active":true,"price":14},"h-nail":{"active":true,"price":42},"h-brush":{"active":true,"price":16},"h-sand":{"active":true,"price":22},"h-filler":{"active":true,"price":24},"h-tape":{"active":true,"price":8},"h-tray":{"active":true,"price":18},"h-hinge":{"active":true,"price":45},"h-winroller":{"active":true,"price":22},"h-wlock":{"active":true,"price":26},"h-gasket":{"active":true,"price":15},"h-stay":{"active":true,"price":35},"h-winscrew":{"active":true,"price":18},"h-etape":{"active":true,"price":15},"h-lever":{"active":true,"price":28},"h-backbox":{"active":true,"price":8},"h-coup20":{"active":true,"price":12},"h-bend20":{"active":true,"price":15},"h-saddle":{"active":true,"price":12},"h-dp20":{"active":true,"price":48},"h-fuse13":{"active":true,"price":15},"h-wire60":{"active":true,"price":780},"h-rccb":{"active":true,"price":180},"h-rose":{"active":true,"price":18},"h-trunk":{"active":true,"price":16},"h-tee12":{"active":true,"price":12},"h-union12":{"active":true,"price":22},"h-soc12":{"active":true,"price":8},"h-flex300":{"active":true,"price":38},"h-pvc40":{"active":true,"price":36},"h-elb40":{"active":true,"price":6},"h-pvcglue":{"active":true,"price":22},"h-wmtap":{"active":true,"price":65},"h-fillv":{"active":true,"price":48},"h-flush":{"active":true,"price":42},"h-pclip":{"active":true,"price":18},"h-screw16":{"active":true,"price":26},"h-screw50":{"active":true,"price":42},"h-drywall":{"active":true,"price":36},"h-langle":{"active":true,"price":16},"h-slide":{"active":true,"price":45},"h-magnet":{"active":true,"price":12},"h-doorstop":{"active":true,"price":22},"h-staple":{"active":true,"price":28},"h-anchor":{"active":true,"price":24},"h-foam":{"active":true,"price":48},"h-roller4":{"active":true,"price":18},"h-brush4":{"active":true,"price":22},"h-sand80":{"active":true,"price":22},"h-sand240":{"active":true,"price":24},"h-putty":{"active":true,"price":18},"h-film":{"active":true,"price":36},"h-primer":{"active":true,"price":68},"h-silicone":{"active":true,"price":28},"h-thinner":{"active":true,"price":32},"t-drill":{"active":false,"price":680},"t-hammer":{"active":false,"price":1280},"t-grinder":{"active":false,"price":420},"t-heat":{"active":false,"price":260},"t-driver":{"active":false,"price":220},"t-jigsaw":{"active":false,"price":480},"t-screwset":{"active":false,"price":88},"t-wrench":{"active":false,"price":48},"t-pump":{"active":false,"price":55},"t-pipewrench":{"active":false,"price":95},"t-plier":{"active":false,"price":38},"t-claw":{"active":false,"price":62},"t-mallet":{"active":false,"price":42},"t-knife":{"active":false,"price":18},"t-tape":{"active":false,"price":28},"t-level":{"active":false,"price":45},"t-laser":{"active":false,"price":320},"t-tester":{"active":false,"price":22},"t-glass":{"active":false,"price":18},"t-glove":{"active":false,"price":25},"t-mask":{"active":false,"price":32},"t-helmet":{"active":false,"price":68}},"deposit":3000,"listingPaused":false}],"orders":[{"orderId":"HW-90218","storeId":"store-kt","storeName":"榮發五金建材行 (觀塘店)","storePhone":"91238888","buyerName":"張師傅 (強哥)","buyerPhone":"9123 8888","address":"觀塘淘大花園 H座樓下交收","deliveryMethod":"五金店自家車隊直送","itemsSummary":"英式 13A 單蘇面板 x4、不鏽鋼自攻螺絲 4×25 x2","total":216,"status":"運送中","time":"15分鐘前"}],"matOrders":[],"supplier":{"name":"建材供應商","deposit":5000,"paused":false},"reviews":[{"id":"REV-499","role":"業主評師傅","reviewer":"陳先生 (淘大業主)","target":"張志強師傅 (強哥)","jobId":"FIX-8821 · 水喉漏水 / 換龍頭","stars":5,"tags":["🔥 準時唔甩底","👍 手工企理"],"comment":"🔥 準時唔甩底，👍 手工企理！過程順暢滿意，值得五星推薦！","time":"剛剛"},{"id":"REV-301","role":"業主評師傅","reviewer":"陳先生 (淘大花園業主)","target":"張志強師傅 (強哥 · MST-8001)","jobId":"FIX-8790 · 廚房換單控龍頭","stars":5,"tags":["🔥 準時唔甩底","👍 手工企理","💰 明碼實價"],"comment":"強哥接單後 5 分鐘就 WhatsApp 我約實今日朝早 10 點，完全準時無甩底！幫我換埋喺建材店買嘅炭灰龍頭，手工好企理，收費公道！","time":"今日 11:40"},{"id":"REV-302","role":"師傅評業主","reviewer":"張志強師傅 (強哥)","target":"陳先生 (淘大花園業主)","jobId":"FIX-8790 · 廚房換單控龍頭","stars":5,"tags":["🤝 溝通清晰","⚡ 找數爽快","📷 現場相片準確"],"comment":"陳生事先影晒相俾我睇廚櫃底個波曲位，去到現場一裝就合尺碼，完工即刻驗收 FPS 找數，好業主！","time":"今日 11:45"}],"pricing":{"kitchen":[{"id":"pk-1","name":"抽油煙機（標準換位安裝）","desc":"包基本掛機、接駁 8 呎標準排氣鋁喉","price":"$590 – $890 起"},{"id":"pk-2","name":"嵌入式 / 座檯煮食爐（氣體/電磁）","desc":"包原位接駁煤氣喉 / 接駁電源插蘇","price":"$450 – $680 起"},{"id":"pk-3","name":"嵌入式焗爐 / 微波爐 / 蒸爐","desc":"包放入現成木櫃開口及接駁電源","price":"$500 – $690 起"},{"id":"pk-4","name":"洗衣機 / 乾衣機","desc":"包駁入水喉、去水喉及試機","price":"$450 – $590 起"},{"id":"pk-5","name":"電熱水爐 / 氣體熱水爐","desc":"包掛牆安裝、接駁冷熱水銅喉及減壓閥","price":"$590 – $890 起"}],"extra":[{"id":"pe-1","name":"拆走舊機（一般電器）","desc":"不含煙導式抽油煙機","price":"$100 / 件"},{"id":"pe-2","name":"拆走舊抽油煙機（煙導式）","desc":"需拆排氣喉及封口","price":"$300 / 件"},{"id":"pe-3","name":"開木孔 / 擴闊石屎/木板位","desc":"現場特殊尺寸修改","price":"$50 – $300 / 件"},{"id":"pe-4","name":"超長排氣鋁喉（每 8 呎）","desc":"超出標準長度額外加長","price":"$100"},{"id":"pe-5","name":"唐樓無升降機（人力搬運上樓費）","desc":"無升降機唐樓搬運上樓","price":"$30 – $50 / 每層 / 每件"},{"id":"pe-6","name":"偏遠地區附加費（如東涌/馬灣）","desc":"偏遠地區交通補貼","price":"$200 – $400"}]},"promos":{"m-downlight":{"on":true,"percent":20}}}</script>
 <!--CAMP_STATE_END-->
 <script>
 const heroConfig = {
@@ -1694,7 +1706,7 @@ const heroConfig = {
   repair: {
     layerId: "hero-img-repair",
     logo: "images/repair/camp/logo.jpg",
-    caption: "🏠 配對站 · 18個工種防甩底指派與星級互評",
+    caption: "🏠 配對站 · 9大維修工種防甩底指派與星級互評",
     indicator: "目前選中：01 配對站",
     badge: "🏠 配對站 · 業主 $0 配對費 · 100分誠信防甩底保障",
     title: '小工程由我來做，<br/><span class="text-amber-400">防甩底工作指派 ＆ 淘寶式雙向打星</span>',
@@ -1703,20 +1715,20 @@ const heroConfig = {
   materials: {
     layerId: "hero-img-materials",
     logo: "images/materials/brand/mark.jpg",
-    caption: "🚿 建材店 · 潔具燈飾門鎖淨料直銷 & 家電公價",
+    caption: "🚿 建材店 · 濾水機、燈飾、龍頭、門鎖淨料直銷 & 家電公價",
     indicator: "目前選中：02 建材店",
-    badge: "🚿 建材店 · 只售產品明碼實價 · 家電標準安裝公價",
-    title: '飲水機、抽油煙機、<br/><span class="text-emerald-400">大門電子鎖、煮食爐淨料直銷</span>',
-    desc: '全部精選家居主材<strong class="text-white">明碼實價淨料直銷</strong>！內置全港家電標準安裝公價表，買料後一鍵預約師傅上門安裝！'
+    badge: "🚿 建材店 · 只售產品明碼實價 · 附家電標準安裝公價表",
+    title: '濾水機、燈飾、龍頭、<br/><span class="text-emerald-400">大門電子鎖及油漆防漏直銷</span>',
+    desc: '全部精選家居主材<strong class="text-white">明碼實價淨料直銷</strong>！另內置全港家電標準安裝公價表，買料後可一鍵預約師傅上門安裝！'
   },
   hardware: {
     layerId: "hero-img-hardware",
     logo: "images/hardware/camp/five.jpg",
-    caption: "🔩 五金店 · 十八區聯盟五金 Google Map 導航直發",
+    caption: "🔩 五金店 · 十八區聯盟五金位置圖及導航直發",
     indicator: "目前選中：03 五金店",
-    badge: "🔩 五金店 · 手機 Google Maps 定位導航 · 各區五金舖直發",
+    badge: "🔩 五金店 · 舖頭位置地圖 · 一鍵打開 Google Maps 導航",
     title: '全行五金，直接送到。<br/><span class="text-sky-400">十八區聯盟五金舖極速補貨</span>',
-    desc: '電工、水喉、木工、泥水、油漆到鎖具。內置 <strong class="text-white">Google Maps 實時地圖與導航</strong>，落單直接 WhatsApp 去五金店老闆手機！'
+    desc: '電工、水喉、木工、泥水、油漆到鎖具。內置各區舖頭位置圖並支援<strong class="text-white">一鍵打開 Google Maps 導航</strong>，就近直發地盤！'
   }
 };
 
@@ -1798,6 +1810,66 @@ const LOCAL_PROMO_KEY = 'hk_camp_product_promos_v1';
 const LOCAL_MAT_ORDERS_KEY = 'hk_camp_mat_orders_v1';
 const LOCAL_MATERIALS_KEY = 'hk_camp_materials_v1';
 const LOCAL_CATALOG_KEY = 'hk_camp_hw_catalog_v1';
+const LOCAL_USER_CONTACT_KEY = 'hk_camp_user_contact_v1';
+let ownerLookupAttempted = false;
+let verifiedOwnerJobCode = '';
+
+function saveLocalUserContact(partial) {
+  try {
+    const cur = JSON.parse(localStorage.getItem(LOCAL_USER_CONTACT_KEY) || '{}');
+    const next = {
+      name: (partial.name !== undefined ? String(partial.name).trim() : (cur.name || '')),
+      phone: (partial.phone !== undefined ? String(partial.phone).trim() : (cur.phone || '')),
+      address: (partial.address !== undefined ? String(partial.address).trim() : (cur.address || ''))
+    };
+    localStorage.setItem(LOCAL_USER_CONTACT_KEY, JSON.stringify(next));
+    applyLocalUserContact();
+  } catch (e) {}
+}
+
+function loadLocalUserContact() {
+  try {
+    return JSON.parse(localStorage.getItem(LOCAL_USER_CONTACT_KEY) || '{}');
+  } catch (e) {
+    return {};
+  }
+}
+
+function applyLocalUserContact() {
+  const c = loadLocalUserContact();
+  const fillIfEmpty = (id, val) => {
+    if (!val) return;
+    const el = document.getElementById(id);
+    if (el && !el.value.trim()) el.value = val;
+  };
+  fillIfEmpty('repair-name', c.name);
+  fillIfEmpty('repair-phone', c.phone);
+  fillIfEmpty('repair-estate', c.address);
+  fillIfEmpty('cart-mat-buyer-name', c.name);
+  fillIfEmpty('cart-mat-buyer-phone', c.phone);
+  fillIfEmpty('cart-mat-buyer-address', c.address);
+  fillIfEmpty('cart-buyer-name', c.name);
+  fillIfEmpty('cart-buyer-phone', c.phone);
+  fillIfEmpty('cart-buyer-address', c.address);
+}
+
+function bindContactSyncListeners() {
+  const map = [
+    ['repair-name', 'name'], ['repair-phone', 'phone'], ['repair-estate', 'address'],
+    ['cart-mat-buyer-name', 'name'], ['cart-mat-buyer-phone', 'phone'], ['cart-mat-buyer-address', 'address'],
+    ['cart-buyer-name', 'name'], ['cart-buyer-phone', 'phone'], ['cart-buyer-address', 'address']
+  ];
+  map.forEach(([id, field]) => {
+    const el = document.getElementById(id);
+    if (el && !el.dataset.contactBound) {
+      el.dataset.contactBound = '1';
+      el.addEventListener('change', () => {
+        const val = el.value.trim();
+        if (val) saveLocalUserContact({ [field]: val });
+      });
+    }
+  });
+}
 
 let appliancePricingData = {
   kitchen: [
@@ -1931,42 +2003,42 @@ let masterHardwareCatalog = [
   { id: "h-socket", cat: "電工", sku: "DC-EL-013", name: "英式 13A 單蘇面板", spec: "86 型單蘇，連開關", size: "86×86 mm", material: "阻燃膠面、銅接線柱", pack: "1 件", standard: "BS 1363", use: "一般插座回路，2.5mm 銅線", desc: "白色英式三腳單蘇，帶開關。", defaultPrice: 38, unit: "件", img: "images/hardware/products/electrical.jpg" },
   { id: "h-socket2", cat: "電工", sku: "DC-EL-026", name: "英式 13A 雙蘇面板", spec: "86 型雙蘇，兩位獨立開關", size: "146×86 mm", material: "阻燃膠面、銅接線柱", pack: "1 件", standard: "BS 1363", use: "廚房、廳櫃多位電器", desc: "雙位帶獨立開關。", defaultPrice: 55, unit: "件", img: "images/hardware/products/electrical.jpg" },
   { id: "h-switch", cat: "電工", sku: "DC-EL-SW1", name: "單位單控燈掣", spec: "一位單控，10AX", size: "86×86 mm", material: "阻燃膠面", pack: "1 件", standard: "BS EN 60669", use: "一個燈位由一處開關", desc: "替換舊燈掣最常用。", defaultPrice: 28, unit: "件", img: "images/hardware/products/electrical.jpg" },
-  { id: "h-switch2", cat: "電工", sku: "DC-EL-SW2", name: "單位雙控燈掣", spec: "一位雙控，10AX", size: "86×86 mm", material: "阻燃膠面", pack: "1 件", standard: "BS EN 60669", use: "樓梯、長走廊兩頭開關同一盞燈", desc: "要兩隻成對安裝。", defaultPrice: 36, unit: "件", img: "images/hardware/camp/elec.jpg" },
+  { id: "h-switch2", cat: "電工", sku: "DC-EL-SW2", name: "單位雙控燈掣", spec: "一位雙控，10AX", size: "86×86 mm", material: "阻燃膠面", pack: "1 件", standard: "BS EN 60669", use: "樓梯、長走廊兩頭開關同一盞燈", desc: "要兩隻成對安裝。", defaultPrice: 36, unit: "件", img: "images/hardware/products/electrical.jpg" },
   { id: "h-wire15", cat: "電工", sku: "DC-EL-15W", name: "1.5mm 單支銅芯電線", spec: "單支銅芯，PVC 絕緣，紅/藍/黃綠", size: "1.5 mm² × 100 m", material: "電解銅", pack: "1 圈", standard: "BS 6004", use: "照明回路", desc: "足米燈具用線。", defaultPrice: 240, unit: "圈", img: "images/hardware/products/electrical.jpg" },
   { id: "h-wire", cat: "電工", sku: "DC-EL-25W", name: "2.5mm 單支銅芯電線", spec: "單支銅芯，PVC 絕緣，紅/黑/黃綠", size: "2.5 mm² × 100 m", material: "電解銅", pack: "1 圈", standard: "BS 6004", use: "13A 插座回路", desc: "地盤拉線最常用的一圈。", defaultPrice: 375, unit: "圈", img: "images/hardware/products/electrical.jpg" },
   { id: "h-wire40", cat: "電工", sku: "DC-EL-40W", name: "4mm 單支銅芯電線", spec: "單支銅芯，PVC 絕緣", size: "4 mm² × 100 m", material: "電解銅", pack: "1 圈", standard: "BS 6004", use: "冷氣、大負載專線", desc: "冷氣專線不要用 2.5mm 代替。", defaultPrice: 560, unit: "圈", img: "images/hardware/products/electrical.jpg" },
-  { id: "h-mcb20", cat: "電工", sku: "DC-EL-M20", name: "MCB 微型斷路器 20A", spec: "單極 C 曲線，6kA", size: "1 單位 DIN", material: "阻燃外殼", pack: "1 件", standard: "IEC 60898", use: "照明或細回路總掣", desc: "入箱替換 20A 單極 MCB。", defaultPrice: 68, unit: "件", img: "images/hardware/camp/elec.jpg" },
-  { id: "h-mcb32", cat: "電工", sku: "DC-EL-M32", name: "MCB 微型斷路器 32A", spec: "單極 C 曲線，6kA", size: "1 單位 DIN", material: "阻燃外殼", pack: "1 件", standard: "IEC 60898", use: "插座回路", desc: "入箱替換 32A 單極 MCB。", defaultPrice: 78, unit: "件", img: "images/hardware/camp/elec.jpg" },
-  { id: "h-conduit", cat: "電工", sku: "DC-EL-C20", name: "PVC 電線膠管 20mm", spec: "中型電線管，連直通另計", size: "20 mm × 2.9 m", material: "PVC", pack: "1 支", standard: "BS 4607", use: "明線或批盪內走線", desc: "燈位、蘇位拉線用。", defaultPrice: 18, unit: "支", img: "images/hardware/camp/elec.jpg" },
+  { id: "h-mcb20", cat: "電工", sku: "DC-EL-M20", name: "MCB 微型斷路器 20A", spec: "單極 C 曲線，6kA", size: "1 單位 DIN", material: "阻燃外殼", pack: "1 件", standard: "IEC 60898", use: "照明或細回路總掣", desc: "入箱替換 20A 單極 MCB。", defaultPrice: 68, unit: "件", img: "images/hardware/products/electrical.jpg" },
+  { id: "h-mcb32", cat: "電工", sku: "DC-EL-M32", name: "MCB 微型斷路器 32A", spec: "單極 C 曲線，6kA", size: "1 單位 DIN", material: "阻燃外殼", pack: "1 件", standard: "IEC 60898", use: "插座回路", desc: "入箱替換 32A 單極 MCB。", defaultPrice: 78, unit: "件", img: "images/hardware/products/electrical.jpg" },
+  { id: "h-conduit", cat: "電工", sku: "DC-EL-C20", name: "PVC 電線膠管 20mm", spec: "中型電線管，連直通另計", size: "20 mm × 2.9 m", material: "PVC", pack: "1 支", standard: "BS 4607", use: "明線或批盪內走線", desc: "燈位、蘇位拉線用。", defaultPrice: 18, unit: "支", img: "images/hardware/products/electrical.jpg" },
   { id: "h-box", cat: "電工", sku: "DC-EL-IP55", name: "防水接線盒", spec: "IP55，4 個出線位", size: "100×100×70 mm", material: "ABS", pack: "1 個", standard: "IP55", use: "露台、廚房外牆駁線", desc: "室外駁線要防水盒，不要用普通底盒。", defaultPrice: 42, unit: "個", img: "images/hardware/products/electrical.jpg" },
   { id: "h-plug", cat: "電工", sku: "DC-EL-P13", name: "13A 英式插頭連保險絲", spec: "可重接插頭，內置 13A 保險絲", size: "英式三腳", material: "阻燃膠", pack: "1 件", standard: "BS 1363", use: "電器換插頭", desc: "保險絲是 13A，細電器不要硬用。", defaultPrice: 12, unit: "件", img: "images/hardware/products/electrical.jpg" },
 
   { id: "h-valve", cat: "水喉", sku: "DC-PB-012", name: "黃銅球閥 1/2寸", spec: "全通徑，蝶柄", size: "1/2 寸（15 mm）", material: "黃銅", pack: "1 件", standard: "全通徑", use: "星盆、洗衣機、熱水器總掣", desc: "半寸波曲，全通徑防漏。", defaultPrice: 68, unit: "件", img: "images/hardware/products/plumbing.jpg" },
   { id: "h-valve34", cat: "水喉", sku: "DC-PB-034", name: "黃銅球閥 3/4寸", spec: "全通徑，蝶柄", size: "3/4 寸（20 mm）", material: "黃銅", pack: "1 件", standard: "全通徑", use: "單位總掣、儲水桶", desc: "六分波曲，總掣常用。", defaultPrice: 88, unit: "件", img: "images/hardware/products/plumbing.jpg" },
-  { id: "h-angle", cat: "水喉", sku: "DC-PB-AV12", name: "黃銅角閥 1/2寸", spec: "四分轉半分", size: "1/2 寸 × 1/2 寸", material: "黃銅", pack: "1 件", standard: "常用角掣", use: "馬桶、洗手盆獨立開關", desc: "維修時可單獨關水，不用關全屋。", defaultPrice: 38, unit: "件", img: "images/hardware/camp/plumb.jpg" },
+  { id: "h-angle", cat: "水喉", sku: "DC-PB-AV12", name: "黃銅角閥 1/2寸", spec: "四分轉半分", size: "1/2 寸 × 1/2 寸", material: "黃銅", pack: "1 件", standard: "常用角掣", use: "馬桶、洗手盆獨立開關", desc: "維修時可單獨關水，不用關全屋。", defaultPrice: 38, unit: "件", img: "images/hardware/products/plumbing.jpg" },
   { id: "h-flex", cat: "水喉", sku: "DC-PB-F400", name: "不鏽鋼軟喉 400mm", spec: "1/2 寸母牙兩頭", size: "400 mm", material: "304 編織軟喉", pack: "1 條", standard: "常用駁喉", use: "星盆、馬桶駁角閥", desc: "長度不夠不要拉緊，要換長一號。", defaultPrice: 45, unit: "條", img: "images/hardware/products/plumbing.jpg" },
-  { id: "h-elbow", cat: "水喉", sku: "DC-PB-E12", name: "鍍鋅彎頭 1/2寸", spec: "90 度內牙", size: "1/2 寸", material: "鍍鋅鐵", pack: "1 件", standard: "英制喉件", use: "明喉轉角", desc: "駁鐵喉轉角。膠喉不要混用這隻。", defaultPrice: 9, unit: "件", img: "images/hardware/camp/plumb.jpg" },
-  { id: "h-nipple", cat: "水喉", sku: "DC-PB-N12", name: "鍍鋅直咀 1/2寸", spec: "外牙對外牙", size: "1/2 寸 × 50 mm", material: "鍍鋅鐵", pack: "1 件", standard: "英制喉件", use: "駁波曲、延長鐵喉", desc: "外牙直咀，配 1/2 寸內牙件。", defaultPrice: 6, unit: "件", img: "images/hardware/camp/plumb.jpg" },
+  { id: "h-elbow", cat: "水喉", sku: "DC-PB-E12", name: "鍍鋅彎頭 1/2寸", spec: "90 度內牙", size: "1/2 寸", material: "鍍鋅鐵", pack: "1 件", standard: "英制喉件", use: "明喉轉角", desc: "駁鐵喉轉角。膠喉不要混用這隻。", defaultPrice: 9, unit: "件", img: "images/hardware/products/plumbing.jpg" },
+  { id: "h-nipple", cat: "水喉", sku: "DC-PB-N12", name: "鍍鋅直咀 1/2寸", spec: "外牙對外牙", size: "1/2 寸 × 50 mm", material: "鍍鋅鐵", pack: "1 件", standard: "英制喉件", use: "駁波曲、延長鐵喉", desc: "外牙直咀，配 1/2 寸內牙件。", defaultPrice: 6, unit: "件", img: "images/hardware/products/plumbing.jpg" },
   { id: "h-pvc20", cat: "水喉", sku: "DC-PB-PVC20", name: "PVC 膠喉 20mm", spec: "排水用，冷水排水", size: "20 mm × 4 m", material: "PVC", pack: "1 支", standard: "排水管", use: "洗手盆、洗衣機去水", desc: "只作排水，不可當食水鐵喉。", defaultPrice: 22, unit: "支", img: "images/hardware/products/plumbing.jpg" },
   { id: "h-trap", cat: "水喉", sku: "DC-PB-TRAP", name: "星盆去水隔氣", spec: "樽型隔氣，連去水掣", size: "1¼ 寸出口", material: "膠及不鏽鋼面", pack: "1 套", standard: "隔氣", use: "廚房、廁所星盆", desc: "有隔氣，減少渠味倒灌。", defaultPrice: 78, unit: "套", img: "images/hardware/products/plumbing.jpg" },
-  { id: "h-drain", cat: "水喉", sku: "DC-PB-DR4", name: "不鏽鋼地漏 4寸", spec: "方型面板，活動隔渣", size: "4 寸", material: "不鏽鋼", pack: "1 件", standard: "地漏", use: "浴室、露台去水", desc: "換地漏要連密封，不要只換面板。", defaultPrice: 65, unit: "件", img: "images/hardware/camp/plumb.jpg" },
+  { id: "h-drain", cat: "水喉", sku: "DC-PB-DR4", name: "不鏽鋼地漏 4寸", spec: "方型面板，活動隔渣", size: "4 寸", material: "不鏽鋼", pack: "1 件", standard: "地漏", use: "浴室、露台去水", desc: "換地漏要連密封，不要只換面板。", defaultPrice: 65, unit: "件", img: "images/hardware/products/plumbing.jpg" },
   { id: "h-ptfe", cat: "水喉", sku: "DC-PB-TAPE", name: "加厚水喉生料帶", spec: "高密度四氟帶", size: "10 卷裝", material: "PTFE", pack: "1 排", standard: "駁口密封", use: "所有牙喉駁口", desc: "順牙方向繞，牙口先繞再上緊。", defaultPrice: 28, unit: "排", img: "images/hardware/products/plumbing.jpg" },
 
   { id: "h-screw", cat: "木工", sku: "DC-WD-425", name: "不鏽鋼自攻螺絲 4×25", spec: "十字頭，全牙", size: "4 × 25 mm", material: "不鏽鋼", pack: "200 粒盒", standard: "地盤盒裝", use: "層板、細木方", desc: "防銹，室內外木作都常用。", defaultPrice: 32, unit: "盒", img: "images/hardware/products/fastener.jpg" },
   { id: "h-screw40", cat: "木工", sku: "DC-WD-440", name: "不鏽鋼自攻螺絲 4×40", spec: "十字頭，全牙", size: "4 × 40 mm", material: "不鏽鋼", pack: "200 粒盒", standard: "地盤盒裝", use: "木方接駁、門套", desc: "比 25mm 長，入木要預鑽。", defaultPrice: 36, unit: "盒", img: "images/hardware/products/fastener.jpg" },
-  { id: "h-plug6", cat: "木工", sku: "DC-WD-P6", name: "膠牆塞 6mm", spec: "配 6mm 鑽咀", size: "6 mm", material: "尼龍", pack: "100 粒盒", standard: "膨脹牆塞", use: "紅磚、混凝土掛鏡、層板托", desc: "鑽孔要同牆塞一樣深，不要太大。", defaultPrice: 18, unit: "盒", img: "images/hardware/camp/wood.jpg" },
-  { id: "h-plug8", cat: "木工", sku: "DC-WD-P8", name: "膠牆塞 8mm", spec: "配 8mm 鑽咀", size: "8 mm", material: "尼龍", pack: "100 粒盒", standard: "膨脹牆塞", use: "較重的層板、電視架", desc: "重物要用 8mm，不要只用 6mm。", defaultPrice: 20, unit: "盒", img: "images/hardware/camp/wood.jpg" },
-  { id: "h-brad", cat: "木工", sku: "DC-WD-B30", name: "木釘 30mm", spec: "圓木榫", size: "8 × 30 mm", material: "實木", pack: "100 支盒", standard: "木榫", use: "櫃門、層板對接", desc: "要配同直徑木釘鑽咀。", defaultPrice: 16, unit: "盒", img: "images/hardware/camp/wood.jpg" },
-  { id: "h-glue", cat: "木工", sku: "DC-WD-GL5", name: "白膠漿 500ml", spec: "木工白膠", size: "500 ml", material: "PVA", pack: "1 支", standard: "室內木作", use: "木榫、封邊、細木接合", desc: "只適合室內。廚房廁所近水位置不要單靠白膠。", defaultPrice: 28, unit: "支", img: "images/hardware/camp/wood.jpg" },
+  { id: "h-plug6", cat: "木工", sku: "DC-WD-P6", name: "膠牆塞 6mm", spec: "配 6mm 鑽咀", size: "6 mm", material: "尼龍", pack: "100 粒盒", standard: "膨脹牆塞", use: "紅磚、混凝土掛鏡、層板托", desc: "鑽孔要同牆塞一樣深，不要太大。", defaultPrice: 18, unit: "盒", img: "images/hardware/products/fastener.jpg" },
+  { id: "h-plug8", cat: "木工", sku: "DC-WD-P8", name: "膠牆塞 8mm", spec: "配 8mm 鑽咀", size: "8 mm", material: "尼龍", pack: "100 粒盒", standard: "膨脹牆塞", use: "較重的層板、電視架", desc: "重物要用 8mm，不要只用 6mm。", defaultPrice: 20, unit: "盒", img: "images/hardware/products/fastener.jpg" },
+  { id: "h-brad", cat: "木工", sku: "DC-WD-B30", name: "木釘 30mm", spec: "圓木榫", size: "8 × 30 mm", material: "實木", pack: "100 支盒", standard: "木榫", use: "櫃門、層板對接", desc: "要配同直徑木釘鑽咀。", defaultPrice: 16, unit: "盒", img: "images/hardware/products/fastener.jpg" },
+  { id: "h-glue", cat: "木工", sku: "DC-WD-GL5", name: "白膠漿 500ml", spec: "木工白膠", size: "500 ml", material: "PVA", pack: "1 支", standard: "室內木作", use: "木榫、封邊、細木接合", desc: "只適合室內。廚房廁所近水位置不要單靠白膠。", defaultPrice: 28, unit: "支", img: "images/hardware/products/fastener.jpg" },
   { id: "h-bracket", cat: "木工", sku: "DC-WD-BR", name: "白色層板托", spec: "一對，連螺絲", size: "150 mm", material: "鋼，白色塗層", pack: "1 對", standard: "層板碼", use: "牆身固定層板", desc: "要配牆塞，石膏板牆不能當混凝土來裝。", defaultPrice: 14, unit: "對", img: "images/hardware/products/fastener.jpg" },
   { id: "h-nail", cat: "木工", sku: "DC-WD-F30", name: "槍釘 F30", spec: "直釘，無頭", size: "30 mm", material: "電鍍鋼", pack: "5000 粒盒", standard: "F 釘", use: "線板、門套收口", desc: "配 F 釘槍。釘長不要超過木厚。", defaultPrice: 42, unit: "盒", img: "images/hardware/products/fastener.jpg" },
 
   { id: "h-roller", cat: "油漆", sku: "DC-PT-R9", name: "細緻羊毛滾筒 9寸", spec: "中毛，3 個替換頭", size: "9 寸", material: "羊毛混紡", pack: "1 組", standard: "室內牆身", use: "乳膠漆大面積", desc: "上漆較勻，用完可換頭。", defaultPrice: 42, unit: "組", img: "images/hardware/products/paint.jpg" },
-  { id: "h-brush", cat: "油漆", sku: "DC-PT-B2", name: "油掃 2寸", spec: "平頭豬鬃", size: "2 寸", material: "木柄、豬鬃", pack: "1 支", standard: "修邊", use: "門邊、天花線、細位", desc: "大面積用滾筒，邊位先用這支掃。", defaultPrice: 16, unit: "支", img: "images/hardware/camp/paint.jpg" },
+  { id: "h-brush", cat: "油漆", sku: "DC-PT-B2", name: "油掃 2寸", spec: "平頭豬鬃", size: "2 寸", material: "木柄、豬鬃", pack: "1 支", standard: "修邊", use: "門邊、天花線、細位", desc: "大面積用滾筒，邊位先用這支掃。", defaultPrice: 16, unit: "支", img: "images/hardware/products/paint.jpg" },
   { id: "h-sand", cat: "油漆", sku: "DC-PT-S120", name: "砂紙 120號", spec: "乾磨", size: "230×280 mm", material: "氧化鋁", pack: "10 張", standard: "P120", use: "批灰後打磨", desc: "批灰乾透先磨。幼面再換更幼的砂紙。", defaultPrice: 22, unit: "包", img: "images/hardware/products/paint.jpg" },
-  { id: "h-filler", cat: "油漆", sku: "DC-PT-FL1", name: "內牆批灰 1kg", spec: "現成補裂灰", size: "1 kg", material: "樹脂灰", pack: "1 包", standard: "室內", use: "釘孔、幼裂", desc: "大裂和空鼓要先剷，不能只補面。", defaultPrice: 24, unit: "包", img: "images/hardware/camp/paint.jpg" },
+  { id: "h-filler", cat: "油漆", sku: "DC-PT-FL1", name: "內牆批灰 1kg", spec: "現成補裂灰", size: "1 kg", material: "樹脂灰", pack: "1 包", standard: "室內", use: "釘孔、幼裂", desc: "大裂和空鼓要先剷，不能只補面。", defaultPrice: 24, unit: "包", img: "images/hardware/products/paint.jpg" },
   { id: "h-tape", cat: "油漆", sku: "DC-PT-T24", name: "美紋紙 24mm", spec: "可撕，低殘膠", size: "24 mm × 20 m", material: "和紙", pack: "1 卷", standard: "遮蔽", use: "門邊、玻璃、插座保護", desc: "油漆乾前撕走，留太久會黏殘膠。", defaultPrice: 8, unit: "卷", img: "images/hardware/products/paint.jpg" },
-  { id: "h-tray", cat: "油漆", sku: "DC-PT-TR9", name: "油漆盤 9寸", spec: "配 9 寸滾筒", size: "9 寸", material: "塑膠", pack: "1 個", standard: "漆盤", use: "滾筒上漆", desc: "可墊垃圾袋，減少洗盤。", defaultPrice: 18, unit: "個", img: "images/hardware/camp/paint.jpg" },
+  { id: "h-tray", cat: "油漆", sku: "DC-PT-TR9", name: "油漆盤 9寸", spec: "配 9 寸滾筒", size: "9 寸", material: "塑膠", pack: "1 個", standard: "漆盤", use: "滾筒上漆", desc: "可墊垃圾袋，減少洗盤。", defaultPrice: 18, unit: "個", img: "images/hardware/products/paint.jpg" },
 
   { id: "h-hinge", cat: "鋁窗", sku: "DC-WD-H304", name: "304 緩衝門鉸", spec: "液壓靜音，一對連螺絲", size: "4 寸", material: "304 不鏽鋼", pack: "1 對", standard: "緩衝鉸", use: "房門、廁所門", desc: "靜音緩衝。門厚和鉸杯尺寸要先量。", defaultPrice: 45, unit: "對", img: "images/hardware/camp/window.jpg" },
   { id: "h-winroller", cat: "鋁窗", sku: "DC-AW-RL", name: "鋁窗滑輪", spec: "不鏽鋼輪，可調高低", size: "常用趟窗輪", material: "不鏽鋼輪、尼龍", pack: "1 對", standard: "趟窗", use: "趟窗推不動、偏墮", desc: "換輪前先看槽闊，不是一隻通吃。", defaultPrice: 22, unit: "對", img: "images/hardware/camp/window.jpg" },
@@ -1976,49 +2048,49 @@ let masterHardwareCatalog = [
   { id: "h-winscrew", cat: "鋁窗", sku: "DC-AW-SC", name: "不鏽鋼窗螺絲", spec: "盤頭自攻", size: "8 × 1/2 寸", material: "不鏽鋼", pack: "100 粒盒", standard: "鋁窗", use: "窗鎖、滑輪、風撐", desc: "不要用普通黑螺絲，會生鏽留痕。", defaultPrice: 18, unit: "盒", img: "images/hardware/products/fastener.jpg" },
 
   { id: "h-etape", cat: "電工", sku: "DC-EL-TAPE", name: "電工膠布", spec: "PVC 絕緣，黑、紅、黃綠", size: "18 mm × 10 m", material: "PVC", pack: "3 卷", standard: "絕緣膠布", use: "駁線收口、分色", desc: "接頭要先接實，膠布只是絕緣，不是用來駁緊電線。", defaultPrice: 15, unit: "排", img: "images/hardware/products/electrical.jpg" },
-  { id: "h-lever", cat: "電工", sku: "DC-EL-LV2", name: "快速接線端子 2位", spec: "按壓式，適合 0.5–2.5mm", size: "2 位", material: "阻燃膠、銅片", pack: "10 隻", standard: "接線端子", use: "燈位、蘇位駁線", desc: "比膠布絞線穩。實芯線直接插入，多芯線要先拗實。", defaultPrice: 28, unit: "排", img: "images/hardware/camp/elec.jpg" },
+  { id: "h-lever", cat: "電工", sku: "DC-EL-LV2", name: "快速接線端子 2位", spec: "按壓式，適合 0.5–2.5mm", size: "2 位", material: "阻燃膠、銅片", pack: "10 隻", standard: "接線端子", use: "燈位、蘇位駁線", desc: "比膠布絞線穩。實芯線直接插入，多芯線要先拗實。", defaultPrice: 28, unit: "排", img: "images/hardware/products/electrical.jpg" },
   { id: "h-backbox", cat: "電工", sku: "DC-EL-BB35", name: "暗裝底盒 35mm", spec: "一位，連螺絲", size: "35 mm 深", material: "鐵", pack: "1 個", standard: "86 型", use: "新做蘇位、燈掣", desc: "深度不夠，面板會頂住電線。舊牆換掣多數不用換底盒。", defaultPrice: 8, unit: "個", img: "images/hardware/products/electrical.jpg" },
-  { id: "h-coup20", cat: "電工", sku: "DC-EL-CP20", name: "膠管直通 20mm", spec: "套入 20mm 電線管", size: "20 mm", material: "PVC", pack: "10 個", standard: "BS 4607", use: "駁長電線管", desc: "要套到管端的止位，不要只插一點。", defaultPrice: 12, unit: "包", img: "images/hardware/camp/elec.jpg" },
-  { id: "h-bend20", cat: "電工", sku: "DC-EL-BD20", name: "膠管彎頭 20mm", spec: "90 度檢查彎", size: "20 mm", material: "PVC", pack: "5 個", standard: "BS 4607", use: "線管轉角", desc: "拉線轉角要用彎頭，硬拗膠管會扁。", defaultPrice: 15, unit: "包", img: "images/hardware/camp/elec.jpg" },
+  { id: "h-coup20", cat: "電工", sku: "DC-EL-CP20", name: "膠管直通 20mm", spec: "套入 20mm 電線管", size: "20 mm", material: "PVC", pack: "10 個", standard: "BS 4607", use: "駁長電線管", desc: "要套到管端的止位，不要只插一點。", defaultPrice: 12, unit: "包", img: "images/hardware/products/electrical.jpg" },
+  { id: "h-bend20", cat: "電工", sku: "DC-EL-BD20", name: "膠管彎頭 20mm", spec: "90 度檢查彎", size: "20 mm", material: "PVC", pack: "5 個", standard: "BS 4607", use: "線管轉角", desc: "拉線轉角要用彎頭，硬拗膠管會扁。", defaultPrice: 15, unit: "包", img: "images/hardware/products/electrical.jpg" },
   { id: "h-saddle", cat: "電工", sku: "DC-EL-SD20", name: "電線碼 20mm", spec: "配 20mm 膠管", size: "20 mm", material: "鍍鋅", pack: "20 隻", standard: "管碼", use: "明線固定膠管", desc: "約每 400mm 一個。石膏板牆要配合適螺絲。", defaultPrice: 12, unit: "包", img: "images/hardware/products/electrical.jpg" },
   { id: "h-dp20", cat: "電工", sku: "DC-EL-DP20", name: "20A 雙極開關", spec: "帶指示燈，雙極隔離", size: "86 型", material: "阻燃膠面", pack: "1 件", standard: "BS EN 60669", use: "熱水器、冷氣隔離", desc: "大功率電器要用雙極開關，不要用普通燈掣。", defaultPrice: 48, unit: "件", img: "images/hardware/products/electrical.jpg" },
-  { id: "h-fuse13", cat: "電工", sku: "DC-EL-F13", name: "13A 保險絲", spec: "英式插頭用", size: "13 A", material: "陶瓷", pack: "10 隻", standard: "BS 1362", use: "換插頭保險絲", desc: "細電器不要一律用 13A，要跟電器原裝安培。", defaultPrice: 15, unit: "排", img: "images/hardware/camp/elec.jpg" },
+  { id: "h-fuse13", cat: "電工", sku: "DC-EL-F13", name: "13A 保險絲", spec: "英式插頭用", size: "13 A", material: "陶瓷", pack: "10 隻", standard: "BS 1362", use: "換插頭保險絲", desc: "細電器不要一律用 13A，要跟電器原裝安培。", defaultPrice: 15, unit: "排", img: "images/hardware/products/electrical.jpg" },
   { id: "h-wire60", cat: "電工", sku: "DC-EL-60W", name: "6mm 單支銅芯電線", spec: "單支銅芯，PVC 絕緣", size: "6 mm² × 100 m", material: "電解銅", pack: "1 圈", standard: "BS 6004", use: "煮食爐、大電流專線", desc: "爐具專線不要用 4mm 頂替。", defaultPrice: 780, unit: "圈", img: "images/hardware/products/electrical.jpg" },
-  { id: "h-rccb", cat: "電工", sku: "DC-EL-RC63", name: "漏電斷路器 63A", spec: "雙極，30mA", size: "2 單位 DIN", material: "阻燃外殼", pack: "1 件", standard: "IEC 61008", use: "電箱總漏電保護", desc: "只防漏電，不代替 MCB 過流保護。", defaultPrice: 180, unit: "件", img: "images/hardware/camp/elec.jpg" },
+  { id: "h-rccb", cat: "電工", sku: "DC-EL-RC63", name: "漏電斷路器 63A", spec: "雙極，30mA", size: "2 單位 DIN", material: "阻燃外殼", pack: "1 件", standard: "IEC 61008", use: "電箱總漏電保護", desc: "只防漏電，不代替 MCB 過流保護。", defaultPrice: 180, unit: "件", img: "images/hardware/products/electrical.jpg" },
   { id: "h-rose", cat: "電工", sku: "DC-EL-ROSE", name: "天花燈玫瑰", spec: "三位接線，連蓋", size: "90 mm", material: "阻燃膠", pack: "1 個", standard: "燈玫瑰", use: "吊燈、燈胆座接電", desc: "天花出線先接入玫瑰，不要把燈線直接扭在一起。", defaultPrice: 18, unit: "個", img: "images/hardware/products/electrical.jpg" },
-  { id: "h-trunk", cat: "電工", sku: "DC-EL-TR25", name: "明裝線槽 25mm", spec: "帶蓋", size: "25 × 16 mm × 2 m", material: "PVC", pack: "1 支", standard: "線槽", use: "不想開牆時的明線", desc: "轉角要配線槽彎，硬拗會裂。", defaultPrice: 16, unit: "支", img: "images/hardware/camp/elec.jpg" },
+  { id: "h-trunk", cat: "電工", sku: "DC-EL-TR25", name: "明裝線槽 25mm", spec: "帶蓋", size: "25 × 16 mm × 2 m", material: "PVC", pack: "1 支", standard: "線槽", use: "不想開牆時的明線", desc: "轉角要配線槽彎，硬拗會裂。", defaultPrice: 16, unit: "支", img: "images/hardware/products/electrical.jpg" },
 
   { id: "h-tee12", cat: "水喉", sku: "DC-PB-T12", name: "鍍鋅三通 1/2寸", spec: "內牙三通", size: "1/2 寸", material: "鍍鋅鐵", pack: "1 件", standard: "英制喉件", use: "分一支去洗衣機或水煲", desc: "三個口都是內牙，要配外牙直咀。", defaultPrice: 12, unit: "件", img: "images/hardware/products/plumbing.jpg" },
-  { id: "h-union12", cat: "水喉", sku: "DC-PB-U12", name: "鍍鋅活接 1/2寸", spec: "可拆接頭", size: "1/2 寸", material: "鍍鋅鐵", pack: "1 件", standard: "英制喉件", use: "日後要拆的位置", desc: "泵、爐、濾水機前裝一隻，維修不用鋸喉。", defaultPrice: 22, unit: "件", img: "images/hardware/camp/plumb.jpg" },
+  { id: "h-union12", cat: "水喉", sku: "DC-PB-U12", name: "鍍鋅活接 1/2寸", spec: "可拆接頭", size: "1/2 寸", material: "鍍鋅鐵", pack: "1 件", standard: "英制喉件", use: "日後要拆的位置", desc: "泵、爐、濾水機前裝一隻，維修不用鋸喉。", defaultPrice: 22, unit: "件", img: "images/hardware/products/plumbing.jpg" },
   { id: "h-soc12", cat: "水喉", sku: "DC-PB-S12", name: "鍍鋅內牙直通 1/2寸", spec: "內牙對內牙", size: "1/2 寸", material: "鍍鋅鐵", pack: "1 件", standard: "英制喉件", use: "駁兩條外牙", desc: "不要當活接用，上緊後不能單獨拆開一邊。", defaultPrice: 8, unit: "件", img: "images/hardware/products/plumbing.jpg" },
   { id: "h-flex300", cat: "水喉", sku: "DC-PB-F300", name: "不鏽鋼軟喉 300mm", spec: "1/2 寸母牙兩頭", size: "300 mm", material: "304 編織軟喉", pack: "1 條", standard: "常用駁喉", use: "短距離駁角閥", desc: "300mm 不夠就換 400mm，不要拉到筆直。", defaultPrice: 38, unit: "條", img: "images/hardware/products/plumbing.jpg" },
-  { id: "h-pvc40", cat: "水喉", sku: "DC-PB-PVC40", name: "PVC 排水管 40mm", spec: "排水用", size: "40 mm × 4 m", material: "PVC", pack: "1 支", standard: "排水管", use: "星盆、洗衣機主去水", desc: "食水不要用這條。駁口要用 PVC 膠。", defaultPrice: 36, unit: "支", img: "images/hardware/camp/plumb.jpg" },
-  { id: "h-elb40", cat: "水喉", sku: "DC-PB-E40", name: "PVC 彎頭 40mm", spec: "90 度排水彎", size: "40 mm", material: "PVC", pack: "1 件", standard: "排水管", use: "去水轉角", desc: "先乾插試位，再上膠。上膠後不能扭正。", defaultPrice: 6, unit: "件", img: "images/hardware/camp/plumb.jpg" },
+  { id: "h-pvc40", cat: "水喉", sku: "DC-PB-PVC40", name: "PVC 排水管 40mm", spec: "排水用", size: "40 mm × 4 m", material: "PVC", pack: "1 支", standard: "排水管", use: "星盆、洗衣機主去水", desc: "食水不要用這條。駁口要用 PVC 膠。", defaultPrice: 36, unit: "支", img: "images/hardware/products/plumbing.jpg" },
+  { id: "h-elb40", cat: "水喉", sku: "DC-PB-E40", name: "PVC 彎頭 40mm", spec: "90 度排水彎", size: "40 mm", material: "PVC", pack: "1 件", standard: "排水管", use: "去水轉角", desc: "先乾插試位，再上膠。上膠後不能扭正。", defaultPrice: 6, unit: "件", img: "images/hardware/products/plumbing.jpg" },
   { id: "h-pvcglue", cat: "水喉", sku: "DC-PB-GLUE", name: "PVC 水管膠", spec: "排水管粘合", size: "125 ml", material: "溶劑膠", pack: "1 支", standard: "PVC 膠", use: "膠喉、彎頭駁口", desc: "只粘 PVC。鐵喉和軟喉不能用這支膠。", defaultPrice: 22, unit: "支", img: "images/hardware/products/plumbing.jpg" },
-  { id: "h-wmtap", cat: "水喉", sku: "DC-PB-WM", name: "洗衣機龍頭", spec: "1/2 寸，可接洗衣機喉", size: "1/2 寸", material: "黃銅", pack: "1 件", standard: "洗衣機掣", use: "洗衣機入水", desc: "要裝在容易開關的高度，不要藏在機後最入。", defaultPrice: 65, unit: "件", img: "images/hardware/camp/plumb.jpg" },
+  { id: "h-wmtap", cat: "水喉", sku: "DC-PB-WM", name: "洗衣機龍頭", spec: "1/2 寸，可接洗衣機喉", size: "1/2 寸", material: "黃銅", pack: "1 件", standard: "洗衣機掣", use: "洗衣機入水", desc: "要裝在容易開關的高度，不要藏在機後最入。", defaultPrice: 65, unit: "件", img: "images/hardware/products/plumbing.jpg" },
   { id: "h-fillv", cat: "水喉", sku: "DC-PB-FILL", name: "馬桶進水器", spec: "底入或側入要先看原裝", size: "常用水箱", material: "塑膠", pack: "1 套", standard: "進水閥", use: "水箱不停入水", desc: "買之前先看水箱是底入水還是側入水。", defaultPrice: 48, unit: "套", img: "images/hardware/products/plumbing.jpg" },
-  { id: "h-flush", cat: "水喉", sku: "DC-PB-FL", name: "馬桶落水器", spec: "連密封圈", size: "常用水箱", material: "塑膠", pack: "1 套", standard: "排水閥", use: "水箱漏落馬桶", desc: "密封圈一定要換新，不要只用舊圈。", defaultPrice: 42, unit: "套", img: "images/hardware/camp/plumb.jpg" },
+  { id: "h-flush", cat: "水喉", sku: "DC-PB-FL", name: "馬桶落水器", spec: "連密封圈", size: "常用水箱", material: "塑膠", pack: "1 套", standard: "排水閥", use: "水箱漏落馬桶", desc: "密封圈一定要換新，不要只用舊圈。", defaultPrice: 42, unit: "套", img: "images/hardware/products/plumbing.jpg" },
   { id: "h-pclip", cat: "水喉", sku: "DC-PB-CL12", name: "喉碼 1/2寸", spec: "騎碼，連螺絲", size: "1/2 寸", material: "鍍鋅", pack: "10 隻", standard: "管碼", use: "固定明喉", desc: "約每 500mm 一個，轉角兩邊都要碼。", defaultPrice: 18, unit: "包", img: "images/hardware/products/plumbing.jpg" },
 
   { id: "h-screw16", cat: "木工", sku: "DC-WD-316", name: "自攻螺絲 3.5×16", spec: "十字頭", size: "3.5 × 16 mm", material: "鍍鋅", pack: "200 粒盒", standard: "地盤盒裝", use: "鉸鏈杯、細五金", desc: "短螺絲用來鎖鉸和小碼，不要用來掛重物。", defaultPrice: 26, unit: "盒", img: "images/hardware/products/fastener.jpg" },
-  { id: "h-screw50", cat: "木工", sku: "DC-WD-550", name: "自攻螺絲 5×50", spec: "十字頭，粗牙", size: "5 × 50 mm", material: "鍍鋅", pack: "100 粒盒", standard: "地盤盒裝", use: "木方、門套骨架", desc: "入硬木要預鑽，否則木方會裂。", defaultPrice: 42, unit: "盒", img: "images/hardware/camp/wood.jpg" },
+  { id: "h-screw50", cat: "木工", sku: "DC-WD-550", name: "自攻螺絲 5×50", spec: "十字頭，粗牙", size: "5 × 50 mm", material: "鍍鋅", pack: "100 粒盒", standard: "地盤盒裝", use: "木方、門套骨架", desc: "入硬木要預鑽，否則木方會裂。", defaultPrice: 42, unit: "盒", img: "images/hardware/products/fastener.jpg" },
   { id: "h-drywall", cat: "木工", sku: "DC-WD-DW25", name: "石膏板釘 3.5×25", spec: "喇叭頭，幼牙", size: "3.5 × 25 mm", material: "黑磷化", pack: "200 粒盒", standard: "乾壁釘", use: "石膏板封板", desc: "釘頭要沉入紙面一點，不要打穿紙皮。", defaultPrice: 36, unit: "盒", img: "images/hardware/products/fastener.jpg" },
-  { id: "h-langle", cat: "木工", sku: "DC-WD-L40", name: "L型角碼 40mm", spec: "四孔，連螺絲", size: "40 × 40 mm", material: "鍍鋅鋼", pack: "10 隻", standard: "角碼", use: "木方直角、層板加固", desc: "只加固直角，不能當膨脹螺絲掛電視。", defaultPrice: 16, unit: "包", img: "images/hardware/camp/wood.jpg" },
+  { id: "h-langle", cat: "木工", sku: "DC-WD-L40", name: "L型角碼 40mm", spec: "四孔，連螺絲", size: "40 × 40 mm", material: "鍍鋅鋼", pack: "10 隻", standard: "角碼", use: "木方直角、層板加固", desc: "只加固直角，不能當膨脹螺絲掛電視。", defaultPrice: 16, unit: "包", img: "images/hardware/products/fastener.jpg" },
   { id: "h-slide", cat: "木工", sku: "DC-WD-SL35", name: "抽屜路軌 350mm", spec: "三節靜音，一對", size: "350 mm", material: "鋼", pack: "1 對", standard: "路軌", use: "櫃桶", desc: "要量櫃內淨深。350 裝不進 300 深的櫃。", defaultPrice: 45, unit: "對", img: "images/hardware/products/fastener.jpg" },
-  { id: "h-magnet", cat: "木工", sku: "DC-WD-MG", name: "櫃門磁吸", spec: "磁力吸，連鐵片", size: "細號", material: "塑膠、磁鐵", pack: "2 隻", standard: "門吸", use: "櫃門保持關閉", desc: "門邊先試吸力，再鎖死。", defaultPrice: 12, unit: "對", img: "images/hardware/camp/wood.jpg" },
+  { id: "h-magnet", cat: "木工", sku: "DC-WD-MG", name: "櫃門磁吸", spec: "磁力吸，連鐵片", size: "細號", material: "塑膠、磁鐵", pack: "2 隻", standard: "門吸", use: "櫃門保持關閉", desc: "門邊先試吸力，再鎖死。", defaultPrice: 12, unit: "對", img: "images/hardware/products/fastener.jpg" },
   { id: "h-doorstop", cat: "木工", sku: "DC-WD-DS", name: "門吸", spec: "牆身或地吸", size: "常用房門", material: "不鏽鋼、磁鐵", pack: "1 套", standard: "門吸", use: "防止門柄撞牆", desc: "空心磚和石膏板要找實位，否則會脫。", defaultPrice: 22, unit: "套", img: "images/hardware/products/fastener.jpg" },
-  { id: "h-staple", cat: "木工", sku: "DC-WD-ST10", name: "碼釘 10mm", spec: "U 型碼", size: "10 mm", material: "鍍鋅鋼", pack: "1000 粒盒", standard: "碼釘", use: "固定網、薄板、線", desc: "配碼釘槍。10mm 不要打入會穿透的薄板。", defaultPrice: 28, unit: "盒", img: "images/hardware/camp/wood.jpg" },
+  { id: "h-staple", cat: "木工", sku: "DC-WD-ST10", name: "碼釘 10mm", spec: "U 型碼", size: "10 mm", material: "鍍鋅鋼", pack: "1000 粒盒", standard: "碼釘", use: "固定網、薄板、線", desc: "配碼釘槍。10mm 不要打入會穿透的薄板。", defaultPrice: 28, unit: "盒", img: "images/hardware/products/fastener.jpg" },
   { id: "h-anchor", cat: "木工", sku: "DC-WD-M8", name: "膨脹螺絲 M8", spec: "套管膨脹，連螺絲", size: "M8 × 60 mm", material: "鍍鋅鋼", pack: "8 套", standard: "膨脹螺絲", use: "混凝土掛架、機架", desc: "只適合實心混凝土。石膏板要用專用空心牆錨。", defaultPrice: 24, unit: "包", img: "images/hardware/products/fastener.jpg" },
-  { id: "h-foam", cat: "木工", sku: "DC-WD-FM", name: "發泡膠", spec: "填縫，固化後可切", size: "750 ml", material: "聚氨酯", pack: "1 支", standard: "填縫膠", use: "門套、窗框四周空隙", desc: "會膨脹。縫太大先塞背桿，不要一次噴滿。", defaultPrice: 48, unit: "支", img: "images/hardware/camp/wood.jpg" },
+  { id: "h-foam", cat: "木工", sku: "DC-WD-FM", name: "發泡膠", spec: "填縫，固化後可切", size: "750 ml", material: "聚氨酯", pack: "1 支", standard: "填縫膠", use: "門套、窗框四周空隙", desc: "會膨脹。縫太大先塞背桿，不要一次噴滿。", defaultPrice: 48, unit: "支", img: "images/hardware/products/fastener.jpg" },
 
   { id: "h-roller4", cat: "油漆", sku: "DC-PT-R4", name: "細滾筒 4寸", spec: "中毛", size: "4 寸", material: "羊毛混紡", pack: "1 個", standard: "室內", use: "門邊、窄位", desc: "大面積仍用 9 寸，這隻只補邊。", defaultPrice: 18, unit: "個", img: "images/hardware/products/paint.jpg" },
-  { id: "h-brush4", cat: "油漆", sku: "DC-PT-B4", name: "油掃 4寸", spec: "平頭", size: "4 寸", material: "木柄、混合毛", pack: "1 支", standard: "牆身", use: "窗邊、門頭線", desc: "新掃先抖走浮毛，再落油。", defaultPrice: 22, unit: "支", img: "images/hardware/camp/paint.jpg" },
+  { id: "h-brush4", cat: "油漆", sku: "DC-PT-B4", name: "油掃 4寸", spec: "平頭", size: "4 寸", material: "木柄、混合毛", pack: "1 支", standard: "牆身", use: "窗邊、門頭線", desc: "新掃先抖走浮毛，再落油。", defaultPrice: 22, unit: "支", img: "images/hardware/products/paint.jpg" },
   { id: "h-sand80", cat: "油漆", sku: "DC-PT-S80", name: "砂紙 80號", spec: "乾磨，較粗", size: "230×280 mm", material: "氧化鋁", pack: "10 張", standard: "P80", use: "舊漆、粗批灰打底", desc: "粗砂只做第一遍，完工面前要換幼砂。", defaultPrice: 22, unit: "包", img: "images/hardware/products/paint.jpg" },
-  { id: "h-sand240", cat: "油漆", sku: "DC-PT-S240", name: "砂紙 240號", spec: "乾磨，較幼", size: "230×280 mm", material: "氧化鋁", pack: "10 張", standard: "P240", use: "面漆前最後打磨", desc: "用來收滑，不能用來剷厚灰。", defaultPrice: 24, unit: "包", img: "images/hardware/camp/paint.jpg" },
+  { id: "h-sand240", cat: "油漆", sku: "DC-PT-S240", name: "砂紙 240號", spec: "乾磨，較幼", size: "230×280 mm", material: "氧化鋁", pack: "10 張", standard: "P240", use: "面漆前最後打磨", desc: "用來收滑，不能用來剷厚灰。", defaultPrice: 24, unit: "包", img: "images/hardware/products/paint.jpg" },
   { id: "h-putty", cat: "油漆", sku: "DC-PT-KN3", name: "油灰刀 3寸", spec: "彈性鋼片", size: "3 寸", material: "鋼、膠柄", pack: "1 把", standard: "批灰刀", use: "補釘孔、刮灰", desc: "刀口彎了就換，否則越補越不平。", defaultPrice: 18, unit: "把", img: "images/hardware/products/paint.jpg" },
-  { id: "h-film", cat: "油漆", sku: "DC-PT-FM", name: "遮蔽膜連膠紙", spec: "靜電膜，一邊有膠紙", size: "550 mm × 20 m", material: "塑料膜", pack: "1 卷", standard: "保護", use: "保護地板、傢俬、玻璃", desc: "貼在乾淨位置。留太久會難撕。", defaultPrice: 36, unit: "卷", img: "images/hardware/camp/paint.jpg" },
+  { id: "h-film", cat: "油漆", sku: "DC-PT-FM", name: "遮蔽膜連膠紙", spec: "靜電膜，一邊有膠紙", size: "550 mm × 20 m", material: "塑料膜", pack: "1 卷", standard: "保護", use: "保護地板、傢俬、玻璃", desc: "貼在乾淨位置。留太久會難撕。", defaultPrice: 36, unit: "卷", img: "images/hardware/products/paint.jpg" },
   { id: "h-primer", cat: "油漆", sku: "DC-PT-PR1", name: "內牆底漆", spec: "封底，減少面漆被吸", size: "1 L", material: "水性底漆", pack: "1 罐", standard: "室內", use: "新批灰、舊牆翻油前", desc: "底漆未乾不要掃面漆。深色牆要先封底。", defaultPrice: 68, unit: "罐", img: "images/hardware/products/paint.jpg" },
-  { id: "h-silicone", cat: "油漆", sku: "DC-PT-SI", name: "中性玻璃膠", spec: "透明，防黴", size: "300 ml", material: "中性矽酮", pack: "1 支", standard: "密封膠", use: "浴室邊、星盆、窗邊", desc: "要配膠槍。舊膠要先清乾淨，否則新膠黏不住。", defaultPrice: 28, unit: "支", img: "images/hardware/camp/paint.jpg" },
+  { id: "h-silicone", cat: "油漆", sku: "DC-PT-SI", name: "中性玻璃膠", spec: "透明，防黴", size: "300 ml", material: "中性矽酮", pack: "1 支", standard: "密封膠", use: "浴室邊、星盆、窗邊", desc: "要配膠槍。舊膠要先清乾淨，否則新膠黏不住。", defaultPrice: 28, unit: "支", img: "images/hardware/products/paint.jpg" },
   { id: "h-thinner", cat: "油漆", sku: "DC-PT-TH", name: "松節水", spec: "稀釋和洗刷", size: "500 ml", material: "溶劑", pack: "1 支", standard: "溶劑", use: "油性漆開油、洗油掃", desc: "水性乳膠漆不要用松節水開。遠離火種。", defaultPrice: 32, unit: "支", img: "images/hardware/products/paint.jpg" },
 
   { id: "t-drill", kind: "tool", cat: "電動", sku: "DC-TL-DR12", name: "12V 充電電鑽套裝", spec: "雙速，連充電器、電池、批咀", size: "夾頭 10 mm", material: "鋰電", pack: "1 套", standard: "12V", use: "上螺絲、鑽木、鑽薄金屬", desc: "家居維修最常用的一把電鑽。", defaultPrice: 680, unit: "套", img: "images/hardware/tools/t-drill.jpg" },
@@ -2415,9 +2487,23 @@ function closeAppliancePricingModal() {
   document.getElementById('appliance-pricing-modal').classList.add('hidden');
 }
 
+let selectedRepairTradeName = '家居小型維修';
+
+function highlightRepairTrade(labelOrName) {
+  const matched = repairTrades.find(t => String(labelOrName || '').includes(t.name));
+  selectedRepairTradeName = matched ? matched.name : '';
+  document.querySelectorAll('#repair-trades-grid button[data-trade-name]').forEach(btn => {
+    const on = btn.dataset.tradeName === selectedRepairTradeName;
+    btn.className = on
+      ? 'card-equal text-left p-2.5 sm:p-3 rounded-2xl border-2 border-amber-400 bg-amber-50 ring-2 ring-amber-300/60 group min-h-[68px]'
+      : 'card-equal text-left p-2.5 sm:p-3 rounded-2xl border border-stone-200 hover:border-amber-400 hover:bg-amber-50/70 group min-h-[68px]';
+  });
+}
+
 function renderRepairTrades() {
   const grid = document.getElementById('repair-trades-grid');
-  grid.innerHTML = repairTrades.map(t => `<button type="button" onclick="selectRepairTrade('${t.name}（${t.desc}）')" class="card-equal text-left p-2.5 sm:p-3 rounded-2xl border border-stone-200 hover:border-amber-400 hover:bg-amber-50/70 group min-h-[68px]"><div class="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-amber-800 line-clamp-1">${t.name}</div><div class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">${t.desc}</div></button>`).join('');
+  grid.innerHTML = repairTrades.map(t => `<button type="button" data-trade-name="${t.name}" onclick="selectRepairTrade('${t.name}（${t.desc}）')" class="card-equal text-left p-2.5 sm:p-3 rounded-2xl border border-stone-200 hover:border-amber-400 hover:bg-amber-50/70 group min-h-[68px]"><div class="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-amber-800 line-clamp-1">${t.name}</div><div class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">${t.desc}</div></button>`).join('');
+  highlightRepairTrade(document.getElementById('repair-trade-input')?.value || selectedRepairTradeName);
 }
 
 function renderTopMastersShowcase() {
@@ -2485,6 +2571,7 @@ function renderMutualReviewsWall() {
 
 function selectRepairTrade(label) {
   document.getElementById('repair-trade-input').value = label;
+  highlightRepairTrade(label);
   document.getElementById('repair-form-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
@@ -2799,7 +2886,7 @@ function applyReportMasterDefault(job) {
     deducted.frozen = true;
     if (currentMasterProfile && currentMasterProfile.masterId === deducted.masterId) currentMasterProfile = deducted;
   }
-  job.status = "🚨 已舉報甩底 ➔ 啟動後備師傅頂上";
+  job.status = "🚨 已舉報甩底 → 啟動後備師傅頂上";
   job.assignedMaster = "";
   job.assignedMasterId = "";
   persistDataLocally();
@@ -2862,8 +2949,14 @@ function jobsForCurrentMember() {
   if (currentMemberUser.role === '師傅' && currentMasterProfile) {
     return liveMasterJobs.filter(j => jobBelongsToMaster(j, currentMasterProfile));
   }
-  const phone = (currentMemberUser.phone || '').replace(/\D/g, '');
-  return liveMasterJobs.filter(j => (j.phone || '').replace(/\D/g, '') === phone);
+  const phone = phoneKey(currentMemberUser.phone);
+  const code = String(verifiedOwnerJobCode || '').replace(/\D/g, '');
+  return liveMasterJobs.filter(j => {
+    if (phoneKey(j.phone) !== phone) return false;
+    if (!code) return false;
+    const jobDigits = String(j.id || '').replace(/\D/g, '');
+    return jobDigits.endsWith(code);
+  });
 }
 
 function reviewsForJob(job) {
@@ -2916,14 +3009,16 @@ function switchMemberTab(tab) {
   }
 }
 
-function setOwnerSessionByPhone(rawPhone, showToast = false) {
+function setOwnerSessionByPhone(rawPhone, showToast = false, jobCode = '') {
   const clean = (rawPhone || '').replace(/\s+/g, '');
   const digits = clean.replace(/\D/g, '');
+  const codeDigits = String(jobCode || '').replace(/\D/g, '').slice(-4);
+  if (codeDigits) verifiedOwnerJobCode = codeDigits;
   logoutMasterSession();
-  const matchedJob = liveMasterJobs.find(j => (j.phone || '').replace(/\D/g, '') === digits);
+  const matchedJob = liveMasterJobs.find(j => phoneKey(j.phone) === phoneKey(digits) && (!verifiedOwnerJobCode || String(j.id || '').replace(/\D/g, '').endsWith(verifiedOwnerJobCode)));
   const autoName = matchedJob && matchedJob.ownerName
     ? matchedJob.ownerName
-    : (matchedJob && matchedJob.estate ? `${matchedJob.estate}業主` : `業主會員 (尾號 ${digits.slice(-4) || '8392'})`);
+    : (matchedJob && matchedJob.estate ? `${matchedJob.estate}業主` : `業主會員 (尾號 ${digits.slice(-4) || '----'})`);
 
   currentMemberUser = { role: '業主', name: autoName, phone: rawPhone };
   setMemberCenterMode('owner');
@@ -2965,11 +3060,13 @@ function quickFillMemberMaster(phoneStr, pinStr) {
 function loginAsMember(role) {
   if (role === 'owner') {
     const phone = document.getElementById('mem-owner-phone').value.trim();
-    if (!phone) {
-      showModal('請輸入電話號碼', '只需輸入你發單時填寫嘅手提電話號碼，即可自動查單及驗收！', '溫馨提示');
+    const jobCode = (document.getElementById('mem-owner-job-code')?.value || '').trim().replace(/\D/g, '');
+    if (phoneKey(phone).length < 8 || jobCode.length < 4) {
+      showModal('請填齊電話同單號後 4 碼', '為防止他人亂查或亂改你的維修單，請同時輸入 8 位發單電話及單號最後 4 位數字（例如 FIX-8821 請填 8821）。', '安全核對');
       return;
     }
-    setOwnerSessionByPhone(phone, true);
+    ownerLookupAttempted = true;
+    setOwnerSessionByPhone(phone, true, jobCode);
   } else {
     const phone = document.getElementById('mem-master-phone').value.trim().replace(/\s+/g, '');
     const pinInput = (document.getElementById('mem-master-pin')?.value || '').trim();
@@ -3037,9 +3134,15 @@ function renderMemberCenterOrders() {
   if (myJobs.length === 0) {
     if (hint) hint.textContent = isMaster
       ? '你未有已接的單。請到派單大廳撳「立即接單鎖定」。'
-      : '這個電話未有維修單。請核對發單電話，或撳右上角「發起新維修單」。';
-    if (note && !isMaster) note.textContent = '未搵到這個電話的維修單。';
-    listEl.innerHTML = `<div class="text-center text-stone-400 text-xs py-6 bg-slate-900 rounded-2xl border border-slate-700">未有屬於這個身份的維修單。</div>`;
+      : (ownerLookupAttempted
+        ? '未搵到相符的維修單，請核對發單電話及單號後 4 碼。'
+        : '請在上方輸入發單電話及單號後 4 碼，再按「核對查單」。');
+    if (note && !isMaster) {
+      note.textContent = ownerLookupAttempted
+        ? '未搵到相符的維修單（請核對電話及單號後 4 碼）。'
+        : '';
+    }
+    listEl.innerHTML = `<div class="text-center text-stone-400 text-xs py-6 bg-slate-900 rounded-2xl border border-slate-700">${isMaster ? '你目前未有已接維修單。' : (ownerLookupAttempted ? '未搵到相符的維修單。' : '請輸入發單電話及單號後 4 碼進行查詢。')}</div>`;
     return;
   }
 
@@ -3084,9 +3187,9 @@ function renderMemberCenterOrders() {
       <div class="flex flex-wrap items-center justify-between gap-2 pt-1 text-[11px]">
         <div class="flex flex-wrap items-center gap-1.5">
           <span class="px-2 py-0.5 rounded font-bold ${step1 ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-800 text-stone-500'}">1. 已發單保護</span>
-          <span class="text-stone-600">➔</span>
+          <span class="text-stone-600">→</span>
           <span class="px-2 py-0.5 rounded font-bold ${step2 ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-800 text-stone-500'}">2. 師傅接單 (${masterLabel.split(' ')[0]})</span>
-          <span class="text-stone-600">➔</span>
+          <span class="text-stone-600">→</span>
           <span class="px-2 py-0.5 rounded font-bold ${step3 ? 'bg-amber-400 text-slate-950 font-black' : 'bg-slate-800 text-stone-400'}">3. ${isCompleted ? '已完工互評' : '待驗收打星'}</span>
         </div>
 
@@ -3154,7 +3257,7 @@ function renderMemberRecentReviewsMini() {
       <div class="space-y-0.5">
         <div class="flex items-center gap-2">
           <span class="text-[10px] font-black px-2 py-0.5 rounded bg-amber-400/20 text-amber-300">${r.role}</span>
-          <span class="font-bold text-white text-xs">${r.reviewer} ➔ ${r.target}</span>
+          <span class="font-bold text-white text-xs">${r.reviewer} → ${r.target}</span>
           <span class="text-xs">${'⭐'.repeat(r.stars || 5)}</span>
         </div>
         <p class="text-[11px] text-stone-300">「${escText(r.comment)}」</p>
@@ -4245,10 +4348,20 @@ function applyCampSnapshot(data) {
 function renderSuperSync() {
   const token = localStorage.getItem('hk_camp_github_token') || '';
   return `<div class="bg-slate-800 border border-slate-700 rounded-2xl p-3 space-y-2">
-    <p class="text-xs font-black text-amber-300">發佈網頁到 GitHub</p>
-    <p class="text-[11px] text-stone-400">師傅、維修單、五金、建材和公價已即時寫入 Firebase，不用再上傳到 Supabase。這裡只更新公開網頁檔案。令牌只存在這部瀏覽器。</p>
+    <p class="text-xs font-black text-amber-300">1. 只更新公開資料到 GitHub</p>
+    <p class="text-[11px] text-stone-400">將目前後台的師傅、維修單、五金店、建材和公價同步到 GitHub 公開網頁（不改動版面程式碼）。令牌只存在這部瀏覽器。</p>
     <input id="gh-token" type="password" value="${escText(token)}" placeholder="GitHub token" class="w-full h-9 bg-slate-950 border border-slate-600 rounded-lg px-2 text-xs text-white" />
-    <button type="button" onclick="pushCampToGitHub()" class="btn-std h-9 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">上傳到 GitHub</button>
+    <button type="button" onclick="pushCampToGitHub()" class="btn-std h-9 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">上傳最新資料到 GitHub</button>
+  </div>
+  <div class="bg-slate-800 border border-emerald-700/60 rounded-2xl p-3 space-y-2">
+    <p class="text-xs font-black text-emerald-300">2. 一鍵上傳整份新版網頁（同步更新 index.html 及 public/camp.html）</p>
+    <p class="text-[11px] text-stone-400">揀選新下載的裝修站 index.html，系統會自動核對檔案安全標記，再一次過覆蓋倉庫根目錄 index.html 同 public/camp.html。</p>
+    <input id="gh-full-html-file" type="file" accept=".html,text/html" class="w-full text-xs text-stone-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-slate-700 file:text-white hover:file:bg-slate-600" />
+    <label class="flex items-center gap-2 text-[11px] text-stone-300 cursor-pointer">
+      <input id="gh-keep-live-state" type="checkbox" checked class="w-4 h-4 accent-emerald-400" />
+      <span>保留目前後台最新資料（自動嵌入現有師傅、維修單、五金店同公價）</span>
+    </label>
+    <button type="button" onclick="pushFullHtmlToGitHub()" class="btn-std h-9 px-3 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs">🚀 一鍵上傳整份網頁到 GitHub</button>
   </div>
   <div class="bg-slate-800 border border-red-900 rounded-2xl p-3 space-y-2">
     <p class="text-xs font-black text-red-300">重置示範數據</p>
@@ -4327,6 +4440,53 @@ async function pushCampToGitHub() {
     setSyncStatus('GitHub 已更新 HTML 和資料檔。公開網站約一分鐘後先會見到。');
   } catch (error) {
     setSyncStatus('GitHub 上傳失敗：' + String(error.message || error).slice(0, 400));
+  }
+}
+
+async function pushFullHtmlToGitHub() {
+  if (!requireAdmin()) return;
+  const token = (document.getElementById('gh-token')?.value || '').trim();
+  if (!token) {
+    showModal('未有 GitHub 令牌', '請先在上方貼上有這個倉庫寫入權限的 GitHub token。', '未填令牌');
+    return;
+  }
+  const fileInput = document.getElementById('gh-full-html-file');
+  const file = fileInput && fileInput.files && fileInput.files[0];
+  if (!file) {
+    showModal('未揀選檔案', '請先揀選要上傳的新版 index.html 檔案。', '未選檔案');
+    return;
+  }
+  localStorage.setItem('hk_camp_github_token', token);
+  try {
+    let newHtml = await file.text();
+    const hasDoctype = /<!doctype html>/i.test(newHtml);
+    const hasMarkers = newHtml.includes('<!--CAMP_STATE_START-->') && newHtml.includes('<!--CAMP_STATE_END-->');
+    const isCampSite = newHtml.includes('香港裝修師傅大本營') && newHtml.includes('hk_camp_modules_v1');
+    if (!hasDoctype || !hasMarkers || !isCampSite) {
+      showModal('檔案核對未通過', '所選檔案並非有效的「香港裝修師傅大本營」裝修站 index.html（缺少必要標記），已中止上傳以保護現有網站。', '安全攔截');
+      return;
+    }
+    const keepState = !!document.getElementById('gh-keep-live-state')?.checked;
+    const kb = Math.round(newHtml.length / 1024);
+    if (!confirm(`確定要將「${file.name}」（約 ${kb} KB）同時覆蓋到 GitHub 的 index.html 及 public/camp.html 嗎？`)) return;
+
+    if (keepState) {
+      const json = JSON.stringify(campSnapshot()).replace(/</g, '\u003c');
+      const block = '<!--CAMP_STATE_START-->\n<script type="application/json" id="camp-published-state">' + json + '</scr' + 'ipt>\n<!--CAMP_STATE_END-->';
+      newHtml = newHtml.replace(/<!--CAMP_STATE_START-->[\s\S]*?<!--CAMP_STATE_END-->/, block);
+      setSyncStatus('正在同步 data/camp-state.json…');
+      const dataFile = await githubFile('data/camp-state.json', token);
+      await githubWrite('data/camp-state.json', json, 'Sync camp data with full HTML upload', token, dataFile && dataFile.sha);
+    }
+
+    for (const path of ['index.html', 'public/camp.html']) {
+      setSyncStatus('正在上傳整份新版 ' + path + '…');
+      const remote = await githubFile(path, token);
+      await githubWrite(path, newHtml, 'Update full camp HTML from super admin', token, remote && remote.sha);
+    }
+    setSyncStatus('✅ 已成功將整份新版網頁上傳至 index.html 及 public/camp.html！GitHub Pages 約 1 分鐘後會自動更新。');
+  } catch (error) {
+    setSyncStatus('整份網頁上傳失敗：' + String(error.message || error).slice(0, 400));
   }
 }
 
@@ -4437,9 +4597,14 @@ function submitRepairTicket(e) {
   };
   liveMasterJobs.unshift(newJobObj);
   // 自動將剛發單嘅業主電話綁定到會員中心，打開會員中心即見新單
+  saveLocalUserContact({ name, phone, address: estate });
+  const codeTail = code.replace(/\D/g, '').slice(-4);
   const ownerPhoneInput = document.getElementById('mem-owner-phone');
+  const ownerCodeInput = document.getElementById('mem-owner-job-code');
   if (ownerPhoneInput) ownerPhoneInput.value = phone;
-  setOwnerSessionByPhone(phone, false);
+  if (ownerCodeInput) ownerCodeInput.value = codeTail;
+  ownerLookupAttempted = true;
+  setOwnerSessionByPhone(phone, false, codeTail);
   persistDataLocally();
   updateMasterCountUI();
   renderMasterJobs();
@@ -4458,9 +4623,13 @@ function submitRepairTicket(e) {
 
 function openMyRepairTicket() {
   if (!lastRepairTicket) return;
+  const codeTail = String(lastRepairTicket.code || '').replace(/\D/g, '').slice(-4);
   const phoneInput = document.getElementById('mem-owner-phone');
+  const codeInput = document.getElementById('mem-owner-job-code');
   if (phoneInput) phoneInput.value = lastRepairTicket.phone;
-  setOwnerSessionByPhone(lastRepairTicket.phone, false);
+  if (codeInput) codeInput.value = codeTail;
+  ownerLookupAttempted = true;
+  setOwnerSessionByPhone(lastRepairTicket.phone, false, codeTail);
   openMemberModal('login');
 }
 
@@ -4664,7 +4833,7 @@ function renderMaterials(filter = 'all') {
       <div class="flex flex-wrap items-center justify-end gap-1.5">
         ${qtyControl('qty-' + p.id)}
         ${installBtn}
-        <button type="button" onclick="event.stopPropagation(); addToCart('${p.id}', 'materials-official', '大本營建材直銷', '60000000', '${p.name}', ${sale.price}, '${p.unit}', readQty('qty-${p.id}'))" class="btn-std h-8 px-3 rounded-lg text-xs font-black bg-slate-900 hover:bg-slate-800 text-white">＋入清單</button>
+        <button type="button" onclick="event.stopPropagation(); addToCart('${p.id}', 'materials-official', '大本營建材直銷', '', '${p.name}', ${sale.price}, '${p.unit}', readQty('qty-${p.id}'))" class="btn-std h-8 px-3 rounded-lg text-xs font-black bg-slate-900 hover:bg-slate-800 text-white">＋入清單</button>
       </div>
     </div>
   </div>`;
@@ -4685,8 +4854,16 @@ function filterMaterials(cat, btnEl) {
 function bookInstallForMaterial(productName, tradeName) {
   closeProductDetail(false);
   switchSection('repair');
-  document.getElementById('repair-trade-input').value = tradeName + ' ｜ 公價參考標準';
-  document.getElementById('repair-desc').value = `我喺【大本營建材店】買咗「${productName}」，想根據大本營標準公價預約高分師傅上門安裝。`;
+  const tradeObj = repairTrades.find(t => t.name === tradeName);
+  const priceNote = tradeName.includes('門鎖') ? '按門厚及現場實況報價（標準安裝約 $650 起）' : '參照大本營標準安裝公價';
+  document.getElementById('repair-trade-input').value = tradeObj
+    ? `${tradeObj.name}（${tradeObj.desc}）｜ ${priceNote}`
+    : `${tradeName} ｜ ${priceNote}`;
+  highlightRepairTrade(tradeName);
+  const inCart = cart.some(i => i.storeId === 'materials-official' && i.name === productName);
+  const cartNote = inCart ? '（已放入建材揀貨清單）' : '（如未落建材單，可一併喺建材店入清單或自備物料）';
+  document.getElementById('repair-desc').value = `我喺【大本營建材店】揀咗「${productName}」${cartNote}，想預約認證師傅上門安裝。`;
+  applyLocalUserContact();
   setTimeout(() => { document.getElementById('repair-form-box').scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 60);
 }
 
@@ -4712,7 +4889,7 @@ function openMaterialDetail(productId) {
         <div class="flex flex-wrap items-center gap-2 pt-1">
           ${qtyControl('qty-detail-' + p.id)}
           ${installBtn}
-          <button type="button" onclick="addToCart('${p.id}', 'materials-official', '大本營建材直銷', '60000000', '${p.name}', ${sale.price}, '${p.unit}', readQty('qty-detail-${p.id}'))" class="btn-std h-10 px-4 rounded-xl text-xs font-black bg-slate-900 text-white">＋入清單</button>
+          <button type="button" onclick="addToCart('${p.id}', 'materials-official', '大本營建材直銷', '', '${p.name}', ${sale.price}, '${p.unit}', readQty('qty-detail-${p.id}'))" class="btn-std h-10 px-4 rounded-xl text-xs font-black bg-slate-900 text-white">＋入清單</button>
         </div>
       </div>
     </div>
@@ -4757,7 +4934,8 @@ function updateGoogleMapWidget() {
   const navBtn = document.getElementById('gmap-external-nav-btn');
 
   if (nameEl) nameEl.textContent = `${store.name} (${store.district})`;
-  if (addrEl) addrEl.textContent = `📍 ${store.address} ｜ 📱 WhatsApp: ${store.phone} ｜ 距地盤約 ${store.distanceKm} km`;
+  const phoneText = store.demo ? '示範店' : (store.phone ? `📱 WhatsApp: ${store.phone}` : '');
+  if (addrEl) addrEl.textContent = `📍 ${store.address}${phoneText ? ' ｜ ' + phoneText : ''}${store.distanceKm ? ' ｜ 距地盤約 ' + store.distanceKm + ' km' : ''}`;
   const encodedQuery = encodeURIComponent((store.lat && store.lng) ? `${store.lat},${store.lng}` : (store.address + ' ' + store.name));
   if (navBtn) navBtn.href = `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`;
   renderStoreMap(store);
@@ -4774,7 +4952,9 @@ function renderStoreMap(store) {
     box.innerHTML = `<iframe title="${store.name}地圖" src="https://www.openstreetmap.org/export/embed.html?bbox=${lng - pad}%2C${lat - pad}%2C${lng + pad}%2C${lat + pad}&layer=mapnik&marker=${lat}%2C${lng}" style="width:100%;height:100%;border:0"></iframe>`;
     return;
   }
-  box.innerHTML = `<img src="images/maps/${store.id}.jpg" alt="${store.name}地圖" style="width:100%;height:100%;object-fit:cover;display:block" />
+  const pad = 0.012;
+  const osmFallback = `https://www.openstreetmap.org/export/embed.html?bbox=${Number(store.lng) - pad}%2C${Number(store.lat) - pad}%2C${Number(store.lng) + pad}%2C${Number(store.lat) + pad}&layer=mapnik&marker=${Number(store.lat)}%2C${Number(store.lng)}`;
+  box.innerHTML = `<img src="images/maps/${store.id}.jpg" alt="${store.name}地圖" onerror="this.parentElement.innerHTML='<iframe title=\'${store.name}地圖\' src=\'${osmFallback}\' style=\'width:100%;height:100%;border:0\'></iframe>'" style="width:100%;height:100%;object-fit:cover;display:block" />
     <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-100%);font-size:32px;line-height:1;z-index:2;filter:drop-shadow(0 1px 1px #fff)">📍</div>
     <div style="position:absolute;left:8px;bottom:8px;z-index:2;background:rgba(255,255,255,.92);color:#0f172a;font-size:11px;font-weight:800;padding:2px 6px;border-radius:6px">${store.name}</div>
     <a href="https://www.openstreetmap.org/?mlat=${store.lat}&mlon=${store.lng}#map=16/${store.lat}/${store.lng}" target="_blank" rel="noopener noreferrer" style="position:absolute;right:6px;bottom:8px;z-index:2;background:rgba(255,255,255,.92);color:#334155;font-size:10px;padding:2px 6px;border-radius:6px">© OpenStreetMap</a>`;
@@ -4874,7 +5054,7 @@ function updateStorefrontBanner() {
   const titleEl = document.getElementById('sf-store-title');
   const metaEl = document.getElementById('sf-store-meta');
   if (titleEl) titleEl.textContent = `${store.name} — 網上直銷專頁`;
-  if (metaEl) metaEl.textContent = `📍 地址：${store.address} ｜ 📱 老闆接單 WhatsApp：${store.phone} ｜ 🚚 物流：${store.etaText}`;
+  if (metaEl) metaEl.textContent = `📍 地址：${store.address} ｜ ${store.demo ? '🏪 示範五金店' : '📱 老闆接單 WhatsApp：' + store.phone} ｜ 🚚 物流：${store.etaText}`;
 }
 
 function copyStoreLink() {
@@ -5141,7 +5321,7 @@ function renderHardwareOrdersTracker() {
         <span class="w-4 h-4 rounded-full inline-flex items-center justify-center text-[10px] font-black ${done ? 'bg-emerald-500 text-slate-950' : 'bg-stone-800 text-stone-500'}">${idx + 1}</span>
         <span>${st}</span>
       </div>`;
-    }).join('<span class="text-stone-600 text-xs">➔</span>');
+    }).join('<span class="text-stone-600 text-xs">→</span>');
 
     return `<div class="bg-stone-900 border ${isReceived ? 'border-emerald-500/60' : 'border-stone-700'} rounded-2xl p-3.5 space-y-2.5">
       <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
@@ -5687,6 +5867,11 @@ function changeQty(cartKey, delta) {
   updateCartUI();
 }
 
+function removeCartItem(cartKey) {
+  cart = cart.filter(i => i.cartKey !== cartKey);
+  updateCartUI();
+}
+
 function consolidateCartToStore(targetStoreId) {
   const targetStore = hardwareStores.find(s => s.id === targetStoreId);
   if (!targetStore) return;
@@ -5775,7 +5960,7 @@ function updateCartUI() {
     if (totalLabelEl) totalLabelEl.textContent = "02 建材店淨料小計：";
     if (checkoutBtnEl) {
       checkoutBtnEl.className = "btn-std w-full h-11 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl shadow-md text-xs sm:text-sm";
-      checkoutBtnEl.innerHTML = `<span>📲 確認【02 建材單】並發送 WhatsApp 俾建材部</span>`;
+      checkoutBtnEl.innerHTML = `<span>✅ 確認建立【02 建材單】</span>`;
     }
   } else {
     if (tabMatBtn) tabMatBtn.className = "btn-std h-9 px-2 rounded-xl text-xs font-bold text-stone-300 hover:text-white";
@@ -5839,16 +6024,23 @@ function updateCartUI() {
         <p class="text-[11px] text-stone-500">HK$${i.price} / ${i.unit}</p>
       </div>
       <div class="flex items-center gap-1.5 shrink-0">
-        <button onclick="changeQty('${i.cartKey}', -1)" class="btn-std w-7 h-7 rounded-lg bg-white border border-stone-300 font-black text-xs">－</button>
+        <button type="button" onclick="changeQty('${i.cartKey}', -1)" class="btn-std w-7 h-7 rounded-lg bg-white border border-stone-300 font-black text-xs">－</button>
         <span class="font-bold text-xs w-5 text-center">${i.qty}</span>
-        <button onclick="changeQty('${i.cartKey}', 1)" class="btn-std w-7 h-7 rounded-lg bg-white border border-stone-300 font-black text-xs">＋</button>
+        <button type="button" onclick="changeQty('${i.cartKey}', 1)" class="btn-std w-7 h-7 rounded-lg bg-white border border-stone-300 font-black text-xs">＋</button>
+        <button type="button" onclick="removeCartItem('${i.cartKey}')" title="移除此貨品" class="btn-std w-7 h-7 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 font-black text-xs">🗑️</button>
       </div>
     </div>`).join('');
 
+    const storeMeta = hardwareStores.find(s => s.id === g.storeId);
+    const contactBadge = isMat
+      ? `<span class="text-[10px] text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded font-bold">站內落單 · 建材台確認</span>`
+      : (storeMeta && storeMeta.demo
+        ? `<span class="text-[10px] text-amber-900 bg-amber-100 px-2 py-0.5 rounded font-bold">示範五金店</span>`
+        : (g.storePhone ? `<span class="text-[10px] font-mono text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded font-bold">WhatsApp: ${g.storePhone}</span>` : ''));
     return `<div class="p-3.5 rounded-2xl border ${isMat ? 'border-emerald-200 bg-emerald-50/40' : 'border-stone-200 bg-stone-50'} space-y-1">
       <div class="flex items-center justify-between gap-2 pb-1">
         <span class="font-black text-xs text-slate-900">${isMat ? '🚿' : '🏪'} ${g.storeName}</span>
-        <span class="text-[10px] font-mono text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded font-bold">WhatsApp: ${g.storePhone}</span>
+        ${contactBadge}
       </div>
       ${rows}
     </div>`;
@@ -5865,6 +6057,7 @@ function toggleCart(show) {
       activeCartTab = 'hardware';
     }
     updateCartUI();
+    applyLocalUserContact();
   }
   document.getElementById('cart-drawer').classList.toggle('hidden', !show);
 }
@@ -6318,6 +6511,7 @@ function checkoutOrder() {
     const ownerAddr = document.getElementById('cart-mat-buyer-address').value.trim();
     const installOpt = document.getElementById('cart-mat-install-option').value;
     if (!needContact(ownerName, ownerPhone, ownerAddr, '業主')) return;
+    saveLocalUserContact({ name: ownerName, phone: ownerPhone, address: ownerAddr });
 
     const matOrderId = 'MAT-' + Math.floor(10000 + Math.random() * 90000);
     const subTotal = activeItems.reduce((s, i) => s + i.price * i.qty, 0);
@@ -6355,9 +6549,13 @@ function checkoutOrder() {
         phone: ownerPhone,
         materialOrderId: matOrderId
       });
+      const codeTail = code.replace(/\D/g, '').slice(-4);
       const ownerPhoneInput = document.getElementById('mem-owner-phone');
+      const ownerCodeInput = document.getElementById('mem-owner-job-code');
       if (ownerPhoneInput) ownerPhoneInput.value = ownerPhone;
-      setOwnerSessionByPhone(ownerPhone, false);
+      if (ownerCodeInput) ownerCodeInput.value = codeTail;
+      ownerLookupAttempted = true;
+      setOwnerSessionByPhone(ownerPhone, false, codeTail);
       repairNote = `\n已同時開維修單 #${code}，師傅可以在配對站接單。`;
       renderMasterJobs();
     }
@@ -6385,6 +6583,7 @@ function checkoutOrder() {
   const buyerAddr = document.getElementById('cart-buyer-address').value.trim();
   const deliveryMethod = document.getElementById('cart-delivery-method').value;
   if (!needContact(buyerName, buyerPhone, buyerAddr, '收貨人')) return;
+  saveLocalUserContact({ name: buyerName, phone: buyerPhone, address: buyerAddr });
 
   const groups = {};
   activeItems.forEach(item => {
@@ -6431,6 +6630,10 @@ function checkoutOrder() {
   toggleCart(false);
 
   const waButtonsHtml = createdOrders.map(o => {
+    const stObj = hardwareStores.find(s => s.id === o.storeId);
+    if (stObj && stObj.demo) {
+      return `<button type="button" onclick="closeModal(); document.getElementById('hardware-orders-tracker')?.scrollIntoView({behavior:'smooth',block:'center'})" class="btn-std w-full h-11 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs shadow-sm">📦 查看示範五金單 #${o.orderId} 進度（示範店不發送外部 WhatsApp）</button>`;
+    }
     const multiNote = o.isMultiStore ? `\n💡 備註：師傅同時喺另一間街坊舖買咗少少料，如車隊順路可商議夾車減運費。` : '';
     const waText = `你好 ${o.storeName} 老闆！我係 ${o.buyerName} (${o.buyerPhone})，喺【香港裝修師傅大本營 · 03 五金店】落咗張五金單：\n\n📌 追蹤單號：#${o.orderId}\n🛒 訂購貨品：${o.itemsSummary}\n💰 物料小計：HK$${o.total}\n🚚 運送方式：${o.deliveryMethod}\n📍 送貨地盤：${o.address}${multiNote}\n\n🔎 查進度：\n${orderLookupUrl(o.orderId)}`;
     const waUrl = `https://wa.me/852${o.storePhone}?text=${encodeURIComponent(waText)}`;
@@ -6439,7 +6642,7 @@ function checkoutOrder() {
 
   showModal(
     `✅ 已建立 ${createdOrders.length} 張五金追蹤單！`,
-    `訂單已經同步加入【03 五金店 ➔ 5段式實時訂單狀態追蹤面板】！\n請撳下方按鈕直接將購物單 WhatsApp 發送到五金店老闆手機：`,
+    `訂單已經同步加入【03 五金店 → 5段式實時訂單狀態追蹤面板】！\n請撳下方按鈕直接將購物單 WhatsApp 發送到五金店老闆手機：`,
     '03 五金店落單成功',
     waButtonsHtml
   );
@@ -6574,6 +6777,7 @@ function applyOrderLookupFromUrl(fromCloud) {
     showModal(`#${order.orderId} · ${order.status}`, `貨品：${order.itemsSummary}\n金額：HK$${Number(order.total).toLocaleString()}\n運單：${order.waybill || '未填'}\n地址：${order.address}`, '五金查單');
     return;
   }
+  let codeTail = '';
   if (params.job) {
     const job = liveMasterJobs.find(j => j.id === params.job);
     if (!job) {
@@ -6582,11 +6786,15 @@ function applyOrderLookupFromUrl(fromCloud) {
       return;
     }
     phone = job.phone || phone;
+    codeTail = String(job.id || '').replace(/\D/g, '').slice(-4);
   }
   if (!phone) return;
   const input = document.getElementById('mem-owner-phone');
+  const codeInput = document.getElementById('mem-owner-job-code');
   if (input) input.value = phone;
-  setOwnerSessionByPhone(phone, false);
+  if (codeInput && codeTail) codeInput.value = codeTail;
+  ownerLookupAttempted = true;
+  setOwnerSessionByPhone(phone, false, codeTail);
   orderLookupApplied = true;
   openMemberModal('login');
 }
@@ -6609,6 +6817,8 @@ function bootCampApp() {
   renderMaterialsOrderTracker();
   updateCartUI();
   updateMasterCountUI();
+  bindContactSyncListeners();
+  applyLocalUserContact();
   const params = readCampParams();
   const allowed = { all: 1, repair: 1, materials: 1, hardware: 1 };
   if (params.section && allowed[params.section]) switchSection(params.section);
@@ -6717,6 +6927,11 @@ window.signInStaff = async function (email, password) {
   const known = STAFF_ROLES[cred.user.email] || (window.storeRoleForEmail ? window.storeRoleForEmail(cred.user.email) : '');
   if (!known) throw new Error('這個帳戶沒有管理權限');
   currentUser = cred.user;
+  const idWrap = document.getElementById('cloud-user-id-wrap');
+  const idEl = document.getElementById('cloud-user-id');
+  if (idWrap) idWrap.classList.remove('hidden');
+  if (idEl) idEl.textContent = cred.user.email;
+  updateCloudBadgeUI("☁️ 職員雲端已連線", true);
   return known;
 };
 
@@ -6741,8 +6956,11 @@ async function initCloudSync() {
     } else {
       currentUser = auth.currentUser;
     }
+    const idWrap = document.getElementById('cloud-user-id-wrap');
     const idEl = document.getElementById('cloud-user-id');
-    if (currentUser && idEl) idEl.textContent = currentUser.uid.substring(0, 6) + '...';
+    const isStaff = !!(currentUser && currentUser.email);
+    if (idWrap) idWrap.classList.toggle('hidden', !isStaff);
+    if (isStaff && idEl) idEl.textContent = currentUser.email;
 
     const syncColRef = collection(db, 'artifacts', appId, 'public', 'data', 'camp_sync');
     onSnapshot(
@@ -6783,7 +7001,9 @@ async function initCloudSync() {
       },
       (err) => {
         console.warn("雲端監聽受限，切換本機模式:", err);
-        updateCloudBadgeUI("⚡ 離線本機模式 (LocalStorage)", false);
+        const idWrap = document.getElementById('cloud-user-id-wrap');
+        if (idWrap) idWrap.classList.add('hidden');
+        updateCloudBadgeUI("📱 訪客本機模式（落單暫存本機）", false);
       }
     );
   } catch (err) {
