@@ -2243,7 +2243,15 @@ const FACTORY_STATE = {
   promos: JSON.parse(JSON.stringify(productPromos))
 };
 
+const DEFAULT_HARDWARE_IMG_MAP = Object.fromEntries(masterHardwareCatalog.map(p => [p.id, p.img]));
+
 function normalizeLoadedState() {
+  masterHardwareCatalog.forEach(item => {
+    const canonical = DEFAULT_HARDWARE_IMG_MAP[item.id];
+    if (canonical && (!item.img || item.img.startsWith('images/hardware/products/') || item.img.startsWith('images/hardware/camp/'))) {
+      item.img = canonical;
+    }
+  });
   registeredMasters.forEach(m => {
     if (m.creditScore == null) m.creditScore = 100;
     if (!m.phone) m.phone = '';
@@ -4354,8 +4362,8 @@ function renderSuperSync() {
     <button type="button" onclick="pushCampToGitHub()" class="btn-std h-9 px-3 rounded-lg bg-amber-400 text-slate-950 font-black text-xs">上傳最新資料到 GitHub</button>
   </div>
   <div class="bg-slate-800 border border-emerald-700/60 rounded-2xl p-3 space-y-2">
-    <p class="text-xs font-black text-emerald-300">2. 一鍵上傳整份新版網頁（同步更新 index.html 及 public/camp.html）</p>
-    <p class="text-[11px] text-stone-400">揀選新下載的裝修站 index.html，系統會自動核對檔案安全標記，再一次過覆蓋倉庫根目錄 index.html 同 public/camp.html。</p>
+    <p class="text-xs font-black text-emerald-300">2. 一鍵上傳整份新版網頁（更新根目錄 index.html）</p>
+    <p class="text-[11px] text-stone-400">揀選新下載的裝修站 index.html，系統會自動核對檔案安全標記，並直接覆蓋倉庫根目錄 index.html。</p>
     <input id="gh-full-html-file" type="file" accept=".html,text/html" class="w-full text-xs text-stone-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-slate-700 file:text-white hover:file:bg-slate-600" />
     <label class="flex items-center gap-2 text-[11px] text-stone-300 cursor-pointer">
       <input id="gh-keep-live-state" type="checkbox" checked class="w-4 h-4 accent-emerald-400" />
@@ -4427,7 +4435,7 @@ async function pushCampToGitHub() {
     setSyncStatus('正在上傳資料檔…');
     const dataFile = await githubFile('data/camp-state.json', token);
     await githubWrite('data/camp-state.json', json, 'Update camp data from super admin', token, dataFile && dataFile.sha);
-    for (const path of ['index.html', 'public/camp.html']) {
+    for (const path of ['index.html']) {
       setSyncStatus('正在更新 ' + path);
       const file = await githubFile(path, token);
       if (!file) continue;
@@ -4468,7 +4476,7 @@ async function pushFullHtmlToGitHub() {
     }
     const keepState = !!document.getElementById('gh-keep-live-state')?.checked;
     const kb = Math.round(newHtml.length / 1024);
-    if (!confirm(`確定要將「${file.name}」（約 ${kb} KB）同時覆蓋到 GitHub 的 index.html 及 public/camp.html 嗎？`)) return;
+    if (!confirm(`確定要將「${file.name}」（約 ${kb} KB）覆蓋到 GitHub 根目錄的 index.html 嗎？`)) return;
 
     if (keepState) {
       const json = JSON.stringify(campSnapshot()).replace(/</g, '\u003c');
@@ -4479,12 +4487,12 @@ async function pushFullHtmlToGitHub() {
       await githubWrite('data/camp-state.json', json, 'Sync camp data with full HTML upload', token, dataFile && dataFile.sha);
     }
 
-    for (const path of ['index.html', 'public/camp.html']) {
+    for (const path of ['index.html']) {
       setSyncStatus('正在上傳整份新版 ' + path + '…');
       const remote = await githubFile(path, token);
       await githubWrite(path, newHtml, 'Update full camp HTML from super admin', token, remote && remote.sha);
     }
-    setSyncStatus('✅ 已成功將整份新版網頁上傳至 index.html 及 public/camp.html！GitHub Pages 約 1 分鐘後會自動更新。');
+    setSyncStatus('✅ 已成功將整份新版網頁上傳至根目錄 index.html！GitHub Pages 約 1 分鐘後會自動更新。');
   } catch (error) {
     setSyncStatus('整份網頁上傳失敗：' + String(error.message || error).slice(0, 400));
   }
